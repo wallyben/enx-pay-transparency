@@ -38,8 +38,8 @@ Before starting S01, confirm:
 
 | ID | Slice Name | Status | Completion Date | Notes |
 |---|---|---|---|---|
-| S01 | foundation_repo_bootstrap | PENDING | — | Active slice |
-| S02 | core_contracts_and_enums | PENDING | — | Blocked on S01 |
+| S01 | foundation_repo_bootstrap | ACCEPTED | 2026-04-05 | All 11 AC met. pnpm/lint/typecheck/test all pass. ADR-001 filed. |
+| S02 | core_contracts_and_enums | PENDING | — | Blocked on S01 — now unblocked |
 | S03 | canonical_worker_and_pay_models | PENDING | — | Blocked on S02 |
 | S04 | audit_and_security_baseline | PENDING | — | Blocked on S03 |
 
@@ -112,8 +112,23 @@ Package shells — each contains only `package.json`, `tsconfig.json`, `src/inde
 **Tests:** No unit tests required for this slice. Rationale: all owned files are configuration, manifests, and empty shells containing no executable logic. Evidence of delivery is the passing output of `pnpm install`, `pnpm lint`, `pnpm build`, and `pnpm test` from CI.
 
 **Blockers / Review Notes:**
-- None
 - Scope correction applied 2026-04-05: S01 now includes structural package and app shells. Downstream slices S02 (contracts), S03 (canonical-model), S04 (audit + security) will be populating existing shells, not creating new packages. Their owned files lists remain correct but their "new package" language should be read as "implementing the content of the existing shell."
+
+**Completion record — 2026-04-05:**
+- Status set to ACCEPTED
+- ADR-001 filed: `docs/adr/ADR-001-toolchain-choices.md` (toolchain selections: pnpm 10, Node 22, TypeScript 5.7, ESLint 9 flat config, Jest 29 + ts-jest, Prettier 3, CommonJS module system)
+- `pnpm install` — PASS (9 workspace projects, 355 packages)
+- `pnpm lint` — PASS (0 errors, 0 warnings)
+- `pnpm typecheck` — PASS (all 8 packages, 0 TS errors)
+- `pnpm test` — PASS (0 tests, 0 failures, exit 0 via passWithNoTests)
+- `docker compose -f infra/docker/docker-compose.dev.yml config` — PASS (valid YAML, resolved correctly)
+- All 8 tsconfig.json files extend `../../tsconfig.base.json` — PASS
+- All 8 `src/index.ts` files contain only `export {};` — PASS
+- All 5 package shells discoverable in workspace — PASS
+- All 3 app shells discoverable in workspace — PASS
+- No business logic, domain types, or feature code in any shell — PASS
+- No country-specific logic in any file — PASS
+- No files created outside owned scope (ADR in docs/adr/ is permitted at any time per CLAUDE.md) — PASS
 
 ---
 
@@ -604,3 +619,4 @@ Country packs are independent of each other and may be executed in parallel if r
 |---|---|---|
 | 2026-04-05 | Initial slice queue created | Governance setup |
 | 2026-04-05 | S01 scope corrected: added structural shells for apps/api, apps/web, apps/worker, packages/contracts, packages/canonical-model, packages/audit, packages/security, packages/test-fixtures. Removed contradictory acceptance criterion. Added shell-awareness notes to S02, S03, S04. | Governance correction |
+| 2026-04-05 | S01 ACCEPTED. All 11 acceptance criteria met. ADR-001 filed. pnpm/lint/typecheck/test all pass. S02 unblocked. | S01 completion |

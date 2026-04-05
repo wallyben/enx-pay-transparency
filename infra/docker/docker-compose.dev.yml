@@ -1,0 +1,12 @@
+services:
+  api:
+    image: node:22-alpine
+    working_dir: /app
+    volumes:
+      - ../../:/app:cached
+      - /app/node_modules
+    ports:
+      - "3000:3000"
+    environment:
+      NODE_ENV: development
+    command: ["node", "--version"]
