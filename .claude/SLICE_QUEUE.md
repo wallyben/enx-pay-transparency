@@ -45,33 +45,75 @@ Before starting S01, confirm:
 
 ### S01 — foundation_repo_bootstrap
 
-**Purpose:** Establish the monorepo workspace configuration, tooling baseline, CI pipeline skeleton, lint and test configuration, and Docker dev environment stub. No application logic.
+**Purpose:** Establish the monorepo workspace configuration, root tooling baseline, CI pipeline skeleton, and Docker dev environment stub. Create minimal structural shells for the app and package directories that Wave 0 slices will build into. No business logic, no domain types, no feature code, no database schema. The shells exist only to give the repo its correct shape and to allow the workspace, TypeScript project references, and CI to resolve all packages from the first commit.
 
 **Owned Files:**
-- `package.json` (root workspace config)
-- `pnpm-workspace.yaml` or equivalent workspace manifest
+
+Root tooling:
+- `package.json` (root workspace config with scripts: install, lint, test, build)
+- `pnpm-workspace.yaml`
 - `tsconfig.base.json`
-- `.eslintrc.js` or `eslint.config.js`
+- `eslint.config.js`
 - `.prettierrc`
-- `jest.config.base.js` or equivalent
-- `Dockerfile.dev` (minimal dev environment)
-- `docker-compose.dev.yml`
-- `.github/workflows/ci.yml` (lint + test pipeline)
+- `jest.config.base.js`
 - `.gitignore`
+- `.editorconfig`
 - `.env.example`
-- `infra/scripts/` (dev setup scripts if needed)
+- `README.md` (minimal: project name, setup instructions, link to SLICE_QUEUE.md)
+
+Infrastructure:
+- `infra/docker/Dockerfile.dev`
+- `infra/docker/docker-compose.dev.yml`
+
+CI:
+- `.github/workflows/ci.yml`
+
+App shells — each contains only `package.json`, `tsconfig.json`, `src/index.ts` (empty export):
+- `apps/api/package.json`
+- `apps/api/tsconfig.json`
+- `apps/api/src/index.ts`
+- `apps/web/package.json`
+- `apps/web/tsconfig.json`
+- `apps/web/src/index.ts`
+- `apps/worker/package.json`
+- `apps/worker/tsconfig.json`
+- `apps/worker/src/index.ts`
+
+Package shells — each contains only `package.json`, `tsconfig.json`, `src/index.ts` (empty export):
+- `packages/contracts/package.json`
+- `packages/contracts/tsconfig.json`
+- `packages/contracts/src/index.ts`
+- `packages/canonical-model/package.json`
+- `packages/canonical-model/tsconfig.json`
+- `packages/canonical-model/src/index.ts`
+- `packages/audit/package.json`
+- `packages/audit/tsconfig.json`
+- `packages/audit/src/index.ts`
+- `packages/security/package.json`
+- `packages/security/tsconfig.json`
+- `packages/security/src/index.ts`
+- `packages/test-fixtures/package.json`
+- `packages/test-fixtures/tsconfig.json`
+- `packages/test-fixtures/src/index.ts`
 
 **Acceptance Criteria:**
-- [ ] `pnpm install` (or equivalent) completes without errors
-- [ ] `pnpm lint` runs and produces no errors on an empty workspace
-- [ ] `pnpm test` runs and exits cleanly (zero tests, zero failures)
-- [ ] `docker compose up` (dev) starts without errors
-- [ ] CI workflow file exists and is syntactically valid
-- [ ] No application packages exist yet (`apps/`, `packages/` are empty or absent)
-- [ ] `tsconfig.base.json` compiles with zero errors
+- [ ] `pnpm install` completes without errors from the repo root
+- [ ] `pnpm lint` runs and exits cleanly across all packages in the workspace (no errors, no warnings treated as errors)
+- [ ] `pnpm test` runs and exits cleanly — zero tests, zero failures (no tests exist yet; this verifies the test runner resolves the workspace correctly)
+- [ ] `pnpm build` (or `pnpm typecheck`) runs on all packages and apps with zero TypeScript errors
+- [ ] `docker compose -f infra/docker/docker-compose.dev.yml up` starts without errors
+- [ ] `.github/workflows/ci.yml` is syntactically valid YAML; references the correct lint, test, and build commands
+- [ ] All 5 package shells exist and are listed in pnpm workspace: `contracts`, `canonical-model`, `audit`, `security`, `test-fixtures`
+- [ ] All 3 app shells exist and are listed in pnpm workspace: `api`, `web`, `worker`
+- [ ] Every `tsconfig.json` in apps and packages extends `tsconfig.base.json`
+- [ ] No shell contains any business logic, domain types, Zod schemas, database references, or feature code
+- [ ] `src/index.ts` in every shell is an empty export (`export {};`) — no implementation
+
+**Tests:** No unit tests required for this slice. Rationale: all owned files are configuration, manifests, and empty shells containing no executable logic. Evidence of delivery is the passing output of `pnpm install`, `pnpm lint`, `pnpm build`, and `pnpm test` from CI.
 
 **Blockers / Review Notes:**
 - None
+- Scope correction applied 2026-04-05: S01 now includes structural package and app shells. Downstream slices S02 (contracts), S03 (canonical-model), S04 (audit + security) will be populating existing shells, not creating new packages. Their owned files lists remain correct but their "new package" language should be read as "implementing the content of the existing shell."
 
 ---
 
@@ -101,6 +143,7 @@ Before starting S01, confirm:
 
 **Blockers / Review Notes:**
 - Blocked on S01 (workspace must be configured)
+- Note: `packages/contracts/` shell (package.json, tsconfig.json, src/index.ts) is created in S01. This slice populates the src/ content — it does not create a new package from scratch.
 
 ---
 
@@ -131,6 +174,7 @@ Before starting S01, confirm:
 
 **Blockers / Review Notes:**
 - Blocked on S02 (contracts must be defined)
+- Note: `packages/canonical-model/` shell (package.json, tsconfig.json, src/index.ts) is created in S01. This slice populates the src/ content.
 
 ---
 
@@ -164,6 +208,7 @@ Before starting S01, confirm:
 
 **Blockers / Review Notes:**
 - Blocked on S03 (canonical model required for audit event targeting)
+- Note: `packages/audit/` and `packages/security/` shells (package.json, tsconfig.json, src/index.ts) are created in S01. This slice populates the src/ content in both.
 
 ---
 
@@ -558,3 +603,4 @@ Country packs are independent of each other and may be executed in parallel if r
 | Date | Change | Author |
 |---|---|---|
 | 2026-04-05 | Initial slice queue created | Governance setup |
+| 2026-04-05 | S01 scope corrected: added structural shells for apps/api, apps/web, apps/worker, packages/contracts, packages/canonical-model, packages/audit, packages/security, packages/test-fixtures. Removed contradictory acceptance criterion. Added shell-awareness notes to S02, S03, S04. | Governance correction |
