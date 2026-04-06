@@ -24,10 +24,12 @@ export function runCategoryAssignmentOnJobNormalization(input: {
   let assignedCount = 0;
   let reviewRequiredCount = 0;
   let unassignedCount = 0;
+  let metricsCalculationBlockedCount = 0;
   for (const r of rows) {
     if (r.status === CategoryAssignmentStatus.ASSIGNED) assignedCount += 1;
     else if (r.status === CategoryAssignmentStatus.REVIEW_REQUIRED) reviewRequiredCount += 1;
     else if (r.status === CategoryAssignmentStatus.UNASSIGNED) unassignedCount += 1;
+    if (r.metricsCalculationBlocked) metricsCalculationBlockedCount += 1;
   }
 
   return {
@@ -42,5 +44,6 @@ export function runCategoryAssignmentOnJobNormalization(input: {
     assignedCount,
     reviewRequiredCount,
     unassignedCount,
+    metricsCalculationBlockedCount,
   };
 }

@@ -55,6 +55,8 @@ describe('runCategoryAssignmentOnJobNormalization', () => {
     expect(result.assignedCount).toBe(2);
     expect(result.reviewRequiredCount).toBe(0);
     expect(result.unassignedCount).toBe(0);
+    expect(result.metricsCalculationBlockedCount).toBe(0);
     expect(result.rows.every((r) => r.status === CategoryAssignmentStatus.ASSIGNED)).toBe(true);
+    expect(result.rows.every((r) => r.metricsCalculationBlocked === false)).toBe(true);
   });
 });

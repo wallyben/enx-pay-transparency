@@ -1,6 +1,7 @@
 export { CategoryAssignmentBasis } from './category-assignment-basis';
 export { CategoryAssignmentIssueCode } from './category-assignment-issue-code';
 export { CategoryAssignmentStatus } from './category-assignment-status';
+export { CategoryOverrideStatus } from './category-override-status';
 export { CaseworkStatus } from './casework-status';
 export { ContractType } from './contract-type';
 export { CountryCode } from './country-code';

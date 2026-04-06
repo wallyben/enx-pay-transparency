@@ -51,6 +51,8 @@ describe('assignCategoryToJobNormalizationRow', () => {
     expect(out.traceability.rulePackVersion).toBe('r-v1');
     expect(out.traceability.jobNormalizationRulesVersion).toBe('jn.v1');
     expect(out.traceability.categoryEngineRulesVersion).toBe('category-engine-rules.v1');
+    expect(out.metricsCalculationBlocked).toBe(false);
+    expect(out.equalValueGroupKey).toBeNull();
   });
 
   it('assigns NORMALIZED_EQUIVALENT when hierarchy+grade are present, title absent, and job norm is clean', () => {
@@ -70,6 +72,7 @@ describe('assignCategoryToJobNormalizationRow', () => {
     expect(out.status).toBe(CategoryAssignmentStatus.ASSIGNED);
     expect(out.basis).toBe(CategoryAssignmentBasis.NORMALIZED_EQUIVALENT);
     expect(out.categoryId).toMatch(/^cat_[a-f0-9]{64}$/);
+    expect(out.metricsCalculationBlocked).toBe(false);
   });
 
   it('uses REVIEW_REQUIRED when job normalization reported issues', () => {
@@ -101,6 +104,7 @@ describe('assignCategoryToJobNormalizationRow', () => {
     expect(out.jobNormalizationIssueCodes).toEqual([
       JobNormalizationIssueCode.JOB_NORM_MISSING_JOB_TITLE,
     ]);
+    expect(out.metricsCalculationBlocked).toBe(true);
   });
 
   it('marks UNASSIGNED when descriptor is empty', () => {
@@ -109,6 +113,7 @@ describe('assignCategoryToJobNormalizationRow', () => {
     expect(out.status).toBe(CategoryAssignmentStatus.UNASSIGNED);
     expect(out.categoryId).toBeNull();
     expect(out.issues[0]?.code).toBe(CategoryAssignmentIssueCode.CAT_ASN_DESCRIPTOR_EMPTY);
+    expect(out.metricsCalculationBlocked).toBe(true);
   });
 
   it('marks REVIEW_REQUIRED when descriptor is incomplete (no assignable key)', () => {
@@ -129,6 +134,7 @@ describe('assignCategoryToJobNormalizationRow', () => {
     expect(out.issues[0]?.code).toBe(
       CategoryAssignmentIssueCode.CAT_ASN_INSUFFICIENT_JOB_DESCRIPTOR,
     );
+    expect(out.metricsCalculationBlocked).toBe(true);
   });
 
   it('produces different EXACT category ids for different titles with same hierarchy', () => {

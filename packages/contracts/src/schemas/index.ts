@@ -4,11 +4,16 @@ export {
   CategoryAssignmentRowResultSchema,
   CategoryAssignmentSnapshotResultSchema,
   CategoryAssignmentTraceabilitySchema,
+  CategoryOverrideRecordSchema,
+  EqualValueGroupDefinitionSchema,
+  EqualValueMemberKeySchema,
+  EqualValueRulesetSchema,
 } from './category-assignment';
 export {
   CategoryAssignmentBasisSchema,
   CategoryAssignmentIssueCodeSchema,
   CategoryAssignmentStatusSchema,
+  CategoryOverrideStatusSchema,
   CaseworkStatusSchema,
   ContractTypeSchema,
   CountryCodeSchema,

@@ -1,6 +1,6 @@
 import { createHash } from 'crypto';
 
-function canonicalJsonStringify(value: unknown): string {
+export function canonicalJsonStringify(value: unknown): string {
   if (value === null || typeof value !== 'object') {
     return JSON.stringify(value);
   }
@@ -12,9 +12,15 @@ function canonicalJsonStringify(value: unknown): string {
   return '{' + keys.map((k) => JSON.stringify(k) + ':' + canonicalJsonStringify(record[k])).join(',') + '}';
 }
 
+export type CategoryIdBasis =
+  | 'EXACT'
+  | 'NORMALIZED_EQUIVALENT'
+  | 'EQUAL_VALUE'
+  | 'OVERRIDE';
+
 export function deterministicCategoryId(input: {
   readonly categoryEngineRulesVersion: string;
-  readonly basis: 'EXACT' | 'NORMALIZED_EQUIVALENT';
+  readonly basis: CategoryIdBasis;
   readonly keyPayload: Record<string, string>;
 }): string {
   const envelope = {

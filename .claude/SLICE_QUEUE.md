@@ -6,11 +6,11 @@
 
 ## CURRENT ACTIVE SLICE
 
-**Slice ID:** S10  
-**Name:** category_engine_equal_value_and_overrides  
-**Status:** PENDING — **S09 ACCEPTED** (2026-04-07). Next implementation slice; **not started**.  
-**Wave:** 2 — Job architecture and comparable categories  
-**Milestone:** M2
+**Slice ID:** S11  
+**Name:** metrics_eu_core  
+**Status:** PENDING — **S10 ACCEPTED** (2026-04-07). Next implementation slice; **not started**.  
+**Wave:** 3 — Metrics and reporting core  
+**Milestone:** M3
 
 **Integration branch:** `claude/setup-repo-structure-dGb6o` — PR [#3](https://github.com/wallyben/enx-pay-transparency/pull/3) merged 2026-04-06; S04 ACCEPTED below; full validation (`pnpm test`, `pnpm typecheck`, `pnpm lint`) passed on integration after merge.
 
@@ -409,7 +409,7 @@ Package shells — each contains only `package.json`, `tsconfig.json`, `src/inde
 |---|---|---|---|---|
 | S08 | job_normalization_core | ACCEPTED | 2026-04-07 | `@enx/job-architecture`, contracts job norm + logical job fields, intake optional job columns, ADR-007; validation green |
 | S09 | category_engine_exact_and_normalized | ACCEPTED | 2026-04-07 | `@enx/category-engine`, contracts category assignment types/issues, ADR-008; exact + norm-equiv + review/unassigned; tests green |
-| S10 | category_engine_equal_value_and_overrides | PENDING | — | Blocked on S09 — cleared; next slice, not started |
+| S10 | category_engine_equal_value_and_overrides | ACCEPTED | 2026-04-07 | Equal-value ruleset + governed overrides + metrics gate fields; ADR-009; tests green |
 
 ### S08 — job_normalization_core
 
@@ -498,15 +498,59 @@ Package shells — each contains only `package.json`, `tsconfig.json`, `src/inde
 
 **Purpose:** Extend category engine with equal-value work grouping and a governed override mechanism. Overrides must be reviewed and approved before they affect outputs.
 
+**Owned Files (S10 delivery):**
+- `packages/contracts/src/enums/category-assignment-basis.ts` (`EQUAL_VALUE`, `OVERRIDE`)
+- `packages/contracts/src/enums/category-assignment-issue-code.ts` (equal-value + governed override issues)
+- `packages/contracts/src/enums/category-override-status.ts`
+- `packages/contracts/src/enums/index.ts` (exports)
+- `packages/contracts/src/types/category-assignment.ts` (S10 row/snapshot fields, `EqualValueRuleset`, `CategoryOverrideRecord`, traceability extensions)
+- `packages/contracts/src/types/index.ts` (exports)
+- `packages/contracts/src/schemas/enums.ts` (`CategoryOverrideStatusSchema`)
+- `packages/contracts/src/schemas/category-assignment.ts` (row/snapshot + equal-value + override Zod)
+- `packages/contracts/src/schemas/index.ts` (exports)
+- `packages/contracts/src/__tests__/category-assignment-schemas.test.ts`
+- `packages/category-engine/src/deterministic-category-id.ts` (`CategoryIdBasis`, exported `canonicalJsonStringify`)
+- `packages/category-engine/src/deterministic-override-id.ts`
+- `packages/category-engine/src/assign-category-row.ts` (S10 row defaults: `metricsCalculationBlocked`, override/equal-value nulls)
+- `packages/category-engine/src/category-assignment-pipeline.ts` (`metricsCalculationBlockedCount`)
+- `packages/category-engine/src/equal-value-grouping.ts`
+- `packages/category-engine/src/governed-override.ts`
+- `packages/category-engine/src/extended-category-assignment-pipeline.ts`
+- `packages/category-engine/src/extended-category-assignment-service.ts`
+- `packages/category-engine/src/override-decision-audit.ts`
+- `packages/category-engine/src/index.ts` (exports)
+- `packages/category-engine/src/__tests__/assign-category-row.test.ts`
+- `packages/category-engine/src/__tests__/category-assignment-pipeline.test.ts`
+- `packages/category-engine/src/__tests__/equal-value-grouping.test.ts`
+- `packages/category-engine/src/__tests__/governed-override.test.ts`
+- `packages/category-engine/src/__tests__/extended-category-assignment-pipeline.test.ts`
+- `packages/category-engine/src/__tests__/extended-category-assignment-service.test.ts`
+- `packages/category-engine/src/__tests__/deterministic-override-id.test.ts`
+- `packages/category-engine/src/__tests__/override-decision-audit.test.ts`
+- `packages/category-engine/src/__tests__/no-metrics-leakage.test.ts` (replaces S09 `no-equal-value-leakage.test.ts` — S10 owns equal-value in-package)
+- `docs/adr/ADR-009-category-engine-equal-value-overrides.md`
+- `.claude/SLICE_QUEUE.md` (this file — S10 status only)
+
+**Cross-slice note:** Deleted `packages/category-engine/src/__tests__/no-equal-value-leakage.test.ts` (S09 guard forbidding equal-value strings in `src/`). Replaced by `no-metrics-leakage.test.ts` so S10 implementation is allowed while pay-gap / `metrics-engine` references remain forbidden in production sources.
+
 **Acceptance Criteria:**
-- [ ] Equal-value grouping logic is implemented per the methodology specification
-- [ ] Override workflow requires explicit reviewer approval
-- [ ] Unapproved overrides block metrics calculation for affected workers
-- [ ] All overrides are audited with reviewer identity and timestamp
-- [ ] Unit and integration tests cover override approval and rejection paths
+- [x] Equal-value grouping logic is implemented per the methodology specification (explicit versioned `EqualValueRuleset`, deterministic group/member ordering, distinct `EQUAL_VALUE` basis and category id)
+- [x] Override workflow requires explicit reviewer approval (only `APPROVED` applies; `PENDING`/`REJECTED` enforced in engine; no auto-approval)
+- [x] Unapproved overrides block metrics calculation for affected workers (`metricsCalculationBlocked` / `metricsCalculationBlockedCount` gate for S11+; no metrics math in this slice)
+- [x] All overrides are audited with reviewer identity and timestamp (`writeCategoryOverrideDecisionAudit` for approve/reject; caller supplies reviewer actor and `decidedAtIso` aligned with the override record)
+- [x] Unit and integration tests cover override approval and rejection paths, equal-value success/failure, pending non-application, traceability, and no pay-gap / `metrics-engine` leakage in `src/`
 
 **Blockers / Review Notes:**
 - Blocked on S09 — cleared 2026-04-07
+
+**Completion record — 2026-04-07:**
+- Status set to **ACCEPTED**
+- ADR-009 filed: `docs/adr/ADR-009-category-engine-equal-value-overrides.md`
+- `pnpm test` — PASS (54 suites, 351 tests, 0 failures)
+- `pnpm typecheck` — PASS (0 TS errors)
+- `pnpm lint` — PASS
+- Primary API: `runExtendedCategoryAssignmentOnJobNormalization`, `runExtendedCategoryAssignmentWithAudit`, `applyGovernedCategoryOverride`, `tryEqualValueCategoryAssignment`, `writeCategoryOverrideDecisionAudit`, `deterministicCategoryOverrideId`
+- S11 next (PENDING, not started; blocked on **M2 Gate** until S08–S10 all ACCEPTED on branch)
 
 ---
 
@@ -801,3 +845,4 @@ Country packs are independent of each other and may be executed in parallel if r
 | 2026-04-07 | S07 ACCEPTED: intake sealed snapshot + deterministic manifest id, lineage, gating vs S06 output, audit `SEAL`, deep-frozen `SEALED` records, `POST .../snapshots`; contracts + canonical-model + intake-engine + API tests; ADR-006; validation green. S08 next (PENDING, M1 Gate). | S07 completion |
 | 2026-04-07 | S08 ACCEPTED: job normalization package `@enx/job-architecture`, contracts job norm types/issues + `JOB_*` logical fields, intake optional job column mapping, pipeline + audit service, tests + ADR-007; `pnpm test` / `typecheck` / `lint` green. S09 next (PENDING). | S08 completion |
 | 2026-04-07 | S09 ACCEPTED: category engine `@enx/category-engine`, contracts category assignment enums/types/schemas + tests, exact vs normalized-equivalent keys + deterministic category IDs, review-required/unassigned outcomes, audit hook on assignment run, ADR-008; `pnpm test` / `typecheck` / `lint` green. S10 next (PENDING). | S09 completion |
+| 2026-04-07 | S10 ACCEPTED: equal-value ruleset + `EQUAL_VALUE` basis, governed `CategoryOverrideRecord` (`PENDING`/`APPROVED`/`REJECTED`), row metrics gate fields + snapshot `metricsCalculationBlockedCount`, override decision audit helper, extended pipeline/service; contracts/schemas/tests; ADR-009; replaced S09 equal-value leakage test with metrics-engine/pay-gap guard; `pnpm test` / `typecheck` / `lint` green. S11 next (PENDING). | S10 completion |

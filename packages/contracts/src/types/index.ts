@@ -22,6 +22,10 @@ export {
   type CategoryAssignmentRowResult,
   type CategoryAssignmentSnapshotResult,
   type CategoryAssignmentTraceability,
+  type CategoryOverrideRecord,
+  type EqualValueGroupDefinition,
+  type EqualValueMemberKey,
+  type EqualValueRuleset,
 } from './category-assignment';
 export {
   type JobNormalizationIssue,

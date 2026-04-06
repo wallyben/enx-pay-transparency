@@ -9,6 +9,18 @@ import {
 import { DEFAULT_CATEGORY_ENGINE_RULES_VERSION } from './category-assignment-rules-version';
 import { deterministicCategoryId } from './deterministic-category-id';
 
+function s10Fields(status: CategoryAssignmentStatus): Pick<
+  CategoryAssignmentRowResult,
+  'metricsCalculationBlocked' | 'equalValueGroupKey' | 'governedOverrideId' | 'governedOverrideStatus'
+> {
+  return {
+    metricsCalculationBlocked: status !== CategoryAssignmentStatus.ASSIGNED,
+    equalValueGroupKey: null,
+    governedOverrideId: null,
+    governedOverrideStatus: null,
+  };
+}
+
 function traceForRow(
   row: JobNormalizationRowResult,
   methodologyVersion: string,
@@ -54,6 +66,7 @@ export function assignCategoryToJobNormalizationRow(input: {
         },
       ],
       jobNormalizationIssueCodes: jobCodes,
+      ...s10Fields(CategoryAssignmentStatus.REVIEW_REQUIRED),
     };
   }
 
@@ -83,6 +96,7 @@ export function assignCategoryToJobNormalizationRow(input: {
       basis: CategoryAssignmentBasis.EXACT,
       issues: [],
       jobNormalizationIssueCodes: [],
+      ...s10Fields(CategoryAssignmentStatus.ASSIGNED),
     };
   }
 
@@ -105,6 +119,7 @@ export function assignCategoryToJobNormalizationRow(input: {
       basis: CategoryAssignmentBasis.NORMALIZED_EQUIVALENT,
       issues: [],
       jobNormalizationIssueCodes: [],
+      ...s10Fields(CategoryAssignmentStatus.ASSIGNED),
     };
   }
 
@@ -119,6 +134,7 @@ export function assignCategoryToJobNormalizationRow(input: {
       basis: null,
       issues: [{ code: CategoryAssignmentIssueCode.CAT_ASN_DESCRIPTOR_EMPTY }],
       jobNormalizationIssueCodes: [],
+      ...s10Fields(CategoryAssignmentStatus.UNASSIGNED),
     };
   }
 
@@ -131,5 +147,6 @@ export function assignCategoryToJobNormalizationRow(input: {
     basis: null,
     issues: [{ code: CategoryAssignmentIssueCode.CAT_ASN_INSUFFICIENT_JOB_DESCRIPTOR }],
     jobNormalizationIssueCodes: [],
+    ...s10Fields(CategoryAssignmentStatus.REVIEW_REQUIRED),
   };
 }
