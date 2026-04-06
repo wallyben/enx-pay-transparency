@@ -6,16 +6,11 @@
 
 ## CURRENT ACTIVE SLICE
 
-**Slice ID:** S01
-**Name:** S01_foundation_repo_bootstrap
-**Status:** PENDING — Ready to start
+**Slice ID:** S04
+**Name:** S04_audit_and_security_baseline
+**Status:** PENDING — Blocked on S03 (now unblocked)
 **Wave:** 0 — Foundation
 **Milestone:** M0
-
-Before starting S01, confirm:
-- [ ] This is the first slice being executed
-- [ ] No application code exists yet
-- [ ] Workspace tooling has not been configured yet
 
 ---
 
@@ -39,9 +34,9 @@ Before starting S01, confirm:
 | ID | Slice Name | Status | Completion Date | Notes |
 |---|---|---|---|---|
 | S01 | foundation_repo_bootstrap | ACCEPTED | 2026-04-05 | All 11 AC met. pnpm/lint/typecheck/test all pass. ADR-001 filed. |
-| S02 | core_contracts_and_enums | PENDING | — | Blocked on S01 — now unblocked |
-| S03 | canonical_worker_and_pay_models | PENDING | — | Blocked on S02 |
-| S04 | audit_and_security_baseline | PENDING | — | Blocked on S03 |
+| S02 | core_contracts_and_enums | PENDING | — | Blocked on S01 — now unblocked. Note: minimal enum definitions (EmploymentType, ContractType, Gender, WorkerStatus, SnapshotStatus, PayComponentType, PayPeriodCode) were added to packages/contracts as a documented supporting edit in S03 per operator instruction. S02 must complete the full contracts specification when executed. |
+| S03 | canonical_worker_and_pay_models | ACCEPTED | 2026-04-06 | All acceptance criteria met. See completion record below. |
+| S04 | audit_and_security_baseline | PENDING | — | Blocked on S03 — now unblocked |
 
 ### S01 — foundation_repo_bootstrap
 
@@ -166,30 +161,73 @@ Package shells — each contains only `package.json`, `tsconfig.json`, `src/inde
 
 **Purpose:** Define the canonical data models for workers, jobs, pay records, and periods. These are the normalized internal representations that all upstream sources map into. These models are country-agnostic.
 
-**Owned Files:**
-- `packages/canonical-model/` (new package, all files)
-- `packages/canonical-model/src/worker.ts`
-- `packages/canonical-model/src/job.ts`
-- `packages/canonical-model/src/pay-record.ts`
-- `packages/canonical-model/src/period.ts`
-- `packages/canonical-model/src/snapshot.ts`
-- `packages/canonical-model/src/index.ts`
-- `packages/canonical-model/package.json`
-- `packages/canonical-model/tsconfig.json`
-- `packages/canonical-model/src/__tests__/`
+**Owned Files (as executed — extended from original definition per operator instruction):**
+
+Primary (packages/canonical-model):
+- `packages/canonical-model/src/currency-amount.ts` ✓
+- `packages/canonical-model/src/effective-date.ts` ✓
+- `packages/canonical-model/src/legal-entity.ts` ✓
+- `packages/canonical-model/src/worker.ts` ✓
+- `packages/canonical-model/src/job.ts` ✓
+- `packages/canonical-model/src/pay-component.ts` ✓
+- `packages/canonical-model/src/pay-snapshot.ts` ✓
+- `packages/canonical-model/src/source-lineage-ref.ts` ✓
+- `packages/canonical-model/src/index.ts` ✓
+- `packages/canonical-model/package.json` ✓
+- `packages/canonical-model/tsconfig.json` (unchanged from S01)
+- `packages/canonical-model/jest.config.js` ✓
+- `packages/canonical-model/src/__tests__/legal-entity.test.ts` ✓
+- `packages/canonical-model/src/__tests__/worker.test.ts` ✓
+- `packages/canonical-model/src/__tests__/job.test.ts` ✓
+- `packages/canonical-model/src/__tests__/pay-component.test.ts` ✓
+- `packages/canonical-model/src/__tests__/pay-snapshot.test.ts` ✓
+- `packages/canonical-model/src/__tests__/effective-date.test.ts` ✓
+- `packages/canonical-model/src/__tests__/country-leakage.test.ts` ✓
+- `packages/canonical-model/src/__tests__/imports.test.ts` ✓
+- `packages/canonical-model/src/__tests__/migration-sanity.test.ts` ✓
+
+Supporting edits (packages/contracts — minimal enums needed by canonical-model; documented):
+- `packages/contracts/src/enums/employment-type.ts` ✓
+- `packages/contracts/src/enums/contract-type.ts` ✓
+- `packages/contracts/src/enums/gender.ts` ✓
+- `packages/contracts/src/enums/worker-status.ts` ✓
+- `packages/contracts/src/enums/snapshot-status.ts` ✓
+- `packages/contracts/src/enums/pay-component-type.ts` ✓
+- `packages/contracts/src/enums/pay-period-code.ts` ✓
+- `packages/contracts/src/enums/index.ts` ✓
+- `packages/contracts/src/index.ts` ✓ (updated from empty export)
+- `packages/contracts/package.json` ✓ (added jest script)
+- `packages/contracts/jest.config.js` ✓
+
+Database schema:
+- `infra/migrations/0001_canonical_model.sql` ✓
+
+ADR:
+- `docs/adr/ADR-002-canonical-model-structure.md` ✓
 
 **Acceptance Criteria:**
-- [ ] Canonical worker model captures all required fields (worker ID, employment type, contract type, gender, FTE fraction, hire date, seniority, cost center, location, job reference)
-- [ ] Canonical pay record captures all required components (base pay, variable pay, bonuses, benefits — as typed, labeled components)
-- [ ] Canonical snapshot model captures snapshot ID, period, methodology version, rule pack version, creation timestamp, creator, and status
-- [ ] All models extend or import from `packages/contracts/`
-- [ ] No country-specific fields in any canonical model
-- [ ] Unit tests cover model construction and validation
-- [ ] Package compiles with zero TypeScript errors
+- [x] Canonical worker model captures all required fields (worker ID, employment type, contract type, gender, FTE fraction, hire date, seniority, cost center, location, job reference) — PASS: Worker entity in `worker.ts`
+- [x] Canonical pay record captures all required components (base pay, variable pay, bonuses, benefits — as typed, labeled components) — PASS: PayComponent entity with `PayComponentType` enum
+- [x] Canonical snapshot model captures snapshot ID, period, methodology version, rule pack version, creation timestamp, creator, and status — PASS: PaySnapshot entity in `pay-snapshot.ts`
+- [x] All models extend or import from `packages/contracts/` — PASS: all enum types imported from `@enx/contracts`
+- [x] No country-specific fields in any canonical model — PASS: country-leakage.test.ts verifies 7 schemas, all clean
+- [x] Unit tests cover model construction and validation — PASS: 85 tests across 9 test suites
+- [x] Package compiles with zero TypeScript errors — PASS: `pnpm typecheck` clean across all 8 packages
 
 **Blockers / Review Notes:**
-- Blocked on S02 (contracts must be defined)
-- Note: `packages/canonical-model/` shell (package.json, tsconfig.json, src/index.ts) is created in S01. This slice populates the src/ content.
+- S02 PENDING note: minimal enum definitions were added to `packages/contracts` as a documented supporting edit per operator instruction. S02 must complete the remaining contracts specification when executed. The enum files created here are fully compatible with what S02 would produce — they follow the same structure.
+- `infra/migrations/` directory created (permitted: part of owned files extended for S03 per task brief).
+
+**Completion record — 2026-04-06:**
+- Status set to ACCEPTED
+- ADR-002 filed: `docs/adr/ADR-002-canonical-model-structure.md`
+- `pnpm typecheck` — PASS (all 8 packages, 0 TS errors)
+- `pnpm lint` — PASS (0 errors, 0 warnings)
+- `pnpm test` — PASS (85 tests, 9 suites, 0 failures)
+- Country leakage: 7 schemas verified, 0 country-specific fields
+- Migration sanity: 0001_canonical_model.sql verified — 7 tables, 7 enum types, all with primary keys, no country names in DDL
+- No files modified outside owned scope — documented supporting edits to `packages/contracts` noted above
+- No country-specific logic in any owned file
 
 ---
 
@@ -620,3 +658,4 @@ Country packs are independent of each other and may be executed in parallel if r
 | 2026-04-05 | Initial slice queue created | Governance setup |
 | 2026-04-05 | S01 scope corrected: added structural shells for apps/api, apps/web, apps/worker, packages/contracts, packages/canonical-model, packages/audit, packages/security, packages/test-fixtures. Removed contradictory acceptance criterion. Added shell-awareness notes to S02, S03, S04. | Governance correction |
 | 2026-04-05 | S01 ACCEPTED. All 11 acceptance criteria met. ADR-001 filed. pnpm/lint/typecheck/test all pass. S02 unblocked. | S01 completion |
+| 2026-04-06 | S03 ACCEPTED. All 7 acceptance criteria met. 85 tests pass. ADR-002 filed. Minimal enum supporting edits applied to packages/contracts (documented). infra/migrations/0001_canonical_model.sql created. S04 unblocked. | S03 completion |
