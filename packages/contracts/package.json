@@ -6,6 +6,9 @@
   "scripts": {
     "typecheck": "tsc --noEmit",
     "build": "tsc --noEmit",
-    "test": "jest --passWithNoTests"
+    "test": "jest --config jest.config.js"
+  },
+  "dependencies": {
+    "zod": "^3.22.0"
   }
 }

@@ -285,10 +285,10 @@ No country goes live before its country pack is in ACCEPTED status and a country
 
 ## 13. IMMEDIATE NEXT STEPS
 
-1. Start S01_foundation_repo_bootstrap per the slice definition in `SLICE_QUEUE.md`
-2. S01 scope: monorepo tooling, workspace configuration, CI baseline, lint/test config, Docker dev environment skeleton
-3. Do not start S02 until S01 is in ACCEPTED status
-4. Do not create application code, DB schema, or API routes during S01
+1. Continue from Wave 0 per `SLICE_QUEUE.md`: S01 and S02 are ACCEPTED on the integration branch.
+2. Next planned implementation slice: **S03_canonical_worker_and_pay_models** (canonical models in `packages/canonical-model/`).
+3. Do not start S04 until S03 is ACCEPTED (per slice dependencies).
+4. Do not create application routes or database schema unless the active slice owns that scope.
 
-Current active slice: **S01_foundation_repo_bootstrap**
+Current active slice: **S03_canonical_worker_and_pay_models** (pending start — confirm queue before executing)
 Current milestone: **M0 — Foundation**
