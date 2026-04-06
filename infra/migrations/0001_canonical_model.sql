@@ -132,6 +132,8 @@ CREATE INDEX idx_jobs_is_active
 -- workers
 -- Canonical person records normalised from source systems.
 -- Workers are effective-dated: changes create new rows rather than mutating.
+-- Seniority level is not stored here; it is reachable via jobs.level_code
+-- through the job_id foreign key.
 -- ============================================================
 
 CREATE TABLE workers (
@@ -145,7 +147,6 @@ CREATE TABLE workers (
   fte_fraction        NUMERIC(5, 4)    NOT NULL,
   hire_date           DATE             NOT NULL,
   termination_date    DATE,
-  seniority_level_code VARCHAR(32),
   cost_center_code    VARCHAR(64),
   work_location_code  VARCHAR(64),
   status              worker_status    NOT NULL DEFAULT 'ACTIVE',
@@ -174,6 +175,7 @@ CREATE INDEX idx_workers_status
 -- pay_snapshots
 -- Immutable records of a reporting population at a point in time.
 -- Once SEALED, no associated pay_components may be modified.
+-- sealed_at is set when transitioning out of DRAFT and must not be cleared.
 -- ============================================================
 
 CREATE TABLE pay_snapshots (
@@ -193,10 +195,12 @@ CREATE TABLE pay_snapshots (
   CONSTRAINT ck_snapshot_period_range
     CHECK (period_end > period_start),
 
+  -- Only DRAFT snapshots have no sealed_at.
+  -- SEALED and ARCHIVED snapshots must retain their sealed_at timestamp.
   CONSTRAINT ck_snapshot_sealed_at
     CHECK (
-      (status = 'SEALED' AND sealed_at IS NOT NULL) OR
-      (status != 'SEALED' AND sealed_at IS NULL)
+      (status = 'DRAFT' AND sealed_at IS NULL) OR
+      (status != 'DRAFT' AND sealed_at IS NOT NULL)
     )
 );
 
@@ -213,21 +217,22 @@ CREATE INDEX idx_pay_snapshots_period
 -- pay_components
 -- Single typed pay elements for a worker within a snapshot period.
 -- Immutable once the parent snapshot is SEALED.
+-- Components have no sub-period effective dates; the snapshot's
+-- period_start/period_end governs all components in the snapshot.
+-- Mid-period pay changes are represented as multiple component records.
 -- ============================================================
 
 CREATE TABLE pay_components (
-  id               UUID               PRIMARY KEY DEFAULT gen_random_uuid(),
-  worker_id        UUID               NOT NULL REFERENCES workers (id),
-  snapshot_id      UUID               NOT NULL REFERENCES pay_snapshots (id),
-  component_type   pay_component_type NOT NULL,
-  source_label     VARCHAR(256)       NOT NULL,
-  raw_amount       NUMERIC(18, 4)     NOT NULL,
-  currency_code    VARCHAR(3)         NOT NULL,
-  period_code      pay_period_code    NOT NULL,
-  is_fte_proratable BOOLEAN           NOT NULL DEFAULT true,
-  effective_from   DATE               NOT NULL,
-  effective_to     DATE,
-  created_at       TIMESTAMPTZ        NOT NULL DEFAULT now()
+  id                UUID               PRIMARY KEY DEFAULT gen_random_uuid(),
+  worker_id         UUID               NOT NULL REFERENCES workers (id),
+  snapshot_id       UUID               NOT NULL REFERENCES pay_snapshots (id),
+  component_type    pay_component_type NOT NULL,
+  source_label      VARCHAR(256)       NOT NULL,
+  raw_amount        NUMERIC(18, 4)     NOT NULL,
+  currency_code     VARCHAR(3)         NOT NULL,
+  period_code       pay_period_code    NOT NULL,
+  is_fte_proratable BOOLEAN            NOT NULL DEFAULT true,
+  created_at        TIMESTAMPTZ        NOT NULL DEFAULT now()
 );
 
 CREATE INDEX idx_pay_components_worker
@@ -236,13 +241,16 @@ CREATE INDEX idx_pay_components_worker
 CREATE INDEX idx_pay_components_snapshot
   ON pay_components (snapshot_id);
 
-CREATE INDEX idx_pay_components_type
-  ON pay_components (component_type);
+-- Composite index for the metrics engine's primary access pattern:
+-- "all components of type X in snapshot Y"
+CREATE INDEX idx_pay_components_snapshot_type
+  ON pay_components (snapshot_id, component_type);
 
 -- ============================================================
 -- snapshot_manifests
--- Aggregate counts and integrity metadata generated at seal time.
+-- Aggregate counts and integrity checksum metadata generated at seal time.
 -- 1:1 with pay_snapshots. Immutable once created.
+-- Source traceability lives in source_lineage_refs, not here.
 -- ============================================================
 
 CREATE TABLE snapshot_manifests (
@@ -250,7 +258,6 @@ CREATE TABLE snapshot_manifests (
   snapshot_id         UUID         NOT NULL UNIQUE REFERENCES pay_snapshots (id),
   worker_count        INTEGER      NOT NULL,
   pay_component_count INTEGER      NOT NULL,
-  source_ref          VARCHAR(512),
   checksum_algorithm  VARCHAR(32)  NOT NULL,
   checksum            VARCHAR(128) NOT NULL,
   generated_at        TIMESTAMPTZ  NOT NULL DEFAULT now(),

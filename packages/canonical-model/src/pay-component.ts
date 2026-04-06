@@ -39,8 +39,6 @@ export interface PayComponent {
    * when annualising. True for salary; false for one-off bonuses.
    */
   isFteProratable: boolean;
-  effectiveFrom: Date;
-  effectiveTo: Date | null;
   createdAt: Date;
 }
 
@@ -54,8 +52,6 @@ export const PayComponentSchema = z.object({
   currencyCode: CurrencyCodeSchema,
   periodCode: z.nativeEnum(PayPeriodCode),
   isFteProratable: z.boolean(),
-  effectiveFrom: z.date(),
-  effectiveTo: z.date().nullable(),
   createdAt: z.date(),
 });
 

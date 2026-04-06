@@ -15,7 +15,6 @@ const BASE: Input = {
   fteFraction: 1.0,
   hireDate: new Date('2019-03-01'),
   terminationDate: null,
-  seniorityLevelCode: 'L3',
   costCenterCode: 'CC-TECH-01',
   workLocationCode: 'HYBRID',
   status: WorkerStatus.ACTIVE,
@@ -73,12 +72,16 @@ describe('WorkerSchema', () => {
       WorkerSchema.safeParse(
         override({
           terminationDate: null,
-          seniorityLevelCode: null,
           costCenterCode: null,
           workLocationCode: null,
         }),
       ).success,
     ).toBe(true);
+  });
+
+  it('does not carry a seniorityLevelCode field (level is on Job via jobId)', () => {
+    const keys = Object.keys(WorkerSchema.shape);
+    expect(keys).not.toContain('seniorityLevelCode');
   });
 
   it('does not contain country-specific fields', () => {

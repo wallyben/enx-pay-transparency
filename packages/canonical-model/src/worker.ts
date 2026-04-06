@@ -41,11 +41,6 @@ export interface Worker {
   fteFraction: number;
   hireDate: Date;
   terminationDate: Date | null;
-  /**
-   * Normalised seniority level code from the internal job architecture.
-   * Nullable until the worker's job has been fully normalised.
-   */
-  seniorityLevelCode: string | null;
   /** Cost centre code from the source system */
   costCenterCode: string | null;
   /** Work location code (office, remote, hybrid) — not a country identifier */
@@ -68,7 +63,6 @@ export const WorkerSchema = z.object({
   fteFraction: z.number().gt(0).lte(1),
   hireDate: z.date(),
   terminationDate: z.date().nullable(),
-  seniorityLevelCode: z.string().min(1).max(32).nullable(),
   costCenterCode: z.string().min(1).max(64).nullable(),
   workLocationCode: z.string().min(1).max(64).nullable(),
   status: z.nativeEnum(WorkerStatus),

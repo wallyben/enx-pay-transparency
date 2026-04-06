@@ -92,8 +92,6 @@ export interface SnapshotManifest {
   snapshotId: string;
   workerCount: number;
   payComponentCount: number;
-  /** Reference to the source data used to build this snapshot */
-  sourceRef: string | null;
   /** Hash algorithm used for the integrity checksum (e.g. "SHA-256") */
   checksumAlgorithm: string;
   /** Hex-encoded checksum of the canonical snapshot content at seal time */
@@ -106,7 +104,6 @@ export const SnapshotManifestSchema = z.object({
   snapshotId: z.string().uuid(),
   workerCount: z.number().int().nonnegative(),
   payComponentCount: z.number().int().nonnegative(),
-  sourceRef: z.string().min(1).max(512).nullable(),
   checksumAlgorithm: z.string().min(1).max(32),
   checksum: z.string().min(1).max(128),
   generatedAt: z.date(),

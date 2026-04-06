@@ -14,8 +14,6 @@ const BASE: Input = {
   currencyCode: 'EUR',
   periodCode: PayPeriodCode.MONTHLY,
   isFteProratable: true,
-  effectiveFrom: new Date('2024-01-01'),
-  effectiveTo: null,
   createdAt: new Date('2024-01-15'),
 };
 
@@ -62,5 +60,11 @@ describe('PayComponentSchema', () => {
         }),
       ).success,
     ).toBe(true);
+  });
+
+  it('does not carry sub-period effective dating fields', () => {
+    const keys = Object.keys(PayComponentSchema.shape);
+    expect(keys).not.toContain('effectiveFrom');
+    expect(keys).not.toContain('effectiveTo');
   });
 });

@@ -78,4 +78,42 @@ describe('SQL migration 0001_canonical_model', () => {
       expect(block).toContain('primary key');
     }
   });
+
+  it('pay_components does not have sub-period effective date columns', () => {
+    const tableStart = sql.indexOf('create table pay_components');
+    const tableEnd = sql.indexOf('create table', tableStart + 1);
+    const block = sql.slice(tableStart, tableEnd > 0 ? tableEnd : undefined);
+    expect(block).not.toContain('effective_from');
+    expect(block).not.toContain('effective_to');
+  });
+
+  it('workers does not have a seniority_level_code column', () => {
+    const tableStart = sql.indexOf('create table workers');
+    const tableEnd = sql.indexOf('create table', tableStart + 1);
+    const block = sql.slice(tableStart, tableEnd > 0 ? tableEnd : undefined);
+    expect(block).not.toContain('seniority_level_code');
+  });
+
+  it('snapshot_manifests does not have a source_ref column', () => {
+    const tableStart = sql.indexOf('create table snapshot_manifests');
+    const tableEnd = sql.indexOf('create table', tableStart + 1);
+    const block = sql.slice(tableStart, tableEnd > 0 ? tableEnd : undefined);
+    expect(block).not.toContain('source_ref');
+  });
+
+  it('ck_snapshot_sealed_at constraint uses DRAFT discriminant (not SEALED)', () => {
+    // Verifies the constraint correctly allows ARCHIVED snapshots to retain sealed_at.
+    // Wrong form: status != 'SEALED' AND sealed_at IS NULL (blocks archiving)
+    // Correct form: status = 'DRAFT' AND sealed_at IS NULL
+    const snapshotStart = sql.indexOf('create table pay_snapshots');
+    const snapshotEnd = sql.indexOf('create table', snapshotStart + 1);
+    const block = sql.slice(snapshotStart, snapshotEnd > 0 ? snapshotEnd : undefined);
+    expect(block).toContain("status = 'draft' and sealed_at is null");
+    expect(block).not.toContain("status != 'sealed' and sealed_at is null");
+  });
+
+  it('pay_components has a composite index on (snapshot_id, component_type)', () => {
+    expect(sql).toContain('idx_pay_components_snapshot_type');
+    expect(sql).toContain('snapshot_id, component_type');
+  });
 });

@@ -87,3 +87,42 @@ Country-specific classifications, thresholds, and derived fields belong in count
 - The intake engine (S05–S07) must map source records to these exact entity structures. No new canonical entities may be added without a new ADR.
 - The metrics engine (S11) must read pay components by `componentType` and use `periodCode` + `isFteProratable` for annualisation — these are the structural hooks for that calculation.
 - The snapshot immutability contract (`SEALED → no component mutations`) must be enforced at the application layer in S07 and at the DB layer via triggers or application-level guards.
+- Mid-period pay changes (e.g. salary raised mid-year) are represented as multiple `PayComponent` records within the same snapshot — not by effective-dating a single component. The intake engine must handle the split.
+- Worker seniority level is not duplicated on the `Worker` record. It is reachable deterministically via `worker.jobId → job.levelCode`. The category engine (S09) must use this FK chain, not add a separate denormalized field.
+- Source references belong in `source_lineage_refs` (supports multiple sources per snapshot). `SnapshotManifest` is for checksums and counts only.
+
+---
+
+## Correction Record — 2026-04-06
+
+Applied during S03 architecture review. The following issues were found and corrected before S04 begins.
+
+### C1 — Removed `effectiveFrom`/`effectiveTo` from `PayComponent`
+
+**Problem:** `PayComponent` carried `effectiveFrom` and `effectiveTo` fields, creating a sub-period dating concept inside a snapshot that already has `periodStart`/`periodEnd`. This introduced ambiguity about which period concept governed the component, and would have forced the metrics engine (S11) to resolve conflicting period boundaries.
+
+**Correction:** Removed both fields from the TypeScript interface, Zod schema, and SQL DDL. Mid-period pay changes are represented as multiple component records.
+
+### C2 — Fixed `ck_snapshot_sealed_at` SQL constraint
+
+**Problem:** The constraint `status != 'SEALED' AND sealed_at IS NULL` evaluated to true for `ARCHIVED` snapshots, forcing `sealed_at` to be NULL before archiving. This would have destroyed the seal timestamp — a material audit traceability loss.
+
+**Correction:** Changed to `status = 'DRAFT' AND sealed_at IS NULL`, correctly encoding the invariant that only `DRAFT` snapshots have no `sealedAt`.
+
+### C3 — Removed `seniorityLevelCode` from `Worker`
+
+**Problem:** `Worker.seniorityLevelCode` duplicated `Job.levelCode`. A worker already references a specific effective-period `Job` row via `jobId`; the level is reachable through that FK. Two level fields with no documented precedence rule would have caused drift in S08/S09 (job normalization, category engine).
+
+**Correction:** Removed the field from the TypeScript interface, Zod schema, and SQL DDL.
+
+### C4 — Removed `sourceRef` from `SnapshotManifest`
+
+**Problem:** `SnapshotManifest.sourceRef` was a single string that duplicated the purpose of `source_lineage_refs`, which already supports multiple sources per snapshot with `mappingVersion` and `recordCount`. Two places to record source references with no coordination guarantee.
+
+**Correction:** Removed the field. The manifest's scope is integrity checksums and counts. All source traceability is in `source_lineage_refs`.
+
+### C5 — Added composite index `(snapshot_id, component_type)` to `pay_components`
+
+**Problem:** The metrics engine's primary access pattern — "all BASE_SALARY components in snapshot X" — was not served by any single index. Three separate single-column indexes existed but no composite.
+
+**Correction:** Added `idx_pay_components_snapshot_type ON pay_components (snapshot_id, component_type)`.

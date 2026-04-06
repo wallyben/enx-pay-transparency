@@ -37,6 +37,14 @@ describe('PaySnapshotSchema', () => {
     ).toBe(true);
   });
 
+  it('accepts an ARCHIVED snapshot with sealedAt retained', () => {
+    expect(
+      PaySnapshotSchema.safeParse(
+        overrideSnapshot({ status: SnapshotStatus.ARCHIVED, sealedAt: new Date('2025-01-15') }),
+      ).success,
+    ).toBe(true);
+  });
+
   it('rejects periodEnd before periodStart', () => {
     expect(
       PaySnapshotSchema.safeParse(
@@ -51,7 +59,7 @@ describe('PaySnapshotSchema', () => {
     ).toBe(false);
   });
 
-  it('accepts all SnapshotStatus values', () => {
+  it('accepts all SnapshotStatus values with correct sealedAt', () => {
     const cases: Array<Partial<SnapshotInput>> = [
       { status: SnapshotStatus.DRAFT, sealedAt: null },
       { status: SnapshotStatus.SEALED, sealedAt: new Date('2025-01-15') },
@@ -77,7 +85,6 @@ describe('SnapshotManifestSchema', () => {
     snapshotId: '523e4567-e89b-12d3-a456-426614174004',
     workerCount: 120,
     payComponentCount: 360,
-    sourceRef: 's3://intake/2024-annual/payroll.csv',
     checksumAlgorithm: 'SHA-256',
     checksum: 'abc123def456',
     generatedAt: new Date('2025-01-15'),
@@ -95,7 +102,8 @@ describe('SnapshotManifestSchema', () => {
     expect(SnapshotManifestSchema.safeParse(overrideManifest({ workerCount: -1 })).success).toBe(false);
   });
 
-  it('accepts null sourceRef', () => {
-    expect(SnapshotManifestSchema.safeParse(overrideManifest({ sourceRef: null })).success).toBe(true);
+  it('does not carry a sourceRef field (source traceability is in source_lineage_refs)', () => {
+    const keys = Object.keys(SnapshotManifestSchema.shape);
+    expect(keys).not.toContain('sourceRef');
   });
 });
