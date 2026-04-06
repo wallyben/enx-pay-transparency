@@ -1,0 +1,22 @@
+import { z } from 'zod';
+import { CaseworkStatus } from '../enums/casework-status';
+import { ContractType } from '../enums/contract-type';
+import { CountryCode } from '../enums/country-code';
+import { EmploymentType } from '../enums/employment-type';
+import { Gender } from '../enums/gender';
+import { PayComponent } from '../enums/pay-component';
+import { RemediationStatus } from '../enums/remediation-status';
+import { ReviewStatus } from '../enums/review-status';
+import { SnapshotStatus } from '../enums/snapshot-status';
+import { WorkerStatus } from '../enums/worker-status';
+
+export const WorkerStatusSchema = z.nativeEnum(WorkerStatus);
+export const EmploymentTypeSchema = z.nativeEnum(EmploymentType);
+export const ContractTypeSchema = z.nativeEnum(ContractType);
+export const GenderSchema = z.nativeEnum(Gender);
+export const PayComponentSchema = z.nativeEnum(PayComponent);
+export const SnapshotStatusSchema = z.nativeEnum(SnapshotStatus);
+export const CaseworkStatusSchema = z.nativeEnum(CaseworkStatus);
+export const RemediationStatusSchema = z.nativeEnum(RemediationStatus);
+export const ReviewStatusSchema = z.nativeEnum(ReviewStatus);
+export const CountryCodeSchema = z.nativeEnum(CountryCode);

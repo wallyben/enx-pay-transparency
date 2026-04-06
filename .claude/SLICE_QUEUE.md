@@ -39,8 +39,8 @@ Before starting S01, confirm:
 | ID | Slice Name | Status | Completion Date | Notes |
 |---|---|---|---|---|
 | S01 | foundation_repo_bootstrap | ACCEPTED | 2026-04-05 | All 11 AC met. pnpm/lint/typecheck/test all pass. ADR-001 filed. |
-| S02 | core_contracts_and_enums | PENDING | — | Blocked on S01 — now unblocked |
-| S03 | canonical_worker_and_pay_models | PENDING | — | Blocked on S02 |
+| S02 | core_contracts_and_enums | ACCEPTED | 2026-04-05 | All 7 AC met. 47 tests pass. ADR-002 filed. S03 unblocked. |
+| S03 | canonical_worker_and_pay_models | PENDING | — | Blocked on S02 — now unblocked |
 | S04 | audit_and_security_baseline | PENDING | — | Blocked on S03 |
 
 ### S01 — foundation_repo_bootstrap
@@ -148,17 +148,31 @@ Package shells — each contains only `package.json`, `tsconfig.json`, `src/inde
 - `packages/contracts/src/__tests__/`
 
 **Acceptance Criteria:**
-- [ ] All enums are defined and exported
-- [ ] All base type interfaces are defined and exported
-- [ ] All Zod schemas match their corresponding TypeScript types
-- [ ] Unit tests verify enum values and schema validation
-- [ ] No country-specific values in any enum or type
-- [ ] Package compiles with zero TypeScript errors
-- [ ] Package is importable from other packages in the workspace
+- [x] All enums are defined and exported
+- [x] All base type interfaces are defined and exported
+- [x] All Zod schemas match their corresponding TypeScript types
+- [x] Unit tests verify enum values and schema validation
+- [x] No country-specific values in any enum or type
+- [x] Package compiles with zero TypeScript errors
+- [x] Package is importable from other packages in the workspace
 
 **Blockers / Review Notes:**
 - Blocked on S01 (workspace must be configured)
 - Note: `packages/contracts/` shell (package.json, tsconfig.json, src/index.ts) is created in S01. This slice populates the src/ content — it does not create a new package from scratch.
+
+**Completion record — 2026-04-05:**
+- Status set to ACCEPTED
+- ADR-002 filed: `docs/adr/ADR-002-zod-as-validation-library.md` (Zod v3 chosen as runtime validation library)
+- Enums created: WorkerStatus, EmploymentType, ContractType, Gender, PayComponent, SnapshotStatus, CaseworkStatus, RemediationStatus, ReviewStatus, CountryCode (10 enums)
+- Types created: Result<T,E> with ok()/fail() helpers, ApiError, PaginationQuery, PaginatedResult<T>
+- Zod schemas created: one per enum (nativeEnum), ApiErrorSchema, PaginationQuerySchema
+- `pnpm --filter @enx/contracts run test` — PASS (47 tests, 3 suites, 0 failures)
+- `pnpm --filter @enx/contracts run typecheck` — PASS (0 TS errors)
+- `pnpm lint` — PASS (0 errors, 0 warnings)
+- `pnpm typecheck` (all packages) — PASS (0 errors across 8 packages)
+- No country-specific logic introduced — PASS (CountryCode uses ISO 3166-1 codes only)
+- No files outside owned scope modified (ADR in docs/adr/ is permitted at any time) — PASS
+- S03 unblocked
 
 ---
 
@@ -620,3 +634,4 @@ Country packs are independent of each other and may be executed in parallel if r
 | 2026-04-05 | Initial slice queue created | Governance setup |
 | 2026-04-05 | S01 scope corrected: added structural shells for apps/api, apps/web, apps/worker, packages/contracts, packages/canonical-model, packages/audit, packages/security, packages/test-fixtures. Removed contradictory acceptance criterion. Added shell-awareness notes to S02, S03, S04. | Governance correction |
 | 2026-04-05 | S01 ACCEPTED. All 11 acceptance criteria met. ADR-001 filed. pnpm/lint/typecheck/test all pass. S02 unblocked. | S01 completion |
+| 2026-04-05 | S02 ACCEPTED. All 7 acceptance criteria met. ADR-002 filed. 47 tests pass. 10 enums, 4 types, 12 Zod schemas. S03 unblocked. | S02 completion |
