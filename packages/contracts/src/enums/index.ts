@@ -4,6 +4,7 @@ export { CountryCode } from './country-code';
 export { EmploymentType } from './employment-type';
 export { Gender } from './gender';
 export { PayComponent } from './pay-component';
+export { PayPeriodCode } from './pay-period-code';
 export { RemediationStatus } from './remediation-status';
 export { ReviewStatus } from './review-status';
 export { SnapshotStatus } from './snapshot-status';
