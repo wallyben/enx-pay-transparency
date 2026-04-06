@@ -1,4 +1,4 @@
-# ADR-002 — Audit and Security Baseline Structure
+# ADR-004 — Audit and Security Baseline Structure
 
 **Status:** Accepted  
 **Date:** 2026-04-06  

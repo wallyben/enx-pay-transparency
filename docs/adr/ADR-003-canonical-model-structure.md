@@ -1,4 +1,4 @@
-# ADR-002 — Canonical Model Structure and Storage Schema Design
+# ADR-003 — Canonical Model Structure and Storage Schema Design
 
 **Status:** Accepted  
 **Slice:** S03 — canonical_worker_and_pay_models  
