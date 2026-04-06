@@ -13,7 +13,7 @@
 **Milestone:** M0
 
 Before marking S04 ACCEPTED, confirm:
-- [ ] S03 is ACCEPTED on the integration branch (or dependency formally handled per governance)
+- [ ] S03 is ACCEPTED on the integration branch (PR #2 merged into `claude/setup-repo-structure-dGb6o`)
 - [ ] All S04 acceptance criteria and tests pass on this branch
 - [ ] ADR filed for any architectural decisions in this slice
 
@@ -40,8 +40,8 @@ Before marking S04 ACCEPTED, confirm:
 |---|---|---|---|---|
 | S01 | foundation_repo_bootstrap | ACCEPTED | 2026-04-05 | All 11 AC met. pnpm/lint/typecheck/test all pass. ADR-001 filed. |
 | S02 | core_contracts_and_enums | ACCEPTED | 2026-04-05 | All 7 AC met. 47 tests pass. ADR-002 filed. S03 unblocked. |
-| S03 | canonical_worker_and_pay_models | PENDING | — | PR branch merged with integration; merge PR #2 to integration before claiming M0 |
-| S04 | audit_and_security_baseline | IN REVIEW | — | Implementation on PR claude/s04-audit-security-baseline-yOnUZ; blocked on S03 per queue until resolved |
+| S03 | canonical_worker_and_pay_models | ACCEPTED | 2026-04-06 | Landed via PR #2 merge to integration; canonical-model + migration + ADR; verify full AC checklist when formalizing M0 |
+| S04 | audit_and_security_baseline | IN REVIEW | — | Implementation on PR claude/s04-audit-security-baseline-yOnUZ; rebase/merge against integration after S03 merge |
 
 ### S01 — foundation_repo_bootstrap
 
