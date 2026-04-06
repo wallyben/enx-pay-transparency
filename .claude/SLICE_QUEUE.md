@@ -6,16 +6,16 @@
 
 ## CURRENT ACTIVE SLICE
 
-**Slice ID:** S01
-**Name:** S01_foundation_repo_bootstrap
-**Status:** PENDING — Ready to start
+**Slice ID:** S03
+**Name:** S03_canonical_worker_and_pay_models
+**Status:** PENDING — Ready to start (S01 and S02 ACCEPTED; see Wave 0 table)
 **Wave:** 0 — Foundation
 **Milestone:** M0
 
-Before starting S01, confirm:
-- [ ] This is the first slice being executed
-- [ ] No application code exists yet
-- [ ] Workspace tooling has not been configured yet
+Before starting S03, confirm:
+- [ ] S02 is ACCEPTED and contracts tests pass on the integration branch
+- [ ] Canonical model package shell exists from S01
+- [ ] No country-specific fields are introduced in canonical models
 
 ---
 

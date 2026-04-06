@@ -48,11 +48,10 @@ describe('Result type helpers', () => {
   describe('Result discriminated union', () => {
     it('narrows correctly in a switch', () => {
       const process = (r: Result<number>): string => {
-        if (r.ok) {
-          return `value: ${r.value}`;
-        } else {
+        if (r.ok === false) {
           return `error: ${r.error}`;
         }
+        return `value: ${r.value}`;
       };
 
       expect(process(ok(5))).toBe('value: 5');
