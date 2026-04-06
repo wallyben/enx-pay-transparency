@@ -6,17 +6,15 @@
 
 ## CURRENT ACTIVE SLICE
 
-**Slice ID:** S04
-**Name:** S04_audit_and_security_baseline
-**Status:** PENDING — Next: merge PR #3; S03 landed via PR #2
-**Wave:** 0 — Foundation
-**Milestone:** M0
+**Slice ID:** S05  
+**Name:** intake_upload_and_validation  
+**Status:** BLOCKED — Next implementation slice after M0. **Do not start** until S04 is ACCEPTED on the integration branch.  
+**Wave:** 1 — Intake  
+**Milestone:** M1 (blocked on M0 gate)
 
-Before merging S04 to integration, confirm:
-- [ ] S03 acceptance evidence reviewed on integration (canonical model + tests + ADR)
-- [ ] S04 PR branch passes pnpm test, typecheck, lint
-- [ ] ADR numbering (multiple ADR-002*) reconciled or documented
+**M0 closure in flight:** S04 — `audit_and_security_baseline` is **IN REVIEW**. PR [#3](https://github.com/wallyben/enx-pay-transparency/pull/3) (`feat(S04): audit and security baseline…`) targets integration branch `claude/setup-repo-structure-dGb6o` and was **open** (not merged) as of 2026-04-06. On the S04 PR branch, `pnpm test`, `pnpm typecheck`, and `pnpm lint` all pass.
 
+Before marking S04 ACCEPTED after merge, confirm on integration: S03 evidence, S04 tests, and ADRs **ADR-001** through **ADR-004** (see `docs/adr/`).
 
 ---
 
@@ -41,8 +39,8 @@ Before merging S04 to integration, confirm:
 |---|---|---|---|---|
 | S01 | foundation_repo_bootstrap | ACCEPTED | 2026-04-05 | All 11 AC met. pnpm/lint/typecheck/test all pass. ADR-001 filed. |
 | S02 | core_contracts_and_enums | ACCEPTED | 2026-04-05 | All 7 AC met. 47 tests pass. ADR-002 filed. S03 unblocked. |
-| S03 | canonical_worker_and_pay_models | ACCEPTED | 2026-04-06 | Landed via PR #2; canonical model, migration, tests, ADR-002-canonical-model-structure |
-| S04 | audit_and_security_baseline | PENDING | — | Unblocked; land via PR #3 |
+| S03 | canonical_worker_and_pay_models | ACCEPTED | 2026-04-06 | Landed via PR #2; canonical model, migration, tests; ADR-003 `docs/adr/ADR-003-canonical-model-structure.md` |
+| S04 | audit_and_security_baseline | IN REVIEW | — | PR #3 open → `claude/setup-repo-structure-dGb6o`; ADR-004 `docs/adr/ADR-004-audit-security-baseline-structure.md` |
 
 ### S01 — foundation_repo_bootstrap
 
@@ -246,7 +244,7 @@ Package shells — each contains only `package.json`, `tsconfig.json`, `src/inde
 
 | ID | Slice Name | Status | Completion Date | Notes |
 |---|---|---|---|---|
-| S05 | intake_upload_and_validation | PENDING | — | Blocked on M0 Gate |
+| S05 | intake_upload_and_validation | BLOCKED | — | Next active slice after M0; blocked until S04 ACCEPTED |
 | S06 | mapping_and_normalization_pipeline | PENDING | — | Blocked on S05 |
 | S07 | snapshot_creation_and_lineage | PENDING | — | Blocked on S06 |
 
@@ -262,7 +260,7 @@ Package shells — each contains only `package.json`, `tsconfig.json`, `src/inde
 - [ ] Unit and integration tests cover valid and invalid file scenarios
 
 **Blockers / Review Notes:**
-- Blocked on M0 Gate (all of Wave 0 must be ACCEPTED)
+- Blocked on M0 Gate (S01–S04 all ACCEPTED). S04 still in PR #3 as of 2026-04-06.
 
 ---
 
@@ -636,3 +634,4 @@ Country packs are independent of each other and may be executed in parallel if r
 | 2026-04-05 | S01 scope corrected: added structural shells for apps/api, apps/web, apps/worker, packages/contracts, packages/canonical-model, packages/audit, packages/security, packages/test-fixtures. Removed contradictory acceptance criterion. Added shell-awareness notes to S02, S03, S04. | Governance correction |
 | 2026-04-05 | S01 ACCEPTED. All 11 acceptance criteria met. ADR-001 filed. pnpm/lint/typecheck/test all pass. S02 unblocked. | S01 completion |
 | 2026-04-05 | S02 ACCEPTED. All 7 acceptance criteria met. ADR-002 filed. 47 tests pass. 10 enums, 4 types, 12 Zod schemas. S03 unblocked. | S02 completion |
+| 2026-04-06 | ADR renumber: canonical model → ADR-003 (`ADR-003-canonical-model-structure.md`); audit/security baseline → ADR-004 (`ADR-004-audit-security-baseline-structure.md`). Zod ADR remains ADR-002. Queue: S04 IN REVIEW (PR #3); S05 set as next slice (BLOCKED until M0). | Post-S04 docs hygiene |
