@@ -6,9 +6,9 @@
 
 ## CURRENT ACTIVE SLICE
 
-**Slice ID:** S09  
-**Name:** category_engine_exact_and_normalized  
-**Status:** PENDING — **S08 ACCEPTED** (2026-04-07). Next implementation slice; **not started** (blocked on S08 predecessor — cleared).  
+**Slice ID:** S10  
+**Name:** category_engine_equal_value_and_overrides  
+**Status:** PENDING — **S09 ACCEPTED** (2026-04-07). Next implementation slice; **not started**.  
 **Wave:** 2 — Job architecture and comparable categories  
 **Milestone:** M2
 
@@ -408,8 +408,8 @@ Package shells — each contains only `package.json`, `tsconfig.json`, `src/inde
 | ID | Slice Name | Status | Completion Date | Notes |
 |---|---|---|---|---|
 | S08 | job_normalization_core | ACCEPTED | 2026-04-07 | `@enx/job-architecture`, contracts job norm + logical job fields, intake optional job columns, ADR-007; validation green |
-| S09 | category_engine_exact_and_normalized | PENDING | — | Blocked on S08 — cleared; next slice, not started |
-| S10 | category_engine_equal_value_and_overrides | PENDING | — | Blocked on S09 |
+| S09 | category_engine_exact_and_normalized | ACCEPTED | 2026-04-07 | `@enx/category-engine`, contracts category assignment types/issues, ADR-008; exact + norm-equiv + review/unassigned; tests green |
+| S10 | category_engine_equal_value_and_overrides | PENDING | — | Blocked on S09 — cleared; next slice, not started |
 
 ### S08 — job_normalization_core
 
@@ -458,14 +458,39 @@ Package shells — each contains only `package.json`, `tsconfig.json`, `src/inde
 
 **Purpose:** Assign workers to comparable categories using exact and normalized job matching. Produce a traceable category assignment for every worker in a snapshot.
 
+**Owned Files (S09 delivery):**
+- `packages/contracts/src/enums/category-assignment-status.ts`
+- `packages/contracts/src/enums/category-assignment-basis.ts`
+- `packages/contracts/src/enums/category-assignment-issue-code.ts`
+- `packages/contracts/src/enums/index.ts` (exports)
+- `packages/contracts/src/types/category-assignment.ts`
+- `packages/contracts/src/types/index.ts` (exports)
+- `packages/contracts/src/schemas/enums.ts` (Zod for new enums)
+- `packages/contracts/src/schemas/category-assignment.ts`
+- `packages/contracts/src/schemas/index.ts` (exports)
+- `packages/contracts/src/__tests__/category-assignment-schemas.test.ts`
+- `packages/category-engine/` (package: `package.json`, `tsconfig.json`, `jest.config.js`, `src/index.ts`, `src/category-assignment-rules-version.ts`, `src/deterministic-category-id.ts`, `src/assign-category-row.ts`, `src/category-assignment-pipeline.ts`, `src/category-assignment-service.ts`, `src/__tests__/`)
+- `docs/adr/ADR-008-category-engine-package.md`
+- `.claude/SLICE_QUEUE.md` (this file — S09 status only)
+
 **Acceptance Criteria:**
-- [ ] Every worker in a snapshot receives a category assignment or an explicit exception
-- [ ] Category assignment is traceable to rule version and methodology version
-- [ ] Exact match and normalized match paths are both implemented and tested
-- [ ] No worker can remain unassigned and silently pass to metrics calculation
+- [x] Every worker in a snapshot receives a category assignment or an explicit exception
+- [x] Category assignment is traceable to rule version and methodology version
+- [x] Exact match and normalized match paths are both implemented and tested
+- [x] No worker can remain unassigned and silently pass to metrics calculation
 
 **Blockers / Review Notes:**
-- Blocked on S08
+- Blocked on S08 — cleared 2026-04-07
+- Rows with any job-normalization issue receive `REVIEW_REQUIRED` (no category) so categories are not silently assigned on dirty descriptors; `NORMALIZED_EQUIVALENT` without title is covered with synthetic clean rows in tests (current S08 pipeline attaches an issue when title is missing)
+
+**Completion record — 2026-04-07:**
+- Status set to **ACCEPTED**
+- ADR-008 filed: `docs/adr/ADR-008-category-engine-package.md`
+- `pnpm test` — PASS (48 suites, 328 tests, 0 failures)
+- `pnpm typecheck` — PASS (0 TS errors; `@enx/category-engine` included)
+- `pnpm lint` — PASS
+- Exports: `runCategoryAssignmentOnJobNormalization`, `runCategoryAssignmentWithAudit`, `assignCategoryToJobNormalizationRow`, `DEFAULT_CATEGORY_ENGINE_RULES_VERSION`; per-row `CategoryAssignmentStatus` (`ASSIGNED` | `REVIEW_REQUIRED` | `UNASSIGNED`), basis `EXACT` | `NORMALIZED_EQUIVALENT`, deterministic `categoryId`, traceability (methodology, rule pack, job-norm rules, category-engine rules)
+- S10 next (PENDING, not started)
 
 ---
 
@@ -481,7 +506,7 @@ Package shells — each contains only `package.json`, `tsconfig.json`, `src/inde
 - [ ] Unit and integration tests cover override approval and rejection paths
 
 **Blockers / Review Notes:**
-- Blocked on S09
+- Blocked on S09 — cleared 2026-04-07
 
 ---
 
@@ -775,3 +800,4 @@ Country packs are independent of each other and may be executed in parallel if r
 | 2026-04-06 | S06 ACCEPTED: mapping + normalization pipeline (logical fields, issues, gating, default profile, audit on map, POST map route); contracts + intake-engine + API tests; validation green. S07 next (PENDING). | S06 completion |
 | 2026-04-07 | S07 ACCEPTED: intake sealed snapshot + deterministic manifest id, lineage, gating vs S06 output, audit `SEAL`, deep-frozen `SEALED` records, `POST .../snapshots`; contracts + canonical-model + intake-engine + API tests; ADR-006; validation green. S08 next (PENDING, M1 Gate). | S07 completion |
 | 2026-04-07 | S08 ACCEPTED: job normalization package `@enx/job-architecture`, contracts job norm types/issues + `JOB_*` logical fields, intake optional job column mapping, pipeline + audit service, tests + ADR-007; `pnpm test` / `typecheck` / `lint` green. S09 next (PENDING). | S08 completion |
+| 2026-04-07 | S09 ACCEPTED: category engine `@enx/category-engine`, contracts category assignment enums/types/schemas + tests, exact vs normalized-equivalent keys + deterministic category IDs, review-required/unassigned outcomes, audit hook on assignment run, ADR-008; `pnpm test` / `typecheck` / `lint` green. S10 next (PENDING). | S09 completion |

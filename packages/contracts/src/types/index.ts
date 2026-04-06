@@ -18,6 +18,12 @@ export {
   type IntakeSnapshotCreationError,
 } from './intake-snapshot';
 export {
+  type CategoryAssignmentIssue,
+  type CategoryAssignmentRowResult,
+  type CategoryAssignmentSnapshotResult,
+  type CategoryAssignmentTraceability,
+} from './category-assignment';
+export {
   type JobNormalizationIssue,
   type JobNormalizationRowResult,
   type JobNormalizationSnapshotResult,

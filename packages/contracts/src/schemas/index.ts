@@ -1,5 +1,14 @@
 export { ApiErrorSchema } from './api-error';
 export {
+  CategoryAssignmentIssueSchema,
+  CategoryAssignmentRowResultSchema,
+  CategoryAssignmentSnapshotResultSchema,
+  CategoryAssignmentTraceabilitySchema,
+} from './category-assignment';
+export {
+  CategoryAssignmentBasisSchema,
+  CategoryAssignmentIssueCodeSchema,
+  CategoryAssignmentStatusSchema,
   CaseworkStatusSchema,
   ContractTypeSchema,
   CountryCodeSchema,

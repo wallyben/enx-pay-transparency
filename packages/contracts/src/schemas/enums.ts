@@ -1,4 +1,7 @@
 import { z } from 'zod';
+import { CategoryAssignmentBasis } from '../enums/category-assignment-basis';
+import { CategoryAssignmentIssueCode } from '../enums/category-assignment-issue-code';
+import { CategoryAssignmentStatus } from '../enums/category-assignment-status';
 import { CaseworkStatus } from '../enums/casework-status';
 import { ContractType } from '../enums/contract-type';
 import { CountryCode } from '../enums/country-code';
@@ -17,6 +20,9 @@ import { SnapshotStatus } from '../enums/snapshot-status';
 import { StructuralIssueCode } from '../enums/structural-issue-code';
 import { WorkerStatus } from '../enums/worker-status';
 
+export const CategoryAssignmentStatusSchema = z.nativeEnum(CategoryAssignmentStatus);
+export const CategoryAssignmentBasisSchema = z.nativeEnum(CategoryAssignmentBasis);
+export const CategoryAssignmentIssueCodeSchema = z.nativeEnum(CategoryAssignmentIssueCode);
 export const WorkerStatusSchema = z.nativeEnum(WorkerStatus);
 export const EmploymentTypeSchema = z.nativeEnum(EmploymentType);
 export const ContractTypeSchema = z.nativeEnum(ContractType);
