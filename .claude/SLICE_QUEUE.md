@@ -6,16 +6,17 @@
 
 ## CURRENT ACTIVE SLICE
 
-**Slice ID:** S03
-**Name:** S03_canonical_worker_and_pay_models
-**Status:** PENDING — Ready to start (S01 and S02 ACCEPTED; see Wave 0 table)
+**Slice ID:** S04
+**Name:** S04_audit_and_security_baseline
+**Status:** PENDING — Next: merge PR #3; S03 landed via PR #2
 **Wave:** 0 — Foundation
 **Milestone:** M0
 
-Before starting S03, confirm:
-- [ ] S02 is ACCEPTED and contracts tests pass on the integration branch
-- [ ] Canonical model package shell exists from S01
-- [ ] No country-specific fields are introduced in canonical models
+Before merging S04 to integration, confirm:
+- [ ] S03 acceptance evidence reviewed on integration (canonical model + tests + ADR)
+- [ ] S04 PR branch passes pnpm test, typecheck, lint
+- [ ] ADR numbering (multiple ADR-002*) reconciled or documented
+
 
 ---
 
@@ -40,8 +41,8 @@ Before starting S03, confirm:
 |---|---|---|---|---|
 | S01 | foundation_repo_bootstrap | ACCEPTED | 2026-04-05 | All 11 AC met. pnpm/lint/typecheck/test all pass. ADR-001 filed. |
 | S02 | core_contracts_and_enums | ACCEPTED | 2026-04-05 | All 7 AC met. 47 tests pass. ADR-002 filed. S03 unblocked. |
-| S03 | canonical_worker_and_pay_models | PENDING | — | Blocked on S02 — now unblocked |
-| S04 | audit_and_security_baseline | PENDING | — | Blocked on S03 |
+| S03 | canonical_worker_and_pay_models | ACCEPTED | 2026-04-06 | Landed via PR #2; canonical model, migration, tests, ADR-002-canonical-model-structure |
+| S04 | audit_and_security_baseline | PENDING | — | Unblocked; land via PR #3 |
 
 ### S01 — foundation_repo_bootstrap
 
