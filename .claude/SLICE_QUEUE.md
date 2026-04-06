@@ -8,14 +8,15 @@
 
 **Slice ID:** S04
 **Name:** S04_audit_and_security_baseline
-**Status:** IN REVIEW — S04 implementation lives on this PR branch; merge integration brought S01/S02 baseline
+**Status:** PENDING — Next: merge PR #3; S03 landed via PR #2
 **Wave:** 0 — Foundation
 **Milestone:** M0
 
-Before marking S04 ACCEPTED, confirm:
-- [ ] S03 is ACCEPTED on the integration branch (PR #2 merged into `claude/setup-repo-structure-dGb6o`)
-- [ ] All S04 acceptance criteria and tests pass on this branch
-- [ ] ADR filed for any architectural decisions in this slice
+Before merging S04 to integration, confirm:
+- [ ] S03 acceptance evidence reviewed on integration (canonical model + tests + ADR)
+- [ ] S04 PR branch passes pnpm test, typecheck, lint
+- [ ] ADR numbering (multiple ADR-002*) reconciled or documented
+
 
 ---
 
@@ -40,8 +41,8 @@ Before marking S04 ACCEPTED, confirm:
 |---|---|---|---|---|
 | S01 | foundation_repo_bootstrap | ACCEPTED | 2026-04-05 | All 11 AC met. pnpm/lint/typecheck/test all pass. ADR-001 filed. |
 | S02 | core_contracts_and_enums | ACCEPTED | 2026-04-05 | All 7 AC met. 47 tests pass. ADR-002 filed. S03 unblocked. |
-| S03 | canonical_worker_and_pay_models | ACCEPTED | 2026-04-06 | Landed via PR #2 merge to integration; canonical-model + migration + ADR; verify full AC checklist when formalizing M0 |
-| S04 | audit_and_security_baseline | IN REVIEW | — | Implementation on PR claude/s04-audit-security-baseline-yOnUZ; rebase/merge against integration after S03 merge |
+| S03 | canonical_worker_and_pay_models | ACCEPTED | 2026-04-06 | Landed via PR #2; canonical model, migration, tests, ADR-002-canonical-model-structure |
+| S04 | audit_and_security_baseline | PENDING | — | Unblocked; land via PR #3 |
 
 ### S01 — foundation_repo_bootstrap
 
@@ -635,4 +636,3 @@ Country packs are independent of each other and may be executed in parallel if r
 | 2026-04-05 | S01 scope corrected: added structural shells for apps/api, apps/web, apps/worker, packages/contracts, packages/canonical-model, packages/audit, packages/security, packages/test-fixtures. Removed contradictory acceptance criterion. Added shell-awareness notes to S02, S03, S04. | Governance correction |
 | 2026-04-05 | S01 ACCEPTED. All 11 acceptance criteria met. ADR-001 filed. pnpm/lint/typecheck/test all pass. S02 unblocked. | S01 completion |
 | 2026-04-05 | S02 ACCEPTED. All 7 acceptance criteria met. ADR-002 filed. 47 tests pass. 10 enums, 4 types, 12 Zod schemas. S03 unblocked. | S02 completion |
-| 2026-04-06 | S04 PR: merged integration branch; replaced contradictory queue claims with S01/S02 ACCEPTED, S03 PENDING, S04 IN REVIEW. | Repo recovery |
