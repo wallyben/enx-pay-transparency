@@ -6,9 +6,9 @@
 
 ## CURRENT ACTIVE SLICE
 
-**Slice ID:** S05  
-**Name:** intake_upload_and_validation  
-**Status:** PENDING — **M0 complete.** Next implementation slice; **not started** (await explicit session kickoff per `CLAUDE.md`).  
+**Slice ID:** S06  
+**Name:** mapping_and_normalization_pipeline  
+**Status:** PENDING — **S05 ACCEPTED** (2026-04-06). Next implementation slice; **not started**.  
 **Wave:** 1 — Intake  
 **Milestone:** M1
 
@@ -252,7 +252,7 @@ Package shells — each contains only `package.json`, `tsconfig.json`, `src/inde
 
 | ID | Slice Name | Status | Completion Date | Notes |
 |---|---|---|---|---|
-| S05 | intake_upload_and_validation | PENDING | — | M0 complete; next implementation slice (not started) |
+| S05 | intake_upload_and_validation | ACCEPTED | 2026-04-06 | Intake HTTP path, `@enx/intake-engine`, contracts, audit + tests; ADR-005 |
 | S06 | mapping_and_normalization_pipeline | PENDING | — | Blocked on S05 |
 | S07 | snapshot_creation_and_lineage | PENDING | — | Blocked on S06 |
 
@@ -260,15 +260,46 @@ Package shells — each contains only `package.json`, `tsconfig.json`, `src/inde
 
 **Purpose:** Implement the file upload intake path and source data validation layer. Uploaded files are parsed, structurally validated, and quarantined if invalid. No normalization yet.
 
+**Owned Files (S05 delivery):**
+- `packages/contracts/src/enums/intake-file-status.ts`
+- `packages/contracts/src/enums/intake-column-type.ts`
+- `packages/contracts/src/enums/structural-issue-code.ts`
+- `packages/contracts/src/enums/index.ts` (exports for the above)
+- `packages/contracts/src/types/intake.ts`
+- `packages/contracts/src/types/index.ts` (intake exports)
+- `packages/contracts/src/schemas/enums.ts` (intake enum schemas)
+- `packages/contracts/src/schemas/intake.ts`
+- `packages/contracts/src/schemas/index.ts` (intake schema exports)
+- `packages/contracts/src/__tests__/schemas.test.ts` (intake structural schema cases)
+- `packages/intake-engine/` (package: `package.json`, `tsconfig.json`, `jest.config.js`, `src/index.ts`, `src/default-layout.ts`, `src/csv-structural.ts`, `src/memory-store.ts`, `src/intake-service.ts`, `src/__tests__/`)
+- `apps/api/src/app.ts`
+- `apps/api/src/index.ts` (HTTP server bootstrap + `createApiApp` re-export)
+- `apps/api/package.json`
+- `apps/api/jest.config.js`
+- `apps/api/src/__tests__/intake-upload.test.ts`
+- `jest.config.base.js` (ts-jest `esModuleInterop` for default imports in tests)
+- `docs/adr/ADR-005-intake-engine-package.md`
+- `.claude/SLICE_QUEUE.md` (this file — S05 status only)
+
 **Acceptance Criteria:**
-- [ ] Supported source formats can be uploaded and parsed (CSV minimum; XLSX as stretch)
-- [ ] Structural validation reports missing required columns, type mismatches, and empty required fields
-- [ ] Invalid files are quarantined — they cannot proceed to the mapping stage
-- [ ] Upload is recorded in the audit log
-- [ ] Unit and integration tests cover valid and invalid file scenarios
+- [x] Supported source formats can be uploaded and parsed (CSV minimum; XLSX as stretch)
+- [x] Structural validation reports missing required columns, type mismatches, and empty required fields
+- [x] Invalid files are quarantined — they cannot proceed to the mapping stage
+- [x] Upload is recorded in the audit log
+- [x] Unit and integration tests cover valid and invalid file scenarios
 
 **Blockers / Review Notes:**
-- M0 complete (2026-04-06). No milestone gate blocker. Slice not started — activate explicitly before implementation.
+- XLSX explicitly deferred (stretch). CSV uses a minimal comma-split parser (no quoted-field support in S05).
+
+**Completion record — 2026-04-06:**
+- Status set to **ACCEPTED**
+- ADR-005 filed: `docs/adr/ADR-005-intake-engine-package.md`
+- `pnpm install` — PASS (workspace includes `@enx/intake-engine`, `apps/api` deps)
+- `pnpm typecheck` — PASS (all workspace projects, 0 TS errors)
+- `pnpm lint` — PASS
+- `pnpm test` — PASS (24 suites, 257 tests, 0 failures)
+- Intake flow: `POST /v1/intake/files` → `registerIntakeFile` → audit `UPLOAD` + `SUBMIT` (outcome from structural result) → record `STRUCTURALLY_VALID` or `QUARANTINED` with structured `StructuralIssueCode`s
+- S06 unblocked (not started)
 
 ---
 
@@ -644,3 +675,4 @@ Country packs are independent of each other and may be executed in parallel if r
 | 2026-04-05 | S02 ACCEPTED. All 7 acceptance criteria met. ADR-002 filed. 47 tests pass. 10 enums, 4 types, 12 Zod schemas. S03 unblocked. | S02 completion |
 | 2026-04-06 | ADR renumber: canonical model → ADR-003 (`ADR-003-canonical-model-structure.md`); audit/security baseline → ADR-004 (`ADR-004-audit-security-baseline-structure.md`). Zod ADR remains ADR-002. Queue: S04 IN REVIEW (PR #3); S05 set as next slice (BLOCKED until M0). | Post-S04 docs hygiene |
 | 2026-04-06 | PR #3 merged to `claude/setup-repo-structure-dGb6o`. S04 ACCEPTED. M0 / Wave 0 closed. S05 → PENDING (next slice, not started). Validation passed on integration. | M0 closure |
+| 2026-04-06 | S05 ACCEPTED: intake upload + structural validation + quarantine + audit; `@enx/intake-engine`; API route; ADR-005; `pnpm test` / `typecheck` / `lint` green. S06 next (PENDING). | S05 completion |
