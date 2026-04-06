@@ -1,0 +1,8 @@
+/**
+ * Category-assignment layer issues (S09). Distinct from job-normalization issue codes.
+ */
+export enum CategoryAssignmentIssueCode {
+  CAT_ASN_JOB_NORMALIZATION_ISSUES_PRESENT = 'CAT_ASN_JOB_NORMALIZATION_ISSUES_PRESENT',
+  CAT_ASN_INSUFFICIENT_JOB_DESCRIPTOR = 'CAT_ASN_INSUFFICIENT_JOB_DESCRIPTOR',
+  CAT_ASN_DESCRIPTOR_EMPTY = 'CAT_ASN_DESCRIPTOR_EMPTY',
+}
