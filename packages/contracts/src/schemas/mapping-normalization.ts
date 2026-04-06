@@ -22,6 +22,10 @@ const NormalizedRowValuesSchema = z
     [LogicalIntakeField.WORKER_EXTERNAL_ID]: NormalizedScalarSchema.optional(),
     [LogicalIntakeField.BASE_PAY_AMOUNT]: NormalizedScalarSchema.optional(),
     [LogicalIntakeField.GENDER]: NormalizedScalarSchema.optional(),
+    [LogicalIntakeField.JOB_TITLE]: NormalizedScalarSchema.optional(),
+    [LogicalIntakeField.JOB_FAMILY_CODE]: NormalizedScalarSchema.optional(),
+    [LogicalIntakeField.JOB_SUBFAMILY_CODE]: NormalizedScalarSchema.optional(),
+    [LogicalIntakeField.JOB_GRADE_OR_LEVEL]: NormalizedScalarSchema.optional(),
   })
   .strict();
 
@@ -30,6 +34,10 @@ const ColumnByLogicalFieldSchema = z
     [LogicalIntakeField.WORKER_EXTERNAL_ID]: z.string().min(1).optional(),
     [LogicalIntakeField.BASE_PAY_AMOUNT]: z.string().min(1).optional(),
     [LogicalIntakeField.GENDER]: z.string().min(1).optional(),
+    [LogicalIntakeField.JOB_TITLE]: z.string().min(1).optional(),
+    [LogicalIntakeField.JOB_FAMILY_CODE]: z.string().min(1).optional(),
+    [LogicalIntakeField.JOB_SUBFAMILY_CODE]: z.string().min(1).optional(),
+    [LogicalIntakeField.JOB_GRADE_OR_LEVEL]: z.string().min(1).optional(),
   })
   .strict();
 

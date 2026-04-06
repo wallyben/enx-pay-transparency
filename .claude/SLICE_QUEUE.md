@@ -6,11 +6,11 @@
 
 ## CURRENT ACTIVE SLICE
 
-**Slice ID:** S08  
-**Name:** job_normalization_core  
-**Status:** PENDING — **S07 ACCEPTED** (2026-04-07). Next implementation slice; **not started** (blocked on M1 Gate per slice definition).  
+**Slice ID:** S09  
+**Name:** category_engine_exact_and_normalized  
+**Status:** PENDING — **S08 ACCEPTED** (2026-04-07). Next implementation slice; **not started** (blocked on S08 predecessor — cleared).  
 **Wave:** 2 — Job architecture and comparable categories  
-**Milestone:** M2 (slice itself blocked on M1 Gate until formally passed)
+**Milestone:** M2
 
 **Integration branch:** `claude/setup-repo-structure-dGb6o` — PR [#3](https://github.com/wallyben/enx-pay-transparency/pull/3) merged 2026-04-06; S04 ACCEPTED below; full validation (`pnpm test`, `pnpm typecheck`, `pnpm lint`) passed on integration after merge.
 
@@ -407,22 +407,50 @@ Package shells — each contains only `package.json`, `tsconfig.json`, `src/inde
 
 | ID | Slice Name | Status | Completion Date | Notes |
 |---|---|---|---|---|
-| S08 | job_normalization_core | PENDING | — | Blocked on M1 Gate |
-| S09 | category_engine_exact_and_normalized | PENDING | — | Blocked on S08 |
+| S08 | job_normalization_core | ACCEPTED | 2026-04-07 | `@enx/job-architecture`, contracts job norm + logical job fields, intake optional job columns, ADR-007; validation green |
+| S09 | category_engine_exact_and_normalized | PENDING | — | Blocked on S08 — cleared; next slice, not started |
 | S10 | category_engine_equal_value_and_overrides | PENDING | — | Blocked on S09 |
 
 ### S08 — job_normalization_core
 
-**Purpose:** Normalize source job titles and codes to the internal job architecture hierarchy. Map jobs to levels, families, and functions.
+**Purpose:** Normalize source job titles and optional hierarchy hints from sealed intake snapshot rows into stable, reviewable job descriptors (titles, family/subfamily codes, grade/level) with deterministic rules and structured issues. No comparable-worker category assignment, equal-value logic, metrics, reporting, or country overlays.
+
+**Owned Files (S08 delivery):**
+- `packages/contracts/src/enums/logical-intake-field.ts` (JOB_* logical fields)
+- `packages/contracts/src/enums/job-normalization-issue-code.ts`
+- `packages/contracts/src/enums/index.ts` (export)
+- `packages/contracts/src/types/job-normalization.ts`
+- `packages/contracts/src/types/index.ts` (export)
+- `packages/contracts/src/schemas/enums.ts` (`JobNormalizationIssueCodeSchema`)
+- `packages/contracts/src/schemas/job-normalization.ts`
+- `packages/contracts/src/schemas/mapping-normalization.ts` (Zod keys for new logical fields)
+- `packages/contracts/src/schemas/index.ts` (export)
+- `packages/contracts/src/__tests__/job-normalization-schemas.test.ts`
+- `packages/intake-engine/src/normalize-scalars.ts` (`normalizeLogicalStringField`)
+- `packages/intake-engine/src/mapping-pipeline.ts` (optional mapped logical fields when CSV headers exist)
+- `packages/intake-engine/src/__tests__/normalize-scalars.test.ts`
+- `packages/intake-engine/src/__tests__/mapping-pipeline.test.ts`
+- `packages/job-architecture/` (package: `package.json`, `tsconfig.json`, `jest.config.js`, `src/index.ts`, `src/job-normalization-rules-version.ts`, `src/extract-raw-job-inputs.ts`, `src/normalize-title.ts`, `src/normalize-code.ts`, `src/normalize-grade.ts`, `src/normalize-job-row.ts`, `src/job-normalization-pipeline.ts`, `src/job-normalization-service.ts`, `src/__tests__/`)
+- `docs/adr/ADR-007-job-architecture-package.md`
+- `.claude/SLICE_QUEUE.md` (this file — S08 status only)
 
 **Acceptance Criteria:**
-- [ ] Job normalization maps source titles to a normalized job reference
-- [ ] Normalization is version-controlled — the mapping version is recorded
-- [ ] Unmapped jobs surface as exceptions, not silent failures
-- [ ] Unit tests cover mapping and exception surfacing
+- [x] Job normalization maps source titles (and optional job fields from intake values) to a normalized job descriptor shape with recorded `jobNormalizationRulesVersion`
+- [x] Normalization is version-controlled — the rules version is recorded on every descriptor and snapshot-level result
+- [x] Missing, invalid, ambiguous, or unmapped job inputs surface as structured `JobNormalizationIssueCode` issues, not silent failures
+- [x] Unit and pipeline/service tests cover success paths, missing title, wrong scalar kinds, invalid/ambiguous grade, deterministic ordering, sealed snapshot consumption, audit emission, and scope guard (no category engine leakage)
 
 **Blockers / Review Notes:**
-- Blocked on M1 Gate
+- Blocked on M1 Gate — **cleared** for this branch: S05–S07 are ACCEPTED (2026-04-06/07).
+
+**Completion record — 2026-04-07:**
+- Status set to **ACCEPTED**
+- ADR-007 filed: `docs/adr/ADR-007-job-architecture-package.md`
+- `pnpm test` — PASS (42 suites, 314 tests, 0 failures)
+- `pnpm typecheck` — PASS (0 TS errors across workspace projects including `@enx/job-architecture`)
+- `pnpm lint` — PASS
+- Exports: `runJobNormalizationOnSealedSnapshot`, `runJobNormalizationWithAudit`, row helpers; intake optional `JOB_*` columns when mapped and present in CSV (backward compatible when columns absent)
+- S09 next (PENDING, not started)
 
 ---
 
@@ -746,3 +774,4 @@ Country packs are independent of each other and may be executed in parallel if r
 | 2026-04-06 | S05 ACCEPTED: intake upload + structural validation + quarantine + audit; `@enx/intake-engine`; API route; ADR-005; `pnpm test` / `typecheck` / `lint` green. S06 next (PENDING). | S05 completion |
 | 2026-04-06 | S06 ACCEPTED: mapping + normalization pipeline (logical fields, issues, gating, default profile, audit on map, POST map route); contracts + intake-engine + API tests; validation green. S07 next (PENDING). | S06 completion |
 | 2026-04-07 | S07 ACCEPTED: intake sealed snapshot + deterministic manifest id, lineage, gating vs S06 output, audit `SEAL`, deep-frozen `SEALED` records, `POST .../snapshots`; contracts + canonical-model + intake-engine + API tests; ADR-006; validation green. S08 next (PENDING, M1 Gate). | S07 completion |
+| 2026-04-07 | S08 ACCEPTED: job normalization package `@enx/job-architecture`, contracts job norm types/issues + `JOB_*` logical fields, intake optional job column mapping, pipeline + audit service, tests + ADR-007; `pnpm test` / `typecheck` / `lint` green. S09 next (PENDING). | S08 completion |

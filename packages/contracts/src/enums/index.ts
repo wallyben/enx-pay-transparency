@@ -6,6 +6,7 @@ export { Gender } from './gender';
 export { IntakeColumnType } from './intake-column-type';
 export { IntakeFileStatus } from './intake-file-status';
 export { IntakeSnapshotBlockedReason } from './intake-snapshot-blocked-reason';
+export { JobNormalizationIssueCode } from './job-normalization-issue-code';
 export { LogicalIntakeField } from './logical-intake-field';
 export { MappingNormalizationIssueCode } from './mapping-normalization-issue-code';
 export { PayComponent } from './pay-component';

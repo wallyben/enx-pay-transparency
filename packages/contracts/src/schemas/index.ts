@@ -7,6 +7,7 @@ export {
   GenderSchema,
   IntakeColumnTypeSchema,
   IntakeFileStatusSchema,
+  JobNormalizationIssueCodeSchema,
   LogicalIntakeFieldSchema,
   MappingNormalizationIssueCodeSchema,
   IntakeSnapshotBlockedReasonSchema,
@@ -24,6 +25,14 @@ export {
   NormalizedIntakeRowResultSchema,
   NormalizedScalarSchema,
 } from './mapping-normalization';
+export {
+  JobNormalizationIssueSchema,
+  JobNormalizationRowResultSchema,
+  JobNormalizationSnapshotResultSchema,
+  NormalizedJobDescriptorSchema,
+  NormalizedJobRawInputsSchema,
+  NormalizedJobShapeSchema,
+} from './job-normalization';
 export { CreateIntakeSnapshotRequestSchema } from './intake-snapshot';
 export {
   IntakeColumnDefinitionSchema,

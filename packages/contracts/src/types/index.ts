@@ -17,5 +17,13 @@ export {
   type CreateIntakeSnapshotRequest,
   type IntakeSnapshotCreationError,
 } from './intake-snapshot';
+export {
+  type JobNormalizationIssue,
+  type JobNormalizationRowResult,
+  type JobNormalizationSnapshotResult,
+  type NormalizedJobDescriptor,
+  type NormalizedJobRawInputs,
+  type NormalizedJobShape,
+} from './job-normalization';
 export { type PaginatedResult, type PaginationQuery } from './pagination';
 export { fail, ok, type Failure, type Result, type Success } from './result';

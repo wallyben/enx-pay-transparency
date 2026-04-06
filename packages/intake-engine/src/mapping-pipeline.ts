@@ -13,6 +13,7 @@ import { parseCsvUtf8 } from './csv-structural';
 import {
   normalizeBasePayDecimal,
   normalizeGenderValue,
+  normalizeLogicalStringField,
   normalizeWorkerExternalId,
 } from './normalize-scalars';
 
@@ -39,8 +40,10 @@ function normalizeField(
   logicalField: LogicalIntakeField,
   raw: string,
   ctx: { rowIndex: number; sourceColumn: string },
+  required: boolean,
 ):
   | { ok: true; value: NormalizedScalar }
+  | { ok: true; absent: true }
   | { ok: false; issue: MappingNormalizationIssue } {
   switch (logicalField) {
     case LogicalIntakeField.WORKER_EXTERNAL_ID:
@@ -49,6 +52,11 @@ function normalizeField(
       return normalizeBasePayDecimal(raw, ctx);
     case LogicalIntakeField.GENDER:
       return normalizeGenderValue(raw, ctx);
+    case LogicalIntakeField.JOB_TITLE:
+    case LogicalIntakeField.JOB_FAMILY_CODE:
+    case LogicalIntakeField.JOB_SUBFAMILY_CODE:
+    case LogicalIntakeField.JOB_GRADE_OR_LEVEL:
+      return normalizeLogicalStringField(logicalField, raw, ctx, { required });
     default: {
       const _exhaustive: never = logicalField;
       return _exhaustive;
@@ -136,6 +144,17 @@ export function runMappingNormalization(input: {
     }
   }
 
+  const optionalResolvedColumns = new Map<LogicalIntakeField, string>();
+  const requiredSet = new Set(profile.requiredLogicalFields);
+  for (const logicalField of Object.values(LogicalIntakeField)) {
+    if (requiredSet.has(logicalField)) continue;
+    const sourceColumn = profile.columnByLogicalField[logicalField];
+    if (sourceColumn === undefined || sourceColumn.trim().length === 0) continue;
+    if (headerIndex.has(sourceColumn)) {
+      optionalResolvedColumns.set(logicalField, sourceColumn);
+    }
+  }
+
   const sortedFileIssues = sortIssues(fileIssues);
   if (sortedFileIssues.length > 0) {
     return {
@@ -166,12 +185,36 @@ export function runMappingNormalization(input: {
         continue;
       }
       const raw = row?.[colIdx] ?? '';
-      const normalized = normalizeField(logicalField, raw, { rowIndex: r, sourceColumn });
+      const normalized = normalizeField(logicalField, raw, { rowIndex: r, sourceColumn }, true);
       if ('issue' in normalized) {
         rowIssues.push(normalized.issue);
         continue;
       }
-      values[logicalField] = normalized.value;
+      if ('absent' in normalized && normalized.absent === true) {
+        continue;
+      }
+      if ('value' in normalized) {
+        values[logicalField] = normalized.value;
+      }
+    }
+
+    for (const logicalField of optionalResolvedColumns.keys()) {
+      const sourceColumn = optionalResolvedColumns.get(logicalField);
+      if (sourceColumn === undefined) continue;
+      const colIdx = headerIndex.get(sourceColumn);
+      if (colIdx === undefined) continue;
+      const raw = row?.[colIdx] ?? '';
+      const normalized = normalizeField(logicalField, raw, { rowIndex: r, sourceColumn }, false);
+      if ('issue' in normalized) {
+        rowIssues.push(normalized.issue);
+        continue;
+      }
+      if ('absent' in normalized && normalized.absent === true) {
+        continue;
+      }
+      if ('value' in normalized) {
+        values[logicalField] = normalized.value;
+      }
     }
 
     rows.push({

@@ -1,5 +1,10 @@
 import { Gender, LogicalIntakeField, MappingNormalizationIssueCode } from '@enx/contracts';
-import { normalizeBasePayDecimal, normalizeGenderValue, normalizeWorkerExternalId } from '../normalize-scalars';
+import {
+  normalizeBasePayDecimal,
+  normalizeGenderValue,
+  normalizeLogicalStringField,
+  normalizeWorkerExternalId,
+} from '../normalize-scalars';
 
 describe('normalizeWorkerExternalId', () => {
   it('trims and accepts non-empty strings', () => {
@@ -55,6 +60,31 @@ describe('normalizeGenderValue', () => {
     if ('issue' in r) {
       expect(r.issue.code).toBe(MappingNormalizationIssueCode.ROW_INVALID_GENDER_VALUE);
       expect(r.issue.rowIndex).toBe(3);
+    }
+  });
+});
+
+describe('normalizeLogicalStringField', () => {
+  it('returns absent for optional empty cells', () => {
+    const r = normalizeLogicalStringField(
+      LogicalIntakeField.JOB_TITLE,
+      '  ',
+      { rowIndex: 0, sourceColumn: 'job_title' },
+      { required: false },
+    );
+    expect(r).toEqual({ ok: true, absent: true });
+  });
+
+  it('requires non-empty when required', () => {
+    const r = normalizeLogicalStringField(
+      LogicalIntakeField.JOB_TITLE,
+      '',
+      { rowIndex: 1, sourceColumn: 'job_title' },
+      { required: true },
+    );
+    expect('issue' in r).toBe(true);
+    if ('issue' in r) {
+      expect(r.issue.code).toBe(MappingNormalizationIssueCode.ROW_EMPTY_REQUIRED_VALUE);
     }
   });
 });

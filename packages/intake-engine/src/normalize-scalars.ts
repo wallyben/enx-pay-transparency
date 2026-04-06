@@ -130,3 +130,33 @@ export function normalizeGenderValue(
 
   return { ok: true as const, value: { kind: 'GENDER', value: gender } };
 }
+
+export type LogicalStringNormalizeResult =
+  | { ok: true; value: NormalizedScalar }
+  | { ok: true; absent: true }
+  | { ok: false; issue: MappingNormalizationIssue };
+
+export function normalizeLogicalStringField(
+  logicalField: LogicalIntakeField,
+  raw: string,
+  ctx: { rowIndex: number; sourceColumn: string },
+  options: { readonly required: boolean },
+): LogicalStringNormalizeResult {
+  const trimmed = raw.trim();
+  if (trimmed.length === 0) {
+    if (options.required) {
+      return {
+        ok: false as const,
+        issue: baseIssue(MappingNormalizationIssueCode.ROW_EMPTY_REQUIRED_VALUE, {
+          rowIndex: ctx.rowIndex,
+          logicalField,
+          sourceColumn: ctx.sourceColumn,
+          expected: 'non_empty_trimmed_string',
+          actual: raw,
+        }),
+      };
+    }
+    return { ok: true as const, absent: true };
+  }
+  return { ok: true as const, value: { kind: 'STRING', value: trimmed } };
+}

@@ -109,6 +109,54 @@ describe('runMappingNormalization', () => {
     expect(result.ok).toBe(false);
   });
 
+  it('maps optional job logical fields when source columns exist', () => {
+    const profile: IntakeMappingProfile = {
+      profileId: 'with_job',
+      version: '1',
+      columnByLogicalField: {
+        ...DEFAULT_INTAKE_MAPPING_PROFILE.columnByLogicalField,
+        [LogicalIntakeField.JOB_TITLE]: 'job_title',
+        [LogicalIntakeField.JOB_GRADE_OR_LEVEL]: 'grade',
+      },
+      requiredLogicalFields: DEFAULT_INTAKE_MAPPING_PROFILE.requiredLogicalFields,
+    };
+    const csv = Buffer.from('worker_id,base_pay,gender,job_title,grade\nw1,50000,MALE,Eng Lead,L3\n', 'utf8');
+    const result = runMappingNormalization({
+      record: baseRecord(),
+      bytes: csv,
+      profile,
+    });
+    expect(result.ok).toBe(true);
+    expect(result.rows[0]?.values[LogicalIntakeField.JOB_TITLE]).toEqual({
+      kind: 'STRING',
+      value: 'Eng Lead',
+    });
+    expect(result.rows[0]?.values[LogicalIntakeField.JOB_GRADE_OR_LEVEL]).toEqual({
+      kind: 'STRING',
+      value: 'L3',
+    });
+  });
+
+  it('does not fail when optional job columns are mapped but absent from the file', () => {
+    const profile: IntakeMappingProfile = {
+      profileId: 'with_job_optional_missing_col',
+      version: '1',
+      columnByLogicalField: {
+        ...DEFAULT_INTAKE_MAPPING_PROFILE.columnByLogicalField,
+        [LogicalIntakeField.JOB_TITLE]: 'job_title',
+      },
+      requiredLogicalFields: DEFAULT_INTAKE_MAPPING_PROFILE.requiredLogicalFields,
+    };
+    const csv = Buffer.from('worker_id,base_pay,gender\nw1,50000,MALE\n', 'utf8');
+    const result = runMappingNormalization({
+      record: baseRecord(),
+      bytes: csv,
+      profile,
+    });
+    expect(result.ok).toBe(true);
+    expect(result.rows[0]?.values[LogicalIntakeField.JOB_TITLE]).toBeUndefined();
+  });
+
   it('produces deterministic normalized output for a valid file', () => {
     const csv = Buffer.from('worker_id,base_pay,gender\n w1 ,50000,male\n', 'utf8');
     const a = runMappingNormalization({
