@@ -6,6 +6,10 @@
   "scripts": {
     "typecheck": "tsc --noEmit",
     "build": "tsc --noEmit",
-    "test": "jest --passWithNoTests"
+    "test": "jest --config jest.config.js"
+  },
+  "dependencies": {
+    "@enx/contracts": "workspace:*",
+    "zod": "^3.23.0"
   }
 }
