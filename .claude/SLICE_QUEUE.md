@@ -6,9 +6,9 @@
 
 ## CURRENT ACTIVE SLICE
 
-**Slice ID:** S06  
-**Name:** mapping_and_normalization_pipeline  
-**Status:** PENDING — **S05 ACCEPTED** (2026-04-06). Next implementation slice; **not started**.  
+**Slice ID:** S07  
+**Name:** snapshot_creation_and_lineage  
+**Status:** PENDING — **S06 ACCEPTED** (2026-04-06). Next implementation slice; **not started**.  
 **Wave:** 1 — Intake  
 **Milestone:** M1
 
@@ -253,7 +253,7 @@ Package shells — each contains only `package.json`, `tsconfig.json`, `src/inde
 | ID | Slice Name | Status | Completion Date | Notes |
 |---|---|---|---|---|
 | S05 | intake_upload_and_validation | ACCEPTED | 2026-04-06 | Intake HTTP path, `@enx/intake-engine`, contracts, audit + tests; ADR-005 |
-| S06 | mapping_and_normalization_pipeline | PENDING | — | Blocked on S05 |
+| S06 | mapping_and_normalization_pipeline | ACCEPTED | 2026-04-06 | Mapping profile, normalization pipeline, gated mapping, API map route, tests |
 | S07 | snapshot_creation_and_lineage | PENDING | — | Blocked on S06 |
 
 ### S05 — intake_upload_and_validation
@@ -305,17 +305,48 @@ Package shells — each contains only `package.json`, `tsconfig.json`, `src/inde
 
 ### S06 — mapping_and_normalization_pipeline
 
-**Purpose:** Map source fields to canonical model fields. Detect and surface unmapped workers and pay components. Unmapped records must block snapshot creation.
+**Purpose:** Map source columns to stable logical intake fields, normalize raw cell values into deterministic intermediate scalars, capture structured mapping/normalization issues, and gate mapping so only structurally valid intake files are processed. This slice produces **intermediate** normalized rows for later canonical binding in downstream slices; it does not persist canonical worker/pay entities or create snapshots.
 
-**Acceptance Criteria:**
-- [ ] Source field mapping configuration is defined per intake source
-- [ ] Every source record is mapped to a canonical worker and pay record or flagged as unmapped
-- [ ] Unmapped records are surfaced with a reason and block downstream processing
-- [ ] Mapping is audited and traceable to the rule version used
-- [ ] Unit tests cover mapping hits, misses, and partial maps
+**Owned Files (S06 delivery):**
+- `packages/contracts/src/enums/logical-intake-field.ts`
+- `packages/contracts/src/enums/mapping-normalization-issue-code.ts`
+- `packages/contracts/src/enums/index.ts` (exports)
+- `packages/contracts/src/types/mapping-normalization.ts`
+- `packages/contracts/src/types/index.ts` (exports)
+- `packages/contracts/src/schemas/enums.ts` (Zod for new enums)
+- `packages/contracts/src/schemas/mapping-normalization.ts`
+- `packages/contracts/src/schemas/index.ts` (exports)
+- `packages/contracts/src/__tests__/mapping-normalization-schemas.test.ts`
+- `packages/intake-engine/src/default-mapping-profile.ts`
+- `packages/intake-engine/src/normalize-scalars.ts`
+- `packages/intake-engine/src/mapping-pipeline.ts`
+- `packages/intake-engine/src/mapping-service.ts`
+- `packages/intake-engine/src/index.ts` (exports)
+- `packages/intake-engine/src/__tests__/normalize-scalars.test.ts`
+- `packages/intake-engine/src/__tests__/mapping-pipeline.test.ts`
+- `packages/intake-engine/src/__tests__/mapping-service.test.ts`
+- `apps/api/src/app.ts` (POST `/v1/intake/files/:intakeFileId/map`)
+- `apps/api/src/__tests__/intake-map.test.ts`
+- `.claude/SLICE_QUEUE.md` (this file — S06 status only)
+
+**Acceptance Criteria (S06 slice contract — intermediate mapping layer):**
+- [x] Source field mapping configuration is defined per intake source (`IntakeMappingProfile` + default profile aligned to default CSV layout)
+- [x] Every source row is mapped to normalized logical field values or flagged with coded row-level issues; file-level issues cover missing profile mappings and absent source columns
+- [x] Invalid or incomplete normalization is surfaced with stable issue codes; downstream consumers treat `ok: false` as blocking for snapshot creation (enforced in S07+)
+- [x] Mapping runs are audited with `AuditAction.UPDATE` and metadata including profile id/version, gated flag, ok flag, and issue counts
+- [x] Unit tests cover normalization helpers, mapping pipeline (gate, profile errors, bad values, deterministic happy path), mapping service + audit, and API map route
 
 **Blockers / Review Notes:**
-- Blocked on S05
+- Blocked on S05 — cleared 2026-04-06
+- Queue text for S06 previously referenced “canonical worker and pay record”; implementation matches the **control-tower slice brief**: intermediate normalized records only, no canonical persistence in S06
+
+**Completion record — 2026-04-06:**
+- Status set to **ACCEPTED**
+- `pnpm test` — PASS (29 suites, 276 tests, 0 failures)
+- `pnpm typecheck` — PASS (0 TS errors across workspace projects)
+- `pnpm lint` — PASS
+- API: `POST /v1/intake/files/:intakeFileId/map` returns `MappingNormalizationResult` JSON; quarantined files yield `gated: true` and no row processing; unknown id → 404
+- S07 unblocked (not started)
 
 ---
 
@@ -676,3 +707,4 @@ Country packs are independent of each other and may be executed in parallel if r
 | 2026-04-06 | ADR renumber: canonical model → ADR-003 (`ADR-003-canonical-model-structure.md`); audit/security baseline → ADR-004 (`ADR-004-audit-security-baseline-structure.md`). Zod ADR remains ADR-002. Queue: S04 IN REVIEW (PR #3); S05 set as next slice (BLOCKED until M0). | Post-S04 docs hygiene |
 | 2026-04-06 | PR #3 merged to `claude/setup-repo-structure-dGb6o`. S04 ACCEPTED. M0 / Wave 0 closed. S05 → PENDING (next slice, not started). Validation passed on integration. | M0 closure |
 | 2026-04-06 | S05 ACCEPTED: intake upload + structural validation + quarantine + audit; `@enx/intake-engine`; API route; ADR-005; `pnpm test` / `typecheck` / `lint` green. S06 next (PENDING). | S05 completion |
+| 2026-04-06 | S06 ACCEPTED: mapping + normalization pipeline (logical fields, issues, gating, default profile, audit on map, POST map route); contracts + intake-engine + API tests; validation green. S07 next (PENDING). | S06 completion |

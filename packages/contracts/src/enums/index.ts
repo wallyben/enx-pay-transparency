@@ -5,6 +5,8 @@ export { EmploymentType } from './employment-type';
 export { Gender } from './gender';
 export { IntakeColumnType } from './intake-column-type';
 export { IntakeFileStatus } from './intake-file-status';
+export { LogicalIntakeField } from './logical-intake-field';
+export { MappingNormalizationIssueCode } from './mapping-normalization-issue-code';
 export { PayComponent } from './pay-component';
 export { PayPeriodCode } from './pay-period-code';
 export { RemediationStatus } from './remediation-status';

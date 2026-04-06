@@ -7,6 +7,8 @@ export {
   GenderSchema,
   IntakeColumnTypeSchema,
   IntakeFileStatusSchema,
+  LogicalIntakeFieldSchema,
+  MappingNormalizationIssueCodeSchema,
   PayComponentSchema,
   RemediationStatusSchema,
   ReviewStatusSchema,
@@ -14,6 +16,13 @@ export {
   StructuralIssueCodeSchema,
   WorkerStatusSchema,
 } from './enums';
+export {
+  IntakeMappingProfileSchema,
+  MappingNormalizationIssueSchema,
+  MappingNormalizationResultSchema,
+  NormalizedIntakeRowResultSchema,
+  NormalizedScalarSchema,
+} from './mapping-normalization';
 export {
   IntakeColumnDefinitionSchema,
   IntakeFileRecordSchema,

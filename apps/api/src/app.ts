@@ -1,6 +1,10 @@
 import { ActorType, type ActorIdentity, type AuditWriter } from '@enx/audit';
 import type { IntakeFileStore } from '@enx/intake-engine';
-import { registerIntakeFile } from '@enx/intake-engine';
+import {
+  IntakeFileNotFoundError,
+  registerIntakeFile,
+  runStoredIntakeMapping,
+} from '@enx/intake-engine';
 import express from 'express';
 import multer from 'multer';
 
@@ -53,6 +57,31 @@ export function createApiApp(options: CreateApiAppOptions): express.Express {
       });
     } catch {
       res.status(500).json({ error: 'intake_failed', message: 'Intake processing failed' });
+    }
+  });
+
+  app.post('/v1/intake/files/:intakeFileId/map', async (req, res) => {
+    const intakeFileId = req.params['intakeFileId'];
+    if (typeof intakeFileId !== 'string' || intakeFileId.length === 0) {
+      res.status(400).json({ error: 'invalid_intake_file_id', message: 'intakeFileId is required' });
+      return;
+    }
+
+    try {
+      const result = await runStoredIntakeMapping({
+        intakeFileId,
+        store: options.intakeStore,
+        auditWriter: options.auditWriter,
+        actor: defaultActor,
+        correlationId: typeof req.headers['x-correlation-id'] === 'string' ? req.headers['x-correlation-id'] : undefined,
+      });
+      res.status(200).json(result);
+    } catch (err) {
+      if (err instanceof IntakeFileNotFoundError) {
+        res.status(404).json({ error: err.code, message: err.message });
+        return;
+      }
+      res.status(500).json({ error: 'mapping_failed', message: 'Mapping and normalization failed' });
     }
   });
 

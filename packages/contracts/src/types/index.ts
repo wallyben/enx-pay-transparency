@@ -6,5 +6,12 @@ export {
   type StructuralIssue,
   type StructuralValidationResult,
 } from './intake';
+export {
+  type IntakeMappingProfile,
+  type MappingNormalizationIssue,
+  type MappingNormalizationResult,
+  type NormalizedIntakeRowResult,
+  type NormalizedScalar,
+} from './mapping-normalization';
 export { type PaginatedResult, type PaginationQuery } from './pagination';
 export { fail, ok, type Failure, type Result, type Success } from './result';
