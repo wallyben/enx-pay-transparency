@@ -6,16 +6,11 @@
 
 ## CURRENT ACTIVE SLICE
 
-**Slice ID:** S01
-**Name:** S01_foundation_repo_bootstrap
-**Status:** PENDING — Ready to start
+**Slice ID:** S04
+**Name:** S04_audit_and_security_baseline
+**Status:** ACCEPTED — 2026-04-06
 **Wave:** 0 — Foundation
 **Milestone:** M0
-
-Before starting S01, confirm:
-- [ ] This is the first slice being executed
-- [ ] No application code exists yet
-- [ ] Workspace tooling has not been configured yet
 
 ---
 
@@ -41,7 +36,7 @@ Before starting S01, confirm:
 | S01 | foundation_repo_bootstrap | ACCEPTED | 2026-04-05 | All 11 AC met. pnpm/lint/typecheck/test all pass. ADR-001 filed. |
 | S02 | core_contracts_and_enums | PENDING | — | Blocked on S01 — now unblocked |
 | S03 | canonical_worker_and_pay_models | PENDING | — | Blocked on S02 |
-| S04 | audit_and_security_baseline | PENDING | — | Blocked on S03 |
+| S04 | audit_and_security_baseline | ACCEPTED | 2026-04-06 | All AC met. 106 tests pass. lint/typecheck clean. ADR-002 filed. Queue-order blocker waived by operator instruction. |
 
 ### S01 — foundation_repo_bootstrap
 
@@ -198,32 +193,59 @@ Package shells — each contains only `package.json`, `tsconfig.json`, `src/inde
 **Purpose:** Implement the audit log write path, audit query interface, PII field tagging, and baseline encryption utilities. Every downstream package that writes auditable events will depend on this.
 
 **Owned Files:**
-- `packages/audit/` (new package, all files)
-- `packages/audit/src/writer.ts`
-- `packages/audit/src/query.ts`
-- `packages/audit/src/types.ts`
-- `packages/audit/src/index.ts`
-- `packages/security/` (new package, all files)
-- `packages/security/src/pii.ts` (PII field tagging and masking utilities)
-- `packages/security/src/encryption.ts` (field-level encryption stubs)
-- `packages/security/src/index.ts`
-- `packages/audit/package.json`, `tsconfig.json`, `jest.config.js`
-- `packages/security/package.json`, `tsconfig.json`, `jest.config.js`
-- `packages/audit/src/__tests__/`
-- `packages/security/src/__tests__/`
+- `packages/audit/` (all files)
+- `packages/audit/src/types.ts` — ActorIdentity, ActorType, AuditEventCategory, AuditAction, AuditOutcome, AuditEvent, AuditQuery, EvidenceItemType, EvidenceItem, EvidenceManifest, validation helpers
+- `packages/audit/src/writer.ts` — AuditWriter interface, InMemoryAuditWriter
+- `packages/audit/src/query.ts` — AuditQueryEngine interface, InMemoryAuditQueryEngine
+- `packages/audit/src/index.ts` — re-exports all public API
+- `packages/audit/jest.config.js`
+- `packages/audit/src/__tests__/types.test.ts`
+- `packages/audit/src/__tests__/writer.test.ts`
+- `packages/audit/src/__tests__/query.test.ts`
+- `packages/audit/src/__tests__/exports.test.ts`
+- `packages/security/` (all files)
+- `packages/security/src/roles.ts` — Role enum, RoleAssignment, validation helpers
+- `packages/security/src/access-reason.ts` — AccessReason enum, AccessReasonRecord, builder
+- `packages/security/src/pii.ts` — PiiTag, PiiField, tagging/masking utilities
+- `packages/security/src/encryption.ts` — EncryptionAlgorithm, EncryptedValue, encrypt/decrypt stubs
+- `packages/security/src/index.ts` — re-exports all public API
+- `packages/security/jest.config.js`
+- `packages/security/src/__tests__/roles.test.ts`
+- `packages/security/src/__tests__/access-reason.test.ts`
+- `packages/security/src/__tests__/pii.test.ts`
+- `packages/security/src/__tests__/encryption.test.ts`
+- `packages/security/src/__tests__/exports.test.ts`
+- `docs/adr/ADR-002-audit-security-baseline-structure.md`
 
 **Acceptance Criteria:**
-- [ ] Audit writer accepts an event and persists it with: actor, action, target entity, timestamp, metadata
-- [ ] Audit query interface can retrieve events by actor, by entity, and by time range
-- [ ] PII tagging utility can mark fields as PII and produce a masked representation
-- [ ] Encryption utility provides encrypt/decrypt for string fields (key management stubbed for now)
-- [ ] Unit tests cover audit write, query, PII masking, and encrypt/decrypt round trip
-- [ ] No country-specific logic
-- [ ] Both packages compile with zero TypeScript errors
+- [x] Baseline roles exist and are exported — Role enum with 7 roles in packages/security; PASS
+- [x] Audit event structures exist and are exported — AuditEvent, AuditEventCategory, AuditAction, AuditOutcome, ActorIdentity in packages/audit; PASS
+- [x] Access-reason structures exist and are exported — AccessReason enum, AccessReasonRecord in packages/security; PASS
+- [x] Evidence manifest structures exist and are exported — EvidenceManifest, EvidenceItem, EvidenceItemType in packages/audit; PASS
+- [x] Audit writer accepts an event and persists it with: actor, action, target entity, timestamp, metadata — InMemoryAuditWriter.write(); PASS
+- [x] Audit query interface can retrieve events by actor, by entity, and by time range — InMemoryAuditQueryEngine; PASS
+- [x] PII tagging utility can mark fields as PII and produce a masked representation — packages/security/src/pii.ts; PASS
+- [x] Encryption utility provides encrypt/decrypt for string fields (key management stubbed) — packages/security/src/encryption.ts; PASS
+- [x] No full auth or workflow logic is embedded — PASS (no auth, no SSO, no casework logic)
+- [x] No country-specific logic in any shared core package — verified by enum tests; PASS
+- [x] Both packages compile with zero TypeScript errors — pnpm typecheck PASS
+- [x] ESLint passes with zero errors — pnpm lint PASS
+- [x] Unit tests cover audit write, query, PII masking, encrypt/decrypt round trip — 106 tests, 9 suites, all PASS
+- [x] ADR filed for structural decisions — ADR-002; PASS
+
+**Completion Record — 2026-04-06:**
+- Status: ACCEPTED
+- Queue-order note: S02 and S03 were PENDING at time of execution; operator instruction explicitly directed S04 execution. S04 was implemented as self-contained (no imports from canonical-model or contracts). Blocker waived by operator.
+- pnpm test — PASS (9 test suites, 106 tests, 0 failures)
+- pnpm lint — PASS (0 errors, 0 warnings)
+- pnpm typecheck — PASS (all 8 packages, 0 TS errors)
+- ADR-002 filed: docs/adr/ADR-002-audit-security-baseline-structure.md
+- No country-specific logic introduced — verified by enum tests
+- No files outside owned scope modified
 
 **Blockers / Review Notes:**
-- Blocked on S03 (canonical model required for audit event targeting)
-- Note: `packages/audit/` and `packages/security/` shells (package.json, tsconfig.json, src/index.ts) are created in S01. This slice populates the src/ content in both.
+- Note: `packages/audit/` and `packages/security/` shells (package.json, tsconfig.json, src/index.ts) were created in S01. This slice populated the src/ content in both.
+- Note: S02 (contracts) and S03 (canonical-model) remain PENDING. They are not blocked by S04 completion.
 
 ---
 
@@ -620,3 +642,4 @@ Country packs are independent of each other and may be executed in parallel if r
 | 2026-04-05 | Initial slice queue created | Governance setup |
 | 2026-04-05 | S01 scope corrected: added structural shells for apps/api, apps/web, apps/worker, packages/contracts, packages/canonical-model, packages/audit, packages/security, packages/test-fixtures. Removed contradictory acceptance criterion. Added shell-awareness notes to S02, S03, S04. | Governance correction |
 | 2026-04-05 | S01 ACCEPTED. All 11 acceptance criteria met. ADR-001 filed. pnpm/lint/typecheck/test all pass. S02 unblocked. | S01 completion |
+| 2026-04-06 | S04 ACCEPTED. All 14 acceptance criteria met. ADR-002 filed. 106 tests pass. lint/typecheck clean. Queue-order blocker waived by operator instruction (S02/S03 remain PENDING but do not block S04). | S04 completion |
