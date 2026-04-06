@@ -8,13 +8,11 @@
 
 **Slice ID:** S05  
 **Name:** intake_upload_and_validation  
-**Status:** BLOCKED — Next implementation slice after M0. **Do not start** until S04 is ACCEPTED on the integration branch.  
+**Status:** PENDING — **M0 complete.** Next implementation slice; **not started** (await explicit session kickoff per `CLAUDE.md`).  
 **Wave:** 1 — Intake  
-**Milestone:** M1 (blocked on M0 gate)
+**Milestone:** M1
 
-**M0 closure in flight:** S04 — `audit_and_security_baseline` is **IN REVIEW**. PR [#3](https://github.com/wallyben/enx-pay-transparency/pull/3) (`feat(S04): audit and security baseline…`) targets integration branch `claude/setup-repo-structure-dGb6o` and was **open** (not merged) as of 2026-04-06. On the S04 PR branch, `pnpm test`, `pnpm typecheck`, and `pnpm lint` all pass.
-
-Before marking S04 ACCEPTED after merge, confirm on integration: S03 evidence, S04 tests, and ADRs **ADR-001** through **ADR-004** (see `docs/adr/`).
+**Integration branch:** `claude/setup-repo-structure-dGb6o` — PR [#3](https://github.com/wallyben/enx-pay-transparency/pull/3) merged 2026-04-06; S04 ACCEPTED below; full validation (`pnpm test`, `pnpm typecheck`, `pnpm lint`) passed on integration after merge.
 
 ---
 
@@ -22,7 +20,7 @@ Before marking S04 ACCEPTED after merge, confirm on integration: S03 evidence, S
 
 | Milestone | Trigger | Required Before Advancing |
 |---|---|---|
-| M0 Gate | S01–S04 all ACCEPTED | All tests pass in CI; ADRs for tech choices filed |
+| M0 Gate | S01–S04 all ACCEPTED | All tests pass in CI; ADRs for tech choices filed — **passed / closed 2026-04-06** |
 | M1 Gate | S05–S07 all ACCEPTED | Snapshot lineage verified end-to-end; no unmapped workers in test fixtures |
 | M2 Gate | S08–S10 all ACCEPTED | Classification engine produces deterministic output; all override paths tested |
 | M3 Gate | S11–S13 all ACCEPTED | EU core metrics verified against known test cases; evidence pack reviewable |
@@ -35,12 +33,14 @@ Before marking S04 ACCEPTED after merge, confirm on integration: S03 evidence, S
 
 ## WAVE 0 — FOUNDATION
 
+**Milestone M0 — Foundation:** **CLOSED** (2026-04-06). S01–S04 ACCEPTED; PR #3 merged to `claude/setup-repo-structure-dGb6o`; ADR-001–ADR-004 filed; `pnpm test` / `pnpm typecheck` / `pnpm lint` passed on integration.
+
 | ID | Slice Name | Status | Completion Date | Notes |
 |---|---|---|---|---|
 | S01 | foundation_repo_bootstrap | ACCEPTED | 2026-04-05 | All 11 AC met. pnpm/lint/typecheck/test all pass. ADR-001 filed. |
 | S02 | core_contracts_and_enums | ACCEPTED | 2026-04-05 | All 7 AC met. 47 tests pass. ADR-002 filed. S03 unblocked. |
 | S03 | canonical_worker_and_pay_models | ACCEPTED | 2026-04-06 | Landed via PR #2; canonical model, migration, tests; ADR-003 `docs/adr/ADR-003-canonical-model-structure.md` |
-| S04 | audit_and_security_baseline | IN REVIEW | — | PR #3 open → `claude/setup-repo-structure-dGb6o`; ADR-004 `docs/adr/ADR-004-audit-security-baseline-structure.md` |
+| S04 | audit_and_security_baseline | ACCEPTED | 2026-04-06 | Landed via PR #3; audit + security packages, tests; ADR-004 `docs/adr/ADR-004-audit-security-baseline-structure.md` |
 
 ### S01 — foundation_repo_bootstrap
 
@@ -238,13 +238,21 @@ Package shells — each contains only `package.json`, `tsconfig.json`, `src/inde
 - Blocked on S03 (canonical model required for audit event targeting)
 - Note: `packages/audit/` and `packages/security/` shells (package.json, tsconfig.json, src/index.ts) are created in S01. This slice populates the src/ content in both.
 
+**Completion record — 2026-04-06:**
+- Status set to ACCEPTED (on integration `claude/setup-repo-structure-dGb6o` after merge of PR #3)
+- ADR-004 filed: `docs/adr/ADR-004-audit-security-baseline-structure.md`
+- `pnpm test` — PASS (21 suites, 246 tests, 0 failures)
+- `pnpm typecheck` — PASS (8 workspace projects)
+- `pnpm lint` — PASS
+- M0 gate cleared; S05 unblocked as next slice (PENDING, not started)
+
 ---
 
 ## WAVE 1 — INTAKE AND SNAPSHOT CONTROL
 
 | ID | Slice Name | Status | Completion Date | Notes |
 |---|---|---|---|---|
-| S05 | intake_upload_and_validation | BLOCKED | — | Next active slice after M0; blocked until S04 ACCEPTED |
+| S05 | intake_upload_and_validation | PENDING | — | M0 complete; next implementation slice (not started) |
 | S06 | mapping_and_normalization_pipeline | PENDING | — | Blocked on S05 |
 | S07 | snapshot_creation_and_lineage | PENDING | — | Blocked on S06 |
 
@@ -260,7 +268,7 @@ Package shells — each contains only `package.json`, `tsconfig.json`, `src/inde
 - [ ] Unit and integration tests cover valid and invalid file scenarios
 
 **Blockers / Review Notes:**
-- Blocked on M0 Gate (S01–S04 all ACCEPTED). S04 still in PR #3 as of 2026-04-06.
+- M0 complete (2026-04-06). No milestone gate blocker. Slice not started — activate explicitly before implementation.
 
 ---
 
@@ -635,3 +643,4 @@ Country packs are independent of each other and may be executed in parallel if r
 | 2026-04-05 | S01 ACCEPTED. All 11 acceptance criteria met. ADR-001 filed. pnpm/lint/typecheck/test all pass. S02 unblocked. | S01 completion |
 | 2026-04-05 | S02 ACCEPTED. All 7 acceptance criteria met. ADR-002 filed. 47 tests pass. 10 enums, 4 types, 12 Zod schemas. S03 unblocked. | S02 completion |
 | 2026-04-06 | ADR renumber: canonical model → ADR-003 (`ADR-003-canonical-model-structure.md`); audit/security baseline → ADR-004 (`ADR-004-audit-security-baseline-structure.md`). Zod ADR remains ADR-002. Queue: S04 IN REVIEW (PR #3); S05 set as next slice (BLOCKED until M0). | Post-S04 docs hygiene |
+| 2026-04-06 | PR #3 merged to `claude/setup-repo-structure-dGb6o`. S04 ACCEPTED. M0 / Wave 0 closed. S05 → PENDING (next slice, not started). Validation passed on integration. | M0 closure |
