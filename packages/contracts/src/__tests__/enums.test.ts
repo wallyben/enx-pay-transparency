@@ -4,6 +4,7 @@ import {
   CountryCode,
   EmploymentType,
   Gender,
+  IntakeSnapshotBlockedReason,
   PayComponent,
   RemediationStatus,
   ReviewStatus,
@@ -99,6 +100,13 @@ describe('ReviewStatus', () => {
   });
 });
 
+describe('IntakeSnapshotBlockedReason', () => {
+  it('has stable string values', () => {
+    expect(IntakeSnapshotBlockedReason.MAPPING_GATED).toBe('MAPPING_GATED');
+    expect(IntakeSnapshotBlockedReason.INCOMPLETE_ROW_MAPPING).toBe('INCOMPLETE_ROW_MAPPING');
+  });
+});
+
 describe('CountryCode', () => {
   it('contains all 12 countries in scope', () => {
     const codes = Object.values(CountryCode);
@@ -133,6 +141,7 @@ describe('Enum values are unique strings', () => {
     RemediationStatus,
     ReviewStatus,
     CountryCode,
+    IntakeSnapshotBlockedReason,
   ];
 
   it('every enum has no duplicate values', () => {

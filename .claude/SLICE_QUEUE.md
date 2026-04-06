@@ -6,11 +6,11 @@
 
 ## CURRENT ACTIVE SLICE
 
-**Slice ID:** S07  
-**Name:** snapshot_creation_and_lineage  
-**Status:** PENDING — **S06 ACCEPTED** (2026-04-06). Next implementation slice; **not started**.  
-**Wave:** 1 — Intake  
-**Milestone:** M1
+**Slice ID:** S08  
+**Name:** job_normalization_core  
+**Status:** PENDING — **S07 ACCEPTED** (2026-04-07). Next implementation slice; **not started** (blocked on M1 Gate per slice definition).  
+**Wave:** 2 — Job architecture and comparable categories  
+**Milestone:** M2 (slice itself blocked on M1 Gate until formally passed)
 
 **Integration branch:** `claude/setup-repo-structure-dGb6o` — PR [#3](https://github.com/wallyben/enx-pay-transparency/pull/3) merged 2026-04-06; S04 ACCEPTED below; full validation (`pnpm test`, `pnpm typecheck`, `pnpm lint`) passed on integration after merge.
 
@@ -254,7 +254,7 @@ Package shells — each contains only `package.json`, `tsconfig.json`, `src/inde
 |---|---|---|---|---|
 | S05 | intake_upload_and_validation | ACCEPTED | 2026-04-06 | Intake HTTP path, `@enx/intake-engine`, contracts, audit + tests; ADR-005 |
 | S06 | mapping_and_normalization_pipeline | ACCEPTED | 2026-04-06 | Mapping profile, normalization pipeline, gated mapping, API map route, tests |
-| S07 | snapshot_creation_and_lineage | PENDING | — | Blocked on S06 |
+| S07 | snapshot_creation_and_lineage | ACCEPTED | 2026-04-07 | Intake sealed snapshot, lineage, gating, audit SEAL, API + tests; ADR-006 |
 
 ### S05 — intake_upload_and_validation
 
@@ -352,17 +352,54 @@ Package shells — each contains only `package.json`, `tsconfig.json`, `src/inde
 
 ### S07 — snapshot_creation_and_lineage
 
-**Purpose:** Create an immutable snapshot from a fully mapped intake batch. Record lineage: source file, mapping version, methodology version, creator, timestamp. Snapshots cannot be modified after creation.
+**Purpose:** Seal normalized intake mapping output into an immutable **intake snapshot** with explicit lineage (intake file, content hash, mapping profile, methodology/rule pack versions, actor, seal time). Enforce gating so invalid, gated, or incomplete mapping cannot produce a snapshot. Emit audit events for seal success and failure. Provide a minimal HTTP path for the full upload→snapshot flow. This is a **control boundary** only: no canonical worker/pay persistence, no classification, metrics, or reporting.
+
+**Owned Files (S07 delivery):**
+- `packages/contracts/src/enums/intake-snapshot-blocked-reason.ts`
+- `packages/contracts/src/enums/index.ts` (export)
+- `packages/contracts/src/types/intake-snapshot.ts`
+- `packages/contracts/src/types/index.ts` (export)
+- `packages/contracts/src/schemas/intake-snapshot.ts`
+- `packages/contracts/src/schemas/enums.ts` (`IntakeSnapshotBlockedReasonSchema`)
+- `packages/contracts/src/schemas/index.ts` (exports)
+- `packages/contracts/src/__tests__/intake-snapshot-schemas.test.ts`
+- `packages/contracts/src/__tests__/enums.test.ts` (IntakeSnapshotBlockedReason coverage)
+- `packages/contracts/src/__tests__/schemas.test.ts` (blocked-reason schema case)
+- `packages/canonical-model/src/intake-sealed-snapshot.ts`
+- `packages/canonical-model/src/index.ts` (exports)
+- `packages/canonical-model/src/__tests__/intake-sealed-snapshot.test.ts`
+- `packages/intake-engine/package.json` (`@enx/canonical-model` dependency)
+- `packages/intake-engine/src/snapshot-creation.ts`
+- `packages/intake-engine/src/snapshot-store.ts`
+- `packages/intake-engine/src/snapshot-service.ts`
+- `packages/intake-engine/src/index.ts` (exports)
+- `packages/intake-engine/src/__tests__/snapshot-creation.test.ts`
+- `packages/intake-engine/src/__tests__/snapshot-service.test.ts`
+- `apps/api/src/app.ts` (`POST /v1/intake/files/:intakeFileId/snapshots`, `express.json`, optional `sealedSnapshotStore`)
+- `apps/api/package.json` (`@enx/contracts` dependency)
+- `apps/api/src/__tests__/intake-snapshot.test.ts`
+- `docs/adr/ADR-006-intake-sealed-snapshot.md`
+- `.claude/SLICE_QUEUE.md` (this file — S07 status only)
 
 **Acceptance Criteria:**
-- [ ] Snapshot creation is blocked if any records are unmapped
-- [ ] Snapshot carries full lineage metadata
-- [ ] Snapshot status transitions are audited
-- [ ] Snapshot cannot be modified after SEALED status
-- [ ] Integration tests verify the full intake-to-snapshot path
+- [x] Snapshot creation is blocked if any records are unmapped
+- [x] Snapshot carries full lineage metadata
+- [x] Snapshot status transitions are audited
+- [x] Snapshot cannot be modified after SEALED status
+- [x] Integration tests verify the full intake-to-snapshot path
 
 **Blockers / Review Notes:**
-- Blocked on S06
+- Blocked on S06 — cleared 2026-04-07
+- “Unmapped” enforced via S06 `gated` / `ok` / file issues, empty row set, row issues, and required logical field presence checks (`IntakeSnapshotBlockedReason`)
+
+**Completion record — 2026-04-07:**
+- Status set to **ACCEPTED**
+- ADR-006 filed: `docs/adr/ADR-006-intake-sealed-snapshot.md`
+- `pnpm test` — PASS (34 suites, 292 tests, 0 failures)
+- `pnpm typecheck` — PASS (0 TS errors)
+- `pnpm lint` — PASS
+- API: `POST /v1/intake/files/:intakeFileId/snapshots` with `{ methodologyVersion, rulePackVersion }` → `201` + `IntakeSealedSnapshot` JSON, or `422` + `blockedReasons`; quarantined / bad mapping blocked; unknown intake → `404`
+- S08 next (PENDING; per queue, blocked on **M1 Gate** until formally closed — S05–S07 are now all ACCEPTED)
 
 ---
 
@@ -708,3 +745,4 @@ Country packs are independent of each other and may be executed in parallel if r
 | 2026-04-06 | PR #3 merged to `claude/setup-repo-structure-dGb6o`. S04 ACCEPTED. M0 / Wave 0 closed. S05 → PENDING (next slice, not started). Validation passed on integration. | M0 closure |
 | 2026-04-06 | S05 ACCEPTED: intake upload + structural validation + quarantine + audit; `@enx/intake-engine`; API route; ADR-005; `pnpm test` / `typecheck` / `lint` green. S06 next (PENDING). | S05 completion |
 | 2026-04-06 | S06 ACCEPTED: mapping + normalization pipeline (logical fields, issues, gating, default profile, audit on map, POST map route); contracts + intake-engine + API tests; validation green. S07 next (PENDING). | S06 completion |
+| 2026-04-07 | S07 ACCEPTED: intake sealed snapshot + deterministic manifest id, lineage, gating vs S06 output, audit `SEAL`, deep-frozen `SEALED` records, `POST .../snapshots`; contracts + canonical-model + intake-engine + API tests; ADR-006; validation green. S08 next (PENDING, M1 Gate). | S07 completion |

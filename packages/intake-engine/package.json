@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@enx/audit": "workspace:*",
+    "@enx/canonical-model": "workspace:*",
     "@enx/contracts": "workspace:*"
   }
 }

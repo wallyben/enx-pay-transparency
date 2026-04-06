@@ -21,3 +21,10 @@ export {
 } from './normalize-scalars';
 export { registerIntakeFile } from './intake-service';
 export type { RegisterIntakeInput } from './intake-service';
+export { collectIntakeSnapshotBlockedReasons } from './snapshot-creation';
+export {
+  InMemorySealedIntakeSnapshotStore,
+  type SealedIntakeSnapshotStore,
+} from './snapshot-store';
+export { runStoredIntakeSnapshotCreation } from './snapshot-service';
+export type { RunStoredIntakeSnapshotCreationInput } from './snapshot-service';

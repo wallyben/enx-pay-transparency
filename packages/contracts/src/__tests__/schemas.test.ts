@@ -6,6 +6,7 @@ import {
   EmploymentTypeSchema,
   GenderSchema,
   IntakeFileRecordSchema,
+  IntakeSnapshotBlockedReasonSchema,
   PaginationQuerySchema,
   PayComponentSchema,
   RemediationStatusSchema,
@@ -24,6 +25,7 @@ import { RemediationStatus } from '../enums/remediation-status';
 import { ReviewStatus } from '../enums/review-status';
 import { SnapshotStatus } from '../enums/snapshot-status';
 import { IntakeFileStatus } from '../enums/intake-file-status';
+import { IntakeSnapshotBlockedReason } from '../enums/intake-snapshot-blocked-reason';
 import { StructuralIssueCode } from '../enums/structural-issue-code';
 import { WorkerStatus } from '../enums/worker-status';
 
@@ -66,6 +68,12 @@ describe('Enum schemas — accept valid values', () => {
   it('SnapshotStatusSchema accepts valid values', () => {
     expect(SnapshotStatusSchema.parse(SnapshotStatus.Draft)).toBe('DRAFT');
     expect(SnapshotStatusSchema.parse(SnapshotStatus.Sealed)).toBe('SEALED');
+  });
+
+  it('IntakeSnapshotBlockedReasonSchema accepts valid values', () => {
+    expect(IntakeSnapshotBlockedReasonSchema.parse(IntakeSnapshotBlockedReason.MAPPING_GATED)).toBe(
+      'MAPPING_GATED',
+    );
   });
 
   it('CaseworkStatusSchema accepts valid values', () => {

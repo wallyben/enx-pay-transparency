@@ -9,6 +9,7 @@ export {
   IntakeFileStatusSchema,
   LogicalIntakeFieldSchema,
   MappingNormalizationIssueCodeSchema,
+  IntakeSnapshotBlockedReasonSchema,
   PayComponentSchema,
   RemediationStatusSchema,
   ReviewStatusSchema,
@@ -23,6 +24,7 @@ export {
   NormalizedIntakeRowResultSchema,
   NormalizedScalarSchema,
 } from './mapping-normalization';
+export { CreateIntakeSnapshotRequestSchema } from './intake-snapshot';
 export {
   IntakeColumnDefinitionSchema,
   IntakeFileRecordSchema,
