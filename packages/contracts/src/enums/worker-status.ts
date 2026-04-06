@@ -1,5 +1,6 @@
 export enum WorkerStatus {
-  ACTIVE = 'ACTIVE',
-  ON_LEAVE = 'ON_LEAVE',
-  TERMINATED = 'TERMINATED',
+  Active = 'ACTIVE',
+  Inactive = 'INACTIVE',
+  OnLeave = 'ON_LEAVE',
+  Terminated = 'TERMINATED',
 }

@@ -13,7 +13,7 @@ const BASE_SNAPSHOT: SnapshotInput = {
   periodEnd: new Date('2024-12-31'),
   methodologyVersion: 'v1.0.0',
   rulePackVersion: 'v1.0.0',
-  status: SnapshotStatus.DRAFT,
+  status: SnapshotStatus.Draft,
   createdBy: 'system',
   sealedAt: null,
   createdAt: new Date('2025-01-10'),
@@ -32,7 +32,7 @@ describe('PaySnapshotSchema', () => {
   it('accepts a SEALED snapshot with sealedAt set', () => {
     expect(
       PaySnapshotSchema.safeParse(
-        overrideSnapshot({ status: SnapshotStatus.SEALED, sealedAt: new Date('2025-01-15') }),
+        overrideSnapshot({ status: SnapshotStatus.Sealed, sealedAt: new Date('2025-01-15') }),
       ).success,
     ).toBe(true);
   });
@@ -40,7 +40,7 @@ describe('PaySnapshotSchema', () => {
   it('accepts an ARCHIVED snapshot with sealedAt retained', () => {
     expect(
       PaySnapshotSchema.safeParse(
-        overrideSnapshot({ status: SnapshotStatus.ARCHIVED, sealedAt: new Date('2025-01-15') }),
+        overrideSnapshot({ status: SnapshotStatus.Archived, sealedAt: new Date('2025-01-15') }),
       ).success,
     ).toBe(true);
   });
@@ -55,15 +55,17 @@ describe('PaySnapshotSchema', () => {
 
   it('rejects an invalid status value', () => {
     expect(
-      PaySnapshotSchema.safeParse(overrideSnapshot({ status: 'PUBLISHED' as SnapshotStatus })).success,
+      PaySnapshotSchema.safeParse(
+        overrideSnapshot({ status: 'NOT_A_STATUS' as unknown as SnapshotStatus }),
+      ).success,
     ).toBe(false);
   });
 
   it('accepts all SnapshotStatus values with correct sealedAt', () => {
     const cases: Array<Partial<SnapshotInput>> = [
-      { status: SnapshotStatus.DRAFT, sealedAt: null },
-      { status: SnapshotStatus.SEALED, sealedAt: new Date('2025-01-15') },
-      { status: SnapshotStatus.ARCHIVED, sealedAt: new Date('2025-01-15') },
+      { status: SnapshotStatus.Draft, sealedAt: null },
+      { status: SnapshotStatus.Sealed, sealedAt: new Date('2025-01-15') },
+      { status: SnapshotStatus.Archived, sealedAt: new Date('2025-01-15') },
     ];
     for (const c of cases) {
       expect(PaySnapshotSchema.safeParse(overrideSnapshot(c)).success).toBe(true);

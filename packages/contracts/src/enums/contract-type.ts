@@ -1,7 +1,5 @@
 export enum ContractType {
-  PERMANENT = 'PERMANENT',
-  FIXED_TERM = 'FIXED_TERM',
-  TEMPORARY = 'TEMPORARY',
-  INTERNSHIP = 'INTERNSHIP',
-  APPRENTICESHIP = 'APPRENTICESHIP',
+  Permanent = 'PERMANENT',
+  FixedTerm = 'FIXED_TERM',
+  TemporaryAgency = 'TEMPORARY_AGENCY',
 }

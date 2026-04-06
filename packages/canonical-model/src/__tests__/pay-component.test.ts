@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import { PayComponentSchema } from '../pay-component';
-import { PayComponentType, PayPeriodCode } from '@enx/contracts';
+import { PayComponent as PayComponentType, PayPeriodCode } from '@enx/contracts';
 
 type Input = z.input<typeof PayComponentSchema>;
 
@@ -8,7 +8,7 @@ const BASE: Input = {
   id: '423e4567-e89b-12d3-a456-426614174003',
   workerId: '323e4567-e89b-12d3-a456-426614174002',
   snapshotId: '523e4567-e89b-12d3-a456-426614174004',
-  componentType: PayComponentType.BASE_SALARY,
+  componentType: PayComponentType.BaseSalary,
   sourceLabel: 'Monthly Base Salary',
   rawAmount: 6000,
   currencyCode: 'EUR',
@@ -54,7 +54,7 @@ describe('PayComponentSchema', () => {
     expect(
       PayComponentSchema.safeParse(
         override({
-          componentType: PayComponentType.BONUS,
+          componentType: PayComponentType.Bonus,
           periodCode: PayPeriodCode.ONE_OFF,
           isFteProratable: false,
         }),

@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { PayComponentType, PayPeriodCode } from '@enx/contracts';
+import { PayComponent as PayComponentType, PayPeriodCode } from '@enx/contracts';
 import { CurrencyCodeSchema } from './currency-amount';
 
 /**
