@@ -1,0 +1,15 @@
+{
+  "name": "@enx/category-engine",
+  "version": "0.0.1",
+  "private": true,
+  "main": "./src/index.ts",
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "build": "tsc --noEmit",
+    "test": "jest --config jest.config.js"
+  },
+  "dependencies": {
+    "@enx/audit": "workspace:*",
+    "@enx/contracts": "workspace:*"
+  }
+}
