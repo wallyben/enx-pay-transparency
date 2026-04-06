@@ -6,11 +6,19 @@
 
 ## CURRENT ACTIVE SLICE
 
-**Slice ID:** S04
-**Name:** S04_audit_and_security_baseline
-**Status:** ACCEPTED — 2026-04-06
+**Last completed:** S04 — audit_and_security_baseline (ACCEPTED 2026-04-06)
+
+**Next unblocked slice:** S02 — core_contracts_and_enums
+**Status:** PENDING — ready to start (S01 ACCEPTED; no further blocker)
 **Wave:** 0 — Foundation
-**Milestone:** M0
+**Milestone:** M0 — NOT PASSED (S02 and S03 remain PENDING)
+
+**M0 Gate assessment — 2026-04-06:**
+- S01 foundation_repo_bootstrap: ACCEPTED ✓
+- S02 core_contracts_and_enums: PENDING — not started
+- S03 canonical_worker_and_pay_models: PENDING — not started
+- S04 audit_and_security_baseline: ACCEPTED ✓
+- Gate status: BLOCKED — S02 and S03 must reach ACCEPTED before M0 passes and S05 can start
 
 ---
 
@@ -34,7 +42,7 @@
 | ID | Slice Name | Status | Completion Date | Notes |
 |---|---|---|---|---|
 | S01 | foundation_repo_bootstrap | ACCEPTED | 2026-04-05 | All 11 AC met. pnpm/lint/typecheck/test all pass. ADR-001 filed. |
-| S02 | core_contracts_and_enums | PENDING | — | Blocked on S01 — now unblocked |
+| S02 | core_contracts_and_enums | PENDING | — | Ready to start — S01 ACCEPTED 2026-04-05 |
 | S03 | canonical_worker_and_pay_models | PENDING | — | Blocked on S02 |
 | S04 | audit_and_security_baseline | ACCEPTED | 2026-04-06 | All AC met. 106 tests pass. lint/typecheck clean. ADR-002 filed. Queue-order blocker waived by operator instruction. |
 
@@ -253,7 +261,7 @@ Package shells — each contains only `package.json`, `tsconfig.json`, `src/inde
 
 | ID | Slice Name | Status | Completion Date | Notes |
 |---|---|---|---|---|
-| S05 | intake_upload_and_validation | PENDING | — | Blocked on M0 Gate |
+| S05 | intake_upload_and_validation | PENDING | — | Blocked on M0 Gate — M0 requires S02+S03 ACCEPTED |
 | S06 | mapping_and_normalization_pipeline | PENDING | — | Blocked on S05 |
 | S07 | snapshot_creation_and_lineage | PENDING | — | Blocked on S06 |
 
@@ -643,3 +651,4 @@ Country packs are independent of each other and may be executed in parallel if r
 | 2026-04-05 | S01 scope corrected: added structural shells for apps/api, apps/web, apps/worker, packages/contracts, packages/canonical-model, packages/audit, packages/security, packages/test-fixtures. Removed contradictory acceptance criterion. Added shell-awareness notes to S02, S03, S04. | Governance correction |
 | 2026-04-05 | S01 ACCEPTED. All 11 acceptance criteria met. ADR-001 filed. pnpm/lint/typecheck/test all pass. S02 unblocked. | S01 completion |
 | 2026-04-06 | S04 ACCEPTED. All 14 acceptance criteria met. ADR-002 filed. 106 tests pass. lint/typecheck clean. Queue-order blocker waived by operator instruction (S02/S03 remain PENDING but do not block S04). | S04 completion |
+| 2026-04-06 | Control-state reconciliation pass. Findings: S02 and S03 have NO completion evidence (implementation not present in repo; git log confirms). SLICE_QUEUE.md statuses for S02 (PENDING) and S03 (PENDING) are correct. M0 Gate correctly NOT PASSED. Corrections applied: (1) CURRENT ACTIVE SLICE block updated to name S02 as next unblocked slice and record explicit M0 gate assessment; (2) S02 Wave 0 table notes updated from stale "now unblocked" to "Ready to start"; (3) S05 blocker note clarified to name S02+S03 as the specific outstanding items. No product code touched. | Reconciliation pass |
