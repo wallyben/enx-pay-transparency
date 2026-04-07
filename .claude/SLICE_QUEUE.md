@@ -6,9 +6,9 @@
 
 ## CURRENT ACTIVE SLICE
 
-**Slice ID:** R03  
-**Name:** access_model_baseline  
-**Status:** PENDING — Next readiness-closure work item after R04 acceptance. Pilot entry remains prohibited until R17 passes.  
+**Slice ID:** R11  
+**Name:** decision_record_pack  
+**Status:** PENDING — Next readiness-closure work item after R10 acceptance. Pilot entry remains prohibited until R17 passes.  
 **Wave:** R — Readiness-Closure (evidence-closure; governance/program-control only)  
 **Milestone:** MR — Readiness re-review prerequisite (R17)
 
@@ -742,7 +742,7 @@ This wave is inserted **before any pilot execution** and before any paused/defer
 | R07 | payroll_reconciliation_dry_run | ACCEPTED (MOCK/TEST GOVERNANCE ONLY) | 2026-04-07 | Docs-only payroll reconciliation dry-run governance artifacts created (no execution; no fabricated results): `docs/readiness-closure/06_reconciliation/PAYROLL_RECONCILIATION_DRY_RUN_v1.md`, `docs/readiness-closure/06_reconciliation/PAYROLL_RECONCILIATION_REPORT_TEMPLATE_v1.md` (plus folder guide: `docs/readiness-closure/06_reconciliation/README.md`). |
 | R08 | exception_register_and_disposition | ACCEPTED (MOCK/TEST GOVERNANCE ONLY) | 2026-04-07 | Docs-only exception register + disposition governance artifacts created (no execution; no fabricated results): `docs/readiness-closure/07_exceptions/EXCEPTION_REGISTER_v1.md`, `docs/readiness-closure/07_exceptions/EXCEPTION_REGISTER_TEMPLATE_v1.md` (plus folder guide: `docs/readiness-closure/07_exceptions/README.md`). |
 | R09 | confidence_output_dry_run | ACCEPTED (MOCK/TEST GOVERNANCE ONLY) | 2026-04-07 | Docs-only confidence output dry-run governance artifacts created (no execution; no fabricated outputs): `docs/readiness-closure/08_confidence-output/CONFIDENCE_OUTPUT_DRY_RUN_v1.md`, `docs/readiness-closure/08_confidence-output/CONFIDENCE_OUTPUT_PACK_TEMPLATE_v1.md`. |
-| R10 | methodology_calibration_evidence | PENDING | — | Calibration evidence requirements and bundle structure (no calibration performed yet). |
+| R10 | methodology_calibration_evidence | ACCEPTED (MOCK/TEST GOVERNANCE ONLY) | 2026-04-07 | MOCK/TEST GOVERNANCE ONLY; no real calibration execution or methodology sign-off performed. Artifacts: `docs/readiness-closure/09_methodology-calibration/METHODOLOGY_CALIBRATION_EVIDENCE_v1.md`, `docs/readiness-closure/09_methodology-calibration/METHODOLOGY_CALIBRATION_PACK_TEMPLATE_v1.md`, `docs/readiness-closure/09_methodology-calibration/README.md`. |
 | R11 | decision_record_pack | PENDING | — | Decision record pack format + indexing (append-only). |
 | R12 | gold_pack_execution_evidence | PENDING | — | Evidence structure for gold/test-pack execution (no execution committed yet). |
 | R13 | privacy_approval_bundle | PENDING | — | Privacy approval bundle structure (no approvals executed here). |
@@ -1073,3 +1073,4 @@ Country packs are independent of each other and may be executed in parallel if r
 | 2026-04-07 | H03 ACCEPTED: Methodology v1 package created (MD + JSON) defining factor model (skills/effort/responsibility/working conditions), anchored scoring scale, weights, evidence standards, calibration, review/challenge, governed overrides with expiry, approval model, and version/change control; aligned to Validation Charter G3 and SoT Matrix `methodology_version`. | H03 completion |
 | 2026-04-07 | H04 ACCEPTED: Reconciliation framework v1 + coded exception taxonomy created (MD + JSON) defining payroll-anchored reconciliation domains, comparison levels, methods, tolerances/rounding, explicit blocker vs warning rules, rerun/version discipline, gold dataset strategy, test pack structure, and evidence requirements; aligned to Validation Charter G5/G8 and SoT Matrix tolerances/severities. | H04 completion |
 | 2026-04-07 | R06 ACCEPTED (MOCK/TEST GOVERNANCE ONLY): Created earning-code inventory + mapping-governance lock artifacts (governance-only; no extraction/mapping execution): `docs/readiness-closure/05_mapping-governance/EARNING_CODE_INVENTORY_v1.md`, `docs/readiness-closure/05_mapping-governance/EARNING_CODE_INVENTORY_TEMPLATE_v1.md`, `docs/readiness-closure/05_mapping-governance/MAPPING_VERSION_LOCK_v1.md` (+ `docs/readiness-closure/05_mapping-governance/README.md`). | R06 completion |
+| 2026-04-07 | R10 ACCEPTED (MOCK/TEST GOVERNANCE ONLY): Created methodology calibration evidence governance artifacts (no calibration execution; no methodology sign-off): `docs/readiness-closure/09_methodology-calibration/METHODOLOGY_CALIBRATION_EVIDENCE_v1.md`, `docs/readiness-closure/09_methodology-calibration/METHODOLOGY_CALIBRATION_PACK_TEMPLATE_v1.md`, `docs/readiness-closure/09_methodology-calibration/README.md`. | R10 completion |
