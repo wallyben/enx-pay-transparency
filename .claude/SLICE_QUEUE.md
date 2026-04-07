@@ -696,7 +696,7 @@ This wave is inserted **before any further product expansion**. Its purpose is t
 | H03 | methodology_v1_package | ACCEPTED | 2026-04-07 | Produced Methodology v1 package artifacts: `docs/methodology/METHODOLOGY_v1.md`, `docs/methodology/methodology_v1.json`. Docs-only slice. |
 | H04 | reconciliation_framework_and_exception_taxonomy | ACCEPTED | 2026-04-07 | Produced reconciliation framework + coded exception taxonomy: `docs/reconciliation/RECONCILIATION_FRAMEWORK_v1.md`, `docs/reconciliation/exception-taxonomy_v1.json`. Docs-only slice. |
 | H05 | confidence_model_and_fail_closed_gates | ACCEPTED | 2026-04-07 | Produced confidence model v1 artifacts: `docs/confidence/CONFIDENCE_MODEL_v1.md`, `docs/confidence/confidence-model_v1.json`. Docs-only slice. |
-| H06 | pilot_gold_packs_and_validation_tests | PENDING | — | Define pilot gold datasets + validation packs + required evidence outputs (no implementation yet). Docs-only slice. |
+| H06 | pilot_gold_packs_and_validation_tests | ACCEPTED | 2026-04-07 | Produced pilot gold-pack strategy + machine-readable validation test-pack catalog: `docs/validation/PILOT_GOLD_PACKS_v1.md`, `docs/validation/pilot-validation-test-packs_v1.json`. Docs-only slice. |
 
 ---
 

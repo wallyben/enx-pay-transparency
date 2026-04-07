@@ -1,0 +1,370 @@
+{
+  "validation_pack_id": "pilot_validation_test_packs_v1",
+  "version": "v1.0.0",
+  "status": "draft",
+  "scenarios": [
+    {
+      "scenario_id": "PVTP-001",
+      "title": "Clean matched payroll run",
+      "category": "clean_payroll_happy_path",
+      "description": "Baseline gold pack where HRIS↔Payroll joins are unique and complete, earning codes are fully mapped, and payroll-anchored reconciliation for base + variable pay is within tolerance. Intended to prove a valid run can complete and produce export-eligible evidence with worker-level explainability available for sampled workers.",
+      "source_conditions": [
+        "HRIS worker/job fields present for in-scope population (SoT Matrix pilot_mandatory=Y fields).",
+        "Payroll earning lines present for in-scope paid population with payroll_run_id, pay period boundaries, currency_code.",
+        "pay_component_mapping_version is present and approved.",
+        "No off-cycle/retro lines in this scenario."
+      ],
+      "expected_join_outcome": "PASS",
+      "expected_reconciliation_outcome": "PASS_WITHIN_TOLERANCE",
+      "expected_confidence_outcome": "PASS (no FC triggers; pilot-mandatory fields and records meet usable thresholds)",
+      "expected_category_or_methodology_outcome": "PASS (no override required; methodology_version matches run metadata)",
+      "expected_export_or_run_gate_outcome": "ALLOW",
+      "expected_exception_codes": [],
+      "evidence_required": [
+        "Version manifest (snapshot_id, methodology_version, reconciliation_framework_v1 version, confidence_model_v1 version, pay_component_mapping_version, SoT Matrix v1 version).",
+        "Join integrity report (>=99% for required joins; 0 duplicates on mandatory keys).",
+        "Reconciliation report (base_pay_amount + variable_pay_amount within tolerance; aggregate control totals within tolerance).",
+        "Confidence outputs (field/record statuses; blocked_record_rate and low_confidence_record_rate below thresholds).",
+        "Explainability walkthrough pack for at least 1 sampled worker (inputs→versions→outputs trace)."
+      ],
+      "blocker_expected": false,
+      "notes": "This is the baseline against which exception scenarios are compared for rerun/version discipline."
+    },
+    {
+      "scenario_id": "PVTP-002",
+      "title": "Missing payroll join",
+      "category": "join_integrity_key_coverage",
+      "description": "An HRIS in-scope worker/assignment cannot be joined to any payroll worker/earning records for the defined pay period/run within the pilot perimeter.",
+      "source_conditions": [
+        "HRIS record exists for in-scope worker and assignment_id/position_id.",
+        "Payroll extract lacks corresponding payroll_worker_id (or earning lines) for the worker within pay period boundaries.",
+        "Crosswalk/linkage keys are present but do not match any payroll record in-scope."
+      ],
+      "expected_join_outcome": "BLOCKER",
+      "expected_reconciliation_outcome": "BLOCKER_EXCEPTION (join integrity failure blocks payroll-anchored reconciliation for affected records)",
+      "expected_confidence_outcome": "FAIL_CLOSED (FC-F2 join missing; record confidence hard-zero)",
+      "expected_category_or_methodology_outcome": "BLOCKED (category eligibility fails due to missing mandatory join dependency)",
+      "expected_export_or_run_gate_outcome": "BLOCK_EXPORT",
+      "expected_exception_codes": ["JOIN_MISSING_PAYROLL"],
+      "evidence_required": [
+        "Join integrity report identifying HRIS-only orphan records and join boundary rates.",
+        "Exception register entry for JOIN_MISSING_PAYROLL with owner role and rerun_required=true evidence links.",
+        "Run-level gate evaluation showing export blocked and downstream outputs not produced."
+      ],
+      "blocker_expected": true,
+      "notes": "Maps to Validation Charter G7 join integrity gate and Confidence Model FC-F2."
+    },
+    {
+      "scenario_id": "PVTP-003",
+      "title": "Duplicate join key",
+      "category": "join_integrity_key_coverage",
+      "description": "A pilot-mandatory identifier expected to be unique (e.g., worker_id or payroll_worker_id within provider context) appears more than once, creating ambiguous join cardinality and double-counting risk.",
+      "source_conditions": [
+        "At least one mandatory join key has duplicate values within the declared grain.",
+        "Join boundary produces 1:many or many:many results where 1:1 is expected."
+      ],
+      "expected_join_outcome": "BLOCKER",
+      "expected_reconciliation_outcome": "BLOCKER_EXCEPTION (reconciliation cannot proceed defensibly under ambiguous join)",
+      "expected_confidence_outcome": "FAIL_CLOSED (FC-F2 ambiguous join; record confidence hard-zero)",
+      "expected_category_or_methodology_outcome": "BLOCKED",
+      "expected_export_or_run_gate_outcome": "BLOCK_EXPORT",
+      "expected_exception_codes": ["JOIN_DUPLICATE_KEY"],
+      "evidence_required": [
+        "Duplicate key/cardinality breach report with affected identifiers (restricted access).",
+        "Exception register entry for JOIN_DUPLICATE_KEY with rerun_required=true.",
+        "Gate evaluation record demonstrating no smoothing/selection of candidate records occurred."
+      ],
+      "blocker_expected": true,
+      "notes": "This scenario explicitly tests the confidence model 'do not smooth ambiguity' rule."
+    },
+    {
+      "scenario_id": "PVTP-004",
+      "title": "Unmapped earning code",
+      "category": "unmapped_or_misclassified_earning_code",
+      "description": "A payroll earning code present in in-scope earning lines has no approved mapping to canonical pay components, risking silent pay leakage.",
+      "source_conditions": [
+        "Payroll extract includes earning_code value not present in approved mapping version.",
+        "The earning line is in-scope for remuneration truth (base/variable components)."
+      ],
+      "expected_join_outcome": "PASS",
+      "expected_reconciliation_outcome": "BLOCKER_EXCEPTION (component mapping incomplete; totals cannot be trusted)",
+      "expected_confidence_outcome": "FAIL_CLOSED (FC-F3 unreconciled remuneration truth due to mapping blocker)",
+      "expected_category_or_methodology_outcome": "PASS (methodology not the failing axis; remuneration gating blocks metrics/export)",
+      "expected_export_or_run_gate_outcome": "BLOCK_EXPORT",
+      "expected_exception_codes": ["EARNING_CODE_UNMAPPED"],
+      "evidence_required": [
+        "Earning-code coverage report showing unmapped code(s) and affected totals.",
+        "Exception register entry for EARNING_CODE_UNMAPPED with rerun_required=true and mapping approval evidence requirement.",
+        "Reconciliation residual evidence showing out-of-tolerance or incomplete component roll-up."
+      ],
+      "blocker_expected": true,
+      "notes": "Also validates SoT Matrix requirement that earning_code mapping coverage is BLOCKER for included lines."
+    },
+    {
+      "scenario_id": "PVTP-005",
+      "title": "Earning code misclassification",
+      "category": "unmapped_or_misclassified_earning_code",
+      "description": "A payroll earning code is mapped but to the wrong canonical component (e.g., base vs variable), risking incorrect bonus/variable reporting even when totals appear close.",
+      "source_conditions": [
+        "An earning_code is present and mapped in the mapping version.",
+        "Mapping assigns the earning_code to an incorrect canonical component for this run.",
+        "Totals may still reconcile at aggregate level but component-level residuals reveal misstatement."
+      ],
+      "expected_join_outcome": "PASS",
+      "expected_reconciliation_outcome": "BLOCKER_EXCEPTION (component-level reconciliation fails or reveals misstatement requiring correction)",
+      "expected_confidence_outcome": "FAIL_CLOSED (FC-F3; remuneration truth for component is not usable)",
+      "expected_category_or_methodology_outcome": "PASS",
+      "expected_export_or_run_gate_outcome": "BLOCK_EXPORT",
+      "expected_exception_codes": ["EARNING_CODE_MISCLASSIFIED"],
+      "evidence_required": [
+        "Component-level reconciliation report by earning_code showing the misclassification impact.",
+        "Evidence of payroll earning code semantic meaning used for classification (payroll controls evidence).",
+        "Mapping version change proposal/approval evidence (for future resolution) and rerun trigger note."
+      ],
+      "blocker_expected": true,
+      "notes": "This is designed to prevent a false pass where aggregate control totals are within tolerance but component semantics are wrong."
+    },
+    {
+      "scenario_id": "PVTP-006",
+      "title": "Retro pay present",
+      "category": "offcycle_retro_adjustment_handling",
+      "description": "Retroactive pay adjustments are present and must be allocated consistently per pilot policy. The scenario validates that retro handling is visible, payroll-anchored, and reconciliation outcomes are deterministic.",
+      "source_conditions": [
+        "Payroll extract includes retro adjustment lines or retro indicators.",
+        "Allocation to pay periods/runs is required to avoid period misstatement."
+      ],
+      "expected_join_outcome": "PASS",
+      "expected_reconciliation_outcome": "BLOCKER_EXCEPTION (until retro allocation policy is applied and reconciles within tolerance)",
+      "expected_confidence_outcome": "FAIL_CLOSED (FC-F3 while retro handling is ambiguous or out-of-tolerance)",
+      "expected_category_or_methodology_outcome": "PASS",
+      "expected_export_or_run_gate_outcome": "BLOCK_EXPORT",
+      "expected_exception_codes": ["RETRO_PAY_TREATMENT"],
+      "evidence_required": [
+        "Payroll retro indicator evidence and retro line inventory.",
+        "Retro allocation rule reference for the pilot perimeter (as evidence artifact).",
+        "Before/after reconciliation residual comparison demonstrating deterministic resolution via rerun."
+      ],
+      "blocker_expected": true,
+      "notes": "Retro handling is a high-probability enterprise failure mode; it must not be hidden in aggregates."
+    },
+    {
+      "scenario_id": "PVTP-007",
+      "title": "Off-cycle payment present",
+      "category": "offcycle_retro_adjustment_handling",
+      "description": "An off-cycle payroll run is present. The scenario validates that off-cycle runs are explicitly flagged, included/excluded per scope, and reconciliation evidence is segmented by run type.",
+      "source_conditions": [
+        "Payroll extract includes off-cycle payroll run(s) within or adjacent to the pay period perimeter.",
+        "off_cycle_flag and payroll_run_id must be present and consistent for earning lines."
+      ],
+      "expected_join_outcome": "PASS",
+      "expected_reconciliation_outcome": "BLOCKER_EXCEPTION (if off-cycle handling is mis-scoped or mis-allocated)",
+      "expected_confidence_outcome": "FAIL_CLOSED (FC-F3 if period/run alignment causes blocker reconciliation outcomes)",
+      "expected_category_or_methodology_outcome": "PASS",
+      "expected_export_or_run_gate_outcome": "BLOCK_EXPORT",
+      "expected_exception_codes": ["OFFCYCLE_RUN"],
+      "evidence_required": [
+        "Payroll run inventory for the period including run types.",
+        "off_cycle_flag completeness/consistency report.",
+        "Reconciliation report segmented by regular vs off-cycle runs."
+      ],
+      "blocker_expected": true,
+      "notes": "Validates SoT Matrix requirement that off_cycle_flag and payroll_run_id are pilot-mandatory."
+    },
+    {
+      "scenario_id": "PVTP-008",
+      "title": "Missing mandatory gender",
+      "category": "low_confidence_fail_closed_cases",
+      "description": "A worker in the in-scope population is missing the pilot-mandatory gender field required for EU core pay gap metrics, triggering fail-closed behavior.",
+      "source_conditions": [
+        "HRIS worker record is otherwise in-scope and joins to payroll.",
+        "gender is null/empty/structurally invalid for the worker."
+      ],
+      "expected_join_outcome": "PASS",
+      "expected_reconciliation_outcome": "PASS_WITHIN_TOLERANCE (remuneration may reconcile; failure is mandatory field completeness)",
+      "expected_confidence_outcome": "FAIL_CLOSED (FC-F1 FIELD_MISSING on pilot-mandatory gender; record confidence hard-zero)",
+      "expected_category_or_methodology_outcome": "PASS (category may exist but metrics eligibility fails due to mandatory reporting dimension missing)",
+      "expected_export_or_run_gate_outcome": "BLOCK_EXPORT",
+      "expected_exception_codes": [],
+      "evidence_required": [
+        "Field completeness report for pilot-mandatory fields showing gender missing count.",
+        "Confidence output showing FIELD_MISSING and ZERO status for affected record(s).",
+        "Gate evaluation demonstrating metrics/report export blocked for affected records and/or run depending on breach thresholds."
+      ],
+      "blocker_expected": true,
+      "notes": "This scenario explicitly tests fail-closed posture on pilot-mandatory demographics per SoT Matrix and Confidence Model FC-F1."
+    },
+    {
+      "scenario_id": "PVTP-009",
+      "title": "Ambiguous job evidence",
+      "category": "methodology_category_challenge_path",
+      "description": "Job architecture evidence required by Methodology v1 is ambiguous or conflicting (e.g., job_level conflicts between HRIS and Reward reference), requiring review/challenge handling and blocking approval until resolved.",
+      "source_conditions": [
+        "Role under review has conflicting evidence for a methodology-required identifier/attribute (e.g., job_level).",
+        "Conflict cannot be resolved within SoT precedence without a recorded disposition."
+      ],
+      "expected_join_outcome": "PASS",
+      "expected_reconciliation_outcome": "PASS_WITHIN_TOLERANCE (payroll reconciliation may pass; failure is methodology evidence/defensibility)",
+      "expected_confidence_outcome": "FAIL_CLOSED (methodology evidence conflict blocks approval; treat as EVIDENCE_MISSING_REQUIRED or effective-date mismatch where applicable)",
+      "expected_category_or_methodology_outcome": "REVIEW_REQUIRED (challenge path triggered; no equal-value decision may be approved)",
+      "expected_export_or_run_gate_outcome": "BLOCK_EXPORT",
+      "expected_exception_codes": [],
+      "evidence_required": [
+        "Methodology decision unit evidence bundle references showing conflicting evidence items and their tiers.",
+        "Recorded challenge/review stage entry (Preparation → Peer review → Legal review as required) as evidence item reference.",
+        "Confidence reasons including EVIDENCE_MISSING_REQUIRED or EFFECTIVE_DATE_MISMATCH where applicable and resulting block."
+      ],
+      "blocker_expected": true,
+      "notes": "This scenario exists to prove the methodology is defensible and challengeable (not title-only)."
+    },
+    {
+      "scenario_id": "PVTP-010",
+      "title": "Pending override blocks downstream truth",
+      "category": "override_governance_cases",
+      "description": "A category/equal-value override exists but is PENDING (unapproved), and therefore must not apply. Downstream metrics/reporting must fail-closed for affected records.",
+      "source_conditions": [
+        "Override record exists for a worker/role/group with status PENDING.",
+        "Override would affect category truth if applied."
+      ],
+      "expected_join_outcome": "PASS",
+      "expected_reconciliation_outcome": "PASS_WITHIN_TOLERANCE",
+      "expected_confidence_outcome": "FAIL_CLOSED (FC-F5 OVERRIDE_PENDING; record confidence hard-zero for category truth)",
+      "expected_category_or_methodology_outcome": "BLOCKED (category truth not eligible; metrics aggregation must not use override)",
+      "expected_export_or_run_gate_outcome": "BLOCK_EXPORT",
+      "expected_exception_codes": [],
+      "evidence_required": [
+        "Override record reference including requested_by, status=PENDING, and affected identifiers.",
+        "Confidence output showing OVERRIDE_PENDING reason and downstream block flags.",
+        "Evidence that SoD rule is enforced (requester != approver; approver absent while pending)."
+      ],
+      "blocker_expected": true,
+      "notes": "Explicitly validates Methodology v1 override governance and Confidence Model FC-F5."
+    },
+    {
+      "scenario_id": "PVTP-011",
+      "title": "Approved override with evidence",
+      "category": "override_governance_cases",
+      "description": "A narrowly scoped override is APPROVED with required evidence and expiry. The override may apply (subject to other gates), and explainability must include override rationale and evidence references.",
+      "source_conditions": [
+        "Override record exists with status APPROVED, approved_by, approved_at, expiry_date present and in-date.",
+        "Override includes bounded reason_code, reason narrative, and evidence references meeting Methodology v1 minimums."
+      ],
+      "expected_join_outcome": "PASS",
+      "expected_reconciliation_outcome": "PASS_WITHIN_TOLERANCE",
+      "expected_confidence_outcome": "PASS (no OVERRIDE_* blocker; mandatory fields meet usable thresholds)",
+      "expected_category_or_methodology_outcome": "PASS (override applies; category truth is explainable and traceable)",
+      "expected_export_or_run_gate_outcome": "ALLOW",
+      "expected_exception_codes": [],
+      "evidence_required": [
+        "Approved override record with SoD evidence (requester != approver), and expiry_date.",
+        "Evidence bundle items supporting the override (tiered evidence references).",
+        "Explainability walkthrough showing override linkage (override_id/flag) and rationale included."
+      ],
+      "blocker_expected": false,
+      "notes": "This scenario proves controlled exceptions can be governed without becoming alternate truth."
+    },
+    {
+      "scenario_id": "PVTP-012",
+      "title": "Methodology version mismatch",
+      "category": "export_report_gating_cases",
+      "description": "The run metadata references a methodology_version that is missing or does not match the approved/declared methodology artifact version, invalidating defensibility and requiring fail-closed blocking.",
+      "source_conditions": [
+        "methodology_version in run manifest is missing or differs from expected v1.0.0 for methodology_v1.",
+        "All other data may be structurally valid."
+      ],
+      "expected_join_outcome": "PASS",
+      "expected_reconciliation_outcome": "PASS_WITHIN_TOLERANCE",
+      "expected_confidence_outcome": "FAIL_CLOSED (FC-F4 METHODOLOGY_VERSION_MISSING or METHODOLOGY_VERSION_MISMATCH)",
+      "expected_category_or_methodology_outcome": "BLOCKED",
+      "expected_export_or_run_gate_outcome": "BLOCK_EXPORT",
+      "expected_exception_codes": [],
+      "evidence_required": [
+        "Version manifest demonstrating the mismatch.",
+        "Confidence output including METHODOLOGY_VERSION_MISMATCH reason code.",
+        "Gate evaluation record showing export is blocked due to defensibility failure."
+      ],
+      "blocker_expected": true,
+      "notes": "Maps directly to Confidence Model FC-F4 and Validation Charter G3/G9 defensibility/reproducibility requirements."
+    },
+    {
+      "scenario_id": "PVTP-013",
+      "title": "Blocker reconciliation causes export block",
+      "category": "remuneration_reconciliation_blocker",
+      "description": "A blocker-level reconciliation exception occurs (e.g., aggregate totals mismatch) and must block downstream export eligibility until resolved via rerun with evidence.",
+      "source_conditions": [
+        "Reconciliation detects out-of-tolerance mismatch at entity/period aggregate level.",
+        "Underlying causes may include join leakage, unmapped codes, period misalignment; scenario focuses on the control outcome."
+      ],
+      "expected_join_outcome": "PASS or WARNING (depending on underlying cause; must not hide blocker outcome)",
+      "expected_reconciliation_outcome": "BLOCKER_EXCEPTION",
+      "expected_confidence_outcome": "FAIL_CLOSED (FC-F3 RECON_BLOCKER on mandatory remuneration truth)",
+      "expected_category_or_methodology_outcome": "PASS (category may exist but export blocked by remuneration truth)",
+      "expected_export_or_run_gate_outcome": "BLOCK_EXPORT",
+      "expected_exception_codes": ["AGGREGATE_CONTROL_TOTAL_MISMATCH"],
+      "evidence_required": [
+        "Aggregate control totals report with deltas vs payroll controls.",
+        "Drill-down residual analysis linking to underlying worker/component exceptions.",
+        "Exception register entry for AGGREGATE_CONTROL_TOTAL_MISMATCH with rerun_required=true."
+      ],
+      "blocker_expected": true,
+      "notes": "Ensures fail-closed posture: no export of evidence/metrics under unresolved payroll-anchored reconciliation blockers."
+    },
+    {
+      "scenario_id": "PVTP-014",
+      "title": "Breach-rate threshold invalidates metrics run",
+      "category": "export_report_gating_cases",
+      "description": "Run-level rates of blocked or low-confidence records exceed confidence model thresholds, invalidating the metrics run even if some records pass individually.",
+      "source_conditions": [
+        "A sufficiently large share of in-scope records are blocked (e.g., due to missing mandatory fields or join ambiguity) or are LOW confidence or below.",
+        "blocked_record_rate > 0.5% OR low_confidence_record_rate > 2.0% per confidence-model thresholds."
+      ],
+      "expected_join_outcome": "WARNING or BLOCKER (at population level; scenario evaluates run-level gating)",
+      "expected_reconciliation_outcome": "MIXED (some records may reconcile; run validity is blocked by breach rate)",
+      "expected_confidence_outcome": "FAIL_CLOSED (FC-R1 run-level breach trigger fires)",
+      "expected_category_or_methodology_outcome": "PASS for eligible records; BLOCKED for non-eligible records; run validity is blocked overall",
+      "expected_export_or_run_gate_outcome": "BLOCK_RUN_VALIDITY",
+      "expected_exception_codes": [],
+      "evidence_required": [
+        "Run-level confidence summary showing blocked_record_rate and low_confidence_record_rate and comparison to thresholds.",
+        "Gate evaluation record showing FC-R1 fired and metrics run labeled NOT_VALID / blocked.",
+        "Decision log reference requirement for any attempted risk acceptance (per Validation Charter Section 12)."
+      ],
+      "blocker_expected": true,
+      "notes": "This scenario is required to prevent 'partial pass' outputs being treated as compliant when population quality is insufficient."
+    },
+    {
+      "scenario_id": "PVTP-015",
+      "title": "Worker-level explainability trace complete",
+      "category": "worker_level_explainability_samples",
+      "description": "A sampled worker has a complete explainability trace linking source extracts → joins → derivations → governance versions → overrides/decisions → final output values, sufficient to satisfy Validation Charter Gate G9.",
+      "source_conditions": [
+        "Worker is in-scope and included in computation outputs.",
+        "Explainability trace references are present and resolvable to evidence bundle items.",
+        "No unresolved blocker exceptions for the sampled worker."
+      ],
+      "expected_join_outcome": "PASS",
+      "expected_reconciliation_outcome": "PASS_WITHIN_TOLERANCE",
+      "expected_confidence_outcome": "PASS (field and record confidence usable; reason codes explain any non-blocking reductions)",
+      "expected_category_or_methodology_outcome": "PASS (category assignment basis and any override evidence is traceable)",
+      "expected_export_or_run_gate_outcome": "ALLOW",
+      "expected_exception_codes": [],
+      "evidence_required": [
+        "Explainability walkthrough pack for the worker including: identifiers (restricted), join evidence references, payroll earning lines and mapped components, methodology_version and mapping versions, category basis, override record (if any), confidence reasons, and final outputs.",
+        "Evidence bundle index linking each trace step to immutable artifact references.",
+        "Reproducibility statement: same snapshot/run + same versions reproduces same trace."
+      ],
+      "blocker_expected": false,
+      "notes": "This scenario tests the end-to-end explainability requirement explicitly; it must not be implied by other passes."
+    }
+  ],
+  "references": {
+    "redirect_decision": "docs/validation/REDIRECT_DECISION.md",
+    "validation_charter_v1": "docs/validation/VALIDATION_CHARTER_v1.md",
+    "source_of_truth_matrix_v1": "docs/data-governance/source-of-truth-matrix_v1.json",
+    "methodology_v1": "docs/methodology/methodology_v1.json",
+    "reconciliation_framework_v1": "docs/reconciliation/RECONCILIATION_FRAMEWORK_v1.md",
+    "exception_taxonomy_v1": "docs/reconciliation/exception-taxonomy_v1.json",
+    "confidence_model_v1": "docs/confidence/confidence-model_v1.json",
+    "pilot_gold_packs_v1": "docs/validation/PILOT_GOLD_PACKS_v1.md"
+  }
+}
+
