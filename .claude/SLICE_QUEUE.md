@@ -6,9 +6,9 @@
 
 ## CURRENT ACTIVE SLICE
 
-**Slice ID:** R14  
-**Name:** security_approval_bundle  
-**Status:** PENDING — Next readiness-closure work item after R13 acceptance. Pilot entry remains prohibited until R17 passes.  
+**Slice ID:** R15  
+**Name:** access_model_evidence  
+**Status:** PENDING — Next readiness-closure work item after R14 acceptance. Pilot entry remains prohibited until R17 passes.  
 **Wave:** R — Readiness-Closure (evidence-closure; governance/program-control only)  
 **Milestone:** MR — Readiness re-review prerequisite (R17)
 
@@ -746,7 +746,7 @@ This wave is inserted **before any pilot execution** and before any paused/defer
 | R11 | decision_record_pack | ACCEPTED (MOCK/TEST GOVERNANCE ONLY) | 2026-04-07 | MOCK/TEST GOVERNANCE ONLY; no executed approvals or real pilot authorization performed. Artifacts: `docs/readiness-closure/01_decision-log/DECISION_RECORD_PACK_v1.md`, `docs/readiness-closure/01_decision-log/DECISION_RECORD_PACK_TEMPLATE_v1.md`. |
 | R12 | gold_pack_execution_evidence | ACCEPTED (MOCK/TEST GOVERNANCE ONLY) | 2026-04-07 | Docs-only gold-pack/test-pack execution evidence governance artifacts created (no execution; no fabricated results): `docs/readiness-closure/10_goldpack-testpack/GOLD_PACK_EXECUTION_EVIDENCE_v1.md`, `docs/readiness-closure/10_goldpack-testpack/GOLD_PACK_EXECUTION_PACK_TEMPLATE_v1.md`. |
 | R13 | privacy_approval_bundle | ACCEPTED (MOCK/TEST GOVERNANCE ONLY) | 2026-04-07 | Docs-only privacy approval bundle governance artifacts created (no approvals executed; no DPIA execution; no real personal data): `docs/readiness-closure/11_privacy-bundle/PRIVACY_APPROVAL_BUNDLE_v1.md`, `docs/readiness-closure/11_privacy-bundle/PRIVACY_APPROVAL_BUNDLE_TEMPLATE_v1.md`. |
-| R14 | security_approval_bundle | PENDING | — | Security approval bundle structure (no approvals executed here). |
+| R14 | security_approval_bundle | ACCEPTED (MOCK/TEST GOVERNANCE ONLY) | 2026-04-07 | Docs-only security approval bundle governance artifacts created (no approvals executed; no security review performed; no real personal data): `docs/readiness-closure/12_security-bundle/SECURITY_APPROVAL_BUNDLE_v1.md`, `docs/readiness-closure/12_security-bundle/SECURITY_APPROVAL_BUNDLE_TEMPLATE_v1.md`. |
 | R15 | access_model_evidence | PENDING | — | Evidence requirements for access model (logging, approvals, group membership). |
 | R16 | consolidated_readiness_bundle | PENDING | — | Single consolidated readiness bundle with indexed evidence references. |
 | R17 | second_pilot_readiness_review | PENDING | — | Second readiness review; must pass before pilot entry or feature resumption. |
@@ -1072,5 +1072,6 @@ Country packs are independent of each other and may be executed in parallel if r
 | 2026-04-07 | H02 ACCEPTED: SoT Matrix v1 created (MD + CSV + JSON) defining field-level truth (SoR, ownership, derivation, reconciliation, tolerances, severity, privacy/access, retention, lineage/audit, change control) for pilot-critical fields; aligned to Validation Charter G2. | H02 completion |
 | 2026-04-07 | H03 ACCEPTED: Methodology v1 package created (MD + JSON) defining factor model (skills/effort/responsibility/working conditions), anchored scoring scale, weights, evidence standards, calibration, review/challenge, governed overrides with expiry, approval model, and version/change control; aligned to Validation Charter G3 and SoT Matrix `methodology_version`. | H03 completion |
 | 2026-04-07 | H04 ACCEPTED: Reconciliation framework v1 + coded exception taxonomy created (MD + JSON) defining payroll-anchored reconciliation domains, comparison levels, methods, tolerances/rounding, explicit blocker vs warning rules, rerun/version discipline, gold dataset strategy, test pack structure, and evidence requirements; aligned to Validation Charter G5/G8 and SoT Matrix tolerances/severities. | H04 completion |
+| 2026-04-07 | R14 ACCEPTED (MOCK/TEST GOVERNANCE ONLY): Created security approval bundle governance artifacts (no approvals executed; no security review performed): `docs/readiness-closure/12_security-bundle/SECURITY_APPROVAL_BUNDLE_v1.md`, `docs/readiness-closure/12_security-bundle/SECURITY_APPROVAL_BUNDLE_TEMPLATE_v1.md`. | R14 completion |
 | 2026-04-07 | R06 ACCEPTED (MOCK/TEST GOVERNANCE ONLY): Created earning-code inventory + mapping-governance lock artifacts (governance-only; no extraction/mapping execution): `docs/readiness-closure/05_mapping-governance/EARNING_CODE_INVENTORY_v1.md`, `docs/readiness-closure/05_mapping-governance/EARNING_CODE_INVENTORY_TEMPLATE_v1.md`, `docs/readiness-closure/05_mapping-governance/MAPPING_VERSION_LOCK_v1.md` (+ `docs/readiness-closure/05_mapping-governance/README.md`). | R06 completion |
 | 2026-04-07 | R10 ACCEPTED (MOCK/TEST GOVERNANCE ONLY): Created methodology calibration evidence governance artifacts (no calibration execution; no methodology sign-off): `docs/readiness-closure/09_methodology-calibration/METHODOLOGY_CALIBRATION_EVIDENCE_v1.md`, `docs/readiness-closure/09_methodology-calibration/METHODOLOGY_CALIBRATION_PACK_TEMPLATE_v1.md`, `docs/readiness-closure/09_methodology-calibration/README.md`. | R10 completion |
