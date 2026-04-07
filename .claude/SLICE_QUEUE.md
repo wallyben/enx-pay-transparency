@@ -6,9 +6,9 @@
 
 ## CURRENT ACTIVE SLICE
 
-**Slice ID:** R11  
-**Name:** decision_record_pack  
-**Status:** PENDING — Next readiness-closure work item after R10 acceptance. Pilot entry remains prohibited until R17 passes.  
+**Slice ID:** R12  
+**Name:** gold_pack_execution_evidence  
+**Status:** PENDING — Next readiness-closure work item after R11 acceptance. Pilot entry remains prohibited until R17 passes.  
 **Wave:** R — Readiness-Closure (evidence-closure; governance/program-control only)  
 **Milestone:** MR — Readiness re-review prerequisite (R17)
 
@@ -743,7 +743,7 @@ This wave is inserted **before any pilot execution** and before any paused/defer
 | R08 | exception_register_and_disposition | ACCEPTED (MOCK/TEST GOVERNANCE ONLY) | 2026-04-07 | Docs-only exception register + disposition governance artifacts created (no execution; no fabricated results): `docs/readiness-closure/07_exceptions/EXCEPTION_REGISTER_v1.md`, `docs/readiness-closure/07_exceptions/EXCEPTION_REGISTER_TEMPLATE_v1.md` (plus folder guide: `docs/readiness-closure/07_exceptions/README.md`). |
 | R09 | confidence_output_dry_run | ACCEPTED (MOCK/TEST GOVERNANCE ONLY) | 2026-04-07 | Docs-only confidence output dry-run governance artifacts created (no execution; no fabricated outputs): `docs/readiness-closure/08_confidence-output/CONFIDENCE_OUTPUT_DRY_RUN_v1.md`, `docs/readiness-closure/08_confidence-output/CONFIDENCE_OUTPUT_PACK_TEMPLATE_v1.md`. |
 | R10 | methodology_calibration_evidence | ACCEPTED (MOCK/TEST GOVERNANCE ONLY) | 2026-04-07 | MOCK/TEST GOVERNANCE ONLY; no real calibration execution or methodology sign-off performed. Artifacts: `docs/readiness-closure/09_methodology-calibration/METHODOLOGY_CALIBRATION_EVIDENCE_v1.md`, `docs/readiness-closure/09_methodology-calibration/METHODOLOGY_CALIBRATION_PACK_TEMPLATE_v1.md`, `docs/readiness-closure/09_methodology-calibration/README.md`. |
-| R11 | decision_record_pack | PENDING | — | Decision record pack format + indexing (append-only). |
+| R11 | decision_record_pack | ACCEPTED (MOCK/TEST GOVERNANCE ONLY) | 2026-04-07 | MOCK/TEST GOVERNANCE ONLY; no executed approvals or real pilot authorization performed. Artifacts: `docs/readiness-closure/01_decision-log/DECISION_RECORD_PACK_v1.md`, `docs/readiness-closure/01_decision-log/DECISION_RECORD_PACK_TEMPLATE_v1.md`. |
 | R12 | gold_pack_execution_evidence | PENDING | — | Evidence structure for gold/test-pack execution (no execution committed yet). |
 | R13 | privacy_approval_bundle | PENDING | — | Privacy approval bundle structure (no approvals executed here). |
 | R14 | security_approval_bundle | PENDING | — | Security approval bundle structure (no approvals executed here). |
