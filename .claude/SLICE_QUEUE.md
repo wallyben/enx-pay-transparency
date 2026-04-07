@@ -6,9 +6,9 @@
 
 ## CURRENT ACTIVE SLICE
 
-**Slice ID:** R01  
-**Name:** no_go_decision_and_charter_adoption  
-**Status:** ACTIVE — Readiness-Closure initiated after NOT READY outcome; pilot entry prohibited until R17 passes.  
+**Slice ID:** R02  
+**Name:** pilot_scope_lock  
+**Status:** ACTIVE (IN REVIEW) — Ireland-first perimeter is specified using **MOCK/SYNTHETIC** values for governance continuity; not real pilot approval. DR-0003 remains PROPOSED until real values replace mock values and VSG approval/veto clearance occurs. Pilot entry remains prohibited until R17 passes.  
 **Wave:** R — Readiness-Closure (evidence-closure; governance/program-control only)  
 **Milestone:** MR — Readiness re-review prerequisite (R17)
 
@@ -734,7 +734,7 @@ This wave is inserted **before any pilot execution** and before any paused/defer
 | ID | Readiness-Closure Work Item | Status | Completion Date | Notes |
 |---|---|---|---|---|
 | R01 | no_go_decision_and_charter_adoption | ACCEPTED | 2026-04-07 | Governance-only slice completed. Artifacts: `docs/readiness-closure/01_decision-log/DECISION_LOG.md`, `docs/readiness-closure/01_decision-log/DR-0001_NO_GO_READINESS_CLOSURE.md`, `docs/readiness-closure/00_charter/CHARTER_ADOPTION_RECORD.md` (DR-0002). Pilot entry remains prohibited until R17 passes and a new GO decision is recorded. |
-| R02 | pilot_scope_lock | PENDING | — | Lock pilot scope (systems/entities/fields) for re-review. No execution. |
+| R02 | pilot_scope_lock | ACTIVE (IN REVIEW) | — | Ireland-first perimeter fully specified in `docs/readiness-closure/02_scope-lock/PILOT_SCOPE_LOCK_RECORD.md` (values supplied; some marked “(MOCK)”) and DR-0003 ready for VSG approval. Pilot execution remains prohibited. No execution. |
 | R03 | access_model_baseline | PENDING | — | Baseline access model (roles/groups, logging expectations). No approvals executed here. |
 | R04 | source_extract_proof | PENDING | — | Proof that required source extracts can be produced (no real data artifacts committed). |
 | R05 | join_integrity_proof | PENDING | — | Proof that join integrity can be measured and reported (no execution evidence committed yet). |

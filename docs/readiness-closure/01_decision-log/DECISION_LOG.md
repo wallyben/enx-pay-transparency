@@ -126,4 +126,5 @@ Exception: Fixing spelling/formatting errors in a *PROPOSED* record is allowed u
 |---|---:|---:|---:|---|---|---|
 | DR-0001 | NO-GO: Readiness-Closure initiated; pilot entry prohibited | 2026-04-07 | APPROVED (recorded) | Freezes pilot entry/execution; enforces readiness-closure governance | VSG / veto-aware | `DR-0001_NO_GO_READINESS_CLOSURE.md` |
 | DR-0002 | Adopt Validation Charter v1 for readiness-closure governance | 2026-04-07 | APPROVED (recorded) | Establishes binding authority model and veto rules for Wave R | VSG / veto-aware | `../00_charter/CHARTER_ADOPTION_RECORD.md` |
+| DR-0003 | Pilot scope lock for readiness-closure evidence work (R02) | 2026-04-07 | PROPOSED (MOCK perimeter only; not real pilot approval) | Locks Ireland-first pilot perimeter (one entity/provider/period; off-cycle/retro/allowances excluded) for readiness evidence work only | VSG / veto-aware | `DR-0003_PILOT_SCOPE_LOCK.md` |
 
