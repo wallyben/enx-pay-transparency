@@ -1,0 +1,159 @@
+{
+  "contract_id": "JDMS_v1",
+  "contract_version": "1.0.0",
+  "synthetic_only": true,
+  "not_pilot_evidence": true,
+  "run_timestamp": "2026-04-07T23:14:34Z",
+  "notes": [
+    "Cohort = main engine CSV eligibility in run_mock_enterprise_demo.py.",
+    "Executable path mirrors engine_row_for_worker mapping (job_subfamily -> job_subfamily_code).",
+    "job_architecture.csv is used for conflict/richer-than-assignment diagnostics only; TS engines do not auto-merge it."
+  ],
+  "profiles": [
+    {
+      "dataset_profile": "baseline_adversarial",
+      "generated_dir": "mock-enterprise/generated",
+      "input_files_evaluated": [
+        "mock-enterprise/generated/hris_workers.csv",
+        "mock-enterprise/generated/hris_assignments.csv",
+        "mock-enterprise/generated/job_architecture.csv",
+        "mock-enterprise/generated/hris_payroll_crosswalk.csv",
+        "mock-enterprise/generated/payroll_earnings.csv",
+        "mock-enterprise/generated/earning_code_mapping.csv"
+      ],
+      "jdms_contract_path": "mock-enterprise/contracts/JDMS_v1.json",
+      "cohort_definition": "Same filters as run_mock_enterprise_demo.py main engine CSV (join OK, scenario not in EXCLUDE_MAIN, gender present, FTE present, no unmapped earning blocker).",
+      "total_workers_in_pack": 8000,
+      "total_rows": 5695,
+      "overall_pass": false,
+      "blocker_count": 5695,
+      "warning_count": 0,
+      "row_status_counts": {
+        "BLOCKER": 5695
+      },
+      "required_field_summaries": [
+        {
+          "canonical_field_name": "job_family",
+          "missing_count": 0,
+          "missing_rate": 0.0,
+          "blocker_if_missing": true,
+          "review_required_if_missing": true,
+          "top_job_family": "",
+          "top_job_level": "",
+          "top_scenario": ""
+        },
+        {
+          "canonical_field_name": "job_level",
+          "missing_count": 0,
+          "missing_rate": 0.0,
+          "blocker_if_missing": true,
+          "review_required_if_missing": true,
+          "top_job_family": "",
+          "top_job_level": "",
+          "top_scenario": ""
+        },
+        {
+          "canonical_field_name": "job_subfamily_code",
+          "missing_count": 5695,
+          "missing_rate": 1.0,
+          "blocker_if_missing": true,
+          "review_required_if_missing": true,
+          "top_job_family": "ENG",
+          "top_job_level": "L4",
+          "top_scenario": "SCN-001"
+        },
+        {
+          "canonical_field_name": "job_title",
+          "missing_count": 0,
+          "missing_rate": 0.0,
+          "blocker_if_missing": true,
+          "review_required_if_missing": true,
+          "top_job_family": "",
+          "top_job_level": "",
+          "top_scenario": ""
+        }
+      ],
+      "top_missing_patterns": [
+        {
+          "pattern": "job_subfamily_code:MISSING_IN_ASSIGNMENT_AND_NO_CATALOG_COLUMN",
+          "count": 5695
+        },
+        {
+          "pattern": "job_level:CONFLICT_ASSIGNMENT_VS_CATALOG",
+          "count": 218
+        }
+      ]
+    },
+    {
+      "dataset_profile": "pilot_shaped_clean",
+      "generated_dir": "mock-enterprise/generated/pilot_shaped_clean",
+      "input_files_evaluated": [
+        "mock-enterprise/generated/pilot_shaped_clean/hris_workers.csv",
+        "mock-enterprise/generated/pilot_shaped_clean/hris_assignments.csv",
+        "mock-enterprise/generated/pilot_shaped_clean/job_architecture.csv",
+        "mock-enterprise/generated/pilot_shaped_clean/hris_payroll_crosswalk.csv",
+        "mock-enterprise/generated/pilot_shaped_clean/payroll_earnings.csv",
+        "mock-enterprise/generated/pilot_shaped_clean/earning_code_mapping.csv"
+      ],
+      "jdms_contract_path": "mock-enterprise/contracts/JDMS_v1.json",
+      "cohort_definition": "Same filters as run_mock_enterprise_demo.py main engine CSV (join OK, scenario not in EXCLUDE_MAIN, gender present, FTE present, no unmapped earning blocker).",
+      "total_workers_in_pack": 8000,
+      "total_rows": 5695,
+      "overall_pass": true,
+      "blocker_count": 0,
+      "warning_count": 218,
+      "row_status_counts": {
+        "PASS": 5477,
+        "WARNING": 218
+      },
+      "required_field_summaries": [
+        {
+          "canonical_field_name": "job_family",
+          "missing_count": 0,
+          "missing_rate": 0.0,
+          "blocker_if_missing": true,
+          "review_required_if_missing": true,
+          "top_job_family": "",
+          "top_job_level": "",
+          "top_scenario": ""
+        },
+        {
+          "canonical_field_name": "job_level",
+          "missing_count": 0,
+          "missing_rate": 0.0,
+          "blocker_if_missing": true,
+          "review_required_if_missing": true,
+          "top_job_family": "",
+          "top_job_level": "",
+          "top_scenario": ""
+        },
+        {
+          "canonical_field_name": "job_subfamily_code",
+          "missing_count": 0,
+          "missing_rate": 0.0,
+          "blocker_if_missing": true,
+          "review_required_if_missing": true,
+          "top_job_family": "",
+          "top_job_level": "",
+          "top_scenario": ""
+        },
+        {
+          "canonical_field_name": "job_title",
+          "missing_count": 0,
+          "missing_rate": 0.0,
+          "blocker_if_missing": true,
+          "review_required_if_missing": true,
+          "top_job_family": "",
+          "top_job_level": "",
+          "top_scenario": ""
+        }
+      ],
+      "top_missing_patterns": [
+        {
+          "pattern": "job_level:CONFLICT_ASSIGNMENT_VS_CATALOG",
+          "count": 218
+        }
+      ]
+    }
+  ]
+}

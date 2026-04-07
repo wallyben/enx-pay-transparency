@@ -1,0 +1,11 @@
+dataset_profile,total_rows,required_field,missing_count,missing_rate,blocker_if_missing,review_required_if_missing,top_job_family,top_job_level,notes
+baseline_adversarial,5695,job_family,0,0.000000,True,True,,,JDMS_v1 required_for_category_assignment; executable path mirrors demo adapter.
+baseline_adversarial,5695,job_level,0,0.000000,True,True,,,JDMS_v1 required_for_category_assignment; executable path mirrors demo adapter.
+baseline_adversarial,5695,job_subfamily_code,5695,1.000000,True,True,ENG,L4,JDMS_v1 required_for_category_assignment; executable path mirrors demo adapter.
+baseline_adversarial,5695,job_title,0,0.000000,True,True,,,JDMS_v1 required_for_category_assignment; executable path mirrors demo adapter.
+baseline_adversarial,5695,_row_level_blocker_any_field,5695,1.000000,True,True,,,Rows with any category-mandatory JDMS field missing on executable intake mapping.
+pilot_shaped_clean,5695,job_family,0,0.000000,True,True,,,JDMS_v1 required_for_category_assignment; executable path mirrors demo adapter.
+pilot_shaped_clean,5695,job_level,0,0.000000,True,True,,,JDMS_v1 required_for_category_assignment; executable path mirrors demo adapter.
+pilot_shaped_clean,5695,job_subfamily_code,0,0.000000,True,True,,,JDMS_v1 required_for_category_assignment; executable path mirrors demo adapter.
+pilot_shaped_clean,5695,job_title,0,0.000000,True,True,,,JDMS_v1 required_for_category_assignment; executable path mirrors demo adapter.
+pilot_shaped_clean,5695,_row_level_blocker_any_field,0,0.000000,True,True,,,Rows with any category-mandatory JDMS field missing on executable intake mapping.
