@@ -6,9 +6,9 @@
 
 ## CURRENT ACTIVE SLICE
 
-**Slice ID:** H03  
-**Name:** methodology_v1_package  
-**Status:** ACCEPTED — Methodology v1 package created (docs-only).  
+**Slice ID:** H04  
+**Name:** reconciliation_framework_and_exception_taxonomy  
+**Status:** ACCEPTED — Reconciliation framework + coded exception taxonomy created (docs-only).  
 **Wave:** H — Enterprise hardening (validation-first)  
 **Milestone:** MH — Hardening gate (pilot prerequisite)
 
@@ -694,7 +694,7 @@ This wave is inserted **before any further product expansion**. Its purpose is t
 | H01 | validation_charter_and_gates | ACCEPTED | 2026-04-07 | Created `docs/validation/VALIDATION_CHARTER_v1.md` with gates, veto/authority model, decision log template, pilot scope structure, and evidence artifact requirements. Docs-only slice. |
 | H02 | field_level_source_of_truth_matrix_v1 | ACCEPTED | 2026-04-07 | Produced SoT Matrix v1 artifacts: `docs/data-governance/SOURCE_OF_TRUTH_MATRIX_v1.md`, `docs/data-governance/source-of-truth-matrix_v1.csv`, `docs/data-governance/source-of-truth-matrix_v1.json` (+ README). Docs-only slice. |
 | H03 | methodology_v1_package | ACCEPTED | 2026-04-07 | Produced Methodology v1 package artifacts: `docs/methodology/METHODOLOGY_v1.md`, `docs/methodology/methodology_v1.json`. Docs-only slice. |
-| H04 | reconciliation_framework_and_exception_taxonomy | PENDING | — | Define reconciliation model anchored to payroll results + coded exception taxonomy + blocker/warning rules. Docs-only slice. |
+| H04 | reconciliation_framework_and_exception_taxonomy | ACCEPTED | 2026-04-07 | Produced reconciliation framework + coded exception taxonomy: `docs/reconciliation/RECONCILIATION_FRAMEWORK_v1.md`, `docs/reconciliation/exception-taxonomy_v1.json`. Docs-only slice. |
 | H05 | confidence_model_and_fail_closed_gates | PENDING | — | Define confidence scoring model and fail-closed propagation to category/metrics/reporting. Docs-only slice. |
 | H06 | pilot_gold_packs_and_validation_tests | PENDING | — | Define pilot gold datasets + validation packs + required evidence outputs (no implementation yet). Docs-only slice. |
 
@@ -718,6 +718,29 @@ This wave is inserted **before any further product expansion**. Its purpose is t
 - [ ] Every pilot-mandatory field has: **primary SoR**, **owner**, **reconciliation method**, **tolerance**, and **failure severity** (BLOCKER vs WARNING) consistent with Validation Charter fail-closed posture.
 - [ ] Payroll is primary truth for remuneration fields unless explicitly justified; Workday is primary for HR worker/job fields unless explicitly justified.
 - [ ] Fields not ready for pilot use are explicitly marked as non-mandatory and/or WARNING/BLOCKER as appropriate (no ambiguous “usable by default”).
+
+---
+
+### H04 — reconciliation_framework_and_exception_taxonomy
+
+**Purpose:** Create the first formal reconciliation framework and coded exception taxonomy for the enterprise-hardening phase so the pilot can prove payroll-anchored truth, classify reconciliation failures consistently, and define blocker vs warning behavior before any pilot execution.
+
+**Owned Files (H04 delivery):**
+- `docs/reconciliation/RECONCILIATION_FRAMEWORK_v1.md`
+- `docs/reconciliation/exception-taxonomy_v1.json`
+- `.claude/SLICE_QUEUE.md` (this file — H04 status only)
+
+**Acceptance Criteria:**
+- [x] `docs/reconciliation/RECONCILIATION_FRAMEWORK_v1.md` exists and includes the required sections (1–13) covering domains, comparison levels, methods, tolerances/rounding, coded taxonomy usage, blocker vs warning rules, rerun/version discipline, gold dataset strategy, test pack structure, evidence requirements, and references.
+- [x] `docs/reconciliation/exception-taxonomy_v1.json` exists and includes coded exceptions with at minimum: code/title/description, default severity, owner role, resolution path, rerun flag, evidence required, and domain mapping.
+- [x] Framework is explicitly payroll-anchored for remuneration truth and defines fail-closed posture for unreconciled pilot-mandatory remuneration fields (no silent pass).
+- [x] No reconciliation engine or product code implemented; no H05 confidence model work started.
+
+**Completion record — 2026-04-07:**
+- Status set to **ACCEPTED**
+- Artifacts created:
+  - `docs/reconciliation/RECONCILIATION_FRAMEWORK_v1.md`
+  - `docs/reconciliation/exception-taxonomy_v1.json`
 
 
 ---
@@ -967,3 +990,4 @@ Country packs are independent of each other and may be executed in parallel if r
 | 2026-04-07 | H01 ACCEPTED: Validation Charter v1 created with objective gates (G0–G10), veto rights, go/no-go authority model (VSG + quorum), decision log template, pilot scope structure, and required evidence artifacts. | H01 completion |
 | 2026-04-07 | H02 ACCEPTED: SoT Matrix v1 created (MD + CSV + JSON) defining field-level truth (SoR, ownership, derivation, reconciliation, tolerances, severity, privacy/access, retention, lineage/audit, change control) for pilot-critical fields; aligned to Validation Charter G2. | H02 completion |
 | 2026-04-07 | H03 ACCEPTED: Methodology v1 package created (MD + JSON) defining factor model (skills/effort/responsibility/working conditions), anchored scoring scale, weights, evidence standards, calibration, review/challenge, governed overrides with expiry, approval model, and version/change control; aligned to Validation Charter G3 and SoT Matrix `methodology_version`. | H03 completion |
+| 2026-04-07 | H04 ACCEPTED: Reconciliation framework v1 + coded exception taxonomy created (MD + JSON) defining payroll-anchored reconciliation domains, comparison levels, methods, tolerances/rounding, explicit blocker vs warning rules, rerun/version discipline, gold dataset strategy, test pack structure, and evidence requirements; aligned to Validation Charter G5/G8 and SoT Matrix tolerances/severities. | H04 completion |
