@@ -142,13 +142,13 @@ def join_outcome_for_worker(wid: str, crosswalk: Dict[str, Dict[str, str]], payr
 
 
 def executable_descriptor_from_assignment(prim: Dict[str, str]) -> Dict[str, str]:
-    """Mirrors run_mock_enterprise_demo.engine_row_for_worker mapping to intake columns."""
+    """Mirrors run_mock_enterprise_demo.engine_row_for_worker (intake CSV columns)."""
     subfam = (prim.get("job_subfamily") or prim.get("job_subfamily_code") or "").strip()
     return {
         "job_title": (prim.get("job_title") or "").strip(),
-        "job_family": (prim.get("job_family") or prim.get("job_family_code") or "").strip(),
+        "job_family": (prim.get("job_family") or "").strip(),
         "job_subfamily_code": subfam,
-        "job_level": (prim.get("job_level") or prim.get("job_grade_or_level") or "").strip(),
+        "job_level": (prim.get("job_level") or "").strip(),
         "position_id": (prim.get("position_id") or "").strip(),
         "job_code": (prim.get("job_code") or "").strip(),
         "equal_value_group_declaration": (
