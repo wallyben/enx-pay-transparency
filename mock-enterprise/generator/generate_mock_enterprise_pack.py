@@ -9,6 +9,7 @@ No real personal data. No external APIs. Writes reproducible CSV outputs.
 
 from __future__ import annotations
 
+import argparse
 import csv
 import dataclasses
 import datetime as dt
@@ -368,7 +369,7 @@ def scenario_by_id(scenario_id: str) -> Scenario:
     raise KeyError(scenario_id)
 
 
-def build_job_catalog(rng: random.Random) -> List[Dict[str, object]]:
+def build_job_catalog(rng: random.Random, synthetic_profile: str) -> List[Dict[str, object]]:
     # 6 job families, 6 levels, 240 positions total.
     families = [
         ("ENG", "Engineering"),
@@ -398,20 +399,22 @@ def build_job_catalog(rng: random.Random) -> List[Dict[str, object]]:
                 resp = int(clamp(round(normal(rng, mean=0.9 + 0.55 * base_level, std=0.7)), 0, 4))
                 workc = int(clamp(round(normal(rng, mean=0.4 + 0.25 * base_level, std=0.9)), 0, 4))
 
-                rows.append(
-                    {
-                        "position_id": position_id,
-                        "job_code": job_code,
-                        "job_title": job_title,
-                        "job_family": fam_code,
-                        "job_level": lvl,
-                        "factor_skills_score": skills,
-                        "factor_effort_score": effort,
-                        "factor_responsibility_score": resp,
-                        "factor_working_conditions_score": workc,
-                        "methodology_version_reference": METHODOLOGY_VERSION_REFERENCE,
-                    }
-                )
+                row_obj: Dict[str, object] = {
+                    "position_id": position_id,
+                    "job_code": job_code,
+                    "job_title": job_title,
+                    "job_family": fam_code,
+                    "job_level": lvl,
+                    "factor_skills_score": skills,
+                    "factor_effort_score": effort,
+                    "factor_responsibility_score": resp,
+                    "factor_working_conditions_score": workc,
+                    "methodology_version_reference": METHODOLOGY_VERSION_REFERENCE,
+                }
+                # Pilot-shaped unlock profile: carry explicit subfamily codes into assignments/engine intake.
+                if synthetic_profile == "pilot_shaped_clean":
+                    row_obj["job_subfamily"] = f"{fam_code}_SUB_{j:02d}"
+                rows.append(row_obj)
     return rows
 
 
@@ -622,22 +625,23 @@ def build_workers_and_assignments(
                 lvl_num2 = int(clamp(lvl_num + rng.choice([-2, 2]), 1, 6))
                 job_level = f"L{lvl_num2}"
 
-            assignments.append(
-                {
-                    "assignment_id": assignment_id,
-                    "hris_worker_id": hris_worker_id,
-                    "position_id": position_id,
-                    "job_code": job["job_code"],
-                    "job_title": job["job_title"],
-                    "job_family": job["job_family"],
-                    "job_level": job_level,
-                    "primary_assignment_flag": primary,
-                    "fte_fraction": "" if fte_frac is None else round2(float(fte_frac)),
-                    "standard_hours_per_week": "" if hours is None else round2(float(hours)),
-                    "effective_start_date": iso(eff_start),
-                    "effective_end_date": iso(eff_end),
-                }
-            )
+            asn_row: Dict[str, object] = {
+                "assignment_id": assignment_id,
+                "hris_worker_id": hris_worker_id,
+                "position_id": position_id,
+                "job_code": job["job_code"],
+                "job_title": job["job_title"],
+                "job_family": job["job_family"],
+                "job_level": job_level,
+                "primary_assignment_flag": primary,
+                "fte_fraction": "" if fte_frac is None else round2(float(fte_frac)),
+                "standard_hours_per_week": "" if hours is None else round2(float(hours)),
+                "effective_start_date": iso(eff_start),
+                "effective_end_date": iso(eff_end),
+            }
+            if "job_subfamily" in job:
+                asn_row["job_subfamily"] = job["job_subfamily"]
+            assignments.append(asn_row)
             assignment_to_scn[assignment_id] = scn_id
 
     return workers, assignments, worker_to_scn, assignment_to_scn
@@ -1069,7 +1073,25 @@ def validate_internal_consistency(
 
 
 def main(argv: List[str]) -> int:
+    ap = argparse.ArgumentParser(description="Generate deterministic synthetic enterprise CSV pack (mock-enterprise/generated).")
+    ap.add_argument(
+        "--synthetic-profile",
+        choices=("baseline_adversarial", "pilot_shaped_clean"),
+        default="baseline_adversarial",
+        help="baseline_adversarial: current pack shape (no job_subfamily column). "
+        "pilot_shaped_clean: adds job_subfamily on catalog + assignments for category-engine completeness demos.",
+    )
+    args = ap.parse_args(argv)
+    synthetic_profile = str(args.synthetic_profile)
+
     rng = random.Random(SEED)
+
+    generated_dir = (
+        os.path.join(OUTPUT_ROOT, "generated", "pilot_shaped_clean")
+        if synthetic_profile == "pilot_shaped_clean"
+        else os.path.join(OUTPUT_ROOT, "generated")
+    )
+    ensure_dir(generated_dir)
 
     # worker population size: enterprise scale target (3k–10k)
     worker_count = 8000
@@ -1113,7 +1135,7 @@ def main(argv: List[str]) -> int:
         scenario_plan["SCN-003"] = 2
         scenario_plan["SCN-001"] = max(0, scenario_plan["SCN-001"] - delta)
 
-    jobs = build_job_catalog(rng)
+    jobs = build_job_catalog(rng, synthetic_profile)
     workers, assignments, worker_to_scn, assignment_to_scn = build_workers_and_assignments(
         rng, worker_count, jobs, scenario_plan
     )
@@ -1133,17 +1155,15 @@ def main(argv: List[str]) -> int:
     scenario_counts["SCN-013"] = 0
 
     # Build HRIS->Payroll crosswalk join table already done; now write outputs
-    ensure_dir(GENERATED_DIR)
-
     paths = {
-        "hris_workers.csv": os.path.join(GENERATED_DIR, "hris_workers.csv"),
-        "hris_assignments.csv": os.path.join(GENERATED_DIR, "hris_assignments.csv"),
-        "job_architecture.csv": os.path.join(GENERATED_DIR, "job_architecture.csv"),
-        "payroll_runs.csv": os.path.join(GENERATED_DIR, "payroll_runs.csv"),
-        "payroll_earnings.csv": os.path.join(GENERATED_DIR, "payroll_earnings.csv"),
-        "hris_payroll_crosswalk.csv": os.path.join(GENERATED_DIR, "hris_payroll_crosswalk.csv"),
-        "earning_code_mapping.csv": os.path.join(GENERATED_DIR, "earning_code_mapping.csv"),
-        "expected_scenario_manifest.csv": os.path.join(GENERATED_DIR, "expected_scenario_manifest.csv"),
+        "hris_workers.csv": os.path.join(generated_dir, "hris_workers.csv"),
+        "hris_assignments.csv": os.path.join(generated_dir, "hris_assignments.csv"),
+        "job_architecture.csv": os.path.join(generated_dir, "job_architecture.csv"),
+        "payroll_runs.csv": os.path.join(generated_dir, "payroll_runs.csv"),
+        "payroll_earnings.csv": os.path.join(generated_dir, "payroll_earnings.csv"),
+        "hris_payroll_crosswalk.csv": os.path.join(generated_dir, "hris_payroll_crosswalk.csv"),
+        "earning_code_mapping.csv": os.path.join(generated_dir, "earning_code_mapping.csv"),
+        "expected_scenario_manifest.csv": os.path.join(generated_dir, "expected_scenario_manifest.csv"),
     }
 
     # Validate before write
@@ -1175,39 +1195,47 @@ def main(argv: List[str]) -> int:
         workers,
     )
 
+    assignment_fields = [
+        "assignment_id",
+        "hris_worker_id",
+        "position_id",
+        "job_code",
+        "job_title",
+        "job_family",
+        "job_level",
+        "primary_assignment_flag",
+        "fte_fraction",
+        "standard_hours_per_week",
+        "effective_start_date",
+        "effective_end_date",
+    ]
+    if synthetic_profile == "pilot_shaped_clean":
+        assignment_fields.insert(6, "job_subfamily")
+
     n_assignments = write_csv(
         paths["hris_assignments.csv"],
-        [
-            "assignment_id",
-            "hris_worker_id",
-            "position_id",
-            "job_code",
-            "job_title",
-            "job_family",
-            "job_level",
-            "primary_assignment_flag",
-            "fte_fraction",
-            "standard_hours_per_week",
-            "effective_start_date",
-            "effective_end_date",
-        ],
+        assignment_fields,
         assignments,
     )
 
+    job_arch_fields = [
+        "position_id",
+        "job_code",
+        "job_title",
+        "job_family",
+        "job_level",
+        "factor_skills_score",
+        "factor_effort_score",
+        "factor_responsibility_score",
+        "factor_working_conditions_score",
+        "methodology_version_reference",
+    ]
+    if synthetic_profile == "pilot_shaped_clean":
+        job_arch_fields.insert(4, "job_subfamily")
+
     n_jobs = write_csv(
         paths["job_architecture.csv"],
-        [
-            "position_id",
-            "job_code",
-            "job_title",
-            "job_family",
-            "job_level",
-            "factor_skills_score",
-            "factor_effort_score",
-            "factor_responsibility_score",
-            "factor_working_conditions_score",
-            "methodology_version_reference",
-        ],
+        job_arch_fields,
         jobs,
     )
 
@@ -1292,6 +1320,8 @@ def main(argv: List[str]) -> int:
 
     # Summary
     print("SYNTHETIC DATA ONLY — NOT REAL PILOT EVIDENCE")
+    print(f"Synthetic profile: {synthetic_profile}")
+    print(f"Output directory: {generated_dir}")
     print(f"Seed: {SEED}")
     print(f"Perimeter: country={COUNTRY_CODE} legal_entity_id={LEGAL_ENTITY_ID} payroll_provider_id={PAYROLL_PROVIDER_ID}")
     print(f"Pay period: {PAY_PERIOD_START.isoformat()}..{PAY_PERIOD_END.isoformat()} currency={DEFAULT_CURRENCY_CODE}")

@@ -1,0 +1,38 @@
+dimension,value,review_required_count
+job_title,Technology L1 Role 06,42
+job_title,Finance L2 Role 05,39
+job_title,People L1 Role 04,38
+job_title,Finance L4 Role 06,37
+job_title,Technology L1 Role 03,37
+job_title,Engineering L6 Role 01,36
+job_title,Technology L4 Role 01,36
+job_title,Finance L5 Role 04,35
+job_title,People L5 Role 06,35
+job_title,Engineering L1 Role 01,34
+job_title,Sales L5 Role 06,34
+job_title,People L4 Role 02,34
+job_title,Sales L4 Role 05,34
+job_title,Operations L1 Role 05,34
+job_title,Engineering L3 Role 04,34
+job_title,Operations L3 Role 05,33
+job_title,Sales L6 Role 02,33
+job_title,Engineering L1 Role 06,33
+job_title,Operations L5 Role 02,33
+job_title,Finance L3 Role 05,32
+job_title,Technology L4 Role 06,32
+job_title,People L6 Role 01,32
+job_title,Technology L2 Role 03,32
+job_title,Engineering L6 Role 03,32
+job_title,People L4 Role 05,32
+job_family_code,ENG,962
+job_family_code,OPS,927
+job_family_code,TEC,922
+job_family_code,FIN,919
+job_family_code,HR,897
+job_family_code,SAL,858
+job_grade_or_level,L4,958
+job_grade_or_level,L1,942
+job_grade_or_level,L6,923
+job_grade_or_level,L5,889
+job_grade_or_level,L2,887
+job_grade_or_level,L3,886

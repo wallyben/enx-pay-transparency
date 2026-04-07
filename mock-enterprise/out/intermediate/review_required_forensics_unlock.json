@@ -1,0 +1,78 @@
+{
+  "generated_dir": "mock-enterprise\\generated\\pilot_shaped_clean",
+  "intermediate_run_id": "unlock",
+  "main_cohort_worker_count": 5695,
+  "engine_row_count": 5695,
+  "status_counts": {
+    "ASSIGNED": 5695
+  },
+  "primary_issue_code_counts_review_required": {},
+  "job_normalization_issue_code_counts_among_review_required": {},
+  "missing_normalized_descriptor_keys_among_review_required": {},
+  "scenario_id_among_review_required": {},
+  "scenario_id_all_statuses_engine_rows": {
+    "SCN-001": {
+      "ASSIGNED": 3710
+    },
+    "SCN-011": {
+      "ASSIGNED": 277
+    },
+    "SCN-014": {
+      "ASSIGNED": 136
+    },
+    "SCN-007": {
+      "ASSIGNED": 287
+    },
+    "SCN-009": {
+      "ASSIGNED": 210
+    },
+    "SCN-017": {
+      "ASSIGNED": 215
+    },
+    "SCN-018": {
+      "ASSIGNED": 215
+    },
+    "SCN-015": {
+      "ASSIGNED": 140
+    },
+    "SCN-019": {
+      "ASSIGNED": 141
+    },
+    "SCN-016": {
+      "ASSIGNED": 144
+    },
+    "SCN-020": {
+      "ASSIGNED": 220
+    }
+  },
+  "enterprise_blocker_labels_worker_level": {
+    "join_not_ok": 473,
+    "unmapped_earning_code_worker": 240,
+    "ambiguous_job_evidence_scenario_data_only": 320,
+    "missing_gender": 240,
+    "missing_fte_primary_assignment": 240,
+    "pending_override_scenario": 240,
+    "methodology_mismatch_scenario_adapter": 160
+  },
+  "engine_summary": {
+    "assignedCount": 5695,
+    "reviewRequiredCount": 0,
+    "unassignedCount": 0,
+    "metricsCalculationBlockedCount": 0
+  },
+  "eu_core_metrics_gate": {
+    "runGateBlocked": false,
+    "classificationIncomplete": false
+  },
+  "reporting_export": {
+    "completeness": {
+      "status": "COMPLETE",
+      "exportBlockedReasons": []
+    },
+    "exportBlockers": []
+  },
+  "top_review_required_titles": [],
+  "top_review_required_families": [],
+  "top_review_required_grades": [],
+  "per_row_rows_included": false
+}

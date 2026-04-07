@@ -5,6 +5,7 @@
 ## What this is
 
 - `run_mock_enterprise_demo.py` — validates the generated CSV pack, runs **join + mapping + reconciliation logic** in Python (demo adapter), writes artifacts under `mock-enterprise/out/`, and invokes the repo TypeScript engines via `run_engines.ts`.
+- `run_classification_forensics.py` — builds `REVIEW_REQUIRED` breakdowns from `engine_category_detail_*.json` and adapter context; optional `--compare` for baseline vs unlock engine JSON.
 - `run_engines.ts` — **demo-only** bridge that calls existing packages: `@enx/intake-engine` (register + seal snapshot), `@enx/job-architecture`, `@enx/category-engine`, `@enx/metrics-engine`, `@enx/reporting-engine`.
 - `mock-intake-profile.ts` — demo CSV layout + mapping profile (not the production default three-column intake).
 
@@ -19,6 +20,20 @@
 ```bash
 python mock-enterprise/generator/generate_mock_enterprise_pack.py
 python mock-enterprise/runner/run_mock_enterprise_demo.py
+```
+
+**Classification unlock profile (synthetic):**
+
+```bash
+python mock-enterprise/generator/generate_mock_enterprise_pack.py --synthetic-profile pilot_shaped_clean
+python mock-enterprise/runner/run_mock_enterprise_demo.py --generated-subdir pilot_shaped_clean --intermediate-run-id unlock
+python mock-enterprise/runner/run_classification_forensics.py --generated-subdir pilot_shaped_clean --intermediate-run-id unlock --intermediate-json-name review_required_forensics_unlock.json --omit-markdown --skip-reason-csv-outputs
+```
+
+**Forensics + baseline/unlock yield comparison** (after preserving baseline `engine_output_main.json`):
+
+```bash
+python mock-enterprise/runner/run_classification_forensics.py --compare mock-enterprise/out/intermediate/baseline_engine_output_for_compare.json mock-enterprise/out/intermediate/engine_output_unlock.json
 ```
 
 ### Run TypeScript engine only (optional)

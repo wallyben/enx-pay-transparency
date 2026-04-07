@@ -32,3 +32,11 @@ python mock-enterprise/generator/generate_mock_enterprise_pack.py
 
 Outputs are written to `mock-enterprise/generated/`.
 
+**Classification unlock profile (adds `job_subfamily` for engine demos):**
+
+```bash
+python mock-enterprise/generator/generate_mock_enterprise_pack.py --synthetic-profile pilot_shaped_clean
+```
+
+Writes to `mock-enterprise/generated/pilot_shaped_clean/` (see `docs/CLASSIFICATION_UNLOCK_PLAN.md`).
+

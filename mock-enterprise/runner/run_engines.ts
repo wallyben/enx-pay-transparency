@@ -38,9 +38,12 @@ async function main(): Promise<void> {
   const csvPath = argValue('--csv');
   const metaPath = argValue('--meta');
   const outPath = argValue('--out');
+  const categoryDetailOut = argValue('--categoryDetailOut');
   if (!csvPath || !metaPath || !outPath) {
     // eslint-disable-next-line no-console
-    console.error('Usage: tsx run_engines.ts --csv=... --meta=... --out=...');
+    console.error(
+      'Usage: tsx run_engines.ts --csv=... --meta=... --out=... [--categoryDetailOut=...]',
+    );
     process.exit(2);
   }
 
@@ -148,6 +151,17 @@ async function main(): Promise<void> {
   };
 
   fs.writeFileSync(outPath, JSON.stringify(out, null, 2), 'utf8');
+
+  if (categoryDetailOut) {
+    const detail = {
+      snapshotId: snapshot.snapshotId,
+      methodologyVersion: meta.methodologyVersion,
+      rulePackVersion: meta.rulePackVersion,
+      jobNormalizationRows: jobNorm.rows,
+      categoryRows: category.rows,
+    };
+    fs.writeFileSync(categoryDetailOut, JSON.stringify(detail, null, 2), 'utf8');
+  }
 }
 
 main().catch((e) => {
