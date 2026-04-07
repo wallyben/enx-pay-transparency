@@ -1,14 +1,14 @@
 {
-  "run_id": "mock-enterprise-demo",
-  "intermediate_run_id": "main",
+  "run_id": "mock-enterprise-demo-unlock",
+  "intermediate_run_id": "unlock",
   "synthetic_only": true,
-  "generated_dir": "mock-enterprise\\generated",
-  "synthetic_profile_label": "default_generated_root",
+  "generated_dir": "mock-enterprise\\generated\\pilot_shaped_clean",
+  "synthetic_profile_label": "pilot_shaped_clean",
   "stages": [
     {
       "name": "1_validate_pack",
       "status": "EXECUTED",
-      "notes": "All required CSVs present under mock-enterprise\\generated"
+      "notes": "All required CSVs present under mock-enterprise\\generated\\pilot_shaped_clean"
     },
     {
       "name": "2_load_sources",
@@ -33,7 +33,7 @@
     {
       "name": "6_7_ts_intake_snapshot_job_category",
       "status": "EXECUTED",
-      "notes": "TS path: register intake \u2192 seal snapshot \u2192 job normalization \u2192 extended category (see engine_output_main.json)."
+      "notes": "TS path: register intake \u2192 seal snapshot \u2192 job normalization \u2192 extended category (see engine_output_unlock.json)."
     },
     {
       "name": "7b_equal_value_path",
@@ -42,21 +42,21 @@
     },
     {
       "name": "8_eu_core_metrics",
-      "status": "PARTIALLY EXECUTED",
-      "notes": "runEuCoreMetrics ran; runGateBlocked=True (classification incomplete for this cohort)."
+      "status": "EXECUTED",
+      "notes": "runEuCoreMetrics ran; runGateBlocked=False (classification complete for this cohort)."
     },
     {
       "name": "9_reporting_evidence_pack",
-      "status": "PARTIALLY EXECUTED",
-      "notes": "assembleReportingPack executed; export blocked when metrics gate blocked (see exportBlockers)."
+      "status": "EXECUTED",
+      "notes": "assembleReportingPack executed; reporting completeness COMPLETE (see exportBlockers)."
     },
     {
       "name": "7c_pending_override_demo_cohort",
-      "status": "EXECUTED",
-      "notes": "Separate TS run on SCN-008 workers with PENDING governed override (metrics gate blocked)."
+      "status": "NOT IMPLEMENTED IN CURRENT SYSTEM",
+      "notes": "SCN-008 pending-override mini-run is only executed for --intermediate-run-id main."
     }
   ],
-  "main_engine_output": "mock-enterprise\\out\\intermediate\\engine_output_main.json",
-  "main_category_detail": "mock-enterprise\\out\\intermediate\\engine_category_detail_main.json",
-  "pending_override_output": "mock-enterprise\\out\\intermediate\\engine_output_pending_override.json"
+  "main_engine_output": "mock-enterprise\\out\\intermediate\\engine_output_unlock.json",
+  "main_category_detail": "mock-enterprise\\out\\intermediate\\engine_category_detail_unlock.json",
+  "pending_override_output": null
 }

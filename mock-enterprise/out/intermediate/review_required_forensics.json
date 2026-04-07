@@ -1,0 +1,269 @@
+{
+  "generated_dir": "mock-enterprise\\generated",
+  "intermediate_run_id": "main",
+  "main_cohort_worker_count": 5695,
+  "engine_row_count": 5695,
+  "status_counts": {
+    "REVIEW_REQUIRED": 5485,
+    "ASSIGNED": 210
+  },
+  "primary_issue_code_counts_review_required": {
+    "CAT_ASN_INSUFFICIENT_JOB_DESCRIPTOR": 5485
+  },
+  "job_normalization_issue_code_counts_among_review_required": {},
+  "missing_normalized_descriptor_keys_among_review_required": {
+    "subfamily": 5485
+  },
+  "scenario_id_among_review_required": {
+    "SCN-001": {
+      "REVIEW_REQUIRED": 3710
+    },
+    "SCN-011": {
+      "REVIEW_REQUIRED": 277
+    },
+    "SCN-014": {
+      "REVIEW_REQUIRED": 136
+    },
+    "SCN-007": {
+      "REVIEW_REQUIRED": 287
+    },
+    "SCN-017": {
+      "REVIEW_REQUIRED": 215
+    },
+    "SCN-018": {
+      "REVIEW_REQUIRED": 215
+    },
+    "SCN-015": {
+      "REVIEW_REQUIRED": 140
+    },
+    "SCN-019": {
+      "REVIEW_REQUIRED": 141
+    },
+    "SCN-016": {
+      "REVIEW_REQUIRED": 144
+    },
+    "SCN-020": {
+      "REVIEW_REQUIRED": 220
+    }
+  },
+  "scenario_id_all_statuses_engine_rows": {
+    "SCN-001": {
+      "REVIEW_REQUIRED": 3710
+    },
+    "SCN-011": {
+      "REVIEW_REQUIRED": 277
+    },
+    "SCN-014": {
+      "REVIEW_REQUIRED": 136
+    },
+    "SCN-007": {
+      "REVIEW_REQUIRED": 287
+    },
+    "SCN-009": {
+      "ASSIGNED": 210
+    },
+    "SCN-017": {
+      "REVIEW_REQUIRED": 215
+    },
+    "SCN-018": {
+      "REVIEW_REQUIRED": 215
+    },
+    "SCN-015": {
+      "REVIEW_REQUIRED": 140
+    },
+    "SCN-019": {
+      "REVIEW_REQUIRED": 141
+    },
+    "SCN-016": {
+      "REVIEW_REQUIRED": 144
+    },
+    "SCN-020": {
+      "REVIEW_REQUIRED": 220
+    }
+  },
+  "enterprise_blocker_labels_worker_level": {
+    "join_not_ok": 473,
+    "unmapped_earning_code_worker": 240,
+    "ambiguous_job_evidence_scenario_data_only": 320,
+    "missing_gender": 240,
+    "missing_fte_primary_assignment": 240,
+    "pending_override_scenario": 240,
+    "methodology_mismatch_scenario_adapter": 160
+  },
+  "engine_summary": {
+    "assignedCount": 210,
+    "reviewRequiredCount": 5485,
+    "unassignedCount": 0,
+    "metricsCalculationBlockedCount": 5485
+  },
+  "eu_core_metrics_gate": {
+    "runGateBlocked": true,
+    "classificationIncomplete": true
+  },
+  "reporting_export": {
+    "completeness": {
+      "status": "INCOMPLETE",
+      "exportBlockedReasons": [
+        "METRICS_RUN_GATE_BLOCKED"
+      ]
+    },
+    "exportBlockers": [
+      "METRICS_RUN_GATE_BLOCKED"
+    ]
+  },
+  "top_review_required_titles": [
+    [
+      "Technology L1 Role 06",
+      42
+    ],
+    [
+      "Finance L2 Role 05",
+      39
+    ],
+    [
+      "People L1 Role 04",
+      38
+    ],
+    [
+      "Finance L4 Role 06",
+      37
+    ],
+    [
+      "Technology L1 Role 03",
+      37
+    ],
+    [
+      "Engineering L6 Role 01",
+      36
+    ],
+    [
+      "Technology L4 Role 01",
+      36
+    ],
+    [
+      "Finance L5 Role 04",
+      35
+    ],
+    [
+      "People L5 Role 06",
+      35
+    ],
+    [
+      "Engineering L1 Role 01",
+      34
+    ],
+    [
+      "Sales L5 Role 06",
+      34
+    ],
+    [
+      "People L4 Role 02",
+      34
+    ],
+    [
+      "Sales L4 Role 05",
+      34
+    ],
+    [
+      "Operations L1 Role 05",
+      34
+    ],
+    [
+      "Engineering L3 Role 04",
+      34
+    ],
+    [
+      "Operations L3 Role 05",
+      33
+    ],
+    [
+      "Sales L6 Role 02",
+      33
+    ],
+    [
+      "Engineering L1 Role 06",
+      33
+    ],
+    [
+      "Operations L5 Role 02",
+      33
+    ],
+    [
+      "Finance L3 Role 05",
+      32
+    ],
+    [
+      "Technology L4 Role 06",
+      32
+    ],
+    [
+      "People L6 Role 01",
+      32
+    ],
+    [
+      "Technology L2 Role 03",
+      32
+    ],
+    [
+      "Engineering L6 Role 03",
+      32
+    ],
+    [
+      "People L4 Role 05",
+      32
+    ]
+  ],
+  "top_review_required_families": [
+    [
+      "ENG",
+      962
+    ],
+    [
+      "OPS",
+      927
+    ],
+    [
+      "TEC",
+      922
+    ],
+    [
+      "FIN",
+      919
+    ],
+    [
+      "HR",
+      897
+    ],
+    [
+      "SAL",
+      858
+    ]
+  ],
+  "top_review_required_grades": [
+    [
+      "L4",
+      958
+    ],
+    [
+      "L1",
+      942
+    ],
+    [
+      "L6",
+      923
+    ],
+    [
+      "L5",
+      889
+    ],
+    [
+      "L2",
+      887
+    ],
+    [
+      "L3",
+      886
+    ]
+  ],
+  "per_row_rows_included": false
+}

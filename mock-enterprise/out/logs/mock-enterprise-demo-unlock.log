@@ -1,0 +1,2 @@
+COMMAND C:\Users\chels\AppData\Roaming\npm\pnpm.CMD exec tsx run_engines.ts --csv=C:/Users/chels/OneDrive/Desktop/enx-pay-transparency/mock-enterprise/out/intermediate/engine_intake_unlock.csv --meta=C:/Users/chels/OneDrive/Desktop/enx-pay-transparency/mock-enterprise/out/intermediate/engine_meta_unlock.json --out=C:/Users/chels/OneDrive/Desktop/enx-pay-transparency/mock-enterprise/out/intermediate/engine_output_unlock.json --categoryDetailOut=C:/Users/chels/OneDrive/Desktop/enx-pay-transparency/mock-enterprise/out/intermediate/engine_category_detail_unlock.json
+EXIT 0

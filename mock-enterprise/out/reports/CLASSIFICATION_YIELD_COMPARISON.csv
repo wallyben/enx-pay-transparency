@@ -1,0 +1,11 @@
+metric,baseline,unlock
+engine_category_rows,5695,5695
+assigned_count,210,5695
+review_required_count,5485,0
+assigned_rate,0.036874,1.0
+review_required_rate,0.963126,0.0
+metrics_run_gate_blocked,True,False
+classification_incomplete,True,False
+reporting_pack_complete,False,True
+export_blocked,True,False
+export_blockers,METRICS_RUN_GATE_BLOCKED,

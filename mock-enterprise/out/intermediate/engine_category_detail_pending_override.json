@@ -1,0 +1,1159 @@
+{
+  "snapshotId": "snp_394fd7a45fc8945aa31c11f035be5b53b09b35665a0587482a2350165ae60e32",
+  "methodologyVersion": "methodology_v1@v1.0.0",
+  "rulePackVersion": "rule_pack_synth_v1",
+  "jobNormalizationRows": [
+    {
+      "rowIndex": 0,
+      "workerExternalId": "HRIS-WKR-000055",
+      "issues": [],
+      "descriptor": {
+        "jobNormalizationRulesVersion": "job-norm-rules@1.0.0",
+        "raw": {
+          "jobTitle": "Operations L5 Role 05",
+          "jobFamilyCode": "OPS",
+          "jobGradeOrLevel": "L5"
+        },
+        "normalized": {
+          "titleNormalized": "OPERATIONS L5 ROLE 05",
+          "familyCodeNormalized": "OPS",
+          "subfamilyCodeNormalized": null,
+          "gradeOrLevelNormalized": "L5"
+        }
+      }
+    },
+    {
+      "rowIndex": 1,
+      "workerExternalId": "HRIS-WKR-000056",
+      "issues": [],
+      "descriptor": {
+        "jobNormalizationRulesVersion": "job-norm-rules@1.0.0",
+        "raw": {
+          "jobTitle": "Operations L6 Role 05",
+          "jobFamilyCode": "OPS",
+          "jobGradeOrLevel": "L6"
+        },
+        "normalized": {
+          "titleNormalized": "OPERATIONS L6 ROLE 05",
+          "familyCodeNormalized": "OPS",
+          "subfamilyCodeNormalized": null,
+          "gradeOrLevelNormalized": "L6"
+        }
+      }
+    },
+    {
+      "rowIndex": 2,
+      "workerExternalId": "HRIS-WKR-000069",
+      "issues": [],
+      "descriptor": {
+        "jobNormalizationRulesVersion": "job-norm-rules@1.0.0",
+        "raw": {
+          "jobTitle": "Technology L1 Role 03",
+          "jobFamilyCode": "TEC",
+          "jobGradeOrLevel": "L1"
+        },
+        "normalized": {
+          "titleNormalized": "TECHNOLOGY L1 ROLE 03",
+          "familyCodeNormalized": "TEC",
+          "subfamilyCodeNormalized": null,
+          "gradeOrLevelNormalized": "L1"
+        }
+      }
+    },
+    {
+      "rowIndex": 3,
+      "workerExternalId": "HRIS-WKR-000152",
+      "issues": [],
+      "descriptor": {
+        "jobNormalizationRulesVersion": "job-norm-rules@1.0.0",
+        "raw": {
+          "jobTitle": "Sales L4 Role 06",
+          "jobFamilyCode": "SAL",
+          "jobGradeOrLevel": "L4"
+        },
+        "normalized": {
+          "titleNormalized": "SALES L4 ROLE 06",
+          "familyCodeNormalized": "SAL",
+          "subfamilyCodeNormalized": null,
+          "gradeOrLevelNormalized": "L4"
+        }
+      }
+    },
+    {
+      "rowIndex": 4,
+      "workerExternalId": "HRIS-WKR-000193",
+      "issues": [],
+      "descriptor": {
+        "jobNormalizationRulesVersion": "job-norm-rules@1.0.0",
+        "raw": {
+          "jobTitle": "Finance L1 Role 05",
+          "jobFamilyCode": "FIN",
+          "jobGradeOrLevel": "L1"
+        },
+        "normalized": {
+          "titleNormalized": "FINANCE L1 ROLE 05",
+          "familyCodeNormalized": "FIN",
+          "subfamilyCodeNormalized": null,
+          "gradeOrLevelNormalized": "L1"
+        }
+      }
+    },
+    {
+      "rowIndex": 5,
+      "workerExternalId": "HRIS-WKR-000261",
+      "issues": [],
+      "descriptor": {
+        "jobNormalizationRulesVersion": "job-norm-rules@1.0.0",
+        "raw": {
+          "jobTitle": "Engineering L1 Role 05",
+          "jobFamilyCode": "ENG",
+          "jobGradeOrLevel": "L1"
+        },
+        "normalized": {
+          "titleNormalized": "ENGINEERING L1 ROLE 05",
+          "familyCodeNormalized": "ENG",
+          "subfamilyCodeNormalized": null,
+          "gradeOrLevelNormalized": "L1"
+        }
+      }
+    },
+    {
+      "rowIndex": 6,
+      "workerExternalId": "HRIS-WKR-000272",
+      "issues": [],
+      "descriptor": {
+        "jobNormalizationRulesVersion": "job-norm-rules@1.0.0",
+        "raw": {
+          "jobTitle": "Sales L3 Role 04",
+          "jobFamilyCode": "SAL",
+          "jobGradeOrLevel": "L3"
+        },
+        "normalized": {
+          "titleNormalized": "SALES L3 ROLE 04",
+          "familyCodeNormalized": "SAL",
+          "subfamilyCodeNormalized": null,
+          "gradeOrLevelNormalized": "L3"
+        }
+      }
+    },
+    {
+      "rowIndex": 7,
+      "workerExternalId": "HRIS-WKR-000274",
+      "issues": [],
+      "descriptor": {
+        "jobNormalizationRulesVersion": "job-norm-rules@1.0.0",
+        "raw": {
+          "jobTitle": "Technology L5 Role 06",
+          "jobFamilyCode": "TEC",
+          "jobGradeOrLevel": "L5"
+        },
+        "normalized": {
+          "titleNormalized": "TECHNOLOGY L5 ROLE 06",
+          "familyCodeNormalized": "TEC",
+          "subfamilyCodeNormalized": null,
+          "gradeOrLevelNormalized": "L5"
+        }
+      }
+    },
+    {
+      "rowIndex": 8,
+      "workerExternalId": "HRIS-WKR-000280",
+      "issues": [],
+      "descriptor": {
+        "jobNormalizationRulesVersion": "job-norm-rules@1.0.0",
+        "raw": {
+          "jobTitle": "Engineering L5 Role 04",
+          "jobFamilyCode": "ENG",
+          "jobGradeOrLevel": "L5"
+        },
+        "normalized": {
+          "titleNormalized": "ENGINEERING L5 ROLE 04",
+          "familyCodeNormalized": "ENG",
+          "subfamilyCodeNormalized": null,
+          "gradeOrLevelNormalized": "L5"
+        }
+      }
+    },
+    {
+      "rowIndex": 9,
+      "workerExternalId": "HRIS-WKR-000338",
+      "issues": [],
+      "descriptor": {
+        "jobNormalizationRulesVersion": "job-norm-rules@1.0.0",
+        "raw": {
+          "jobTitle": "Engineering L4 Role 05",
+          "jobFamilyCode": "ENG",
+          "jobGradeOrLevel": "L4"
+        },
+        "normalized": {
+          "titleNormalized": "ENGINEERING L4 ROLE 05",
+          "familyCodeNormalized": "ENG",
+          "subfamilyCodeNormalized": null,
+          "gradeOrLevelNormalized": "L4"
+        }
+      }
+    },
+    {
+      "rowIndex": 10,
+      "workerExternalId": "HRIS-WKR-000359",
+      "issues": [],
+      "descriptor": {
+        "jobNormalizationRulesVersion": "job-norm-rules@1.0.0",
+        "raw": {
+          "jobTitle": "Technology L4 Role 04",
+          "jobFamilyCode": "TEC",
+          "jobGradeOrLevel": "L4"
+        },
+        "normalized": {
+          "titleNormalized": "TECHNOLOGY L4 ROLE 04",
+          "familyCodeNormalized": "TEC",
+          "subfamilyCodeNormalized": null,
+          "gradeOrLevelNormalized": "L4"
+        }
+      }
+    },
+    {
+      "rowIndex": 11,
+      "workerExternalId": "HRIS-WKR-000405",
+      "issues": [],
+      "descriptor": {
+        "jobNormalizationRulesVersion": "job-norm-rules@1.0.0",
+        "raw": {
+          "jobTitle": "Operations L5 Role 03",
+          "jobFamilyCode": "OPS",
+          "jobGradeOrLevel": "L5"
+        },
+        "normalized": {
+          "titleNormalized": "OPERATIONS L5 ROLE 03",
+          "familyCodeNormalized": "OPS",
+          "subfamilyCodeNormalized": null,
+          "gradeOrLevelNormalized": "L5"
+        }
+      }
+    },
+    {
+      "rowIndex": 12,
+      "workerExternalId": "HRIS-WKR-000428",
+      "issues": [],
+      "descriptor": {
+        "jobNormalizationRulesVersion": "job-norm-rules@1.0.0",
+        "raw": {
+          "jobTitle": "Sales L3 Role 02",
+          "jobFamilyCode": "SAL",
+          "jobGradeOrLevel": "L3"
+        },
+        "normalized": {
+          "titleNormalized": "SALES L3 ROLE 02",
+          "familyCodeNormalized": "SAL",
+          "subfamilyCodeNormalized": null,
+          "gradeOrLevelNormalized": "L3"
+        }
+      }
+    },
+    {
+      "rowIndex": 13,
+      "workerExternalId": "HRIS-WKR-000454",
+      "issues": [],
+      "descriptor": {
+        "jobNormalizationRulesVersion": "job-norm-rules@1.0.0",
+        "raw": {
+          "jobTitle": "Technology L5 Role 03",
+          "jobFamilyCode": "TEC",
+          "jobGradeOrLevel": "L5"
+        },
+        "normalized": {
+          "titleNormalized": "TECHNOLOGY L5 ROLE 03",
+          "familyCodeNormalized": "TEC",
+          "subfamilyCodeNormalized": null,
+          "gradeOrLevelNormalized": "L5"
+        }
+      }
+    },
+    {
+      "rowIndex": 14,
+      "workerExternalId": "HRIS-WKR-000458",
+      "issues": [],
+      "descriptor": {
+        "jobNormalizationRulesVersion": "job-norm-rules@1.0.0",
+        "raw": {
+          "jobTitle": "Technology L1 Role 02",
+          "jobFamilyCode": "TEC",
+          "jobGradeOrLevel": "L1"
+        },
+        "normalized": {
+          "titleNormalized": "TECHNOLOGY L1 ROLE 02",
+          "familyCodeNormalized": "TEC",
+          "subfamilyCodeNormalized": null,
+          "gradeOrLevelNormalized": "L1"
+        }
+      }
+    },
+    {
+      "rowIndex": 15,
+      "workerExternalId": "HRIS-WKR-000545",
+      "issues": [],
+      "descriptor": {
+        "jobNormalizationRulesVersion": "job-norm-rules@1.0.0",
+        "raw": {
+          "jobTitle": "Engineering L4 Role 05",
+          "jobFamilyCode": "ENG",
+          "jobGradeOrLevel": "L2"
+        },
+        "normalized": {
+          "titleNormalized": "ENGINEERING L4 ROLE 05",
+          "familyCodeNormalized": "ENG",
+          "subfamilyCodeNormalized": null,
+          "gradeOrLevelNormalized": "L2"
+        }
+      }
+    },
+    {
+      "rowIndex": 16,
+      "workerExternalId": "HRIS-WKR-000589",
+      "issues": [],
+      "descriptor": {
+        "jobNormalizationRulesVersion": "job-norm-rules@1.0.0",
+        "raw": {
+          "jobTitle": "Finance L6 Role 06",
+          "jobFamilyCode": "FIN",
+          "jobGradeOrLevel": "L6"
+        },
+        "normalized": {
+          "titleNormalized": "FINANCE L6 ROLE 06",
+          "familyCodeNormalized": "FIN",
+          "subfamilyCodeNormalized": null,
+          "gradeOrLevelNormalized": "L6"
+        }
+      }
+    },
+    {
+      "rowIndex": 17,
+      "workerExternalId": "HRIS-WKR-000640",
+      "issues": [],
+      "descriptor": {
+        "jobNormalizationRulesVersion": "job-norm-rules@1.0.0",
+        "raw": {
+          "jobTitle": "Sales L2 Role 06",
+          "jobFamilyCode": "SAL",
+          "jobGradeOrLevel": "L2"
+        },
+        "normalized": {
+          "titleNormalized": "SALES L2 ROLE 06",
+          "familyCodeNormalized": "SAL",
+          "subfamilyCodeNormalized": null,
+          "gradeOrLevelNormalized": "L2"
+        }
+      }
+    },
+    {
+      "rowIndex": 18,
+      "workerExternalId": "HRIS-WKR-000714",
+      "issues": [],
+      "descriptor": {
+        "jobNormalizationRulesVersion": "job-norm-rules@1.0.0",
+        "raw": {
+          "jobTitle": "Sales L6 Role 04",
+          "jobFamilyCode": "SAL",
+          "jobGradeOrLevel": "L6"
+        },
+        "normalized": {
+          "titleNormalized": "SALES L6 ROLE 04",
+          "familyCodeNormalized": "SAL",
+          "subfamilyCodeNormalized": null,
+          "gradeOrLevelNormalized": "L6"
+        }
+      }
+    },
+    {
+      "rowIndex": 19,
+      "workerExternalId": "HRIS-WKR-000730",
+      "issues": [],
+      "descriptor": {
+        "jobNormalizationRulesVersion": "job-norm-rules@1.0.0",
+        "raw": {
+          "jobTitle": "Engineering L6 Role 05",
+          "jobFamilyCode": "ENG",
+          "jobGradeOrLevel": "L6"
+        },
+        "normalized": {
+          "titleNormalized": "ENGINEERING L6 ROLE 05",
+          "familyCodeNormalized": "ENG",
+          "subfamilyCodeNormalized": null,
+          "gradeOrLevelNormalized": "L6"
+        }
+      }
+    },
+    {
+      "rowIndex": 20,
+      "workerExternalId": "HRIS-WKR-000736",
+      "issues": [],
+      "descriptor": {
+        "jobNormalizationRulesVersion": "job-norm-rules@1.0.0",
+        "raw": {
+          "jobTitle": "Technology L1 Role 05",
+          "jobFamilyCode": "TEC",
+          "jobGradeOrLevel": "L1"
+        },
+        "normalized": {
+          "titleNormalized": "TECHNOLOGY L1 ROLE 05",
+          "familyCodeNormalized": "TEC",
+          "subfamilyCodeNormalized": null,
+          "gradeOrLevelNormalized": "L1"
+        }
+      }
+    },
+    {
+      "rowIndex": 21,
+      "workerExternalId": "HRIS-WKR-000838",
+      "issues": [],
+      "descriptor": {
+        "jobNormalizationRulesVersion": "job-norm-rules@1.0.0",
+        "raw": {
+          "jobTitle": "Operations L5 Role 06",
+          "jobFamilyCode": "OPS",
+          "jobGradeOrLevel": "L5"
+        },
+        "normalized": {
+          "titleNormalized": "OPERATIONS L5 ROLE 06",
+          "familyCodeNormalized": "OPS",
+          "subfamilyCodeNormalized": null,
+          "gradeOrLevelNormalized": "L5"
+        }
+      }
+    },
+    {
+      "rowIndex": 22,
+      "workerExternalId": "HRIS-WKR-000845",
+      "issues": [],
+      "descriptor": {
+        "jobNormalizationRulesVersion": "job-norm-rules@1.0.0",
+        "raw": {
+          "jobTitle": "Engineering L3 Role 02",
+          "jobFamilyCode": "ENG",
+          "jobGradeOrLevel": "L3"
+        },
+        "normalized": {
+          "titleNormalized": "ENGINEERING L3 ROLE 02",
+          "familyCodeNormalized": "ENG",
+          "subfamilyCodeNormalized": null,
+          "gradeOrLevelNormalized": "L3"
+        }
+      }
+    },
+    {
+      "rowIndex": 23,
+      "workerExternalId": "HRIS-WKR-000859",
+      "issues": [],
+      "descriptor": {
+        "jobNormalizationRulesVersion": "job-norm-rules@1.0.0",
+        "raw": {
+          "jobTitle": "Finance L4 Role 01",
+          "jobFamilyCode": "FIN",
+          "jobGradeOrLevel": "L4"
+        },
+        "normalized": {
+          "titleNormalized": "FINANCE L4 ROLE 01",
+          "familyCodeNormalized": "FIN",
+          "subfamilyCodeNormalized": null,
+          "gradeOrLevelNormalized": "L4"
+        }
+      }
+    },
+    {
+      "rowIndex": 24,
+      "workerExternalId": "HRIS-WKR-000864",
+      "issues": [],
+      "descriptor": {
+        "jobNormalizationRulesVersion": "job-norm-rules@1.0.0",
+        "raw": {
+          "jobTitle": "Sales L6 Role 03",
+          "jobFamilyCode": "SAL",
+          "jobGradeOrLevel": "L6"
+        },
+        "normalized": {
+          "titleNormalized": "SALES L6 ROLE 03",
+          "familyCodeNormalized": "SAL",
+          "subfamilyCodeNormalized": null,
+          "gradeOrLevelNormalized": "L6"
+        }
+      }
+    }
+  ],
+  "categoryRows": [
+    {
+      "rowIndex": 0,
+      "workerExternalId": "HRIS-WKR-000055",
+      "status": "REVIEW_REQUIRED",
+      "traceability": {
+        "methodologyVersion": "methodology_v1@v1.0.0",
+        "rulePackVersion": "rule_pack_synth_v1",
+        "jobNormalizationRulesVersion": "job-norm-rules@1.0.0",
+        "categoryEngineRulesVersion": "category-engine-rules.v1"
+      },
+      "categoryId": null,
+      "basis": null,
+      "issues": [
+        {
+          "code": "CAT_ASN_INSUFFICIENT_JOB_DESCRIPTOR"
+        },
+        {
+          "code": "CAT_ASN_GOVERNED_OVERRIDE_PENDING",
+          "detail": "ovr_pending_HRIS-WKR-000055"
+        }
+      ],
+      "jobNormalizationIssueCodes": [],
+      "metricsCalculationBlocked": true,
+      "equalValueGroupKey": null,
+      "governedOverrideId": "ovr_pending_HRIS-WKR-000055",
+      "governedOverrideStatus": "PENDING"
+    },
+    {
+      "rowIndex": 1,
+      "workerExternalId": "HRIS-WKR-000056",
+      "status": "REVIEW_REQUIRED",
+      "traceability": {
+        "methodologyVersion": "methodology_v1@v1.0.0",
+        "rulePackVersion": "rule_pack_synth_v1",
+        "jobNormalizationRulesVersion": "job-norm-rules@1.0.0",
+        "categoryEngineRulesVersion": "category-engine-rules.v1"
+      },
+      "categoryId": null,
+      "basis": null,
+      "issues": [
+        {
+          "code": "CAT_ASN_INSUFFICIENT_JOB_DESCRIPTOR"
+        },
+        {
+          "code": "CAT_ASN_GOVERNED_OVERRIDE_PENDING",
+          "detail": "ovr_pending_HRIS-WKR-000056"
+        }
+      ],
+      "jobNormalizationIssueCodes": [],
+      "metricsCalculationBlocked": true,
+      "equalValueGroupKey": null,
+      "governedOverrideId": "ovr_pending_HRIS-WKR-000056",
+      "governedOverrideStatus": "PENDING"
+    },
+    {
+      "rowIndex": 2,
+      "workerExternalId": "HRIS-WKR-000069",
+      "status": "REVIEW_REQUIRED",
+      "traceability": {
+        "methodologyVersion": "methodology_v1@v1.0.0",
+        "rulePackVersion": "rule_pack_synth_v1",
+        "jobNormalizationRulesVersion": "job-norm-rules@1.0.0",
+        "categoryEngineRulesVersion": "category-engine-rules.v1"
+      },
+      "categoryId": null,
+      "basis": null,
+      "issues": [
+        {
+          "code": "CAT_ASN_INSUFFICIENT_JOB_DESCRIPTOR"
+        },
+        {
+          "code": "CAT_ASN_GOVERNED_OVERRIDE_PENDING",
+          "detail": "ovr_pending_HRIS-WKR-000069"
+        }
+      ],
+      "jobNormalizationIssueCodes": [],
+      "metricsCalculationBlocked": true,
+      "equalValueGroupKey": null,
+      "governedOverrideId": "ovr_pending_HRIS-WKR-000069",
+      "governedOverrideStatus": "PENDING"
+    },
+    {
+      "rowIndex": 3,
+      "workerExternalId": "HRIS-WKR-000152",
+      "status": "REVIEW_REQUIRED",
+      "traceability": {
+        "methodologyVersion": "methodology_v1@v1.0.0",
+        "rulePackVersion": "rule_pack_synth_v1",
+        "jobNormalizationRulesVersion": "job-norm-rules@1.0.0",
+        "categoryEngineRulesVersion": "category-engine-rules.v1"
+      },
+      "categoryId": null,
+      "basis": null,
+      "issues": [
+        {
+          "code": "CAT_ASN_INSUFFICIENT_JOB_DESCRIPTOR"
+        },
+        {
+          "code": "CAT_ASN_GOVERNED_OVERRIDE_PENDING",
+          "detail": "ovr_pending_HRIS-WKR-000152"
+        }
+      ],
+      "jobNormalizationIssueCodes": [],
+      "metricsCalculationBlocked": true,
+      "equalValueGroupKey": null,
+      "governedOverrideId": "ovr_pending_HRIS-WKR-000152",
+      "governedOverrideStatus": "PENDING"
+    },
+    {
+      "rowIndex": 4,
+      "workerExternalId": "HRIS-WKR-000193",
+      "status": "REVIEW_REQUIRED",
+      "traceability": {
+        "methodologyVersion": "methodology_v1@v1.0.0",
+        "rulePackVersion": "rule_pack_synth_v1",
+        "jobNormalizationRulesVersion": "job-norm-rules@1.0.0",
+        "categoryEngineRulesVersion": "category-engine-rules.v1"
+      },
+      "categoryId": null,
+      "basis": null,
+      "issues": [
+        {
+          "code": "CAT_ASN_INSUFFICIENT_JOB_DESCRIPTOR"
+        },
+        {
+          "code": "CAT_ASN_GOVERNED_OVERRIDE_PENDING",
+          "detail": "ovr_pending_HRIS-WKR-000193"
+        }
+      ],
+      "jobNormalizationIssueCodes": [],
+      "metricsCalculationBlocked": true,
+      "equalValueGroupKey": null,
+      "governedOverrideId": "ovr_pending_HRIS-WKR-000193",
+      "governedOverrideStatus": "PENDING"
+    },
+    {
+      "rowIndex": 5,
+      "workerExternalId": "HRIS-WKR-000261",
+      "status": "REVIEW_REQUIRED",
+      "traceability": {
+        "methodologyVersion": "methodology_v1@v1.0.0",
+        "rulePackVersion": "rule_pack_synth_v1",
+        "jobNormalizationRulesVersion": "job-norm-rules@1.0.0",
+        "categoryEngineRulesVersion": "category-engine-rules.v1"
+      },
+      "categoryId": null,
+      "basis": null,
+      "issues": [
+        {
+          "code": "CAT_ASN_INSUFFICIENT_JOB_DESCRIPTOR"
+        },
+        {
+          "code": "CAT_ASN_GOVERNED_OVERRIDE_PENDING",
+          "detail": "ovr_pending_HRIS-WKR-000261"
+        }
+      ],
+      "jobNormalizationIssueCodes": [],
+      "metricsCalculationBlocked": true,
+      "equalValueGroupKey": null,
+      "governedOverrideId": "ovr_pending_HRIS-WKR-000261",
+      "governedOverrideStatus": "PENDING"
+    },
+    {
+      "rowIndex": 6,
+      "workerExternalId": "HRIS-WKR-000272",
+      "status": "REVIEW_REQUIRED",
+      "traceability": {
+        "methodologyVersion": "methodology_v1@v1.0.0",
+        "rulePackVersion": "rule_pack_synth_v1",
+        "jobNormalizationRulesVersion": "job-norm-rules@1.0.0",
+        "categoryEngineRulesVersion": "category-engine-rules.v1"
+      },
+      "categoryId": null,
+      "basis": null,
+      "issues": [
+        {
+          "code": "CAT_ASN_INSUFFICIENT_JOB_DESCRIPTOR"
+        },
+        {
+          "code": "CAT_ASN_GOVERNED_OVERRIDE_PENDING",
+          "detail": "ovr_pending_HRIS-WKR-000272"
+        }
+      ],
+      "jobNormalizationIssueCodes": [],
+      "metricsCalculationBlocked": true,
+      "equalValueGroupKey": null,
+      "governedOverrideId": "ovr_pending_HRIS-WKR-000272",
+      "governedOverrideStatus": "PENDING"
+    },
+    {
+      "rowIndex": 7,
+      "workerExternalId": "HRIS-WKR-000274",
+      "status": "REVIEW_REQUIRED",
+      "traceability": {
+        "methodologyVersion": "methodology_v1@v1.0.0",
+        "rulePackVersion": "rule_pack_synth_v1",
+        "jobNormalizationRulesVersion": "job-norm-rules@1.0.0",
+        "categoryEngineRulesVersion": "category-engine-rules.v1"
+      },
+      "categoryId": null,
+      "basis": null,
+      "issues": [
+        {
+          "code": "CAT_ASN_INSUFFICIENT_JOB_DESCRIPTOR"
+        },
+        {
+          "code": "CAT_ASN_GOVERNED_OVERRIDE_PENDING",
+          "detail": "ovr_pending_HRIS-WKR-000274"
+        }
+      ],
+      "jobNormalizationIssueCodes": [],
+      "metricsCalculationBlocked": true,
+      "equalValueGroupKey": null,
+      "governedOverrideId": "ovr_pending_HRIS-WKR-000274",
+      "governedOverrideStatus": "PENDING"
+    },
+    {
+      "rowIndex": 8,
+      "workerExternalId": "HRIS-WKR-000280",
+      "status": "REVIEW_REQUIRED",
+      "traceability": {
+        "methodologyVersion": "methodology_v1@v1.0.0",
+        "rulePackVersion": "rule_pack_synth_v1",
+        "jobNormalizationRulesVersion": "job-norm-rules@1.0.0",
+        "categoryEngineRulesVersion": "category-engine-rules.v1"
+      },
+      "categoryId": null,
+      "basis": null,
+      "issues": [
+        {
+          "code": "CAT_ASN_INSUFFICIENT_JOB_DESCRIPTOR"
+        },
+        {
+          "code": "CAT_ASN_GOVERNED_OVERRIDE_PENDING",
+          "detail": "ovr_pending_HRIS-WKR-000280"
+        }
+      ],
+      "jobNormalizationIssueCodes": [],
+      "metricsCalculationBlocked": true,
+      "equalValueGroupKey": null,
+      "governedOverrideId": "ovr_pending_HRIS-WKR-000280",
+      "governedOverrideStatus": "PENDING"
+    },
+    {
+      "rowIndex": 9,
+      "workerExternalId": "HRIS-WKR-000338",
+      "status": "REVIEW_REQUIRED",
+      "traceability": {
+        "methodologyVersion": "methodology_v1@v1.0.0",
+        "rulePackVersion": "rule_pack_synth_v1",
+        "jobNormalizationRulesVersion": "job-norm-rules@1.0.0",
+        "categoryEngineRulesVersion": "category-engine-rules.v1"
+      },
+      "categoryId": null,
+      "basis": null,
+      "issues": [
+        {
+          "code": "CAT_ASN_INSUFFICIENT_JOB_DESCRIPTOR"
+        },
+        {
+          "code": "CAT_ASN_GOVERNED_OVERRIDE_PENDING",
+          "detail": "ovr_pending_HRIS-WKR-000338"
+        }
+      ],
+      "jobNormalizationIssueCodes": [],
+      "metricsCalculationBlocked": true,
+      "equalValueGroupKey": null,
+      "governedOverrideId": "ovr_pending_HRIS-WKR-000338",
+      "governedOverrideStatus": "PENDING"
+    },
+    {
+      "rowIndex": 10,
+      "workerExternalId": "HRIS-WKR-000359",
+      "status": "REVIEW_REQUIRED",
+      "traceability": {
+        "methodologyVersion": "methodology_v1@v1.0.0",
+        "rulePackVersion": "rule_pack_synth_v1",
+        "jobNormalizationRulesVersion": "job-norm-rules@1.0.0",
+        "categoryEngineRulesVersion": "category-engine-rules.v1"
+      },
+      "categoryId": null,
+      "basis": null,
+      "issues": [
+        {
+          "code": "CAT_ASN_INSUFFICIENT_JOB_DESCRIPTOR"
+        },
+        {
+          "code": "CAT_ASN_GOVERNED_OVERRIDE_PENDING",
+          "detail": "ovr_pending_HRIS-WKR-000359"
+        }
+      ],
+      "jobNormalizationIssueCodes": [],
+      "metricsCalculationBlocked": true,
+      "equalValueGroupKey": null,
+      "governedOverrideId": "ovr_pending_HRIS-WKR-000359",
+      "governedOverrideStatus": "PENDING"
+    },
+    {
+      "rowIndex": 11,
+      "workerExternalId": "HRIS-WKR-000405",
+      "status": "REVIEW_REQUIRED",
+      "traceability": {
+        "methodologyVersion": "methodology_v1@v1.0.0",
+        "rulePackVersion": "rule_pack_synth_v1",
+        "jobNormalizationRulesVersion": "job-norm-rules@1.0.0",
+        "categoryEngineRulesVersion": "category-engine-rules.v1"
+      },
+      "categoryId": null,
+      "basis": null,
+      "issues": [
+        {
+          "code": "CAT_ASN_INSUFFICIENT_JOB_DESCRIPTOR"
+        },
+        {
+          "code": "CAT_ASN_GOVERNED_OVERRIDE_PENDING",
+          "detail": "ovr_pending_HRIS-WKR-000405"
+        }
+      ],
+      "jobNormalizationIssueCodes": [],
+      "metricsCalculationBlocked": true,
+      "equalValueGroupKey": null,
+      "governedOverrideId": "ovr_pending_HRIS-WKR-000405",
+      "governedOverrideStatus": "PENDING"
+    },
+    {
+      "rowIndex": 12,
+      "workerExternalId": "HRIS-WKR-000428",
+      "status": "REVIEW_REQUIRED",
+      "traceability": {
+        "methodologyVersion": "methodology_v1@v1.0.0",
+        "rulePackVersion": "rule_pack_synth_v1",
+        "jobNormalizationRulesVersion": "job-norm-rules@1.0.0",
+        "categoryEngineRulesVersion": "category-engine-rules.v1"
+      },
+      "categoryId": null,
+      "basis": null,
+      "issues": [
+        {
+          "code": "CAT_ASN_INSUFFICIENT_JOB_DESCRIPTOR"
+        },
+        {
+          "code": "CAT_ASN_GOVERNED_OVERRIDE_PENDING",
+          "detail": "ovr_pending_HRIS-WKR-000428"
+        }
+      ],
+      "jobNormalizationIssueCodes": [],
+      "metricsCalculationBlocked": true,
+      "equalValueGroupKey": null,
+      "governedOverrideId": "ovr_pending_HRIS-WKR-000428",
+      "governedOverrideStatus": "PENDING"
+    },
+    {
+      "rowIndex": 13,
+      "workerExternalId": "HRIS-WKR-000454",
+      "status": "REVIEW_REQUIRED",
+      "traceability": {
+        "methodologyVersion": "methodology_v1@v1.0.0",
+        "rulePackVersion": "rule_pack_synth_v1",
+        "jobNormalizationRulesVersion": "job-norm-rules@1.0.0",
+        "categoryEngineRulesVersion": "category-engine-rules.v1"
+      },
+      "categoryId": null,
+      "basis": null,
+      "issues": [
+        {
+          "code": "CAT_ASN_INSUFFICIENT_JOB_DESCRIPTOR"
+        },
+        {
+          "code": "CAT_ASN_GOVERNED_OVERRIDE_PENDING",
+          "detail": "ovr_pending_HRIS-WKR-000454"
+        }
+      ],
+      "jobNormalizationIssueCodes": [],
+      "metricsCalculationBlocked": true,
+      "equalValueGroupKey": null,
+      "governedOverrideId": "ovr_pending_HRIS-WKR-000454",
+      "governedOverrideStatus": "PENDING"
+    },
+    {
+      "rowIndex": 14,
+      "workerExternalId": "HRIS-WKR-000458",
+      "status": "REVIEW_REQUIRED",
+      "traceability": {
+        "methodologyVersion": "methodology_v1@v1.0.0",
+        "rulePackVersion": "rule_pack_synth_v1",
+        "jobNormalizationRulesVersion": "job-norm-rules@1.0.0",
+        "categoryEngineRulesVersion": "category-engine-rules.v1"
+      },
+      "categoryId": null,
+      "basis": null,
+      "issues": [
+        {
+          "code": "CAT_ASN_INSUFFICIENT_JOB_DESCRIPTOR"
+        },
+        {
+          "code": "CAT_ASN_GOVERNED_OVERRIDE_PENDING",
+          "detail": "ovr_pending_HRIS-WKR-000458"
+        }
+      ],
+      "jobNormalizationIssueCodes": [],
+      "metricsCalculationBlocked": true,
+      "equalValueGroupKey": null,
+      "governedOverrideId": "ovr_pending_HRIS-WKR-000458",
+      "governedOverrideStatus": "PENDING"
+    },
+    {
+      "rowIndex": 15,
+      "workerExternalId": "HRIS-WKR-000545",
+      "status": "REVIEW_REQUIRED",
+      "traceability": {
+        "methodologyVersion": "methodology_v1@v1.0.0",
+        "rulePackVersion": "rule_pack_synth_v1",
+        "jobNormalizationRulesVersion": "job-norm-rules@1.0.0",
+        "categoryEngineRulesVersion": "category-engine-rules.v1"
+      },
+      "categoryId": null,
+      "basis": null,
+      "issues": [
+        {
+          "code": "CAT_ASN_INSUFFICIENT_JOB_DESCRIPTOR"
+        },
+        {
+          "code": "CAT_ASN_GOVERNED_OVERRIDE_PENDING",
+          "detail": "ovr_pending_HRIS-WKR-000545"
+        }
+      ],
+      "jobNormalizationIssueCodes": [],
+      "metricsCalculationBlocked": true,
+      "equalValueGroupKey": null,
+      "governedOverrideId": "ovr_pending_HRIS-WKR-000545",
+      "governedOverrideStatus": "PENDING"
+    },
+    {
+      "rowIndex": 16,
+      "workerExternalId": "HRIS-WKR-000589",
+      "status": "REVIEW_REQUIRED",
+      "traceability": {
+        "methodologyVersion": "methodology_v1@v1.0.0",
+        "rulePackVersion": "rule_pack_synth_v1",
+        "jobNormalizationRulesVersion": "job-norm-rules@1.0.0",
+        "categoryEngineRulesVersion": "category-engine-rules.v1"
+      },
+      "categoryId": null,
+      "basis": null,
+      "issues": [
+        {
+          "code": "CAT_ASN_INSUFFICIENT_JOB_DESCRIPTOR"
+        },
+        {
+          "code": "CAT_ASN_GOVERNED_OVERRIDE_PENDING",
+          "detail": "ovr_pending_HRIS-WKR-000589"
+        }
+      ],
+      "jobNormalizationIssueCodes": [],
+      "metricsCalculationBlocked": true,
+      "equalValueGroupKey": null,
+      "governedOverrideId": "ovr_pending_HRIS-WKR-000589",
+      "governedOverrideStatus": "PENDING"
+    },
+    {
+      "rowIndex": 17,
+      "workerExternalId": "HRIS-WKR-000640",
+      "status": "REVIEW_REQUIRED",
+      "traceability": {
+        "methodologyVersion": "methodology_v1@v1.0.0",
+        "rulePackVersion": "rule_pack_synth_v1",
+        "jobNormalizationRulesVersion": "job-norm-rules@1.0.0",
+        "categoryEngineRulesVersion": "category-engine-rules.v1"
+      },
+      "categoryId": null,
+      "basis": null,
+      "issues": [
+        {
+          "code": "CAT_ASN_INSUFFICIENT_JOB_DESCRIPTOR"
+        },
+        {
+          "code": "CAT_ASN_GOVERNED_OVERRIDE_PENDING",
+          "detail": "ovr_pending_HRIS-WKR-000640"
+        }
+      ],
+      "jobNormalizationIssueCodes": [],
+      "metricsCalculationBlocked": true,
+      "equalValueGroupKey": null,
+      "governedOverrideId": "ovr_pending_HRIS-WKR-000640",
+      "governedOverrideStatus": "PENDING"
+    },
+    {
+      "rowIndex": 18,
+      "workerExternalId": "HRIS-WKR-000714",
+      "status": "REVIEW_REQUIRED",
+      "traceability": {
+        "methodologyVersion": "methodology_v1@v1.0.0",
+        "rulePackVersion": "rule_pack_synth_v1",
+        "jobNormalizationRulesVersion": "job-norm-rules@1.0.0",
+        "categoryEngineRulesVersion": "category-engine-rules.v1"
+      },
+      "categoryId": null,
+      "basis": null,
+      "issues": [
+        {
+          "code": "CAT_ASN_INSUFFICIENT_JOB_DESCRIPTOR"
+        },
+        {
+          "code": "CAT_ASN_GOVERNED_OVERRIDE_PENDING",
+          "detail": "ovr_pending_HRIS-WKR-000714"
+        }
+      ],
+      "jobNormalizationIssueCodes": [],
+      "metricsCalculationBlocked": true,
+      "equalValueGroupKey": null,
+      "governedOverrideId": "ovr_pending_HRIS-WKR-000714",
+      "governedOverrideStatus": "PENDING"
+    },
+    {
+      "rowIndex": 19,
+      "workerExternalId": "HRIS-WKR-000730",
+      "status": "REVIEW_REQUIRED",
+      "traceability": {
+        "methodologyVersion": "methodology_v1@v1.0.0",
+        "rulePackVersion": "rule_pack_synth_v1",
+        "jobNormalizationRulesVersion": "job-norm-rules@1.0.0",
+        "categoryEngineRulesVersion": "category-engine-rules.v1"
+      },
+      "categoryId": null,
+      "basis": null,
+      "issues": [
+        {
+          "code": "CAT_ASN_INSUFFICIENT_JOB_DESCRIPTOR"
+        },
+        {
+          "code": "CAT_ASN_GOVERNED_OVERRIDE_PENDING",
+          "detail": "ovr_pending_HRIS-WKR-000730"
+        }
+      ],
+      "jobNormalizationIssueCodes": [],
+      "metricsCalculationBlocked": true,
+      "equalValueGroupKey": null,
+      "governedOverrideId": "ovr_pending_HRIS-WKR-000730",
+      "governedOverrideStatus": "PENDING"
+    },
+    {
+      "rowIndex": 20,
+      "workerExternalId": "HRIS-WKR-000736",
+      "status": "REVIEW_REQUIRED",
+      "traceability": {
+        "methodologyVersion": "methodology_v1@v1.0.0",
+        "rulePackVersion": "rule_pack_synth_v1",
+        "jobNormalizationRulesVersion": "job-norm-rules@1.0.0",
+        "categoryEngineRulesVersion": "category-engine-rules.v1"
+      },
+      "categoryId": null,
+      "basis": null,
+      "issues": [
+        {
+          "code": "CAT_ASN_INSUFFICIENT_JOB_DESCRIPTOR"
+        },
+        {
+          "code": "CAT_ASN_GOVERNED_OVERRIDE_PENDING",
+          "detail": "ovr_pending_HRIS-WKR-000736"
+        }
+      ],
+      "jobNormalizationIssueCodes": [],
+      "metricsCalculationBlocked": true,
+      "equalValueGroupKey": null,
+      "governedOverrideId": "ovr_pending_HRIS-WKR-000736",
+      "governedOverrideStatus": "PENDING"
+    },
+    {
+      "rowIndex": 21,
+      "workerExternalId": "HRIS-WKR-000838",
+      "status": "REVIEW_REQUIRED",
+      "traceability": {
+        "methodologyVersion": "methodology_v1@v1.0.0",
+        "rulePackVersion": "rule_pack_synth_v1",
+        "jobNormalizationRulesVersion": "job-norm-rules@1.0.0",
+        "categoryEngineRulesVersion": "category-engine-rules.v1"
+      },
+      "categoryId": null,
+      "basis": null,
+      "issues": [
+        {
+          "code": "CAT_ASN_INSUFFICIENT_JOB_DESCRIPTOR"
+        },
+        {
+          "code": "CAT_ASN_GOVERNED_OVERRIDE_PENDING",
+          "detail": "ovr_pending_HRIS-WKR-000838"
+        }
+      ],
+      "jobNormalizationIssueCodes": [],
+      "metricsCalculationBlocked": true,
+      "equalValueGroupKey": null,
+      "governedOverrideId": "ovr_pending_HRIS-WKR-000838",
+      "governedOverrideStatus": "PENDING"
+    },
+    {
+      "rowIndex": 22,
+      "workerExternalId": "HRIS-WKR-000845",
+      "status": "REVIEW_REQUIRED",
+      "traceability": {
+        "methodologyVersion": "methodology_v1@v1.0.0",
+        "rulePackVersion": "rule_pack_synth_v1",
+        "jobNormalizationRulesVersion": "job-norm-rules@1.0.0",
+        "categoryEngineRulesVersion": "category-engine-rules.v1"
+      },
+      "categoryId": null,
+      "basis": null,
+      "issues": [
+        {
+          "code": "CAT_ASN_INSUFFICIENT_JOB_DESCRIPTOR"
+        },
+        {
+          "code": "CAT_ASN_GOVERNED_OVERRIDE_PENDING",
+          "detail": "ovr_pending_HRIS-WKR-000845"
+        }
+      ],
+      "jobNormalizationIssueCodes": [],
+      "metricsCalculationBlocked": true,
+      "equalValueGroupKey": null,
+      "governedOverrideId": "ovr_pending_HRIS-WKR-000845",
+      "governedOverrideStatus": "PENDING"
+    },
+    {
+      "rowIndex": 23,
+      "workerExternalId": "HRIS-WKR-000859",
+      "status": "REVIEW_REQUIRED",
+      "traceability": {
+        "methodologyVersion": "methodology_v1@v1.0.0",
+        "rulePackVersion": "rule_pack_synth_v1",
+        "jobNormalizationRulesVersion": "job-norm-rules@1.0.0",
+        "categoryEngineRulesVersion": "category-engine-rules.v1"
+      },
+      "categoryId": null,
+      "basis": null,
+      "issues": [
+        {
+          "code": "CAT_ASN_INSUFFICIENT_JOB_DESCRIPTOR"
+        },
+        {
+          "code": "CAT_ASN_GOVERNED_OVERRIDE_PENDING",
+          "detail": "ovr_pending_HRIS-WKR-000859"
+        }
+      ],
+      "jobNormalizationIssueCodes": [],
+      "metricsCalculationBlocked": true,
+      "equalValueGroupKey": null,
+      "governedOverrideId": "ovr_pending_HRIS-WKR-000859",
+      "governedOverrideStatus": "PENDING"
+    },
+    {
+      "rowIndex": 24,
+      "workerExternalId": "HRIS-WKR-000864",
+      "status": "REVIEW_REQUIRED",
+      "traceability": {
+        "methodologyVersion": "methodology_v1@v1.0.0",
+        "rulePackVersion": "rule_pack_synth_v1",
+        "jobNormalizationRulesVersion": "job-norm-rules@1.0.0",
+        "categoryEngineRulesVersion": "category-engine-rules.v1"
+      },
+      "categoryId": null,
+      "basis": null,
+      "issues": [
+        {
+          "code": "CAT_ASN_INSUFFICIENT_JOB_DESCRIPTOR"
+        },
+        {
+          "code": "CAT_ASN_GOVERNED_OVERRIDE_PENDING",
+          "detail": "ovr_pending_HRIS-WKR-000864"
+        }
+      ],
+      "jobNormalizationIssueCodes": [],
+      "metricsCalculationBlocked": true,
+      "equalValueGroupKey": null,
+      "governedOverrideId": "ovr_pending_HRIS-WKR-000864",
+      "governedOverrideStatus": "PENDING"
+    }
+  ]
+}

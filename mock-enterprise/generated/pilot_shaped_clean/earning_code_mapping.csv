@@ -1,0 +1,8 @@
+earning_code,earning_description,source_payroll_provider,source_instance,mapping_status,mapped_component_family,mapping_version,blocker_flag,notes
+BASE,Base salary,SYNTH_PAYROLL,IE-INSTANCE-A,MAPPED,BASE,earning_mapping_v1.0.0,N,
+BONUS,Bonus payment,SYNTH_PAYROLL,IE-INSTANCE-A,MAPPED,VARIABLE,earning_mapping_v1.0.0,N,
+ALLOW_TRAVEL,Travel allowance (excluded in perimeter),SYNTH_PAYROLL,IE-INSTANCE-A,MAPPED,EXCLUDED,earning_mapping_v1.0.0,N,Excluded component family for this mock perimeter.
+OFFCYCLE_ADJ,Off-cycle adjustment (excluded in perimeter),SYNTH_PAYROLL,IE-INSTANCE-A,MAPPED,EXCLUDED,earning_mapping_v1.0.0,N,Off-cycle excluded.
+RETRO_ADJ,Retro adjustment (excluded in perimeter),SYNTH_PAYROLL,IE-INSTANCE-A,MAPPED,EXCLUDED,earning_mapping_v1.0.0,N,Retro excluded.
+SUSPECT_BASE,Suspected misclassified base-like code,SYNTH_PAYROLL,IE-INSTANCE-A,MAPPED,VARIABLE,earning_mapping_v1.0.0,N,Intentionally mapped to VARIABLE to simulate suspected misclassification for review.
+UNMAPPED_X,Intentionally unmapped code (blocker),SYNTH_PAYROLL,IE-INSTANCE-A,UNMAPPED,,earning_mapping_v1.0.0,Y,Intentionally unmapped to trigger mapping blocker scenario.

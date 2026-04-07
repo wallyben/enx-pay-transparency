@@ -1,0 +1,100 @@
+{
+  "status": "OK",
+  "intakeFileId": "5bba6e83-9a6b-49d5-9e1c-4332e30e0aae",
+  "snapshot": {
+    "snapshotId": "snp_929ced9151656e6cf5e717558ea95b13844506783141ed9b8c6d1c015d17dab4",
+    "manifestDigest": "929ced9151656e6cf5e717558ea95b13844506783141ed9b8c6d1c015d17dab4",
+    "rowCount": 5695
+  },
+  "jobNormalization": {
+    "ok": true,
+    "rowIssueCount": 0,
+    "jobNormalizationRulesVersion": "job-norm-rules@1.0.0"
+  },
+  "categoryAssignment": {
+    "assignedCount": 5695,
+    "reviewRequiredCount": 0,
+    "unassignedCount": 0,
+    "metricsCalculationBlockedCount": 0
+  },
+  "euCoreMetrics": {
+    "traceability": {
+      "snapshotId": "snp_929ced9151656e6cf5e717558ea95b13844506783141ed9b8c6d1c015d17dab4",
+      "methodologyVersion": "methodology_v1@v1.0.0",
+      "rulePackVersion": "rule_pack_synth_v1",
+      "categoryEngineRulesVersion": "category-engine-rules.v1",
+      "jobNormalizationRulesVersion": "job-norm-rules@1.0.0"
+    },
+    "runGateBlocked": false,
+    "inclusion": {
+      "totalCategoryRows": 5695,
+      "classificationIncomplete": false,
+      "excludedNotAssigned": 0,
+      "excludedMetricsCalculationBlocked": 0,
+      "excludedMissingIntakeRow": 0,
+      "excludedMissingBasePay": 0,
+      "excludedInvalidBasePay": 0,
+      "excludedMissingGender": 0,
+      "excludedNonBinaryGender": 240,
+      "eligibleForPayGapCount": 5455,
+      "eligibleMaleCount": 2947,
+      "eligibleFemaleCount": 2508,
+      "eligibleWithVariablePayCount": 1372,
+      "eligibleMaleWithVariablePayCount": 737,
+      "eligibleFemaleWithVariablePayCount": 635
+    },
+    "meanGenderPayGap": {
+      "metricId": "MEAN_GENDER_PAY_GAP_PCT",
+      "status": "COMPUTED",
+      "valuePercent": -2.417052,
+      "issues": []
+    },
+    "medianGenderPayGap": {
+      "metricId": "MEDIAN_GENDER_PAY_GAP_PCT",
+      "status": "COMPUTED",
+      "valuePercent": -5.663365,
+      "issues": []
+    },
+    "meanVariablePayGap": {
+      "metricId": "MEAN_VARIABLE_PAY_GAP_PCT",
+      "status": "COMPUTED",
+      "valuePercent": 3.816384,
+      "issues": []
+    },
+    "payQuartileDistribution": {
+      "metricId": "PAY_QUARTILE_DISTRIBUTION_BY_GENDER",
+      "status": "COMPUTED",
+      "bands": [
+        {
+          "quartile": 1,
+          "maleCount": 757,
+          "femaleCount": 607
+        },
+        {
+          "quartile": 2,
+          "maleCount": 750,
+          "femaleCount": 614
+        },
+        {
+          "quartile": 3,
+          "maleCount": 713,
+          "femaleCount": 651
+        },
+        {
+          "quartile": 4,
+          "maleCount": 727,
+          "femaleCount": 636
+        }
+      ],
+      "issues": []
+    }
+  },
+  "reportingPack": {
+    "reportRunId": "rpr_0521118e1e8bcf6cfebc112b49a9e6d2c89f3d54f2c0e7132243ad588ae5e84a",
+    "completeness": {
+      "status": "COMPLETE",
+      "exportBlockedReasons": []
+    },
+    "exportBlockers": []
+  }
+}
