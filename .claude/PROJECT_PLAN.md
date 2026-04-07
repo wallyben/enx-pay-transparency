@@ -346,16 +346,48 @@ The current and authoritative slice execution order is maintained in `.claude/SL
 
 ---
 
+## 12B. READINESS-CLOSURE PHASE (BINDING)
+
+### 12B.1 Trigger and decision
+
+The latest pilot readiness review outcome is **NOT READY**.
+
+Binding implications:
+- The program enters a **Readiness-Closure phase** (evidence-closure; governance/program-control only).
+- **Pilot entry is prohibited** and **pilot execution is blocked**.
+- **No pilot entry and no resumption of deferred/paused feature work is allowed until R17 passes** (second pilot readiness review) and the decision is recorded.
+
+### 12B.2 What this phase is (and is not)
+
+This phase exists to close readiness evidence gaps and produce a consolidated readiness bundle suitable for a re-review.
+
+It is:
+- evidence-closure and decision-pack preparation (dry-run evidence bundle + privacy/security/access clearance)
+- controlled work through the readiness-closure queue items R01–R17
+
+It is not:
+- pilot execution
+- downstream feature delivery or product expansion
+
+### 12B.3 Enforcement
+
+The authoritative execution queue is `.claude/SLICE_QUEUE.md`:
+- Wave R (Readiness-Closure) is mandatory and precedes any pilot execution or feature resumption.
+- Pilot execution remains **BLOCKED** until R17 is completed and passes.
+
+---
+
 ## 13. IMMEDIATE NEXT STEPS
 
-This repo has completed the docs-only redirect and is now in **validation-first enterprise hardening**.
+This repo is now in **Readiness-Closure** (evidence-closure), following a **NOT READY** pilot readiness review outcome.
 
 1. Treat `.claude/SLICE_QUEUE.md` as the **live execution queue**. `PROJECT_PLAN.md` is a controlling document, but it must stay aligned with the queue’s current active slice and statuses.
-2. Next active slice is **H01_validation_charter_and_gates** (docs-only). Do not start H02 or later hardening slices until H01 is complete and reviewed.
-3. **Downstream product expansion remains frozen** pending hardening gates and pilot pass:
+2. Next active slice is **R01_no_go_decision_and_charter_adoption** (governance/program-control). Do not start R02 or later readiness-closure work until R01 is accepted.
+3. **Pilot entry and pilot execution are prohibited** until readiness-closure completes and R17 passes.
+4. **Downstream product expansion remains frozen/deferred**:
    - S13 is **DEFERRED**
    - Waves 4–7 are **PAUSED**
-4. Do not create application routes, database schema, product features, or schemas unless the active slice explicitly owns that scope.
+5. Do not create application routes, database schema, product features, or schemas unless the active slice explicitly owns that scope.
 
-Current active slice (authoritative): **H01_validation_charter_and_gates** — see `.claude/SLICE_QUEUE.md`
-Current phase: **Wave H — Enterprise hardening (validation-first)**
+Current active slice (authoritative): **R01_no_go_decision_and_charter_adoption** — see `.claude/SLICE_QUEUE.md`
+Current phase: **Wave R — Readiness-Closure (evidence-closure; governance only)**
