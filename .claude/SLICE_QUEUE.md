@@ -6,9 +6,9 @@
 
 ## CURRENT ACTIVE SLICE
 
-**Slice ID:** R02  
-**Name:** pilot_scope_lock  
-**Status:** ACTIVE (IN REVIEW) — Ireland-first perimeter is specified using **MOCK/SYNTHETIC** values for governance continuity; not real pilot approval. DR-0003 remains PROPOSED until real values replace mock values and VSG approval/veto clearance occurs. Pilot entry remains prohibited until R17 passes.  
+**Slice ID:** R03  
+**Name:** access_model_baseline  
+**Status:** PENDING — Next readiness-closure work item after R04 acceptance. Pilot entry remains prohibited until R17 passes.  
 **Wave:** R — Readiness-Closure (evidence-closure; governance/program-control only)  
 **Milestone:** MR — Readiness re-review prerequisite (R17)
 
@@ -734,9 +734,9 @@ This wave is inserted **before any pilot execution** and before any paused/defer
 | ID | Readiness-Closure Work Item | Status | Completion Date | Notes |
 |---|---|---|---|---|
 | R01 | no_go_decision_and_charter_adoption | ACCEPTED | 2026-04-07 | Governance-only slice completed. Artifacts: `docs/readiness-closure/01_decision-log/DECISION_LOG.md`, `docs/readiness-closure/01_decision-log/DR-0001_NO_GO_READINESS_CLOSURE.md`, `docs/readiness-closure/00_charter/CHARTER_ADOPTION_RECORD.md` (DR-0002). Pilot entry remains prohibited until R17 passes and a new GO decision is recorded. |
-| R02 | pilot_scope_lock | ACTIVE (IN REVIEW) | — | Ireland-first perimeter fully specified in `docs/readiness-closure/02_scope-lock/PILOT_SCOPE_LOCK_RECORD.md` (values supplied; some marked “(MOCK)”) and DR-0003 ready for VSG approval. Pilot execution remains prohibited. No execution. |
+| R02 | pilot_scope_lock | ACCEPTED (MOCK/TEST GOVERNANCE ONLY) | 2026-04-07 | Accepted only as a **mock/test governance perimeter** to support readiness-closure build continuity. Not accepted as real pilot scope approval. Does not authorize pilot entry or pilot execution. DR-0003 remains PROPOSED until real values replace mock values and VSG approval/veto clearance occurs. |
 | R03 | access_model_baseline | PENDING | — | Baseline access model (roles/groups, logging expectations). No approvals executed here. |
-| R04 | source_extract_proof | PENDING | — | Proof that required source extracts can be produced (no real data artifacts committed). |
+| R04 | source_extract_proof | ACCEPTED | 2026-04-07 | Docs-only extract-proof governance artifacts created (no execution; no raw extracts committed): `docs/readiness-closure/03_extract-proof/SOURCE_EXTRACT_PROOF_v1.md`, `docs/readiness-closure/03_extract-proof/EXTRACT_MANIFEST_TEMPLATE_v1.md`. |
 | R05 | join_integrity_proof | PENDING | — | Proof that join integrity can be measured and reported (no execution evidence committed yet). |
 | R06 | earning_code_inventory_and_mapping_lock | PENDING | — | Controlled earning code inventory + mapping governance lock. |
 | R07 | payroll_reconciliation_dry_run | PENDING | — | Dry-run reconciliation evidence plan and output structure (no results committed yet). |
