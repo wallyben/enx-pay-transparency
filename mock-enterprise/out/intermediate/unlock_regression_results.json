@@ -1,0 +1,174 @@
+{
+  "suite_id": "UNLOCK_REGRESSION_V1",
+  "jdms_version": "1.0.0",
+  "jdms_contract_path": "mock-enterprise/contracts/JDMS_v1.json",
+  "profiles_tested": [
+    "baseline_adversarial",
+    "pilot_shaped_clean"
+  ],
+  "expected_conditions": {
+    "baseline_adversarial": {
+      "descriptor_overall_pass": false,
+      "job_subfamily_missing_count_min": 1,
+      "blocker_count_min": 1,
+      "assigned_rate_max_exclusive": 0.5,
+      "metrics_run_gate_blocked": true,
+      "reporting_incomplete_or_export_blocked": true
+    },
+    "pilot_shaped_clean": {
+      "descriptor_overall_pass": true,
+      "job_subfamily_missing_count_max": 0,
+      "blocker_count_max": 0,
+      "assigned_count_equals_row_count": true,
+      "review_required_count_max": 0,
+      "metrics_run_gate_blocked": false,
+      "reporting_pack_complete": true,
+      "export_blockers_required_empty": true
+    }
+  },
+  "actual_conditions": {
+    "baseline_adversarial": {
+      "dataset_profile": "baseline_adversarial",
+      "descriptor_overall_pass": false,
+      "job_subfamily_missing_count": 5695,
+      "blocker_count": 5695,
+      "assigned_count": 210,
+      "row_count": 5695,
+      "assigned_rate": 0.036874,
+      "review_required_count": 5485,
+      "metrics_run_gate_blocked": true,
+      "reporting_pack_complete": false,
+      "export_blockers": [
+        "METRICS_RUN_GATE_BLOCKED"
+      ],
+      "reporting_export_blocked": true
+    },
+    "pilot_shaped_clean": {
+      "dataset_profile": "pilot_shaped_clean",
+      "descriptor_overall_pass": true,
+      "job_subfamily_missing_count": 0,
+      "blocker_count": 0,
+      "assigned_count": 5695,
+      "row_count": 5695,
+      "assigned_rate": 1.0,
+      "review_required_count": 0,
+      "metrics_run_gate_blocked": false,
+      "reporting_pack_complete": true,
+      "export_blockers": [],
+      "reporting_export_blocked": false
+    }
+  },
+  "per_profile_results": [
+    {
+      "dataset_profile": "baseline_adversarial",
+      "regression_expectation_met": true,
+      "demo_exit_code": 0,
+      "checks": [
+        {
+          "name": "descriptor_overall_pass_is_false",
+          "passed": true,
+          "detail": "overall_pass=False expected False"
+        },
+        {
+          "name": "job_subfamily_missing_positive",
+          "passed": true,
+          "detail": "missing_count=5695 expected >=1"
+        },
+        {
+          "name": "descriptor_blocker_count_positive",
+          "passed": true,
+          "detail": "blocker_count=5695 expected >=1"
+        },
+        {
+          "name": "category_yield_low_not_enterprise_usable",
+          "passed": true,
+          "detail": "assigned_rate=0.036874 expected < 0.5"
+        },
+        {
+          "name": "metrics_gate_blocked",
+          "passed": true,
+          "detail": "runGateBlocked=True expected True"
+        },
+        {
+          "name": "reporting_incomplete_or_export_blocked",
+          "passed": true,
+          "detail": "complete=False export_blockers=['METRICS_RUN_GATE_BLOCKED']"
+        },
+        {
+          "name": "demo_run_succeeded",
+          "passed": true,
+          "detail": "run_mock_enterprise_demo.py must exit 0 for this profile"
+        }
+      ]
+    },
+    {
+      "dataset_profile": "pilot_shaped_clean",
+      "regression_expectation_met": true,
+      "demo_exit_code": 0,
+      "checks": [
+        {
+          "name": "descriptor_overall_pass_is_true",
+          "passed": true,
+          "detail": "overall_pass=True expected True"
+        },
+        {
+          "name": "job_subfamily_missing_zero",
+          "passed": true,
+          "detail": "missing_count=0 expected <=0"
+        },
+        {
+          "name": "descriptor_blocker_count_zero",
+          "passed": true,
+          "detail": "blocker_count=0 expected <=0"
+        },
+        {
+          "name": "full_assignment_cohort",
+          "passed": true,
+          "detail": "assigned=5695 row_count=5695"
+        },
+        {
+          "name": "review_required_zero",
+          "passed": true,
+          "detail": "review_required=0"
+        },
+        {
+          "name": "metrics_gate_not_blocked",
+          "passed": true,
+          "detail": "runGateBlocked=False expected False"
+        },
+        {
+          "name": "reporting_complete",
+          "passed": true,
+          "detail": "reporting complete=True"
+        },
+        {
+          "name": "export_not_blocked",
+          "passed": true,
+          "detail": "export_blockers=[]"
+        },
+        {
+          "name": "demo_run_succeeded",
+          "passed": true,
+          "detail": "run_mock_enterprise_demo.py must exit 0 for this profile"
+        }
+      ]
+    }
+  ],
+  "overall_result": "PASS",
+  "run_timestamp": "2026-04-07T23:32:28Z",
+  "demo_execution": {
+    "baseline_adversarial": {
+      "exit_code": 0,
+      "stderr_tail": ""
+    },
+    "pilot_shaped_clean": {
+      "exit_code": 0,
+      "stderr_tail": ""
+    }
+  },
+  "notes": [
+    "Synthetic-only regression; not pilot evidence.",
+    "Descriptor evaluation uses the same cohort rules as run_mock_enterprise_demo.py (see run_descriptor_completeness_validator.py).",
+    "Engine expectations read from engine_output_main.json and engine_output_unlock.json paths under mock-enterprise/out/intermediate/."
+  ]
+}

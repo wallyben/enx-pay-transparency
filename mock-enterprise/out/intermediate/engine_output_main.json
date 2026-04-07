@@ -1,9 +1,9 @@
 {
   "status": "OK",
-  "intakeFileId": "3ed87f35-6739-4073-a7d5-22c92d0847bf",
+  "intakeFileId": "65a259a3-5308-420b-bb2d-0ef3be6c9f13",
   "snapshot": {
-    "snapshotId": "snp_3f599cf8525c5d904f95765a1e161b1e0d164911e50ace9e54ff0430c45946d1",
-    "manifestDigest": "3f599cf8525c5d904f95765a1e161b1e0d164911e50ace9e54ff0430c45946d1",
+    "snapshotId": "snp_b46a3d115c561d3a8ae01e995dd43754c5c21deb35a3c7a0ca08d9986eb407f7",
+    "manifestDigest": "b46a3d115c561d3a8ae01e995dd43754c5c21deb35a3c7a0ca08d9986eb407f7",
     "rowCount": 5695
   },
   "jobNormalization": {
@@ -19,7 +19,7 @@
   },
   "euCoreMetrics": {
     "traceability": {
-      "snapshotId": "snp_3f599cf8525c5d904f95765a1e161b1e0d164911e50ace9e54ff0430c45946d1",
+      "snapshotId": "snp_b46a3d115c561d3a8ae01e995dd43754c5c21deb35a3c7a0ca08d9986eb407f7",
       "methodologyVersion": "methodology_v1@v1.0.0",
       "rulePackVersion": "rule_pack_synth_v1",
       "categoryEngineRulesVersion": "category-engine-rules.v1",
@@ -81,7 +81,7 @@
     }
   },
   "reportingPack": {
-    "reportRunId": "rpr_be6cb5edd99d5e4675a8a9cc3916df225aebb821f745c9dffefc03b2d48c50ea",
+    "reportRunId": "rpr_b3d3dc4059a3fe4a5d0586a9ad5697bc71a4b0fecdc90078c6c542e0cfdbf0dc",
     "completeness": {
       "status": "INCOMPLETE",
       "exportBlockedReasons": [

@@ -129,4 +129,4 @@ Expected: **`baseline_adversarial`** omits assignment subfamily → mass executa
 
 ---
 
-*Run timestamp (UTC): 2026-04-07T23:14:34Z*
+*Run timestamp (UTC): 2026-04-07T23:25:12Z*
