@@ -1,0 +1,314 @@
+{
+  "methodology_id": "methodology_v1",
+  "version": "v1.0.0",
+  "status": "draft",
+  "effective_date": null,
+  "review_cycle": {
+    "cadence": "quarterly",
+    "next_review_due": null,
+    "trigger_events": [
+      "material_change_proposed",
+      "challenge_outcome_amended",
+      "challenge_outcome_escalated"
+    ]
+  },
+  "factors": [
+    {
+      "factor_id": "skills_knowledge",
+      "name": "Skills / knowledge",
+      "definition": "Breadth and depth of knowledge required to perform the role effectively. Must reflect role requirements (not individual CV unless role requires it).",
+      "required": true
+    },
+    {
+      "factor_id": "effort",
+      "name": "Effort",
+      "definition": "Sustained mental/physical effort required by the role. Must reflect stable role characteristics (not short-term spikes).",
+      "required": true
+    },
+    {
+      "factor_id": "responsibility",
+      "name": "Responsibility",
+      "definition": "Accountability, decision impact, supervisory/financial responsibility, and risk ownership tied to defined accountability structures.",
+      "required": true
+    },
+    {
+      "factor_id": "working_conditions",
+      "name": "Working conditions",
+      "definition": "Conditions under which the role is performed (environmental, hazard, unsocial hours where in scope). Must be evidenced by official policies or contractual/rostered requirements.",
+      "required": true
+    }
+  ],
+  "scoring_scale": {
+    "scale_id": "ordinal_0_4_anchored",
+    "type": "ordinal",
+    "min": 0,
+    "max": 4,
+    "anchors": [
+      {
+        "score": 0,
+        "label": "Not evidenced / not applicable",
+        "definition": "Evidence is missing or the factor is not relevant to the role as defined in-scope. Use only when genuinely not applicable; otherwise it indicates evidence deficiency."
+      },
+      {
+        "score": 1,
+        "label": "Basic",
+        "definition": "Routine application of standard procedures and limited discretion."
+      },
+      {
+        "score": 2,
+        "label": "Proficient",
+        "definition": "Specialized working knowledge; independent execution; moderate discretion within defined policies."
+      },
+      {
+        "score": 3,
+        "label": "Advanced",
+        "definition": "Deep specialized expertise; complex problem solving; significant discretion; may guide others."
+      },
+      {
+        "score": 4,
+        "label": "Expert / critical",
+        "definition": "Recognized expert or critical role-holder; high complexity and ambiguity; broad discretion or high-consequence decisions."
+      }
+    ]
+  },
+  "weights": {
+    "weight_set_id": "v1_default",
+    "factor_weights": {
+      "responsibility": 0.35,
+      "skills_knowledge": 0.3,
+      "effort": 0.2,
+      "working_conditions": 0.15
+    },
+    "must_sum_to": 1.0
+  },
+  "evidence_requirements": {
+    "evidence_quality_tiers": [
+      {
+        "tier": "A",
+        "name": "authoritative",
+        "definition": "Systems of record or governed artifacts (e.g., HRIS job profile, Reward job architecture, official policies)."
+      },
+      {
+        "tier": "B",
+        "name": "supporting",
+        "definition": "Controlled but secondary evidence (e.g., training catalog, documented operating procedures)."
+      },
+      {
+        "tier": "C",
+        "name": "contextual",
+        "definition": "Human statements or email threads. May inform but cannot be the sole basis for a score of 3–4."
+      }
+    ],
+    "per_factor_minimums": {
+      "score_gte_2": {
+        "min_items": 1,
+        "allowed_tiers": ["A", "B"]
+      },
+      "score_eq_4": {
+        "min_items": 2,
+        "allowed_tiers": ["A", "B", "C"],
+        "must_include_tier": "A"
+      },
+      "score_eq_0": {
+        "requires_designation": ["not_applicable", "evidence_missing"],
+        "evidence_missing_blocks_approval": true
+      }
+    },
+    "traceability": {
+      "must_reference": [
+        "source_system_and_extract_metadata_or_governed_artifact_id_version",
+        "relevant_source_of_truth_fields_when_applicable"
+      ]
+    }
+  },
+  "calibration_rules": {
+    "initial_calibration_required_before_signoff": true,
+    "cadence": "quarterly_or_material_change",
+    "dataset_requirements": [
+      "roles_believed_comparable",
+      "roles_believed_not_comparable",
+      "boundary_cases_job_level_transitions",
+      "materially_different_working_conditions"
+    ],
+    "required_outputs": [
+      "distribution_of_weighted_totals",
+      "weight_sensitivity_analysis_within_plus_minus_0_05_per_factor",
+      "expected_decisions_and_alignment",
+      "rationale_for_any_threshold_or_weight_change_proposals"
+    ],
+    "changeable_parameters": [
+      "weights",
+      "tolerance_band",
+      "perimeter_constraints",
+      "evidence_minimums"
+    ]
+  },
+  "challenge_rules": {
+    "challenge_window_days": 30,
+    "eligible_challengers": [
+      "reward_reviewer",
+      "legal",
+      "internal_audit_assurance",
+      "employee_representatives_where_applicable"
+    ],
+    "required_review_stages": [
+      "preparation",
+      "peer_review_reward",
+      "legal_review_as_required",
+      "assurance_review_acknowledgement",
+      "decision_record_issuance"
+    ],
+    "outcomes": ["upheld", "amended", "rejected", "escalated"],
+    "escalation_body_reference": "validation_steering_group_vsg"
+  },
+  "override_rules": {
+    "principle": "Overrides are controlled exceptions, not alternate truth.",
+    "allowed_when": [
+      "deterministic_decision_not_possible_due_to_evidence_conflicts_or_ambiguity_within_pilot_timeline",
+      "narrow_exception_case_not_yet_represented_by_methodology"
+    ],
+    "not_allowed_to": [
+      "bypass_missing_pilot_mandatory_fields",
+      "bypass_reconciliation_blockers",
+      "create_country_specific_methodology_variants"
+    ],
+    "override_types": [
+      {
+        "type": "category_assignment_override",
+        "description": "Sets or adjusts comparable category for a worker/role."
+      },
+      {
+        "type": "equal_value_grouping_override",
+        "description": "Assigns a role to an equal-value group contrary to factor outcome, with explicit rationale and evidence."
+      }
+    ],
+    "required_fields": [
+      "scope",
+      "affected_identifiers",
+      "reason_code",
+      "reason_narrative",
+      "evidence_references",
+      "requested_by",
+      "approved_by",
+      "approved_at",
+      "expiry_date"
+    ],
+    "separation_of_duties": {
+      "requester_must_not_be_approver": true
+    }
+  },
+  "override_expiry_rules": {
+    "expiry_mandatory": true,
+    "default_expiry_days": 90,
+    "expires_no_later_than_pilot_end": true,
+    "renewal_requires": [
+      "revalidation_of_conditions",
+      "updated_evidence_if_facts_changed",
+      "reapproval_same_or_higher_authority",
+      "new_decision_record_no_edit_in_place"
+    ],
+    "expired_override_behavior": [
+      "not_applicable_to_new_runs",
+      "baseline_methodology_applies_unless_new_override_approved"
+    ]
+  },
+  "scoring_model": {
+    "unit_of_scoring": "role_under_review",
+    "required_identifiers": ["position_id", "job_level"],
+    "rules": {
+      "evidence_cited_for_non_zero_scores": true,
+      "no_imputation": true,
+      "conflicting_evidence_blocks_approval_until_resolved": true,
+      "anchored_selection_required": true
+    },
+    "aggregation": {
+      "formula": "T = Σ (w_f × s_f)",
+      "equal_value_tolerance_band": {
+        "max_absolute_difference": 0.4
+      }
+    },
+    "comparability_perimeter_constraints": [
+      {
+        "constraint_id": "job_level_sanity",
+        "rule": "Difference of more than 1 level band requires Legal review and explicit justification.",
+        "type": "escalation_required"
+      },
+      {
+        "constraint_id": "working_conditions_gating",
+        "rule": "If working_conditions score >= 3 for one role and <= 1 for the other, grouping not permitted without explicit exception approval.",
+        "type": "exception_approval_required"
+      }
+    ]
+  },
+  "approval_roles": {
+    "methodology_owner_reward": {
+      "role": "reward_methodology_owner",
+      "responsibility": "Accountable owner of the methodology."
+    },
+    "legal_signoff": {
+      "role": "legal_employment_regulatory",
+      "responsibility": "Approves defensibility and regulatory adequacy."
+    },
+    "audit_acknowledgement": {
+      "role": "internal_audit_assurance",
+      "responsibility": "Confirms evidence sufficiency and control design adequacy."
+    },
+    "consulted": [
+      {
+        "role": "payroll_controls_owner",
+        "responsibility": "Consulted where methodology depends on payroll-mapped remuneration definitions per SoT Matrix v1."
+      }
+    ],
+    "veto_rights": [
+      "privacy_gdpr_lead",
+      "security_lead",
+      "internal_audit_assurance",
+      "legal_employment_regulatory",
+      "payroll_controls_lead"
+    ]
+  },
+  "signoff_requirements": {
+    "sequence": [
+      "reward_methodology_owner_approval",
+      "legal_signoff",
+      "internal_audit_assurance_acknowledgement"
+    ],
+    "blocking_rule": "If any required approval is missing, methodology status remains draft and must not be used as an approved gate artifact for G3.",
+    "required_evidence_bundle_items": [
+      "docs/methodology/METHODOLOGY_v1.md",
+      "docs/methodology/methodology_v1.json",
+      "calibration_pack_outputs",
+      "example_decision_record_evidence_to_scores_to_outcome_trace",
+      "override_governance_template_reason_codes_and_expiry_fields",
+      "references_alignment_to_validation_charter_g3_and_sot_methodology_version"
+    ]
+  },
+  "change_control": {
+    "versioning_scheme": "semantic_versioning",
+    "effective_date_required": true,
+    "no_retroactive_changes": true,
+    "requires": [
+      "rationale_and_impact_analysis",
+      "update_md_and_json_in_same_change",
+      "approval_sequence_per_signoff_requirements"
+    ],
+    "change_types": {
+      "major": [
+        "factor_model_structure_change",
+        "scoring_scale_change",
+        "change_invalidation_of_prior_comparisons"
+      ],
+      "minor": ["weight_change", "tolerance_change", "new_reason_codes", "tighten_evidence_requirements"],
+      "patch": ["clarification_no_outcome_change"]
+    }
+  },
+  "references": {
+    "validation_charter_v1": "docs/validation/VALIDATION_CHARTER_v1.md",
+    "redirect_decision": "docs/validation/REDIRECT_DECISION.md",
+    "source_of_truth_matrix_v1": [
+      "docs/data-governance/SOURCE_OF_TRUTH_MATRIX_v1.md",
+      "docs/data-governance/source-of-truth-matrix_v1.csv",
+      "docs/data-governance/source-of-truth-matrix_v1.json"
+    ]
+  }
+}

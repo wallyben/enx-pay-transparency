@@ -6,9 +6,9 @@
 
 ## CURRENT ACTIVE SLICE
 
-**Slice ID:** H02  
-**Name:** field_level_source_of_truth_matrix_v1  
-**Status:** ACCEPTED — SoT Matrix v1 created (docs-only).  
+**Slice ID:** H03  
+**Name:** methodology_v1_package  
+**Status:** ACCEPTED — Methodology v1 package created (docs-only).  
 **Wave:** H — Enterprise hardening (validation-first)  
 **Milestone:** MH — Hardening gate (pilot prerequisite)
 
@@ -693,7 +693,7 @@ This wave is inserted **before any further product expansion**. Its purpose is t
 |---|---|---|---|---|
 | H01 | validation_charter_and_gates | ACCEPTED | 2026-04-07 | Created `docs/validation/VALIDATION_CHARTER_v1.md` with gates, veto/authority model, decision log template, pilot scope structure, and evidence artifact requirements. Docs-only slice. |
 | H02 | field_level_source_of_truth_matrix_v1 | ACCEPTED | 2026-04-07 | Produced SoT Matrix v1 artifacts: `docs/data-governance/SOURCE_OF_TRUTH_MATRIX_v1.md`, `docs/data-governance/source-of-truth-matrix_v1.csv`, `docs/data-governance/source-of-truth-matrix_v1.json` (+ README). Docs-only slice. |
-| H03 | methodology_v1_package | PENDING | — | Produce Methodology v1 package (factor model, scoring, calibration, overrides, expiry, approval, versioning; doc + structured representation stub). Docs-only slice. |
+| H03 | methodology_v1_package | ACCEPTED | 2026-04-07 | Produced Methodology v1 package artifacts: `docs/methodology/METHODOLOGY_v1.md`, `docs/methodology/methodology_v1.json`. Docs-only slice. |
 | H04 | reconciliation_framework_and_exception_taxonomy | PENDING | — | Define reconciliation model anchored to payroll results + coded exception taxonomy + blocker/warning rules. Docs-only slice. |
 | H05 | confidence_model_and_fail_closed_gates | PENDING | — | Define confidence scoring model and fail-closed propagation to category/metrics/reporting. Docs-only slice. |
 | H06 | pilot_gold_packs_and_validation_tests | PENDING | — | Define pilot gold datasets + validation packs + required evidence outputs (no implementation yet). Docs-only slice. |
@@ -966,3 +966,4 @@ Country packs are independent of each other and may be executed in parallel if r
 | 2026-04-07 | S12 ACCEPTED: `@enx/reporting-engine` base `assembleReportingPack` (deterministic `contentDigest`/`reportRunId`, manifest + evidence sections, methodology/traceability refs, data quality notes, PDF placeholder, attestation shells), `evaluateReportingPackExportBlockers` + `assertReportingPackExportable`, assembly audit helper; contracts reporting-pack enums/types/schemas + tests; scope guard test; ADR-011; `pnpm test` / `typecheck` / `lint` green. S13 next (PENDING). | S12 completion |
 | 2026-04-07 | H01 ACCEPTED: Validation Charter v1 created with objective gates (G0–G10), veto rights, go/no-go authority model (VSG + quorum), decision log template, pilot scope structure, and required evidence artifacts. | H01 completion |
 | 2026-04-07 | H02 ACCEPTED: SoT Matrix v1 created (MD + CSV + JSON) defining field-level truth (SoR, ownership, derivation, reconciliation, tolerances, severity, privacy/access, retention, lineage/audit, change control) for pilot-critical fields; aligned to Validation Charter G2. | H02 completion |
+| 2026-04-07 | H03 ACCEPTED: Methodology v1 package created (MD + JSON) defining factor model (skills/effort/responsibility/working conditions), anchored scoring scale, weights, evidence standards, calibration, review/challenge, governed overrides with expiry, approval model, and version/change control; aligned to Validation Charter G3 and SoT Matrix `methodology_version`. | H03 completion |
