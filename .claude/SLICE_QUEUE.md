@@ -6,9 +6,9 @@
 
 ## CURRENT ACTIVE SLICE
 
-**Slice ID:** H04  
-**Name:** reconciliation_framework_and_exception_taxonomy  
-**Status:** ACCEPTED — Reconciliation framework + coded exception taxonomy created (docs-only).  
+**Slice ID:** H05  
+**Name:** confidence_model_and_fail_closed_gates  
+**Status:** ACCEPTED — Confidence model + fail-closed gating design created (docs-only).  
 **Wave:** H — Enterprise hardening (validation-first)  
 **Milestone:** MH — Hardening gate (pilot prerequisite)
 
@@ -695,7 +695,7 @@ This wave is inserted **before any further product expansion**. Its purpose is t
 | H02 | field_level_source_of_truth_matrix_v1 | ACCEPTED | 2026-04-07 | Produced SoT Matrix v1 artifacts: `docs/data-governance/SOURCE_OF_TRUTH_MATRIX_v1.md`, `docs/data-governance/source-of-truth-matrix_v1.csv`, `docs/data-governance/source-of-truth-matrix_v1.json` (+ README). Docs-only slice. |
 | H03 | methodology_v1_package | ACCEPTED | 2026-04-07 | Produced Methodology v1 package artifacts: `docs/methodology/METHODOLOGY_v1.md`, `docs/methodology/methodology_v1.json`. Docs-only slice. |
 | H04 | reconciliation_framework_and_exception_taxonomy | ACCEPTED | 2026-04-07 | Produced reconciliation framework + coded exception taxonomy: `docs/reconciliation/RECONCILIATION_FRAMEWORK_v1.md`, `docs/reconciliation/exception-taxonomy_v1.json`. Docs-only slice. |
-| H05 | confidence_model_and_fail_closed_gates | PENDING | — | Define confidence scoring model and fail-closed propagation to category/metrics/reporting. Docs-only slice. |
+| H05 | confidence_model_and_fail_closed_gates | ACCEPTED | 2026-04-07 | Produced confidence model v1 artifacts: `docs/confidence/CONFIDENCE_MODEL_v1.md`, `docs/confidence/confidence-model_v1.json`. Docs-only slice. |
 | H06 | pilot_gold_packs_and_validation_tests | PENDING | — | Define pilot gold datasets + validation packs + required evidence outputs (no implementation yet). Docs-only slice. |
 
 ---
@@ -741,6 +741,32 @@ This wave is inserted **before any further product expansion**. Its purpose is t
 - Artifacts created:
   - `docs/reconciliation/RECONCILIATION_FRAMEWORK_v1.md`
   - `docs/reconciliation/exception-taxonomy_v1.json`
+
+
+---
+
+### H05 — confidence_model_and_fail_closed_gates
+
+**Purpose:** Create the first formal confidence model and fail-closed gating design for the enterprise-hardening phase so the pilot can measure field-level and record-level confidence, propagate uncertainty deterministically, and block downstream outputs when confidence is insufficient.
+
+**Owned Files (H05 delivery):**
+- `docs/confidence/CONFIDENCE_MODEL_v1.md`
+- `docs/confidence/confidence-model_v1.json`
+- `.claude/SLICE_QUEUE.md` (this file — H05 status only)
+
+**Acceptance Criteria:**
+- [x] `docs/confidence/CONFIDENCE_MODEL_v1.md` exists and includes the required sections (1–13) covering purpose/scope, design principles, field-level model, record-level model, input signals, reason codes, propagation rules, fail-closed triggers, downstream impact rules, thresholds/statuses, reviewer visibility, evidence/audit requirements, and references.
+- [x] `docs/confidence/confidence-model_v1.json` exists and contains required structured keys: confidence_model_id, version, status, effective_date, field_level_model, record_level_model, input_signals[], reason_codes[], thresholds, fail_closed_rules[], downstream_impacts, reviewer_visibility, evidence_requirements, references.
+- [x] Fail-closed triggers explicitly cover (at minimum): missing pilot-mandatory field, ambiguous join on mandatory identifier, unreconciled mandatory remuneration field, methodology version missing/mismatch, pending/expired override affecting category truth, and run-level breach-rate validity block.
+- [x] Downstream blocking rules explicitly cover: category eligibility, metrics eligibility, reporting/evidence-pack export eligibility.
+- [x] Model aligns to and references Validation Charter v1 (G6), SoT Matrix v1, Methodology v1, and Reconciliation Framework v1 + exception taxonomy.
+- [x] No confidence engine or product code implemented; no H06 work started.
+
+**Completion record — 2026-04-07:**
+- Status set to **ACCEPTED**
+- Artifacts created:
+  - `docs/confidence/CONFIDENCE_MODEL_v1.md`
+  - `docs/confidence/confidence-model_v1.json`
 
 
 ---
