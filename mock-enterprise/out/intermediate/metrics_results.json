@@ -8,7 +8,7 @@
   },
   "scn_012_013": "NOT EXERCISED \u2014 zero-count scenarios in this pack version (see manifest).",
   "main_engine_eu_core": {
-    "runGateBlocked": true,
-    "classificationIncomplete": true
+    "runGateBlocked": false,
+    "classificationIncomplete": false
   }
 }

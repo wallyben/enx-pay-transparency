@@ -3,7 +3,7 @@
   "contract_version": "1.0.0",
   "synthetic_only": true,
   "not_pilot_evidence": true,
-  "run_timestamp": "2026-04-07T23:14:34Z",
+  "run_timestamp": "2026-04-07T23:25:12Z",
   "notes": [
     "Cohort = main engine CSV eligibility in run_mock_enterprise_demo.py.",
     "Executable path mirrors engine_row_for_worker mapping (job_subfamily -> job_subfamily_code).",
