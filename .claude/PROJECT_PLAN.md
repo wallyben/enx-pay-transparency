@@ -352,10 +352,12 @@ The current and authoritative slice execution order is maintained in `.claude/SL
 
 The latest pilot readiness review outcome is **NOT READY**.
 
+The second pilot readiness review (R17) concluded **NOT READY** and closed the mock/test readiness-closure wave (R01–R17) as **governance structure only**.
+
 Binding implications:
 - The program enters a **Readiness-Closure phase** (evidence-closure; governance/program-control only).
 - **Pilot entry is prohibited** and **pilot execution is blocked**.
-- **No pilot entry and no resumption of deferred/paused feature work is allowed until R17 passes** (second pilot readiness review) and the decision is recorded.
+- **No pilot entry and no resumption of deferred/paused feature work is allowed unless and until the real-evidence readiness review passes (P13)** and the decision is recorded.
 
 ### 12B.2 What this phase is (and is not)
 
@@ -363,7 +365,7 @@ This phase exists to close readiness evidence gaps and produce a consolidated re
 
 It is:
 - evidence-closure and decision-pack preparation (dry-run evidence bundle + privacy/security/access clearance)
-- controlled work through the readiness-closure queue items R01–R17
+- controlled work through readiness-closure, preserving the audit trail from R01–R17 and transitioning into the real-evidence closure wave defined in `.claude/SLICE_QUEUE.md`
 
 It is not:
 - pilot execution
@@ -373,21 +375,45 @@ It is not:
 
 The authoritative execution queue is `.claude/SLICE_QUEUE.md`:
 - Wave R (Readiness-Closure) is mandatory and precedes any pilot execution or feature resumption.
-- Pilot execution remains **BLOCKED** until R17 is completed and passes.
+- Pilot execution remains **BLOCKED** until the real-evidence readiness review (P13) is completed and passes.
+
+---
+
+## 12C. REAL-EVIDENCE READINESS CLOSURE (BINDING)
+
+### 12C.1 Why this phase exists
+
+The mock/test readiness-closure wave (R01–R17) produced templates, operating rules, and a fail-closed governance perimeter. R17 confirmed this is **insufficient** for real pilot authorization because executed proof and real approvals were explicitly absent.
+
+### 12C.2 What is required now (fail-closed)
+
+Readiness closure now requires **real executed evidence** and **real approvals** (per the Validation Charter authority and veto model), including at minimum:
+- approved real pilot perimeter
+- controlled extract proof instances (without committing raw extracts into the repo)
+- measured join integrity results
+- payroll-anchored reconciliation results with coded exceptions and dispositions
+- executed confidence outputs and gate evaluations
+- real privacy/security/access clearances and evidence pointers
+
+### 12C.3 Enforcement boundary (binding)
+
+- **Pilot entry remains prohibited** and **pilot execution remains blocked** until **P13** passes.
+- **Downstream feature work remains frozen/unauthorized** until **P13** passes.
+- Progress in documentation without real executed evidence does **not** authorize pilot entry.
 
 ---
 
 ## 13. IMMEDIATE NEXT STEPS
 
-This repo is now in **Readiness-Closure** (evidence-closure), following a **NOT READY** pilot readiness review outcome.
+This repo is now in **Real-Evidence Readiness Closure** (evidence-closure; governance/program-control only), following **R17 = NOT READY**.
 
 1. Treat `.claude/SLICE_QUEUE.md` as the **live execution queue**. `PROJECT_PLAN.md` is a controlling document, but it must stay aligned with the queue’s current active slice and statuses.
-2. Next active slice is **R01_no_go_decision_and_charter_adoption** (governance/program-control). Do not start R02 or later readiness-closure work until R01 is accepted.
-3. **Pilot entry and pilot execution are prohibited** until readiness-closure completes and R17 passes.
+2. Next active slice is **P01_real_perimeter_approval** (governance/program-control). Do not start P02 or later real-evidence work until P01 is accepted.
+3. **Pilot entry and pilot execution are prohibited** until the real-evidence readiness review (P13) passes.
 4. **Downstream product expansion remains frozen/deferred**:
    - S13 is **DEFERRED**
    - Waves 4–7 are **PAUSED**
 5. Do not create application routes, database schema, product features, or schemas unless the active slice explicitly owns that scope.
 
-Current active slice (authoritative): **R01_no_go_decision_and_charter_adoption** — see `.claude/SLICE_QUEUE.md`
-Current phase: **Wave R — Readiness-Closure (evidence-closure; governance only)**
+Current active slice (authoritative): **P01_real_perimeter_approval** — see `.claude/SLICE_QUEUE.md`
+Current phase: **Wave P — Real-Evidence Pilot-Readiness (evidence-closure; governance only)**
