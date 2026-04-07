@@ -11,6 +11,7 @@ NOT real pilot evidence. NOT legal/regulatory reliance.
 
 from __future__ import annotations
 
+import argparse
 import csv
 import json
 import os
@@ -29,8 +30,9 @@ if str(_RUNNER_DIR) not in sys.path:
 from scenario_allocation import build_worker_primary_scenario
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
-GENERATED = REPO_ROOT / "mock-enterprise" / "generated"
-OUT = REPO_ROOT / "mock-enterprise" / "out"
+MOCK_ENT_ROOT = REPO_ROOT / "mock-enterprise"
+GENERATED_BASE = MOCK_ENT_ROOT / "generated"
+OUT = MOCK_ENT_ROOT / "out"
 LOGS = OUT / "logs"
 REPORTS = OUT / "reports"
 INTERMEDIATE = OUT / "intermediate"
@@ -51,8 +53,15 @@ def ensure_dirs() -> None:
         p.mkdir(parents=True, exist_ok=True)
 
 
-def load_csv(name: str) -> List[Dict[str, str]]:
-    path = GENERATED / name
+def resolve_generated_dir(subdir: str) -> Path:
+    s = (subdir or "").strip()
+    if not s:
+        return GENERATED_BASE
+    return GENERATED_BASE / s
+
+
+def load_csv(generated_dir: Path, name: str) -> List[Dict[str, str]]:
+    path = generated_dir / name
     if not path.exists():
         raise FileNotFoundError(path)
     with path.open(newline="", encoding="utf-8") as f:
@@ -76,7 +85,13 @@ def log_line(path: Path, msg: str) -> None:
         f.write(msg.rstrip() + "\n")
 
 
-def run_ts_engine(csv_path: Path, meta_path: Path, out_path: Path, log_path: Path) -> None:
+def run_ts_engine(
+    csv_path: Path,
+    meta_path: Path,
+    out_path: Path,
+    log_path: Path,
+    category_detail_out: Optional[Path] = None,
+) -> None:
     runner_dir = REPO_ROOT / "mock-enterprise" / "runner"
     pnpm = shutil.which("pnpm")
     if not pnpm:
@@ -90,6 +105,8 @@ def run_ts_engine(csv_path: Path, meta_path: Path, out_path: Path, log_path: Pat
         f"--meta={meta_path.resolve().as_posix()}",
         f"--out={out_path.resolve().as_posix()}",
     ]
+    if category_detail_out is not None:
+        cmd.append(f"--categoryDetailOut={category_detail_out.resolve().as_posix()}")
     log_line(log_path, "COMMAND " + " ".join(cmd))
     if os.name == "nt":
         p = subprocess.run(
@@ -126,9 +143,26 @@ def build_earning_lookup(mapping_rows: List[Dict[str, str]]) -> Dict[str, Dict[s
 
 
 def main() -> int:
+    parser = argparse.ArgumentParser(description="Synthetic mock enterprise demo driver (CSV pack → adapter → TS engines).")
+    parser.add_argument(
+        "--generated-subdir",
+        default=os.environ.get("MOCK_ENTERPRISE_GENERATED_SUBDIR", "").strip(),
+        help="Optional folder under mock-enterprise/generated/ (e.g. pilot_shaped_clean). Default: mock-enterprise/generated/.",
+    )
+    parser.add_argument(
+        "--intermediate-run-id",
+        default=os.environ.get("MOCK_ENTERPRISE_INTERMEDIATE_RUN_ID", "main").strip() or "main",
+        help='Intermediate artifact stem: "main" (default) or "unlock" (writes engine_output_unlock.json, unlock_run_manifest.json, ...).',
+    )
+    args = parser.parse_args()
+    generated_dir = resolve_generated_dir(args.generated_subdir)
+    synthetic_profile_label = args.generated_subdir.strip() or "default_generated_root"
+    run_id = args.intermediate_run_id.strip() or "main"
+
     ensure_dirs()
-    run_id = "mock-enterprise-demo"
-    log_path = LOGS / f"{run_id}.log"
+    log_name = "mock-enterprise-demo" if run_id == "main" else f"mock-enterprise-demo-{run_id}"
+    manifest_path = INTERMEDIATE / ("unlock_run_manifest.json" if run_id == "unlock" else "run_manifest.json")
+    log_path = LOGS / f"{log_name}.log"
     if log_path.exists():
         log_path.unlink()
     stages: List[StageStatus] = []
@@ -144,29 +178,42 @@ def main() -> int:
         "earning_code_mapping.csv",
         "expected_scenario_manifest.csv",
     ]
-    missing = [f for f in required_files if not (GENERATED / f).exists()]
+    missing = [f for f in required_files if not (generated_dir / f).exists()]
     if missing:
         stages.append(
             StageStatus(
                 "1_validate_pack",
                 "BLOCKED",
-                "Missing generated files: " + ", ".join(missing),
+                "Missing generated files: " + ", ".join(missing) + f" (under {generated_dir})",
             )
         )
         write_json(
-            INTERMEDIATE / "run_manifest.json",
-            {"run_id": run_id, "stages": [s.__dict__ for s in stages], "error": "missing_inputs"},
+            manifest_path,
+            {
+                "run_id": log_name,
+                "intermediate_run_id": run_id,
+                "generated_dir": str(generated_dir.relative_to(REPO_ROOT)),
+                "synthetic_profile_label": synthetic_profile_label,
+                "stages": [s.__dict__ for s in stages],
+                "error": "missing_inputs",
+            },
         )
         return 1
-    stages.append(StageStatus("1_validate_pack", "EXECUTED", "All required CSVs present under mock-enterprise/generated/"))
+    stages.append(
+        StageStatus(
+            "1_validate_pack",
+            "EXECUTED",
+            f"All required CSVs present under {generated_dir.relative_to(REPO_ROOT)}",
+        )
+    )
 
-    workers = load_csv("hris_workers.csv")
-    assignments = load_csv("hris_assignments.csv")
-    jobs = {r["position_id"]: r for r in load_csv("job_architecture.csv")}
-    crosswalk = {r["hris_worker_id"]: r for r in load_csv("hris_payroll_crosswalk.csv")}
-    earnings = load_csv("payroll_earnings.csv")
-    earn_map = build_earning_lookup(load_csv("earning_code_mapping.csv"))
-    manifest_rows = load_csv("expected_scenario_manifest.csv")
+    workers = load_csv(generated_dir, "hris_workers.csv")
+    assignments = load_csv(generated_dir, "hris_assignments.csv")
+    jobs = {r["position_id"]: r for r in load_csv(generated_dir, "job_architecture.csv")}
+    crosswalk = {r["hris_worker_id"]: r for r in load_csv(generated_dir, "hris_payroll_crosswalk.csv")}
+    earnings = load_csv(generated_dir, "payroll_earnings.csv")
+    earn_map = build_earning_lookup(load_csv(generated_dir, "earning_code_mapping.csv"))
+    manifest_rows = load_csv(generated_dir, "expected_scenario_manifest.csv")
 
     worker_count = len(workers)
     scn_by_worker = build_worker_primary_scenario(worker_count)
@@ -331,13 +378,14 @@ def main() -> int:
         g = (w.get("gender") or "").strip()
         if not g:
             return None
+        subfam = (prim.get("job_subfamily") or prim.get("job_subfamily_code") or "").strip()
         return {
             "worker_id": wid,
             "base_pay": f"{float(base):.2f}",
             "gender": g,
             "job_title": prim.get("job_title") or "",
             "job_family_code": prim.get("job_family") or "",
-            "job_subfamily_code": "",
+            "job_subfamily_code": subfam,
             "job_grade_or_level": prim.get("job_level") or "",
             "_variable_pay": f"{float(var):.2f}",
         }
@@ -395,7 +443,7 @@ def main() -> int:
                 }
             )
 
-    main_csv = INTERMEDIATE / "engine_intake_main.csv"
+    main_csv = INTERMEDIATE / f"engine_intake_{run_id}.csv"
     write_csv(main_csv, csv_headers, csv_rows)
     main_meta = {
         "methodologyVersion": METHOD_VERSION,
@@ -404,18 +452,19 @@ def main() -> int:
         "governedOverrides": overrides,
         "equalValueRuleset": None,
     }
-    main_meta_path = INTERMEDIATE / "engine_meta_main.json"
+    main_meta_path = INTERMEDIATE / f"engine_meta_{run_id}.json"
     write_json(main_meta_path, main_meta)
-    main_out = INTERMEDIATE / "engine_output_main.json"
+    main_out = INTERMEDIATE / f"engine_output_{run_id}.json"
+    main_category_detail = INTERMEDIATE / f"engine_category_detail_{run_id}.json"
 
     ts_stages_note = ""
     try:
-        run_ts_engine(main_csv, main_meta_path, main_out, log_path)
+        run_ts_engine(main_csv, main_meta_path, main_out, log_path, category_detail_out=main_category_detail)
         stages.append(
             StageStatus(
                 "6_7_ts_intake_snapshot_job_category",
                 "EXECUTED",
-                "TS path: register intake → seal snapshot → job normalization → extended category (see engine_output_main.json).",
+                f"TS path: register intake → seal snapshot → job normalization → extended category (see engine_output_{run_id}.json).",
             )
         )
         stages.append(
@@ -441,20 +490,27 @@ def main() -> int:
         eu_main = json.loads(main_out.read_text(encoding="utf-8"))
         if eu_main.get("status") == "OK":
             m_blocked = (eu_main.get("euCoreMetrics") or {}).get("runGateBlocked")
+            if m_blocked:
+                m_notes = "runEuCoreMetrics ran; runGateBlocked=True (classification incomplete for this cohort)."
+            else:
+                m_notes = "runEuCoreMetrics ran; runGateBlocked=False (classification complete for this cohort)."
             stages.append(
                 StageStatus(
                     "8_eu_core_metrics",
                     "PARTIALLY EXECUTED" if m_blocked else "EXECUTED",
-                    "runEuCoreMetrics ran; runGateBlocked=%s (classification incomplete dominates this synthetic title set)."
-                    % bool(m_blocked),
+                    m_notes,
                 )
             )
             rp_ok = (eu_main.get("reportingPack") or {}).get("completeness", {}).get("status") == "COMPLETE"
+            if rp_ok:
+                rp_notes = "assembleReportingPack executed; reporting completeness COMPLETE (see exportBlockers)."
+            else:
+                rp_notes = "assembleReportingPack executed; export blocked when metrics gate blocked (see exportBlockers)."
             stages.append(
                 StageStatus(
                     "9_reporting_evidence_pack",
                     "PARTIALLY EXECUTED" if not rp_ok else "EXECUTED",
-                    "assembleReportingPack executed; export blocked when metrics gate blocked (see exportBlockers).",
+                    rp_notes,
                 )
             )
         elif eu_main.get("status") == "SNAPSHOT_BLOCKED":
@@ -464,12 +520,12 @@ def main() -> int:
         stages.append(StageStatus("8_eu_core_metrics", "BLOCKED", ts_stages_note or "no output"))
         stages.append(StageStatus("9_reporting_evidence_pack", "BLOCKED", ts_stages_note or "no output"))
 
-    # --- SCN-008 mini-run (pending override) ---
+    # --- SCN-008 mini-run (pending override) — main demo only ---
     pending_out = INTERMEDIATE / "engine_output_pending_override.json"
     scn008_workers = [wid for wid, s in scn_by_worker.items() if s == "SCN-008"]
     scn008_workers.sort()
     mini = scn008_workers[: min(25, len(scn008_workers))]
-    if len(mini) >= 1:
+    if run_id == "main" and len(mini) >= 1:
         csv_mini_rows = []
         vp_mini = []
         ovr_mini = []
@@ -502,7 +558,13 @@ def main() -> int:
             },
         )
         try:
-            run_ts_engine(mini_csv, mini_meta_path, pending_out, log_path)
+            run_ts_engine(
+                mini_csv,
+                mini_meta_path,
+                pending_out,
+                log_path,
+                category_detail_out=INTERMEDIATE / "engine_category_detail_pending_override.json",
+            )
             stages.append(
                 StageStatus(
                     "7c_pending_override_demo_cohort",
@@ -512,6 +574,14 @@ def main() -> int:
             )
         except Exception as ex:
             stages.append(StageStatus("7c_pending_override_demo_cohort", "BLOCKED", str(ex)))
+    elif run_id != "main":
+        stages.append(
+            StageStatus(
+                "7c_pending_override_demo_cohort",
+                "NOT IMPLEMENTED IN CURRENT SYSTEM",
+                "SCN-008 pending-override mini-run is only executed for --intermediate-run-id main.",
+            )
+        )
 
     # --- Synthetic confidence / FC-R1 (adapter only; not H05 engine code) ---
     blocked_flags: Dict[str, bool] = {}
@@ -652,13 +722,21 @@ def main() -> int:
     )
 
     write_json(
-        INTERMEDIATE / "run_manifest.json",
+        manifest_path,
         {
-            "run_id": run_id,
+            "run_id": log_name,
+            "intermediate_run_id": run_id,
             "synthetic_only": True,
+            "generated_dir": str(generated_dir.relative_to(REPO_ROOT)),
+            "synthetic_profile_label": synthetic_profile_label,
             "stages": [s.__dict__ for s in stages],
             "main_engine_output": str(main_out.relative_to(REPO_ROOT)) if main_out.exists() else None,
-            "pending_override_output": str(pending_out.relative_to(REPO_ROOT)) if pending_out.exists() else None,
+            "main_category_detail": str(main_category_detail.relative_to(REPO_ROOT))
+            if main_category_detail.exists()
+            else None,
+            "pending_override_output": str(pending_out.relative_to(REPO_ROOT))
+            if run_id == "main" and pending_out.exists()
+            else None,
         },
     )
 
