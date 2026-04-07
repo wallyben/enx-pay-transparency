@@ -6,11 +6,11 @@
 
 ## CURRENT ACTIVE SLICE
 
-**Slice ID:** R15  
-**Name:** access_model_evidence  
-**Status:** PENDING — Next readiness-closure work item after R14 acceptance. Pilot entry remains prohibited until R17 passes.  
-**Wave:** R — Readiness-Closure (evidence-closure; governance/program-control only)  
-**Milestone:** MR — Readiness re-review prerequisite (R17)
+**Slice ID:** P01  
+**Name:** real_perimeter_approval  
+**Status:** ACTIVE — Real-evidence pilot-readiness phase. Pilot entry remains prohibited until P13 passes. Downstream feature work remains frozen.  
+**Wave:** P — Real-Evidence Pilot-Readiness (evidence-closure; governance/program-control only)  
+**Milestone:** MP — Real-evidence readiness re-review prerequisite (P13)
 
 **Integration branch:** `claude/setup-repo-structure-dGb6o` — PR [#3](https://github.com/wallyben/enx-pay-transparency/pull/3) merged 2026-04-06; S04 ACCEPTED below; full validation (`pnpm test`, `pnpm typecheck`, `pnpm lint`) passed on integration after merge.
 
@@ -35,7 +35,7 @@ Latest pilot readiness review outcome: **NOT READY**.
 
 Binding implications:
 - **Pilot entry is prohibited.**
-- **Pilot execution is BLOCKED** until readiness-closure is completed and a second readiness review passes (**R17**).
+- **Pilot execution is BLOCKED** until real-evidence readiness closure is completed and a real-evidence readiness review passes (**P13**).
 - This repo is now in **readiness evidence-closure**, not pilot execution and not downstream feature delivery.
 
 ---
@@ -754,6 +754,32 @@ This wave is inserted **before any pilot execution** and before any paused/defer
 **Immediate controlled work items:** WP1/WP2/WP3 correspond to **R01 / R02 / R03** (in that order). R02+ must not start until R01 is ACCEPTED.
 
 ---
+
+## WAVE P — REAL-EVIDENCE PILOT-READINESS (EVIDENCE-CLOSURE; GOVERNANCE ONLY)
+
+This wave begins after R17 concluded **NOT READY** and after the mock/test governance readiness-closure wave (R01–R17) is complete as **structure-only**.
+
+**Binding:** This wave exists to produce and index **real executed evidence** (not templates) sufficient to authorize pilot entry. It does not execute the pilot itself inside this repo.
+
+**Binding:** Pilot entry remains **PROHIBITED** and pilot execution remains **BLOCKED** until **P13** passes with an explicit READY/GO decision record.
+
+**Binding:** Downstream feature work remains frozen/unauthorized until **P13** passes (no resumption authority is granted by Wave P documentation alone).
+
+| ID | Real-Evidence Pilot-Readiness Work Item | Status | Completion Date | Notes |
+|---|---|---|---|---|
+| P01 | real_perimeter_approval | ACTIVE | — | Replace MOCK/SYNTHETIC perimeter with enterprise-approved real perimeter under the charter authority model (quorum + veto-aware). Must result in an approved, binding perimeter decision record suitable for real pilot entry gating. |
+| P02 | real_extract_proof | PENDING | — | Produce controlled extract proof instances (run IDs, checksums, storage pointers, approvals) without committing raw extracts into the repo. |
+| P03 | real_join_integrity_results | PENDING | — | Produce populated join integrity reports with measured thresholds against the locked perimeter (no fabricated results). |
+| P04 | real_mapping_lock | PENDING | — | Produce a locked, approved mapping version state using real earning code inventory evidence and controlled change discipline. |
+| P05 | real_reconciliation_results | PENDING | — | Produce populated, payroll-anchored reconciliation reports with tolerances, coded exceptions, and disposition evidence. |
+| P06 | real_exception_register | PENDING | — | Populate and operate the exception register with owned dispositions and evidence pointers for join/reconciliation/confidence failures. |
+| P07 | real_confidence_outputs | PENDING | — | Produce executed confidence output packs and fail-closed trigger registers tied to real inputs and versions. |
+| P08 | real_methodology_calibration_pack | PENDING | — | Produce executed methodology calibration evidence pack and required sign-offs (Reward, Legal, Audit acknowledgement) for real pilot use. |
+| P09 | real_privacy_clearance | PENDING | — | Produce real privacy clearance evidence (lawful basis/DPIA where required, minimization/retention, approvals) referenced as controlled pointers. |
+| P10 | real_security_clearance | PENDING | — | Produce real security clearance evidence (review outcomes, findings closure, controls) referenced as controlled pointers. |
+| P11 | real_access_evidence | PENDING | — | Produce real access evidence (approved groups/roles, grants, logging evidence exports) referenced as controlled pointers. |
+| P12 | consolidated_real_readiness_bundle | PENDING | — | Assemble a consolidated real-evidence readiness bundle indexing all required evidence and decisions for re-review. |
+| P13 | third_pilot_readiness_review | PENDING | — | Conduct the real-evidence readiness review. Only this item may recommend READY/GO. Until then, pilot entry remains prohibited and feature freeze remains in force. |
 
 ### H02 — field_level_source_of_truth_matrix_v1
 
