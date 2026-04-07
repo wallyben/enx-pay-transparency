@@ -1,0 +1,521 @@
+{
+  "confidence_model_id": "confidence_model_v1",
+  "version": "v1.0.0",
+  "status": "draft",
+  "effective_date": "2026-04-07",
+  "field_level_model": {
+    "score_scale": {
+      "type": "integer",
+      "min": 0,
+      "max": 100
+    },
+    "base_score_by_source_of_record": [
+      {
+        "source_of_record": "Payroll",
+        "base_score": 95,
+        "notes": "Payroll is anchor truth for remuneration (Validation Charter + Reconciliation Framework)."
+      },
+      {
+        "source_of_record": "Workday",
+        "base_score": 90,
+        "notes": "HRIS anchor truth for worker/job identity and attributes (SoT Matrix v1 principle)."
+      },
+      {
+        "source_of_record": "Reward",
+        "base_score": 85,
+        "notes": "Governed reference artifacts (job architecture inputs)."
+      },
+      {
+        "source_of_record": "Derived",
+        "base_score": 80,
+        "notes": "Only when derivation logic is explicitly defined in SoT Matrix."
+      },
+      {
+        "source_of_record": "Undeclared",
+        "base_score": 40,
+        "notes": "SoR ambiguity is a governance defect; pilot-mandatory fields fail-closed."
+      }
+    ],
+    "scoring_formula": {
+      "type": "multiplicative_with_hard_zero",
+      "definition": "C_f = clamp( round( C_base * M_evidence * M_freshness * M_recon * M_join * M_override ), 0..100 )",
+      "hard_zero_rule": "If any hard-zero trigger evaluates true, then C_f := 0 regardless of other multipliers."
+    },
+    "multipliers": {
+      "evidence": {
+        "name": "M_evidence",
+        "range": [0, 1],
+        "rules": [
+          {
+            "when": "field_missing",
+            "multiplier": 0,
+            "reason_codes": ["FIELD_MISSING"]
+          },
+          {
+            "when": "field_invalid_format",
+            "multiplier": 0,
+            "reason_codes": ["FIELD_INVALID_FORMAT"]
+          }
+        ]
+      },
+      "freshness_effective_date": {
+        "name": "M_freshness",
+        "range": [0, 1],
+        "rules": [
+          {
+            "when": "effective_date_alignment_verified",
+            "multiplier": 1.0,
+            "reason_codes": []
+          },
+          {
+            "when": "effective_date_alignment_unknown",
+            "multiplier": 0.7,
+            "reason_codes": ["EFFECTIVE_DATE_UNKNOWN"]
+          },
+          {
+            "when": "effective_date_mismatch",
+            "multiplier": 0,
+            "reason_codes": ["EFFECTIVE_DATE_MISMATCH"]
+          }
+        ]
+      },
+      "reconciliation": {
+        "name": "M_recon",
+        "range": [0, 1],
+        "rules": [
+          {
+            "when": "reconciled_within_tolerance",
+            "multiplier": 1.0,
+            "reason_codes": []
+          },
+          {
+            "when": "reconciliation_warning_exception",
+            "multiplier": 0.6,
+            "reason_codes": ["RECON_WARNING"]
+          },
+          {
+            "when": "reconciliation_blocker_exception",
+            "multiplier": 0,
+            "reason_codes": ["RECON_BLOCKER"]
+          }
+        ],
+        "exception_taxonomy_reference": "docs/reconciliation/exception-taxonomy_v1.json"
+      },
+      "join_integrity": {
+        "name": "M_join",
+        "range": [0, 1],
+        "rules": [
+          {
+            "when": "unique_non_ambiguous_join",
+            "multiplier": 1.0,
+            "reason_codes": []
+          },
+          {
+            "when": "join_weak_but_not_blocker",
+            "multiplier": 0.7,
+            "reason_codes": ["JOIN_WEAK"]
+          },
+          {
+            "when": "join_missing_or_ambiguous",
+            "multiplier": 0,
+            "reason_codes": ["JOIN_MISSING", "JOIN_AMBIGUOUS"]
+          }
+        ]
+      },
+      "override_status": {
+        "name": "M_override",
+        "range": [0, 1],
+        "rules": [
+          {
+            "when": "no_override_involved",
+            "multiplier": 1.0,
+            "reason_codes": []
+          },
+          {
+            "when": "override_approved_and_in_date",
+            "multiplier": 1.0,
+            "reason_codes": []
+          },
+          {
+            "when": "override_pending",
+            "multiplier": 0,
+            "reason_codes": ["OVERRIDE_PENDING"]
+          },
+          {
+            "when": "override_expired",
+            "multiplier": 0,
+            "reason_codes": ["OVERRIDE_EXPIRED"]
+          },
+          {
+            "when": "override_rejected",
+            "multiplier": 0,
+            "reason_codes": ["OVERRIDE_REJECTED"]
+          }
+        ],
+        "methodology_reference": "docs/methodology/METHODOLOGY_v1.md"
+      }
+    }
+  },
+  "record_level_model": {
+    "score_scale": {
+      "type": "integer",
+      "min": 0,
+      "max": 100
+    },
+    "aggregation": {
+      "type": "mandatory_floor_with_hard_zero",
+      "definition": "C_mandatory = min(C_f for f in F_mandatory); C_r = 0 if any hard-zero trigger else C_mandatory",
+      "mandatory_set_source": "docs/data-governance/source-of-truth-matrix_v1.json (rows where pilot_mandatory == 'Y', filtered to record grain)"
+    },
+    "reasoning_rules": {
+      "must_include_reasons_for_all_mandatory_breaches": true,
+      "must_include_gate_triggers": true,
+      "do_not_smooth_ambiguity": true
+    }
+  },
+  "input_signals": [
+    {
+      "signal_id": "source_of_record_strength",
+      "name": "Source-of-record strength",
+      "description": "Baseline confidence determined from SoT Matrix primary system-of-record posture for the field.",
+      "inputs": ["system_of_record_primary", "pilot_mandatory", "failure_severity"],
+      "outputs": ["C_base", "SOT_SOR_UNDECLARED", "SOT_FIELD_NOT_IN_MATRIX"],
+      "references": ["docs/data-governance/source-of-truth-matrix_v1.json"]
+    },
+    {
+      "signal_id": "completeness",
+      "name": "Completeness",
+      "description": "Missing/null required fields at the record grain.",
+      "inputs": ["field_presence"],
+      "outputs": ["FIELD_MISSING"],
+      "references": ["docs/validation/VALIDATION_CHARTER_v1.md"]
+    },
+    {
+      "signal_id": "structural_validity",
+      "name": "Structural validity",
+      "description": "Type/format validity (ids, dates, currencies, enums).",
+      "inputs": ["field_format_validation"],
+      "outputs": ["FIELD_INVALID_FORMAT"],
+      "references": ["docs/data-governance/SOURCE_OF_TRUTH_MATRIX_v1.md"]
+    },
+    {
+      "signal_id": "freshness_effective_date_alignment",
+      "name": "Freshness / effective-date alignment",
+      "description": "Value is valid for snapshot effective date and pay period boundaries where applicable.",
+      "inputs": ["effective_date_metadata", "pay_period_boundaries"],
+      "outputs": ["EFFECTIVE_DATE_UNKNOWN", "EFFECTIVE_DATE_MISMATCH"],
+      "references": ["docs/data-governance/source-of-truth-matrix_v1.json"]
+    },
+    {
+      "signal_id": "reconciliation_outcome",
+      "name": "Reconciliation outcome",
+      "description": "Within tolerance vs warning/blocker exception-coded reconciliation outcome (payroll-anchored).",
+      "inputs": ["exception_taxonomy_codes", "within_tolerance_flag"],
+      "outputs": ["RECON_WARNING", "RECON_BLOCKER"],
+      "references": [
+        "docs/reconciliation/RECONCILIATION_FRAMEWORK_v1.md",
+        "docs/reconciliation/exception-taxonomy_v1.json"
+      ]
+    },
+    {
+      "signal_id": "join_integrity",
+      "name": "Join integrity",
+      "description": "Join coverage and ambiguity (duplicates/cardinality breaches) at required join boundaries.",
+      "inputs": ["join_rate", "duplicate_key_count", "cardinality_breach_flag"],
+      "outputs": ["JOIN_WEAK", "JOIN_MISSING", "JOIN_AMBIGUOUS"],
+      "references": [
+        "docs/validation/VALIDATION_CHARTER_v1.md",
+        "docs/reconciliation/RECONCILIATION_FRAMEWORK_v1.md"
+      ]
+    },
+    {
+      "signal_id": "override_status",
+      "name": "Override status",
+      "description": "Governed override status (approved/pending/expired/rejected) affecting category truth or other derived outputs.",
+      "inputs": ["override_status", "override_expiry_date", "override_scope"],
+      "outputs": ["OVERRIDE_PENDING", "OVERRIDE_EXPIRED", "OVERRIDE_REJECTED"],
+      "references": ["docs/methodology/METHODOLOGY_v1.md"]
+    },
+    {
+      "signal_id": "methodology_evidence_presence",
+      "name": "Evidence presence where methodology requires it",
+      "description": "Missing or insufficient evidence items for methodology decisions (factor scoring, perimeter exceptions).",
+      "inputs": ["evidence_item_refs", "evidence_tier_classifications"],
+      "outputs": ["EVIDENCE_MISSING_REQUIRED", "EVIDENCE_INSUFFICIENT_TIER"],
+      "references": ["docs/methodology/METHODOLOGY_v1.md"]
+    }
+  ],
+  "reason_codes": [
+    {
+      "code": "SOT_SOR_UNDECLARED",
+      "severity": "BLOCKER",
+      "scope": ["field"],
+      "description": "SoT Matrix does not declare a usable system-of-record posture for the field; treated as low confidence and fail-closed for pilot-mandatory fields."
+    },
+    {
+      "code": "SOT_FIELD_NOT_IN_MATRIX",
+      "severity": "WARNING",
+      "scope": ["field"],
+      "description": "Evaluated field is not present in SoT Matrix v1; indicates governance coverage gap."
+    },
+    {
+      "code": "FIELD_MISSING",
+      "severity": "BLOCKER",
+      "scope": ["field", "record"],
+      "description": "Required field missing/null at the record grain."
+    },
+    {
+      "code": "FIELD_INVALID_FORMAT",
+      "severity": "BLOCKER",
+      "scope": ["field", "record"],
+      "description": "Field present but structurally invalid (type/format/enum)."
+    },
+    {
+      "code": "EFFECTIVE_DATE_UNKNOWN",
+      "severity": "WARNING",
+      "scope": ["field"],
+      "description": "Effective-date alignment required but metadata missing; confidence reduced."
+    },
+    {
+      "code": "EFFECTIVE_DATE_MISMATCH",
+      "severity": "BLOCKER",
+      "scope": ["field", "record"],
+      "description": "Known out-of-window vs snapshot/pay period; fail-closed for pilot-mandatory fields."
+    },
+    {
+      "code": "JOIN_WEAK",
+      "severity": "WARNING",
+      "scope": ["field", "record"],
+      "description": "Join coverage below desired quality but not classified as blocker for the evaluated non-mandatory dependency."
+    },
+    {
+      "code": "JOIN_MISSING",
+      "severity": "BLOCKER",
+      "scope": ["field", "record"],
+      "description": "Required join missing for the record at required boundary."
+    },
+    {
+      "code": "JOIN_AMBIGUOUS",
+      "severity": "BLOCKER",
+      "scope": ["field", "record"],
+      "description": "Ambiguous join (duplicate key/cardinality breach); must not be smoothed; hard-zero for mandatory dependencies."
+    },
+    {
+      "code": "RECON_WARNING",
+      "severity": "WARNING",
+      "scope": ["field", "record"],
+      "description": "Reconciliation warning exception affecting the field/record (taxonomy code must be preserved in evidence)."
+    },
+    {
+      "code": "RECON_BLOCKER",
+      "severity": "BLOCKER",
+      "scope": ["field", "record"],
+      "description": "Reconciliation blocker exception affecting the field/record; confidence is hard-zero."
+    },
+    {
+      "code": "OVERRIDE_PENDING",
+      "severity": "BLOCKER",
+      "scope": ["field", "record"],
+      "description": "Override exists but is pending/unapproved; blocks category truth and downstream use."
+    },
+    {
+      "code": "OVERRIDE_EXPIRED",
+      "severity": "BLOCKER",
+      "scope": ["field", "record"],
+      "description": "Override expired; treated as not applicable; blocks downstream use when relied upon."
+    },
+    {
+      "code": "OVERRIDE_REJECTED",
+      "severity": "BLOCKER",
+      "scope": ["field", "record"],
+      "description": "Override rejected; blocks downstream use when relied upon."
+    },
+    {
+      "code": "METHODOLOGY_VERSION_MISSING",
+      "severity": "BLOCKER",
+      "scope": ["record", "run"],
+      "description": "Methodology version reference missing; outputs are not defensible or reproducible."
+    },
+    {
+      "code": "METHODOLOGY_VERSION_MISMATCH",
+      "severity": "BLOCKER",
+      "scope": ["record", "run"],
+      "description": "Methodology version mismatch vs declared/approved run version."
+    },
+    {
+      "code": "EVIDENCE_MISSING_REQUIRED",
+      "severity": "BLOCKER",
+      "scope": ["field", "record"],
+      "description": "Required evidence item(s) missing where methodology requires evidence; blocks approval/eligibility."
+    },
+    {
+      "code": "EVIDENCE_INSUFFICIENT_TIER",
+      "severity": "WARNING",
+      "scope": ["field", "record"],
+      "description": "Evidence exists but does not meet tier minimums for the decision context; confidence reduced."
+    }
+  ],
+  "thresholds": {
+    "statuses": [
+      { "status": "HIGH", "min": 90, "max": 100, "usable": true },
+      { "status": "MEDIUM", "min": 80, "max": 89, "usable": true },
+      { "status": "LOW", "min": 60, "max": 79, "usable": false },
+      { "status": "VERY_LOW", "min": 1, "max": 59, "usable": false },
+      { "status": "ZERO", "min": 0, "max": 0, "usable": false }
+    ],
+    "pilot_mandatory_field_usable_min_score": 80,
+    "pilot_mandatory_record_usable_min_score": 80,
+    "run_level_breach_thresholds": {
+      "blocked_record_rate_max": 0.005,
+      "low_confidence_record_rate_max": 0.02,
+      "low_confidence_definition": "record_status_in_[LOW, VERY_LOW, ZERO]"
+    }
+  },
+  "fail_closed_rules": [
+    {
+      "rule_id": "FC-F1",
+      "name": "Missing pilot-mandatory field",
+      "level": "field_record",
+      "condition": "Any SoT Matrix v1 pilot_mandatory field missing or invalid for the record grain",
+      "action": "Hard-zero affected fields and record; block downstream category/metrics/reporting use",
+      "reason_codes": ["FIELD_MISSING", "FIELD_INVALID_FORMAT"],
+      "references": ["docs/data-governance/source-of-truth-matrix_v1.json", "docs/validation/VALIDATION_CHARTER_v1.md"]
+    },
+    {
+      "rule_id": "FC-F2",
+      "name": "Ambiguous join on mandatory identifier",
+      "level": "field_record",
+      "condition": "Duplicate key/cardinality breach affecting any pilot-mandatory join key or dependency",
+      "action": "Hard-zero impacted fields and record; block downstream use; do not select a candidate record",
+      "reason_codes": ["JOIN_AMBIGUOUS", "JOIN_MISSING"],
+      "references": ["docs/validation/VALIDATION_CHARTER_v1.md", "docs/reconciliation/exception-taxonomy_v1.json"]
+    },
+    {
+      "rule_id": "FC-F3",
+      "name": "Unreconciled mandatory remuneration field",
+      "level": "field_record",
+      "condition": "Blocker reconciliation exception affecting pilot-mandatory remuneration truth (base/variable pay, earning code mapping, currency, period alignment)",
+      "action": "Hard-zero remuneration fields and record; block metrics and export",
+      "reason_codes": ["RECON_BLOCKER"],
+      "references": ["docs/reconciliation/RECONCILIATION_FRAMEWORK_v1.md", "docs/reconciliation/exception-taxonomy_v1.json"]
+    },
+    {
+      "rule_id": "FC-F4",
+      "name": "Methodology version missing/mismatch",
+      "level": "record_run",
+      "condition": "Missing or mismatched methodology version reference",
+      "action": "Hard-zero record/run confidence for methodological outputs; block category/metrics/reporting eligibility",
+      "reason_codes": ["METHODOLOGY_VERSION_MISSING", "METHODOLOGY_VERSION_MISMATCH"],
+      "references": ["docs/methodology/METHODOLOGY_v1.md", "docs/validation/VALIDATION_CHARTER_v1.md"]
+    },
+    {
+      "rule_id": "FC-F5",
+      "name": "Pending/expired override affecting category truth",
+      "level": "field_record",
+      "condition": "Override exists but not approved/in-date (pending/expired/rejected)",
+      "action": "Hard-zero category truth fields and record; block downstream use",
+      "reason_codes": ["OVERRIDE_PENDING", "OVERRIDE_EXPIRED", "OVERRIDE_REJECTED"],
+      "references": ["docs/methodology/METHODOLOGY_v1.md"]
+    },
+    {
+      "rule_id": "FC-R1",
+      "name": "Run-level confidence breach rate too high",
+      "level": "run",
+      "condition": "blocked_record_rate > blocked_record_rate_max OR low_confidence_record_rate > low_confidence_record_rate_max",
+      "action": "Block metrics run validity and evidence export eligibility until VSG disposition",
+      "reason_codes": [],
+      "references": ["docs/validation/VALIDATION_CHARTER_v1.md"]
+    }
+  ],
+  "downstream_impacts": {
+    "category_eligibility": {
+      "requires": [
+        "all_pilot_mandatory_identity_and_join_fields_score_gte_80",
+        "no_JOIN_AMBIGUOUS_or_JOIN_MISSING",
+        "no_override_pending_expired_rejected_affecting_category_truth",
+        "methodology_version_present_and_matches_declared"
+      ],
+      "blocks_when_failed": ["category_assignment_use", "category_based_aggregation"]
+    },
+    "metrics_eligibility": {
+      "requires": [
+        "category_eligible",
+        "all_pilot_mandatory_remuneration_fields_score_gte_80",
+        "no_reconciliation_blockers_on_remuneration_truth",
+        "run_level_breach_thresholds_not_exceeded"
+      ],
+      "blocks_when_failed": ["metrics_computation_for_record", "metrics_run_validity_if_run_breach"]
+    },
+    "reporting_export_eligibility": {
+      "requires": [
+        "metrics_run_validity_pass",
+        "evidence_bundle_complete",
+        "version_manifest_included",
+        "blocked_outputs_not_exported"
+      ],
+      "blocks_when_failed": ["evidence_pack_export", "regulator_ready_exports"]
+    }
+  },
+  "reviewer_visibility": {
+    "requirements": {
+      "field_level": [
+        "pilot_mandatory_fields_score_status_reason_codes",
+        "sot_matrix_row_reference",
+        "reconciliation_taxonomy_codes_when_applicable"
+      ],
+      "record_level": [
+        "record_score_status",
+        "blocking_reasons",
+        "category_eligible_flag",
+        "metrics_eligible_flag"
+      ],
+      "run_level": [
+        "blocked_record_rate",
+        "low_confidence_record_rate",
+        "counts_by_reason_code",
+        "fail_closed_triggers_fired",
+        "downstream_outputs_blocked_summary"
+      ]
+    },
+    "audiences_minimum": [
+      "internal_audit_assurance",
+      "payroll_controls_owner",
+      "reward_methodology_owner",
+      "legal_employment_regulatory",
+      "privacy_gdpr_lead",
+      "security_lead"
+    ]
+  },
+  "evidence_requirements": {
+    "append_only": true,
+    "required_bundle_items": [
+      "version_manifest",
+      "field_and_record_confidence_outputs_with_reason_codes",
+      "gate_evaluation_record_fc_rules_and_downstream_blocks",
+      "exception_disposition_references_for_any_warning_allowed_to_proceed"
+    ],
+    "version_manifest_must_include": [
+      "confidence_model_id_version",
+      "source_of_truth_matrix_id_version",
+      "methodology_id_version",
+      "reconciliation_framework_id_version",
+      "snapshot_or_run_identifiers",
+      "mapping_versions_referenced_by_sot_matrix"
+    ]
+  },
+  "references": {
+    "validation_charter_v1": "docs/validation/VALIDATION_CHARTER_v1.md",
+    "redirect_decision": "docs/validation/REDIRECT_DECISION.md",
+    "source_of_truth_matrix_v1": [
+      "docs/data-governance/SOURCE_OF_TRUTH_MATRIX_v1.md",
+      "docs/data-governance/source-of-truth-matrix_v1.csv",
+      "docs/data-governance/source-of-truth-matrix_v1.json"
+    ],
+    "methodology_v1": ["docs/methodology/METHODOLOGY_v1.md", "docs/methodology/methodology_v1.json"],
+    "reconciliation_framework_v1": [
+      "docs/reconciliation/RECONCILIATION_FRAMEWORK_v1.md",
+      "docs/reconciliation/exception-taxonomy_v1.json"
+    ]
+  }
+}
+
