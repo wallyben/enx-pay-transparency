@@ -1,0 +1,2 @@
+payroll_run_id,payroll_provider_id,legal_entity_id,pay_period_start_date,pay_period_end_date,off_cycle_flag,retro_flag,run_status,currency_code
+RUN-IE-2026-02-REG-001,PAYPROV-IE-SYNTH-001,LE-IE-SYNTH-001,2026-02-01,2026-02-28,N,N,CLOSED,EUR
