@@ -1,0 +1,23 @@
+{
+  "name": "@enx/mock-enterprise-runner",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "run-engine": "tsx run_engines.ts"
+  },
+  "dependencies": {
+    "@enx/audit": "workspace:*",
+    "@enx/canonical-model": "workspace:*",
+    "@enx/category-engine": "workspace:*",
+    "@enx/contracts": "workspace:*",
+    "@enx/intake-engine": "workspace:*",
+    "@enx/job-architecture": "workspace:*",
+    "@enx/metrics-engine": "workspace:*",
+    "@enx/reporting-engine": "workspace:*"
+  },
+  "devDependencies": {
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2"
+  }
+}

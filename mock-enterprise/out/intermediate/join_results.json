@@ -1,0 +1,11 @@
+{
+  "summary": {
+    "worker_count": 8000,
+    "join_ok": 7527,
+    "join_missing_payroll": 471,
+    "join_duplicate_key": 2
+  },
+  "notes": [
+    "Join logic is mock-enterprise Python only; it mirrors the dataset dictionary join model."
+  ]
+}

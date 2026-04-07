@@ -1,0 +1,5 @@
+metric,value
+workers_total,8000
+join_ok,7527
+join_missing_payroll,471
+join_duplicate_payroll_key,2

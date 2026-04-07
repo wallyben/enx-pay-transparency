@@ -1,0 +1,284 @@
+{
+  "methodologyVersion": "methodology_v1@v1.0.0",
+  "rulePackVersion": "rule_pack_synth_v1",
+  "variablePayRows": [
+    {
+      "rowIndex": 0,
+      "variablePayDecimal": "0.00"
+    },
+    {
+      "rowIndex": 1,
+      "variablePayDecimal": "0.00"
+    },
+    {
+      "rowIndex": 2,
+      "variablePayDecimal": "0.00"
+    },
+    {
+      "rowIndex": 3,
+      "variablePayDecimal": "1360.54"
+    },
+    {
+      "rowIndex": 4,
+      "variablePayDecimal": "147.90"
+    },
+    {
+      "rowIndex": 5,
+      "variablePayDecimal": "667.97"
+    },
+    {
+      "rowIndex": 6,
+      "variablePayDecimal": "0.00"
+    },
+    {
+      "rowIndex": 7,
+      "variablePayDecimal": "3920.01"
+    },
+    {
+      "rowIndex": 8,
+      "variablePayDecimal": "0.00"
+    },
+    {
+      "rowIndex": 9,
+      "variablePayDecimal": "0.00"
+    },
+    {
+      "rowIndex": 10,
+      "variablePayDecimal": "0.00"
+    },
+    {
+      "rowIndex": 11,
+      "variablePayDecimal": "0.00"
+    },
+    {
+      "rowIndex": 12,
+      "variablePayDecimal": "0.00"
+    },
+    {
+      "rowIndex": 13,
+      "variablePayDecimal": "0.00"
+    },
+    {
+      "rowIndex": 14,
+      "variablePayDecimal": "0.00"
+    },
+    {
+      "rowIndex": 15,
+      "variablePayDecimal": "0.00"
+    },
+    {
+      "rowIndex": 16,
+      "variablePayDecimal": "0.00"
+    },
+    {
+      "rowIndex": 17,
+      "variablePayDecimal": "0.00"
+    },
+    {
+      "rowIndex": 18,
+      "variablePayDecimal": "0.00"
+    },
+    {
+      "rowIndex": 19,
+      "variablePayDecimal": "0.00"
+    },
+    {
+      "rowIndex": 20,
+      "variablePayDecimal": "114.43"
+    },
+    {
+      "rowIndex": 21,
+      "variablePayDecimal": "2297.83"
+    },
+    {
+      "rowIndex": 22,
+      "variablePayDecimal": "0.00"
+    },
+    {
+      "rowIndex": 23,
+      "variablePayDecimal": "194.12"
+    },
+    {
+      "rowIndex": 24,
+      "variablePayDecimal": "4624.58"
+    }
+  ],
+  "governedOverrides": [
+    {
+      "overrideId": "ovr_pending_HRIS-WKR-000055",
+      "rowIndex": 0,
+      "proposedCategoryId": "cat_synth_pending",
+      "status": "PENDING",
+      "proposedAtIso": "2026-04-07T00:00:00.000Z"
+    },
+    {
+      "overrideId": "ovr_pending_HRIS-WKR-000056",
+      "rowIndex": 1,
+      "proposedCategoryId": "cat_synth_pending",
+      "status": "PENDING",
+      "proposedAtIso": "2026-04-07T00:00:00.000Z"
+    },
+    {
+      "overrideId": "ovr_pending_HRIS-WKR-000069",
+      "rowIndex": 2,
+      "proposedCategoryId": "cat_synth_pending",
+      "status": "PENDING",
+      "proposedAtIso": "2026-04-07T00:00:00.000Z"
+    },
+    {
+      "overrideId": "ovr_pending_HRIS-WKR-000152",
+      "rowIndex": 3,
+      "proposedCategoryId": "cat_synth_pending",
+      "status": "PENDING",
+      "proposedAtIso": "2026-04-07T00:00:00.000Z"
+    },
+    {
+      "overrideId": "ovr_pending_HRIS-WKR-000193",
+      "rowIndex": 4,
+      "proposedCategoryId": "cat_synth_pending",
+      "status": "PENDING",
+      "proposedAtIso": "2026-04-07T00:00:00.000Z"
+    },
+    {
+      "overrideId": "ovr_pending_HRIS-WKR-000261",
+      "rowIndex": 5,
+      "proposedCategoryId": "cat_synth_pending",
+      "status": "PENDING",
+      "proposedAtIso": "2026-04-07T00:00:00.000Z"
+    },
+    {
+      "overrideId": "ovr_pending_HRIS-WKR-000272",
+      "rowIndex": 6,
+      "proposedCategoryId": "cat_synth_pending",
+      "status": "PENDING",
+      "proposedAtIso": "2026-04-07T00:00:00.000Z"
+    },
+    {
+      "overrideId": "ovr_pending_HRIS-WKR-000274",
+      "rowIndex": 7,
+      "proposedCategoryId": "cat_synth_pending",
+      "status": "PENDING",
+      "proposedAtIso": "2026-04-07T00:00:00.000Z"
+    },
+    {
+      "overrideId": "ovr_pending_HRIS-WKR-000280",
+      "rowIndex": 8,
+      "proposedCategoryId": "cat_synth_pending",
+      "status": "PENDING",
+      "proposedAtIso": "2026-04-07T00:00:00.000Z"
+    },
+    {
+      "overrideId": "ovr_pending_HRIS-WKR-000338",
+      "rowIndex": 9,
+      "proposedCategoryId": "cat_synth_pending",
+      "status": "PENDING",
+      "proposedAtIso": "2026-04-07T00:00:00.000Z"
+    },
+    {
+      "overrideId": "ovr_pending_HRIS-WKR-000359",
+      "rowIndex": 10,
+      "proposedCategoryId": "cat_synth_pending",
+      "status": "PENDING",
+      "proposedAtIso": "2026-04-07T00:00:00.000Z"
+    },
+    {
+      "overrideId": "ovr_pending_HRIS-WKR-000405",
+      "rowIndex": 11,
+      "proposedCategoryId": "cat_synth_pending",
+      "status": "PENDING",
+      "proposedAtIso": "2026-04-07T00:00:00.000Z"
+    },
+    {
+      "overrideId": "ovr_pending_HRIS-WKR-000428",
+      "rowIndex": 12,
+      "proposedCategoryId": "cat_synth_pending",
+      "status": "PENDING",
+      "proposedAtIso": "2026-04-07T00:00:00.000Z"
+    },
+    {
+      "overrideId": "ovr_pending_HRIS-WKR-000454",
+      "rowIndex": 13,
+      "proposedCategoryId": "cat_synth_pending",
+      "status": "PENDING",
+      "proposedAtIso": "2026-04-07T00:00:00.000Z"
+    },
+    {
+      "overrideId": "ovr_pending_HRIS-WKR-000458",
+      "rowIndex": 14,
+      "proposedCategoryId": "cat_synth_pending",
+      "status": "PENDING",
+      "proposedAtIso": "2026-04-07T00:00:00.000Z"
+    },
+    {
+      "overrideId": "ovr_pending_HRIS-WKR-000545",
+      "rowIndex": 15,
+      "proposedCategoryId": "cat_synth_pending",
+      "status": "PENDING",
+      "proposedAtIso": "2026-04-07T00:00:00.000Z"
+    },
+    {
+      "overrideId": "ovr_pending_HRIS-WKR-000589",
+      "rowIndex": 16,
+      "proposedCategoryId": "cat_synth_pending",
+      "status": "PENDING",
+      "proposedAtIso": "2026-04-07T00:00:00.000Z"
+    },
+    {
+      "overrideId": "ovr_pending_HRIS-WKR-000640",
+      "rowIndex": 17,
+      "proposedCategoryId": "cat_synth_pending",
+      "status": "PENDING",
+      "proposedAtIso": "2026-04-07T00:00:00.000Z"
+    },
+    {
+      "overrideId": "ovr_pending_HRIS-WKR-000714",
+      "rowIndex": 18,
+      "proposedCategoryId": "cat_synth_pending",
+      "status": "PENDING",
+      "proposedAtIso": "2026-04-07T00:00:00.000Z"
+    },
+    {
+      "overrideId": "ovr_pending_HRIS-WKR-000730",
+      "rowIndex": 19,
+      "proposedCategoryId": "cat_synth_pending",
+      "status": "PENDING",
+      "proposedAtIso": "2026-04-07T00:00:00.000Z"
+    },
+    {
+      "overrideId": "ovr_pending_HRIS-WKR-000736",
+      "rowIndex": 20,
+      "proposedCategoryId": "cat_synth_pending",
+      "status": "PENDING",
+      "proposedAtIso": "2026-04-07T00:00:00.000Z"
+    },
+    {
+      "overrideId": "ovr_pending_HRIS-WKR-000838",
+      "rowIndex": 21,
+      "proposedCategoryId": "cat_synth_pending",
+      "status": "PENDING",
+      "proposedAtIso": "2026-04-07T00:00:00.000Z"
+    },
+    {
+      "overrideId": "ovr_pending_HRIS-WKR-000845",
+      "rowIndex": 22,
+      "proposedCategoryId": "cat_synth_pending",
+      "status": "PENDING",
+      "proposedAtIso": "2026-04-07T00:00:00.000Z"
+    },
+    {
+      "overrideId": "ovr_pending_HRIS-WKR-000859",
+      "rowIndex": 23,
+      "proposedCategoryId": "cat_synth_pending",
+      "status": "PENDING",
+      "proposedAtIso": "2026-04-07T00:00:00.000Z"
+    },
+    {
+      "overrideId": "ovr_pending_HRIS-WKR-000864",
+      "rowIndex": 24,
+      "proposedCategoryId": "cat_synth_pending",
+      "status": "PENDING",
+      "proposedAtIso": "2026-04-07T00:00:00.000Z"
+    }
+  ],
+  "equalValueRuleset": null
+}

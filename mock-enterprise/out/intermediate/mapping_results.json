@@ -1,0 +1,1205 @@
+{
+  "unmapped_events": [
+    {
+      "hris_worker_id": "HRIS-WKR-000007",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-000112",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-000127",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-000146",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-000150",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-000194",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-000217",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-000231",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-000237",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-000259",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-000265",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-000332",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-000339",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-000350",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-000397",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-000401",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-000414",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-000471",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-000476",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-000479",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-000501",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-000574",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-000606",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-000703",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-000728",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-000773",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-000822",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-000876",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-000886",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-000895",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-000945",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-001038",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-001078",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-001097",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-001110",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-001125",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-001131",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-001237",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-001271",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-001315",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-001362",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-001426",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-001431",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-001441",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-001513",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-001534",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-001571",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-001594",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-001602",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-001638",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-001659",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-001748",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-001760",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-001803",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-001820",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-001827",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-001907",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-001939",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-001948",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-001969",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-001985",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-002011",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-002046",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-002082",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-002107",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-002117",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-002120",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-002127",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-002158",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-002176",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-002202",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-002247",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-002347",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-002376",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-002417",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-002443",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-002445",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-002458",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-002462",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-002487",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-002497",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-002518",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-002524",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-002532",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-002556",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-002607",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-002625",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-002691",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-002716",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-002805",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-002830",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-002831",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-002855",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-002918",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-003021",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-003100",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-003122",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-003186",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-003350",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-003364",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-003472",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-003484",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-003534",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-003549",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-003568",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-003570",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-003585",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-003607",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-003624",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-003686",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-003716",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-003721",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-003728",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-003804",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-003851",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-003866",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-003899",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-003929",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-003943",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-003984",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-004030",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-004044",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-004046",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-004063",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-004169",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-004247",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-004283",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-004340",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-004366",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-004384",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-004429",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-004435",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-004476",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-004490",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-004509",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-004516",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-004524",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-004537",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-004568",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-004586",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-004588",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-004693",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-004739",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-004799",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-004810",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-004818",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-004865",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-004867",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-004893",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-004899",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-004924",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-004943",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-004969",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-005017",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-005052",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-005102",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-005270",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-005272",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-005305",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-005325",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-005364",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-005523",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-005545",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-005596",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-005602",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-005632",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-005764",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-005782",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-005783",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-005787",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-005823",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-005849",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-005852",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-005857",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-005885",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-005888",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-005923",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-005931",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-006035",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-006036",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-006037",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-006043",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-006156",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-006163",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-006182",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-006186",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-006262",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-006296",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-006318",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-006380",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-006389",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-006396",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-006414",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-006485",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-006508",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-006528",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-006549",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-006683",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-006754",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-006778",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-006793",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-006849",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-006893",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-006945",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-006949",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-006973",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-007004",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-007013",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-007038",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-007042",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-007108",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-007152",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-007218",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-007244",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-007322",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-007347",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-007372",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-007419",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-007420",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-007442",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-007461",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-007475",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-007499",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-007525",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-007576",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-007588",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-007592",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-007616",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-007661",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-007676",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-007692",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-007744",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-007798",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-007839",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-007840",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-007866",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-007905",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-007929",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-007953",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    },
+    {
+      "hris_worker_id": "HRIS-WKR-007964",
+      "earning_code": "UNMAPPED_X",
+      "status": "UNMAPPED"
+    }
+  ],
+  "total_unmapped_events": 240
+}

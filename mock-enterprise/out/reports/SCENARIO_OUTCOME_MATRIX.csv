@@ -1,0 +1,21 @@
+scenario_id,records_encountered_adapter,expected_join_outcome,observed_join_ok_share,expected_export_gate,engine_encountered_notes,proof_level,notes
+SCN-001,4240,PASS,0.9696,ALLOW,"{""cohort_size"": 4240, ""join_ok_share"": 0.9696}",ADAPTER_ONLY,
+SCN-002,240,BLOCKER,0.0,BLOCK_EXPORT,"{""cohort_size"": 240, ""join_ok_share"": 0.0}",ADAPTER_ONLY,
+SCN-003,160,BLOCKER,0.9625,BLOCK_EXPORT,"{""cohort_size"": 160, ""join_ok_share"": 0.9625}",ADAPTER_ONLY,
+SCN-004,240,PASS,0.975,BLOCK_EXPORT,"{""cohort_size"": 240, ""join_ok_share"": 0.975}",ADAPTER_ONLY,
+SCN-005,240,PASS,0.975,BLOCK_EXPORT,"{""cohort_size"": 240, ""join_ok_share"": 0.975}",ADAPTER_ONLY,
+SCN-006,240,PASS,0.95,BLOCK_EXPORT,"{""cohort_size"": 240, ""join_ok_share"": 0.95}",ADAPTER_ONLY,
+SCN-007,320,PASS,0.9812,BLOCK_EXPORT,"{""cohort_size"": 320, ""join_ok_share"": 0.9812}",ADAPTER_ONLY,
+SCN-008,240,PASS,0.9792,BLOCK_EXPORT,"{""cohort_size"": 240, ""join_ok_share"": 0.9792}",ADAPTER_PLUS_ENGINE_SECOND_RUN,Override records are synthetic demo objects passed to @enx/category-engine; not legal approval.
+SCN-009,240,PASS,0.9583,ALLOW,"{""cohort_size"": 240, ""join_ok_share"": 0.9583}",ENGINE_MAIN_COHORT,Override records are synthetic demo objects passed to @enx/category-engine; not legal approval.
+SCN-010,160,PASS,0.9875,BLOCK_EXPORT,"{""cohort_size"": 160, ""join_ok_share"": 0.9875, ""methodology_mismatch"": ""Simulated only at adapter level (SCN-010 workers excluded from main TS meta; no FC-F4 code path in repo).""}",ADAPTER_ONLY,Excluded from main TS cohort; mismatch behaviour not executed as dedicated code beyond version strings.
+SCN-011,320,PASS,0.9781,BLOCK_EXPORT,"{""cohort_size"": 320, ""join_ok_share"": 0.9781, ""methodology_ambiguous_job_evidence"": ""Generator perturbs assignment job_level vs job_architecture; @enx/job-architecture does not load job_architecture.csv for cross-check — cannot observe REVIEW_REQUIRED from that inconsistency in TS.""}",ADAPTER_ONLY,
+SCN-012,0,MIXED,,BLOCK_RUN_VALIDITY,"{""records"": 0, ""manifest_note"": ""Zero-count in baseline pack — NOT EXERCISED for threshold breach.""}",NOT_EXERCISED,Zero-count scenarios in manifest; no threshold breach demonstration in this dataset version.
+SCN-013,0,MIXED,,BLOCK_RUN_VALIDITY,"{""records"": 0, ""manifest_note"": ""Zero-count in baseline pack — NOT EXERCISED for threshold breach.""}",NOT_EXERCISED,Zero-count scenarios in manifest; no threshold breach demonstration in this dataset version.
+SCN-014,160,PASS,0.95,ALLOW,"{""cohort_size"": 160, ""join_ok_share"": 0.95}",ADAPTER_ONLY,
+SCN-015,160,PASS,0.9563,ALLOW,"{""cohort_size"": 160, ""join_ok_share"": 0.9563}",ADAPTER_ONLY,
+SCN-016,160,PASS,0.9688,ALLOW,"{""cohort_size"": 160, ""join_ok_share"": 0.9688}",ADAPTER_ONLY,
+SCN-017,240,PASS,0.975,ALLOW,"{""cohort_size"": 240, ""join_ok_share"": 0.975}",ADAPTER_ONLY,
+SCN-018,240,PASS,0.9708,ALLOW,"{""cohort_size"": 240, ""join_ok_share"": 0.9708}",ADAPTER_ONLY,
+SCN-019,160,PASS,0.9625,ALLOW,"{""cohort_size"": 160, ""join_ok_share"": 0.9625}",ADAPTER_ONLY,
+SCN-020,240,PASS,0.9792,ALLOW,"{""cohort_size"": 240, ""join_ok_share"": 0.9792}",ADAPTER_ONLY,

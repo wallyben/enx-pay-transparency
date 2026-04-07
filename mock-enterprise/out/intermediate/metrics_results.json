@@ -1,0 +1,14 @@
+{
+  "blocked_record_rate": 0.190875,
+  "low_confidence_proxy_rate": 0.079,
+  "thresholds_reference": {
+    "blocked_record_max": 0.005,
+    "low_confidence_max": 0.02,
+    "source": "docs/confidence/CONFIDENCE_MODEL_v1.md (reference only; not executed as code)"
+  },
+  "scn_012_013": "NOT EXERCISED \u2014 zero-count scenarios in this pack version (see manifest).",
+  "main_engine_eu_core": {
+    "runGateBlocked": true,
+    "classificationIncomplete": true
+  }
+}
