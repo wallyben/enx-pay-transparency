@@ -283,12 +283,79 @@ No country goes live before its country pack is in ACCEPTED status and a country
 
 ---
 
+## 12A. ENTERPRISE HARDENING REDIRECT (BINDING)
+
+### 12A.1 Decision
+
+The project is continuing, but it is **formally redirected** from feature delivery → **enterprise hardening and validation-first execution**.
+
+This redirect is binding. It supersedes any implied “next slice” sequence that continues feature expansion without proving truth, defensibility, and governance.
+
+### 12A.2 Why the redirect happened (root causes, not code defects)
+
+The core engine is structurally promising (deterministic pipelines, sealed snapshots, traceability), but the enterprise failure modes are upstream and operational:
+- **Unclear source-of-truth across systems** (Workday vs payroll vs reward): canonicalization does not establish truth.
+- **Equal-value/category methodology not yet legally defensible**: “normalization + overrides” is not a methodology package with factor model, scoring, calibration, challenge, expiry, and evidence.
+- **Metrics accuracy not proven against payroll outputs**: without reconciliation anchored to payroll results, the platform can produce confident but incorrect outputs.
+- **Governance and ownership not embedded**: compliance requires accountable owners, approvals, attestations, veto rights, and non-bypassable controls.
+
+### 12A.3 What is frozen immediately
+
+Stop building until validation gates pass:
+- Additional dashboards or reporting layers beyond what is strictly required to execute validation and produce audit evidence
+- Broader multi-country expansion and all country packs
+- Employee-facing features
+- Remediation workflows beyond basic scaffolding
+- Nice-to-have analytics and exploratory reporting
+
+### 12A.4 What continues (hardening tracks)
+
+Execution moves through four hardening tracks. Ownership is enterprise, not engineering.
+
+1) **Source-of-Truth Hardening**
+- For each critical field: define system of record, derivation logic, owner, reconciliation method, tolerance, and failure severity.
+- Principle: **Payroll is the anchor truth for remuneration** unless explicitly justified otherwise for a specific field.
+
+2) **Category & Equal-Value Methodology (Methodology as a Product)**
+- Implement a governed methodology v1: factor model (skills/effort/responsibility/conditions), scoring, weighting, calibration, review/challenge, controlled overrides with expiry and approval.
+- Outputs must be legally defensible and explainable at worker level.
+
+3) **Enterprise Pilot (Constrained)**
+- Prove the system in a limited scope (one country, one payroll provider, limited entities).
+- Demonstrate join integrity, payroll reconciliation, trusted categories, explainability, and zero critical privacy/audit issues.
+
+4) **Governance & Operating Model**
+- Ownership: Reward (methodology), Payroll (remuneration truth), HRIS (worker/job integrity), Legal (defensibility), Security/Privacy (data controls), Internal Audit (assurance).
+- Embed approvals, attestations, override governance, and audit trails as non-bypassable controls.
+
+### 12A.5 Validation gates (program controls)
+
+No further product expansion may proceed until the following gates are met and recorded (go/no-go authority + decision log):
+- **Validation design complete**: charter, SoT matrix, methodology v1 package structure, reconciliation and confidence models defined.
+- **Pilot ready**: approvals in place; pilot dataset + gold packs prepared; join integrity measured; reconciliation runnable.
+- **Pilot passed** (minimum):
+  - **>=99% data join integrity** across sources
+  - Payroll vs system outputs within agreed tolerance
+  - Category assignments approved by Reward
+  - Methodology signed off by Legal
+  - Zero critical audit/privacy issues
+  - Full explainability at worker level
+- **Rollout eligible**: operating model embedded; reproducibility and evidence exports proven.
+
+The current and authoritative slice execution order is maintained in `.claude/SLICE_QUEUE.md` (see Wave H).
+
+---
+
 ## 13. IMMEDIATE NEXT STEPS
 
-1. Continue from Wave 0 per `SLICE_QUEUE.md`: S01 and S02 are ACCEPTED on the integration branch.
-2. Next planned implementation slice: **S03_canonical_worker_and_pay_models** (canonical models in `packages/canonical-model/`).
-3. Do not start S04 until S03 is ACCEPTED (per slice dependencies).
-4. Do not create application routes or database schema unless the active slice owns that scope.
+This repo has completed the docs-only redirect and is now in **validation-first enterprise hardening**.
 
-Current active slice: **S03_canonical_worker_and_pay_models** (pending start — confirm queue before executing)
-Current milestone: **M0 — Foundation**
+1. Treat `.claude/SLICE_QUEUE.md` as the **live execution queue**. `PROJECT_PLAN.md` is a controlling document, but it must stay aligned with the queue’s current active slice and statuses.
+2. Next active slice is **H01_validation_charter_and_gates** (docs-only). Do not start H02 or later hardening slices until H01 is complete and reviewed.
+3. **Downstream product expansion remains frozen** pending hardening gates and pilot pass:
+   - S13 is **DEFERRED**
+   - Waves 4–7 are **PAUSED**
+4. Do not create application routes, database schema, product features, or schemas unless the active slice explicitly owns that scope.
+
+Current active slice (authoritative): **H01_validation_charter_and_gates** — see `.claude/SLICE_QUEUE.md`
+Current phase: **Wave H — Enterprise hardening (validation-first)**

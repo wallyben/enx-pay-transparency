@@ -6,13 +6,26 @@
 
 ## CURRENT ACTIVE SLICE
 
-**Slice ID:** S13  
-**Name:** group_dashboard_core  
-**Status:** PENDING — **S12 ACCEPTED** (2026-04-07). Next implementation slice; **not started**.  
-**Wave:** 3 — Metrics and reporting core  
-**Milestone:** M3
+**Slice ID:** H01  
+**Name:** validation_charter_and_gates  
+**Status:** ACCEPTED — Validation Charter v1 created (docs-only).  
+**Wave:** H — Enterprise hardening (validation-first)  
+**Milestone:** MH — Hardening gate (pilot prerequisite)
 
 **Integration branch:** `claude/setup-repo-structure-dGb6o` — PR [#3](https://github.com/wallyben/enx-pay-transparency/pull/3) merged 2026-04-06; S04 ACCEPTED below; full validation (`pnpm test`, `pnpm typecheck`, `pnpm lint`) passed on integration after merge.
+
+---
+
+## ENTERPRISE HARDENING REDIRECT — OPERATIONAL NOTE (BINDING)
+
+**This repo is no longer following the prior next-slice sequence from S13 onward.**
+
+Effective immediately:
+- **Feature expansion is frozen**: no dashboards/reporting expansion, no country packs, no employee-facing work, no broad multi-country rollout, no additional workflow surfaces beyond hardening governance scaffolding.
+- The project enters a new **Hardening Wave (Wave H)** focused on **source-of-truth hardening, methodology defensibility, reconciliation-first validation, confidence gating, and a constrained enterprise pilot**.
+- **No downstream slice resumes until the hardening gates are passed** (see Hardening Wave and go/no-go gates in `docs/validation/REDIRECT_DECISION.md` once created).
+
+This is not a rebuild. It is a controlled redirect from feature delivery → enterprise validation and hardening.
 
 ---
 
@@ -560,7 +573,7 @@ Package shells — each contains only `package.json`, `tsconfig.json`, `src/inde
 |---|---|---|---|---|
 | S11 | metrics_eu_core | ACCEPTED | 2026-04-07 | `@enx/metrics-engine`, EU core contracts/schemas, audit hook, ADR-010; validation green |
 | S12 | reporting_pack_base | ACCEPTED | 2026-04-07 | `@enx/reporting-engine`, reporting pack contracts/schemas, assembly + completeness + audit, ADR-011; validation green |
-| S13 | group_dashboard_core | PENDING | — | Blocked on S12 |
+| S13 | group_dashboard_core | DEFERRED | — | **Frozen by Enterprise Hardening Redirect**. Dashboard/reporting expansion does not proceed until pilot passes and SteerCo re-authorizes. |
 
 ### S11 — metrics_eu_core
 
@@ -665,7 +678,25 @@ Package shells — each contains only `package.json`, `tsconfig.json`, `src/inde
 - [ ] Integration tests verify aggregation correctness
 
 **Blockers / Review Notes:**
-- Blocked on S12
+- Previously blocked on S12 (now cleared).
+- **Deferred by redirect**: This work expands surfaces without proving source-of-truth, payroll reconciliation, and methodology defensibility. Reconsider only after **Hardening Wave** gates pass.
+
+---
+
+## WAVE H — ENTERPRISE HARDENING (VALIDATION-FIRST)
+
+This wave is inserted **before any further product expansion**. Its purpose is to make the system enterprise-safe by resolving the primary non-code risks: **source-of-truth ambiguity, reconciliation to payroll truth, legally defensible equal-value methodology, embedded governance, and confidence gating**.
+
+**Rule:** No slice in Waves 4–7 (casework, remediation, policy registry, recruiting controls, country packs, dashboard expansion, release hardening) may start until **Hardening Wave gates** are passed and recorded (go/no-go authority + decision log).
+
+| ID | Slice Name | Status | Completion Date | Notes |
+|---|---|---|---|---|
+| H01 | validation_charter_and_gates | ACCEPTED | 2026-04-07 | Created `docs/validation/VALIDATION_CHARTER_v1.md` with gates, veto/authority model, decision log template, pilot scope structure, and evidence artifact requirements. Docs-only slice. |
+| H02 | field_level_source_of_truth_matrix_v1 | PENDING | — | Produce Field-Level Source-of-Truth Matrix v1 (pilot-mandatory fields, SoR, derivations, reconciliation, tolerances, severity). Docs-only slice. |
+| H03 | methodology_v1_package | PENDING | — | Produce Methodology v1 package (factor model, scoring, calibration, overrides, expiry, approval, versioning; doc + structured representation stub). Docs-only slice. |
+| H04 | reconciliation_framework_and_exception_taxonomy | PENDING | — | Define reconciliation model anchored to payroll results + coded exception taxonomy + blocker/warning rules. Docs-only slice. |
+| H05 | confidence_model_and_fail_closed_gates | PENDING | — | Define confidence scoring model and fail-closed propagation to category/metrics/reporting. Docs-only slice. |
+| H06 | pilot_gold_packs_and_validation_tests | PENDING | — | Define pilot gold datasets + validation packs + required evidence outputs (no implementation yet). Docs-only slice. |
 
 ---
 
@@ -673,10 +704,10 @@ Package shells — each contains only `package.json`, `tsconfig.json`, `src/inde
 
 | ID | Slice Name | Status | Completion Date | Notes |
 |---|---|---|---|---|
-| S14 | casework_request_intake | PENDING | — | Blocked on M3 Gate |
-| S15 | casework_response_and_review | PENDING | — | Blocked on S14 |
-| S16 | remediation_issue_register | PENDING | — | Blocked on M3 Gate |
-| S17 | remediation_actions_and_closure | PENDING | — | Blocked on S16 |
+| S14 | casework_request_intake | PAUSED | — | Paused pending **Hardening Wave** completion + pilot pass. Not authorized during validation-first phase. |
+| S15 | casework_response_and_review | PAUSED | — | Paused pending **Hardening Wave** completion + pilot pass. |
+| S16 | remediation_issue_register | PAUSED | — | Paused pending **Hardening Wave** completion + pilot pass. |
+| S17 | remediation_actions_and_closure | PAUSED | — | Paused pending **Hardening Wave** completion + pilot pass. |
 
 ### S14 — casework_request_intake
 
@@ -689,7 +720,7 @@ Package shells — each contains only `package.json`, `tsconfig.json`, `src/inde
 - [ ] Unit tests cover intake and deadline calculation
 
 **Blockers / Review Notes:**
-- Blocked on M3 Gate
+- **Paused by redirect**: Casework is a downstream surface area increase. Do not proceed until pilot validates truth + methodology + governance.
 
 ---
 
@@ -704,7 +735,7 @@ Package shells — each contains only `package.json`, `tsconfig.json`, `src/inde
 - [ ] Integration tests cover the full request-to-response workflow
 
 **Blockers / Review Notes:**
-- Blocked on S14
+- **Paused by redirect**.
 
 ---
 
@@ -719,7 +750,7 @@ Package shells — each contains only `package.json`, `tsconfig.json`, `src/inde
 - [ ] Unit tests cover issue creation and status transitions
 
 **Blockers / Review Notes:**
-- Blocked on M3 Gate
+- **Paused by redirect**.
 
 ---
 
@@ -734,7 +765,7 @@ Package shells — each contains only `package.json`, `tsconfig.json`, `src/inde
 - [ ] Integration tests cover the full issue-to-closure workflow
 
 **Blockers / Review Notes:**
-- Blocked on S16
+- **Paused by redirect**.
 
 ---
 
@@ -742,8 +773,8 @@ Package shells — each contains only `package.json`, `tsconfig.json`, `src/inde
 
 | ID | Slice Name | Status | Completion Date | Notes |
 |---|---|---|---|---|
-| S18 | policy_registry_core | PENDING | — | Blocked on M4 Gate |
-| S19 | recruiting_controls_core | PENDING | — | Blocked on S18 |
+| S18 | policy_registry_core | PAUSED | — | Paused pending **Hardening Wave** completion + pilot pass. (Methodology governance is handled in Wave H first.) |
+| S19 | recruiting_controls_core | PAUSED | — | Paused pending **Hardening Wave** completion + pilot pass. |
 
 ### S18 — policy_registry_core
 
@@ -756,7 +787,7 @@ Package shells — each contains only `package.json`, `tsconfig.json`, `src/inde
 - [ ] Unit tests cover versioning and approval flow
 
 **Blockers / Review Notes:**
-- Blocked on M4 Gate
+- **Paused by redirect**. Policy registry product work resumes only after pilot pass; Wave H defines methodology/validation governance first.
 
 ---
 
@@ -771,7 +802,7 @@ Package shells — each contains only `package.json`, `tsconfig.json`, `src/inde
 - [ ] Unit tests cover pass, fail, and manual-review paths
 
 **Blockers / Review Notes:**
-- Blocked on S18
+- **Paused by redirect**.
 
 ---
 
@@ -779,18 +810,18 @@ Package shells — each contains only `package.json`, `tsconfig.json`, `src/inde
 
 | ID | Slice Name | Status | Completion Date | Notes |
 |---|---|---|---|---|
-| S20 | country_pack_ireland | PENDING | — | Blocked on M5 Gate |
-| S21 | country_pack_uk | PENDING | — | Blocked on M5 Gate |
-| S22 | country_pack_norway | PENDING | — | Blocked on M5 Gate |
-| S23 | country_pack_belgium | PENDING | — | Blocked on M5 Gate |
-| S24 | country_pack_denmark | PENDING | — | Blocked on M5 Gate |
-| S25 | country_pack_france | PENDING | — | Blocked on M5 Gate |
-| S26 | country_pack_germany | PENDING | — | Blocked on M5 Gate |
-| S27 | country_pack_italy | PENDING | — | Blocked on M5 Gate |
-| S28 | country_pack_netherlands | PENDING | — | Blocked on M5 Gate |
-| S29 | country_pack_portugal | PENDING | — | Blocked on M5 Gate |
-| S30 | country_pack_spain | PENDING | — | Blocked on M5 Gate |
-| S31 | country_pack_sweden | PENDING | — | Blocked on M5 Gate |
+| S20 | country_pack_ireland | PAUSED | — | Paused pending pilot pass. No multi-country expansion until validation gates pass. |
+| S21 | country_pack_uk | PAUSED | — | Paused pending pilot pass. |
+| S22 | country_pack_norway | PAUSED | — | Paused pending pilot pass. |
+| S23 | country_pack_belgium | PAUSED | — | Paused pending pilot pass. |
+| S24 | country_pack_denmark | PAUSED | — | Paused pending pilot pass. |
+| S25 | country_pack_france | PAUSED | — | Paused pending pilot pass. |
+| S26 | country_pack_germany | PAUSED | — | Paused pending pilot pass. |
+| S27 | country_pack_italy | PAUSED | — | Paused pending pilot pass. |
+| S28 | country_pack_netherlands | PAUSED | — | Paused pending pilot pass. |
+| S29 | country_pack_portugal | PAUSED | — | Paused pending pilot pass. |
+| S30 | country_pack_spain | PAUSED | — | Paused pending pilot pass. |
+| S31 | country_pack_sweden | PAUSED | — | Paused pending pilot pass. |
 
 Each country pack slice follows the same structure. Before starting any country pack:
 - Confirm the core metric interfaces are finalized (no pending changes to `metrics-engine` API)
@@ -808,16 +839,18 @@ Each country pack must provide:
 
 Country packs are independent of each other and may be executed in parallel if resources allow, subject to the M5 Gate being passed.
 
+**Redirect note (binding):** Country packs are **paused** until the enterprise pilot passes and the program formally authorizes expansion. Do not start any country pack work during Wave H.
+
 ---
 
 ## WAVE 7 — HARDENING AND RELEASE
 
 | ID | Slice Name | Status | Completion Date | Notes |
 |---|---|---|---|---|
-| S32 | evidence_pack_viewer | PENDING | — | Blocked on M6 Gate |
-| S33 | admin_rule_pack_management | PENDING | — | Blocked on M6 Gate |
-| S34 | security_hardening_and_role_matrix | PENDING | — | Blocked on M6 Gate |
-| S35 | e2e_release_runbooks | PENDING | — | Blocked on S32–S34 |
+| S32 | evidence_pack_viewer | PAUSED | — | Paused pending pilot pass; viewer is downstream surface area. |
+| S33 | admin_rule_pack_management | PAUSED | — | Paused pending pilot pass; Wave H defines governance artifacts first. |
+| S34 | security_hardening_and_role_matrix | PAUSED | — | Paused pending pilot pass; security/privacy approvals are handled as gates in Wave H. |
+| S35 | e2e_release_runbooks | PAUSED | — | Paused pending pilot pass and resumption decision. |
 
 ### S32 — evidence_pack_viewer
 
@@ -887,6 +920,7 @@ Country packs are independent of each other and may be executed in parallel if r
 | ACCEPTED | All acceptance criteria met, tests pass, ADRs filed |
 | BLOCKED | Cannot proceed — blocker logged above |
 | DEFERRED | Formally deferred with documented rationale |
+| PAUSED | Explicitly frozen by program redirect; may not start until hardening gates pass and resumption is authorized |
 
 ---
 
@@ -908,3 +942,4 @@ Country packs are independent of each other and may be executed in parallel if r
 | 2026-04-07 | S10 ACCEPTED: equal-value ruleset + `EQUAL_VALUE` basis, governed `CategoryOverrideRecord` (`PENDING`/`APPROVED`/`REJECTED`), row metrics gate fields + snapshot `metricsCalculationBlockedCount`, override decision audit helper, extended pipeline/service; contracts/schemas/tests; ADR-009; replaced S09 equal-value leakage test with metrics-engine/pay-gap guard; `pnpm test` / `typecheck` / `lint` green. S11 next (PENDING). | S10 completion |
 | 2026-04-07 | S11 ACCEPTED: `@enx/metrics-engine` EU core `runEuCoreMetrics` (mean/median gap %, optional mean variable gap, quartile distribution), first-class inclusion/exclusion + `metricsCalculationBlocked` exclusion, classification incomplete gate, contracts enums/types/schemas + schema tests, audit write helper, ADR-010; `pnpm test` / `typecheck` / `lint` green. S12 next (PENDING). | S11 completion |
 | 2026-04-07 | S12 ACCEPTED: `@enx/reporting-engine` base `assembleReportingPack` (deterministic `contentDigest`/`reportRunId`, manifest + evidence sections, methodology/traceability refs, data quality notes, PDF placeholder, attestation shells), `evaluateReportingPackExportBlockers` + `assertReportingPackExportable`, assembly audit helper; contracts reporting-pack enums/types/schemas + tests; scope guard test; ADR-011; `pnpm test` / `typecheck` / `lint` green. S13 next (PENDING). | S12 completion |
+| 2026-04-07 | H01 ACCEPTED: Validation Charter v1 created with objective gates (G0–G10), veto rights, go/no-go authority model (VSG + quorum), decision log template, pilot scope structure, and required evidence artifacts. | H01 completion |
