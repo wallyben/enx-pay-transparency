@@ -1,0 +1,95 @@
+{
+  "status": "OK",
+  "intakeFileId": "41be5d77-62c3-46c8-ad89-c3b55481ed5e",
+  "snapshot": {
+    "snapshotId": "snp_f20c7c13ec0718e696b7ba39186f18d2b869c3ac13a82395690bf053e2d54ca8",
+    "manifestDigest": "f20c7c13ec0718e696b7ba39186f18d2b869c3ac13a82395690bf053e2d54ca8",
+    "rowCount": 5695
+  },
+  "jobNormalization": {
+    "ok": true,
+    "rowIssueCount": 0,
+    "jobNormalizationRulesVersion": "job-norm-rules@1.0.0"
+  },
+  "categoryAssignment": {
+    "assignedCount": 210,
+    "reviewRequiredCount": 5485,
+    "unassignedCount": 0,
+    "metricsCalculationBlockedCount": 5485
+  },
+  "euCoreMetrics": {
+    "traceability": {
+      "snapshotId": "snp_f20c7c13ec0718e696b7ba39186f18d2b869c3ac13a82395690bf053e2d54ca8",
+      "methodologyVersion": "methodology_v1@v1.0.0",
+      "rulePackVersion": "rule_pack_synth_v1",
+      "categoryEngineRulesVersion": "category-engine-rules.v1",
+      "jobNormalizationRulesVersion": "job-norm-rules@1.0.0"
+    },
+    "runGateBlocked": true,
+    "inclusion": {
+      "totalCategoryRows": 5695,
+      "classificationIncomplete": true,
+      "excludedNotAssigned": 5485,
+      "excludedMetricsCalculationBlocked": 0,
+      "excludedMissingIntakeRow": 0,
+      "excludedMissingBasePay": 0,
+      "excludedInvalidBasePay": 0,
+      "excludedMissingGender": 0,
+      "excludedNonBinaryGender": 10,
+      "eligibleForPayGapCount": 200,
+      "eligibleMaleCount": 107,
+      "eligibleFemaleCount": 93,
+      "eligibleWithVariablePayCount": 47,
+      "eligibleMaleWithVariablePayCount": 24,
+      "eligibleFemaleWithVariablePayCount": 23
+    },
+    "meanGenderPayGap": {
+      "metricId": "MEAN_GENDER_PAY_GAP_PCT",
+      "status": "BLOCKED_CLASSIFICATION_INCOMPLETE",
+      "issues": [
+        {
+          "code": "CLASSIFICATION_INCOMPLETE"
+        }
+      ]
+    },
+    "medianGenderPayGap": {
+      "metricId": "MEDIAN_GENDER_PAY_GAP_PCT",
+      "status": "BLOCKED_CLASSIFICATION_INCOMPLETE",
+      "issues": [
+        {
+          "code": "CLASSIFICATION_INCOMPLETE"
+        }
+      ]
+    },
+    "meanVariablePayGap": {
+      "metricId": "MEAN_VARIABLE_PAY_GAP_PCT",
+      "status": "BLOCKED_CLASSIFICATION_INCOMPLETE",
+      "issues": [
+        {
+          "code": "CLASSIFICATION_INCOMPLETE"
+        }
+      ]
+    },
+    "payQuartileDistribution": {
+      "metricId": "PAY_QUARTILE_DISTRIBUTION_BY_GENDER",
+      "status": "BLOCKED_CLASSIFICATION_INCOMPLETE",
+      "issues": [
+        {
+          "code": "CLASSIFICATION_INCOMPLETE"
+        }
+      ]
+    }
+  },
+  "reportingPack": {
+    "reportRunId": "rpr_5dcd450002cd82d8cb730455528035058d5d0e83a84905fd1d2f63a495fa3893",
+    "completeness": {
+      "status": "INCOMPLETE",
+      "exportBlockedReasons": [
+        "METRICS_RUN_GATE_BLOCKED"
+      ]
+    },
+    "exportBlockers": [
+      "METRICS_RUN_GATE_BLOCKED"
+    ]
+  }
+}

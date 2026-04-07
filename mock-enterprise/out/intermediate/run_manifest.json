@@ -1,0 +1,58 @@
+{
+  "run_id": "mock-enterprise-demo",
+  "synthetic_only": true,
+  "stages": [
+    {
+      "name": "1_validate_pack",
+      "status": "EXECUTED",
+      "notes": "All required CSVs present under mock-enterprise/generated/"
+    },
+    {
+      "name": "2_load_sources",
+      "status": "EXECUTED",
+      "notes": "workers=8000, assignments=8780"
+    },
+    {
+      "name": "3_join_hris_payroll",
+      "status": "EXECUTED",
+      "notes": "Synthetic crosswalk join evaluated (demo adapter; not HTTP intake)."
+    },
+    {
+      "name": "4_earning_code_mapping",
+      "status": "EXECUTED",
+      "notes": "Mapped in-scope lines using earning_code_mapping.csv (synthetic adapter)."
+    },
+    {
+      "name": "5_normalized_worker_money_shape",
+      "status": "EXECUTED",
+      "notes": "Per-worker base/variable rollups computed for downstream eligibility checks."
+    },
+    {
+      "name": "6_7_ts_intake_snapshot_job_category",
+      "status": "EXECUTED",
+      "notes": "TS path: register intake \u2192 seal snapshot \u2192 job normalization \u2192 extended category (see engine_output_main.json)."
+    },
+    {
+      "name": "7b_equal_value_path",
+      "status": "PARTIALLY EXECUTED",
+      "notes": "EqualValueRuleset not passed (null); equal-value grouping not exercised in this run."
+    },
+    {
+      "name": "8_eu_core_metrics",
+      "status": "PARTIALLY EXECUTED",
+      "notes": "runEuCoreMetrics ran; runGateBlocked=True (classification incomplete dominates this synthetic title set)."
+    },
+    {
+      "name": "9_reporting_evidence_pack",
+      "status": "PARTIALLY EXECUTED",
+      "notes": "assembleReportingPack executed; export blocked when metrics gate blocked (see exportBlockers)."
+    },
+    {
+      "name": "7c_pending_override_demo_cohort",
+      "status": "EXECUTED",
+      "notes": "Separate TS run on SCN-008 workers with PENDING governed override (metrics gate blocked)."
+    }
+  ],
+  "main_engine_output": "mock-enterprise\\out\\intermediate\\engine_output_main.json",
+  "pending_override_output": "mock-enterprise\\out\\intermediate\\engine_output_pending_override.json"
+}

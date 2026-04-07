@@ -1,0 +1,5 @@
+metric,value
+adapter_blocked_record_rate,0.190875
+adapter_low_confidence_proxy_rate,0.079
+engine_eligible_for_pay_gap_count,200
+engine_run_gate_blocked,True
