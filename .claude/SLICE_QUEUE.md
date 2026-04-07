@@ -6,9 +6,9 @@
 
 ## CURRENT ACTIVE SLICE
 
-**Slice ID:** R13  
-**Name:** privacy_approval_bundle  
-**Status:** PENDING — Next readiness-closure work item after R12 acceptance. Pilot entry remains prohibited until R17 passes.  
+**Slice ID:** R14  
+**Name:** security_approval_bundle  
+**Status:** PENDING — Next readiness-closure work item after R13 acceptance. Pilot entry remains prohibited until R17 passes.  
 **Wave:** R — Readiness-Closure (evidence-closure; governance/program-control only)  
 **Milestone:** MR — Readiness re-review prerequisite (R17)
 
@@ -745,7 +745,7 @@ This wave is inserted **before any pilot execution** and before any paused/defer
 | R10 | methodology_calibration_evidence | ACCEPTED (MOCK/TEST GOVERNANCE ONLY) | 2026-04-07 | MOCK/TEST GOVERNANCE ONLY; no real calibration execution or methodology sign-off performed. Artifacts: `docs/readiness-closure/09_methodology-calibration/METHODOLOGY_CALIBRATION_EVIDENCE_v1.md`, `docs/readiness-closure/09_methodology-calibration/METHODOLOGY_CALIBRATION_PACK_TEMPLATE_v1.md`, `docs/readiness-closure/09_methodology-calibration/README.md`. |
 | R11 | decision_record_pack | ACCEPTED (MOCK/TEST GOVERNANCE ONLY) | 2026-04-07 | MOCK/TEST GOVERNANCE ONLY; no executed approvals or real pilot authorization performed. Artifacts: `docs/readiness-closure/01_decision-log/DECISION_RECORD_PACK_v1.md`, `docs/readiness-closure/01_decision-log/DECISION_RECORD_PACK_TEMPLATE_v1.md`. |
 | R12 | gold_pack_execution_evidence | ACCEPTED (MOCK/TEST GOVERNANCE ONLY) | 2026-04-07 | Docs-only gold-pack/test-pack execution evidence governance artifacts created (no execution; no fabricated results): `docs/readiness-closure/10_goldpack-testpack/GOLD_PACK_EXECUTION_EVIDENCE_v1.md`, `docs/readiness-closure/10_goldpack-testpack/GOLD_PACK_EXECUTION_PACK_TEMPLATE_v1.md`. |
-| R13 | privacy_approval_bundle | PENDING | — | Privacy approval bundle structure (no approvals executed here). |
+| R13 | privacy_approval_bundle | ACCEPTED (MOCK/TEST GOVERNANCE ONLY) | 2026-04-07 | Docs-only privacy approval bundle governance artifacts created (no approvals executed; no DPIA execution; no real personal data): `docs/readiness-closure/11_privacy-bundle/PRIVACY_APPROVAL_BUNDLE_v1.md`, `docs/readiness-closure/11_privacy-bundle/PRIVACY_APPROVAL_BUNDLE_TEMPLATE_v1.md`. |
 | R14 | security_approval_bundle | PENDING | — | Security approval bundle structure (no approvals executed here). |
 | R15 | access_model_evidence | PENDING | — | Evidence requirements for access model (logging, approvals, group membership). |
 | R16 | consolidated_readiness_bundle | PENDING | — | Single consolidated readiness bundle with indexed evidence references. |
