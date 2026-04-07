@@ -6,11 +6,11 @@
 
 ## CURRENT ACTIVE SLICE
 
-**Slice ID:** H05  
-**Name:** confidence_model_and_fail_closed_gates  
-**Status:** ACCEPTED — Confidence model + fail-closed gating design created (docs-only).  
-**Wave:** H — Enterprise hardening (validation-first)  
-**Milestone:** MH — Hardening gate (pilot prerequisite)
+**Slice ID:** R01  
+**Name:** no_go_decision_and_charter_adoption  
+**Status:** ACTIVE — Readiness-Closure initiated after NOT READY outcome; pilot entry prohibited until R17 passes.  
+**Wave:** R — Readiness-Closure (evidence-closure; governance/program-control only)  
+**Milestone:** MR — Readiness re-review prerequisite (R17)
 
 **Integration branch:** `claude/setup-repo-structure-dGb6o` — PR [#3](https://github.com/wallyben/enx-pay-transparency/pull/3) merged 2026-04-06; S04 ACCEPTED below; full validation (`pnpm test`, `pnpm typecheck`, `pnpm lint`) passed on integration after merge.
 
@@ -26,6 +26,31 @@ Effective immediately:
 - **No downstream slice resumes until the hardening gates are passed** (see Hardening Wave and go/no-go gates in `docs/validation/REDIRECT_DECISION.md` once created).
 
 This is not a rebuild. It is a controlled redirect from feature delivery → enterprise validation and hardening.
+
+---
+
+## PILOT READINESS REVIEW — OUTCOME (BINDING)
+
+Latest pilot readiness review outcome: **NOT READY**.
+
+Binding implications:
+- **Pilot entry is prohibited.**
+- **Pilot execution is BLOCKED** until readiness-closure is completed and a second readiness review passes (**R17**).
+- This repo is now in **readiness evidence-closure**, not pilot execution and not downstream feature delivery.
+
+---
+
+## READINESS-CLOSURE WAVE — OPERATIONAL NOTE (BINDING)
+
+This repo enters **Wave R — Readiness-Closure** as a mandatory, pre-pilot governance/evidence-closure wave.
+
+**Rule (binding):**
+- No pilot execution and no resumption of downstream feature work may start until **R17** is completed and the second pilot readiness review records **READY/GO**.
+
+**Scope discipline (binding):**
+- Governance/program-control work only (planning artifacts, evidence scaffolding, decision pack structure).
+- Do not create fake evidence artifacts.
+- Do not start content-heavy execution work for R02+ during this transition slice.
 
 ---
 
@@ -697,6 +722,36 @@ This wave is inserted **before any further product expansion**. Its purpose is t
 | H04 | reconciliation_framework_and_exception_taxonomy | ACCEPTED | 2026-04-07 | Produced reconciliation framework + coded exception taxonomy: `docs/reconciliation/RECONCILIATION_FRAMEWORK_v1.md`, `docs/reconciliation/exception-taxonomy_v1.json`. Docs-only slice. |
 | H05 | confidence_model_and_fail_closed_gates | ACCEPTED | 2026-04-07 | Produced confidence model v1 artifacts: `docs/confidence/CONFIDENCE_MODEL_v1.md`, `docs/confidence/confidence-model_v1.json`. Docs-only slice. |
 | H06 | pilot_gold_packs_and_validation_tests | ACCEPTED | 2026-04-07 | Produced pilot gold-pack strategy + machine-readable validation test-pack catalog: `docs/validation/PILOT_GOLD_PACKS_v1.md`, `docs/validation/pilot-validation-test-packs_v1.json`. Docs-only slice. |
+
+---
+
+## WAVE R — READINESS-CLOSURE (EVIDENCE-CLOSURE; GOVERNANCE ONLY)
+
+This wave is inserted **before any pilot execution** and before any paused/deferred downstream feature work can resume.
+
+**Binding:** Pilot execution is **BLOCKED** until R17 passes.
+
+| ID | Readiness-Closure Work Item | Status | Completion Date | Notes |
+|---|---|---|---|---|
+| R01 | no_go_decision_and_charter_adoption | ACTIVE | — | Formalize NOT READY outcome; adopt readiness-closure charter; freeze pilot entry. Governance/program-control only. |
+| R02 | pilot_scope_lock | PENDING | — | Lock pilot scope (systems/entities/fields) for re-review. No execution. |
+| R03 | access_model_baseline | PENDING | — | Baseline access model (roles/groups, logging expectations). No approvals executed here. |
+| R04 | source_extract_proof | PENDING | — | Proof that required source extracts can be produced (no real data artifacts committed). |
+| R05 | join_integrity_proof | PENDING | — | Proof that join integrity can be measured and reported (no execution evidence committed yet). |
+| R06 | earning_code_inventory_and_mapping_lock | PENDING | — | Controlled earning code inventory + mapping governance lock. |
+| R07 | payroll_reconciliation_dry_run | PENDING | — | Dry-run reconciliation evidence plan and output structure (no results committed yet). |
+| R08 | exception_register_and_disposition | PENDING | — | Exception register structure + disposition governance (append-only discipline). |
+| R09 | confidence_output_dry_run | PENDING | — | Dry-run confidence output structure aligned to H05 (no execution outputs yet). |
+| R10 | methodology_calibration_evidence | PENDING | — | Calibration evidence requirements and bundle structure (no calibration performed yet). |
+| R11 | decision_record_pack | PENDING | — | Decision record pack format + indexing (append-only). |
+| R12 | gold_pack_execution_evidence | PENDING | — | Evidence structure for gold/test-pack execution (no execution committed yet). |
+| R13 | privacy_approval_bundle | PENDING | — | Privacy approval bundle structure (no approvals executed here). |
+| R14 | security_approval_bundle | PENDING | — | Security approval bundle structure (no approvals executed here). |
+| R15 | access_model_evidence | PENDING | — | Evidence requirements for access model (logging, approvals, group membership). |
+| R16 | consolidated_readiness_bundle | PENDING | — | Single consolidated readiness bundle with indexed evidence references. |
+| R17 | second_pilot_readiness_review | PENDING | — | Second readiness review; must pass before pilot entry or feature resumption. |
+
+**Immediate controlled work items:** WP1/WP2/WP3 correspond to **R01 / R02 / R03** (in that order). R02+ must not start until R01 is ACCEPTED.
 
 ---
 
