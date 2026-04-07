@@ -40,6 +40,23 @@ export {
   type PayQuartileBand,
 } from './eu-core-metrics';
 export {
+  type AssembleReportingPackInput,
+  type IntakeSnapshotRefForPack,
+  type ReportingAttestationPartyShell,
+  type ReportingAttestationShell,
+  type ReportingCategorySummarySection,
+  type ReportingDataQualityNote,
+  type ReportingEvidencePack,
+  type ReportingEvidenceSections,
+  type ReportingPackCompletenessBlock,
+  type ReportingPackManifest,
+  type ReportingPackMethodologyReferences,
+  type ReportingPackRunRecord,
+  type ReportingPackTraceabilityRefs,
+  type ReportingPdfArtifactPlaceholder,
+  type ReportingSnapshotSummarySection,
+} from './reporting-pack';
+export {
   type JobNormalizationIssue,
   type JobNormalizationRowResult,
   type JobNormalizationSnapshotResult,

@@ -67,4 +67,18 @@ export {
   EuCoreScalarMetricResultSchema,
   EuCoreVariablePayRowInputSchema,
 } from './eu-core-metrics';
+export {
+  ReportingAttestationPartyShellSchema,
+  ReportingAttestationShellSchema,
+  ReportingCategorySummarySectionSchema,
+  ReportingDataQualityNoteSchema,
+  ReportingEvidencePackSchema,
+  ReportingEvidenceSectionsSchema,
+  ReportingPackCompletenessBlockSchema,
+  ReportingPackManifestSchema,
+  ReportingPackRunRecordSchema,
+  ReportingPackTraceabilityRefsSchema,
+  ReportingPdfArtifactPlaceholderSchema,
+  ReportingSnapshotSummarySectionSchema,
+} from './reporting-pack';
 export { PaginationQuerySchema } from './pagination';

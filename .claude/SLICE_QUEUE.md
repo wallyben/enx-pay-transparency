@@ -6,9 +6,9 @@
 
 ## CURRENT ACTIVE SLICE
 
-**Slice ID:** S12  
-**Name:** reporting_pack_base  
-**Status:** PENDING — **S11 ACCEPTED** (2026-04-07). Next implementation slice; **not started**.  
+**Slice ID:** S13  
+**Name:** group_dashboard_core  
+**Status:** PENDING — **S12 ACCEPTED** (2026-04-07). Next implementation slice; **not started**.  
 **Wave:** 3 — Metrics and reporting core  
 **Milestone:** M3
 
@@ -559,7 +559,7 @@ Package shells — each contains only `package.json`, `tsconfig.json`, `src/inde
 | ID | Slice Name | Status | Completion Date | Notes |
 |---|---|---|---|---|
 | S11 | metrics_eu_core | ACCEPTED | 2026-04-07 | `@enx/metrics-engine`, EU core contracts/schemas, audit hook, ADR-010; validation green |
-| S12 | reporting_pack_base | PENDING | — | Blocked on S11 |
+| S12 | reporting_pack_base | ACCEPTED | 2026-04-07 | `@enx/reporting-engine`, reporting pack contracts/schemas, assembly + completeness + audit, ADR-011; validation green |
 | S13 | group_dashboard_core | PENDING | — | Blocked on S12 |
 
 ### S11 — metrics_eu_core
@@ -603,17 +603,54 @@ Package shells — each contains only `package.json`, `tsconfig.json`, `src/inde
 
 ### S12 — reporting_pack_base
 
-**Purpose:** Generate a base evidence pack from a completed metrics run. The pack must be audit-ready: structured, signed, and complete enough for external review.
+**Purpose:** Assemble a **base, country-agnostic evidence pack** from accepted upstream outputs (EU core metrics run plus category assignment snapshot): explicit manifest, traceability to snapshot/methodology/rule-pack/category-engine/job-normalization lineage, structured completeness and export blockers, reviewer/management attestation **shells** (no workflow), optional intake snapshot ref, and minimal audit emission. No country packs, regulator templates, dashboards, publication pipelines, PDF rendering, casework, or remediation.
+
+**Owned Files (S12 delivery):**
+- `packages/contracts/src/enums/reporting-pack-completeness-status.ts`
+- `packages/contracts/src/enums/reporting-pack-export-blocked-reason.ts`
+- `packages/contracts/src/enums/index.ts` (exports)
+- `packages/contracts/src/types/reporting-pack.ts`
+- `packages/contracts/src/types/index.ts` (exports)
+- `packages/contracts/src/schemas/reporting-pack.ts`
+- `packages/contracts/src/schemas/enums.ts` (Zod for new enums)
+- `packages/contracts/src/schemas/index.ts` (exports)
+- `packages/contracts/src/__tests__/reporting-pack-schemas.test.ts`
+- `packages/reporting-engine/package.json`
+- `packages/reporting-engine/tsconfig.json`
+- `packages/reporting-engine/jest.config.js`
+- `packages/reporting-engine/src/index.ts`
+- `packages/reporting-engine/src/canonical-json.ts`
+- `packages/reporting-engine/src/pack-completeness.ts`
+- `packages/reporting-engine/src/data-quality-notes.ts`
+- `packages/reporting-engine/src/assemble-reporting-pack.ts`
+- `packages/reporting-engine/src/reporting-pack-audit.ts`
+- `packages/reporting-engine/src/test-fixtures/assemble-fixtures.ts`
+- `packages/reporting-engine/src/__tests__/assemble-reporting-pack.test.ts`
+- `packages/reporting-engine/src/__tests__/pack-completeness.test.ts`
+- `packages/reporting-engine/src/__tests__/reporting-pack-audit.test.ts`
+- `packages/reporting-engine/src/__tests__/no-country-pack-leakage.test.ts`
+- `docs/adr/ADR-011-reporting-engine-package.md`
+- `pnpm-lock.yaml` (workspace wiring for `@enx/reporting-engine`)
+- `.claude/SLICE_QUEUE.md` (this file — S12 status only)
 
 **Acceptance Criteria:**
-- [ ] Evidence pack includes: snapshot metadata, methodology version, metric outputs, category summary, data quality notes
-- [ ] Pack is generated as a structured format (JSON + PDF stub minimum)
-- [ ] Pack includes reviewer attestation section
-- [ ] Incomplete packs cannot be exported
-- [ ] Unit tests cover pack generation and completeness checks
+- [x] Evidence pack includes: snapshot metadata, methodology version, metric outputs, category summary, data quality notes
+- [x] Pack is generated as a structured format (JSON evidence + manifest PDF placeholder `NOT_PRODUCED` — no final PDF rendering in S12)
+- [x] Pack includes reviewer attestation section (shell: `PENDING`, null fields)
+- [x] Incomplete packs cannot be exported (`assertReportingPackExportable` / first-class blocked reasons)
+- [x] Unit tests cover pack generation and completeness checks
 
 **Blockers / Review Notes:**
-- Blocked on S11
+- Blocked on S11 — cleared 2026-04-07
+
+**Completion record — 2026-04-07:**
+- Status set to **ACCEPTED**
+- ADR-011 filed: `docs/adr/ADR-011-reporting-engine-package.md`
+- `pnpm test` — PASS (64 suites, 380 tests, 0 failures)
+- `pnpm typecheck` — PASS (0 TS errors; `@enx/reporting-engine` included)
+- `pnpm lint` — PASS
+- Primary API: `assembleReportingPack`, `assertReportingPackExportable`, `evaluateReportingPackExportBlockers`, `writeReportingPackAssemblyAudit` / `buildReportingPackAssemblyAuditInput`; contracts `ReportingEvidencePack` + manifest completeness enums
+- S13 next (PENDING, not started)
 
 ---
 
@@ -870,3 +907,4 @@ Country packs are independent of each other and may be executed in parallel if r
 | 2026-04-07 | S09 ACCEPTED: category engine `@enx/category-engine`, contracts category assignment enums/types/schemas + tests, exact vs normalized-equivalent keys + deterministic category IDs, review-required/unassigned outcomes, audit hook on assignment run, ADR-008; `pnpm test` / `typecheck` / `lint` green. S10 next (PENDING). | S09 completion |
 | 2026-04-07 | S10 ACCEPTED: equal-value ruleset + `EQUAL_VALUE` basis, governed `CategoryOverrideRecord` (`PENDING`/`APPROVED`/`REJECTED`), row metrics gate fields + snapshot `metricsCalculationBlockedCount`, override decision audit helper, extended pipeline/service; contracts/schemas/tests; ADR-009; replaced S09 equal-value leakage test with metrics-engine/pay-gap guard; `pnpm test` / `typecheck` / `lint` green. S11 next (PENDING). | S10 completion |
 | 2026-04-07 | S11 ACCEPTED: `@enx/metrics-engine` EU core `runEuCoreMetrics` (mean/median gap %, optional mean variable gap, quartile distribution), first-class inclusion/exclusion + `metricsCalculationBlocked` exclusion, classification incomplete gate, contracts enums/types/schemas + schema tests, audit write helper, ADR-010; `pnpm test` / `typecheck` / `lint` green. S12 next (PENDING). | S11 completion |
+| 2026-04-07 | S12 ACCEPTED: `@enx/reporting-engine` base `assembleReportingPack` (deterministic `contentDigest`/`reportRunId`, manifest + evidence sections, methodology/traceability refs, data quality notes, PDF placeholder, attestation shells), `evaluateReportingPackExportBlockers` + `assertReportingPackExportable`, assembly audit helper; contracts reporting-pack enums/types/schemas + tests; scope guard test; ADR-011; `pnpm test` / `typecheck` / `lint` green. S13 next (PENDING). | S12 completion |

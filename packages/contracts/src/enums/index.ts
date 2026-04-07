@@ -18,6 +18,8 @@ export { MappingNormalizationIssueCode } from './mapping-normalization-issue-cod
 export { PayComponent } from './pay-component';
 export { PayPeriodCode } from './pay-period-code';
 export { RemediationStatus } from './remediation-status';
+export { ReportingPackCompletenessStatus } from './reporting-pack-completeness-status';
+export { ReportingPackExportBlockedReason } from './reporting-pack-export-blocked-reason';
 export { ReviewStatus } from './review-status';
 export { SnapshotStatus } from './snapshot-status';
 export { StructuralIssueCode } from './structural-issue-code';
