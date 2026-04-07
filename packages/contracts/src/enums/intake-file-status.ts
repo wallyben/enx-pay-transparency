@@ -1,0 +1,4 @@
+export enum IntakeFileStatus {
+  STRUCTURALLY_VALID = 'STRUCTURALLY_VALID',
+  QUARANTINED = 'QUARANTINED',
+}

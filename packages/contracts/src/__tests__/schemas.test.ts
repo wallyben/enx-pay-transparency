@@ -5,11 +5,14 @@ import {
   CountryCodeSchema,
   EmploymentTypeSchema,
   GenderSchema,
+  IntakeFileRecordSchema,
+  IntakeSnapshotBlockedReasonSchema,
   PaginationQuerySchema,
   PayComponentSchema,
   RemediationStatusSchema,
   ReviewStatusSchema,
   SnapshotStatusSchema,
+  StructuralValidationResultSchema,
   WorkerStatusSchema,
 } from '../schemas';
 import { CaseworkStatus } from '../enums/casework-status';
@@ -21,6 +24,9 @@ import { PayComponent } from '../enums/pay-component';
 import { RemediationStatus } from '../enums/remediation-status';
 import { ReviewStatus } from '../enums/review-status';
 import { SnapshotStatus } from '../enums/snapshot-status';
+import { IntakeFileStatus } from '../enums/intake-file-status';
+import { IntakeSnapshotBlockedReason } from '../enums/intake-snapshot-blocked-reason';
+import { StructuralIssueCode } from '../enums/structural-issue-code';
 import { WorkerStatus } from '../enums/worker-status';
 
 describe('Enum schemas — accept valid values', () => {
@@ -62,6 +68,12 @@ describe('Enum schemas — accept valid values', () => {
   it('SnapshotStatusSchema accepts valid values', () => {
     expect(SnapshotStatusSchema.parse(SnapshotStatus.Draft)).toBe('DRAFT');
     expect(SnapshotStatusSchema.parse(SnapshotStatus.Sealed)).toBe('SEALED');
+  });
+
+  it('IntakeSnapshotBlockedReasonSchema accepts valid values', () => {
+    expect(IntakeSnapshotBlockedReasonSchema.parse(IntakeSnapshotBlockedReason.MAPPING_GATED)).toBe(
+      'MAPPING_GATED',
+    );
   });
 
   it('CaseworkStatusSchema accepts valid values', () => {
@@ -123,6 +135,41 @@ describe('ApiErrorSchema', () => {
   it('rejects an ApiError missing required fields', () => {
     expect(() => ApiErrorSchema.parse({ code: 'ERR' })).toThrow();
     expect(() => ApiErrorSchema.parse({ message: 'msg' })).toThrow();
+  });
+});
+
+describe('Intake structural schemas', () => {
+  it('StructuralValidationResultSchema accepts a valid result', () => {
+    const parsed = StructuralValidationResultSchema.parse({
+      ok: false,
+      issues: [
+        {
+          code: StructuralIssueCode.TYPE_MISMATCH,
+          column: 'base_pay',
+          rowIndex: 0,
+          expected: 'NUMBER',
+          actual: 'x',
+        },
+      ],
+    });
+    expect(parsed.ok).toBe(false);
+    const first = parsed.issues[0];
+    expect(first).toBeDefined();
+    expect(first?.code).toBe(StructuralIssueCode.TYPE_MISMATCH);
+  });
+
+  it('IntakeFileRecordSchema accepts a valid record', () => {
+    const parsed = IntakeFileRecordSchema.parse({
+      intakeFileId: '3fa85f64-5717-4562-b3fc-2c963f66afa6',
+      originalFilename: 'f.csv',
+      contentType: 'text/csv',
+      byteLength: 12,
+      status: IntakeFileStatus.QUARANTINED,
+      validation: { ok: false, issues: [{ code: StructuralIssueCode.EMPTY_FILE }] },
+      createdAt: new Date().toISOString(),
+      contentSha256: 'abc',
+    });
+    expect(parsed.status).toBe(IntakeFileStatus.QUARANTINED);
   });
 });
 

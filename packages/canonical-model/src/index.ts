@@ -19,3 +19,11 @@ export {
   SnapshotManifestOutput,
 } from './pay-snapshot';
 export { SourceLineageRef, SourceLineageRefSchema, SourceLineageRefInput, SourceLineageRefOutput } from './source-lineage-ref';
+export {
+  type IntakeSealedSnapshot,
+  type IntakeSnapshotLineage,
+  buildIntakeSealedSnapshotManifestPayload,
+  deepFreeze,
+  digestIntakeSealedSnapshotManifest,
+  sealIntakeSnapshot,
+} from './intake-sealed-snapshot';
