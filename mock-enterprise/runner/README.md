@@ -6,6 +6,7 @@
 
 - `run_mock_enterprise_demo.py` — validates the generated CSV pack, runs **join + mapping + reconciliation logic** in Python (demo adapter), writes artifacts under `mock-enterprise/out/`, and invokes the repo TypeScript engines via `run_engines.ts`.
 - `run_classification_forensics.py` — builds `REVIEW_REQUIRED` breakdowns from `engine_category_detail_*.json` and adapter context; optional `--compare` for baseline vs unlock engine JSON.
+- `run_descriptor_completeness_validator.py` — **pre-engine** JDMS v1 completeness gate on synthetic CSVs; writes `out/reports/DESCRIPTOR_COMPLETENESS_*` and `out/intermediate/descriptor_completeness_results.json` (see `mock-enterprise/docs/DESCRIPTOR_COMPLETENESS_VALIDATOR.md`).
 - `run_engines.ts` — **demo-only** bridge that calls existing packages: `@enx/intake-engine` (register + seal snapshot), `@enx/job-architecture`, `@enx/category-engine`, `@enx/metrics-engine`, `@enx/reporting-engine`.
 - `mock-intake-profile.ts` — demo CSV layout + mapping profile (not the production default three-column intake).
 
@@ -20,6 +21,12 @@
 ```bash
 python mock-enterprise/generator/generate_mock_enterprise_pack.py
 python mock-enterprise/runner/run_mock_enterprise_demo.py
+```
+
+**JDMS descriptor completeness (pre-category gate, synthetic):**
+
+```bash
+python mock-enterprise/runner/run_descriptor_completeness_validator.py
 ```
 
 **Classification unlock profile (synthetic):**
