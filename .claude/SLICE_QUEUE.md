@@ -8,7 +8,7 @@
 
 **Slice ID:** H01  
 **Name:** validation_charter_and_gates  
-**Status:** PENDING — **Enterprise Hardening Redirect is now binding** (2026-04-07). Next implementation slice; **not started**.  
+**Status:** ACCEPTED — Validation Charter v1 created (docs-only).  
 **Wave:** H — Enterprise hardening (validation-first)  
 **Milestone:** MH — Hardening gate (pilot prerequisite)
 
@@ -691,7 +691,7 @@ This wave is inserted **before any further product expansion**. Its purpose is t
 
 | ID | Slice Name | Status | Completion Date | Notes |
 |---|---|---|---|---|
-| H01 | validation_charter_and_gates | PENDING | — | Define Validation Charter v1 structure, pilot gates, veto rights, go/no-go authority. Docs-only slice. |
+| H01 | validation_charter_and_gates | ACCEPTED | 2026-04-07 | Created `docs/validation/VALIDATION_CHARTER_v1.md` with gates, veto/authority model, decision log template, pilot scope structure, and evidence artifact requirements. Docs-only slice. |
 | H02 | field_level_source_of_truth_matrix_v1 | PENDING | — | Produce Field-Level Source-of-Truth Matrix v1 (pilot-mandatory fields, SoR, derivations, reconciliation, tolerances, severity). Docs-only slice. |
 | H03 | methodology_v1_package | PENDING | — | Produce Methodology v1 package (factor model, scoring, calibration, overrides, expiry, approval, versioning; doc + structured representation stub). Docs-only slice. |
 | H04 | reconciliation_framework_and_exception_taxonomy | PENDING | — | Define reconciliation model anchored to payroll results + coded exception taxonomy + blocker/warning rules. Docs-only slice. |
@@ -942,3 +942,4 @@ Country packs are independent of each other and may be executed in parallel if r
 | 2026-04-07 | S10 ACCEPTED: equal-value ruleset + `EQUAL_VALUE` basis, governed `CategoryOverrideRecord` (`PENDING`/`APPROVED`/`REJECTED`), row metrics gate fields + snapshot `metricsCalculationBlockedCount`, override decision audit helper, extended pipeline/service; contracts/schemas/tests; ADR-009; replaced S09 equal-value leakage test with metrics-engine/pay-gap guard; `pnpm test` / `typecheck` / `lint` green. S11 next (PENDING). | S10 completion |
 | 2026-04-07 | S11 ACCEPTED: `@enx/metrics-engine` EU core `runEuCoreMetrics` (mean/median gap %, optional mean variable gap, quartile distribution), first-class inclusion/exclusion + `metricsCalculationBlocked` exclusion, classification incomplete gate, contracts enums/types/schemas + schema tests, audit write helper, ADR-010; `pnpm test` / `typecheck` / `lint` green. S12 next (PENDING). | S11 completion |
 | 2026-04-07 | S12 ACCEPTED: `@enx/reporting-engine` base `assembleReportingPack` (deterministic `contentDigest`/`reportRunId`, manifest + evidence sections, methodology/traceability refs, data quality notes, PDF placeholder, attestation shells), `evaluateReportingPackExportBlockers` + `assertReportingPackExportable`, assembly audit helper; contracts reporting-pack enums/types/schemas + tests; scope guard test; ADR-011; `pnpm test` / `typecheck` / `lint` green. S13 next (PENDING). | S12 completion |
+| 2026-04-07 | H01 ACCEPTED: Validation Charter v1 created with objective gates (G0–G10), veto rights, go/no-go authority model (VSG + quorum), decision log template, pilot scope structure, and required evidence artifacts. | H01 completion |
