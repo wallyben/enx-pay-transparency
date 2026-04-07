@@ -6,6 +6,8 @@ export { CaseworkStatus } from './casework-status';
 export { ContractType } from './contract-type';
 export { CountryCode } from './country-code';
 export { EmploymentType } from './employment-type';
+export { EuCoreMetricId } from './eu-core-metric-id';
+export { EuCoreMetricResultStatus } from './eu-core-metric-result-status';
 export { Gender } from './gender';
 export { IntakeColumnType } from './intake-column-type';
 export { IntakeFileStatus } from './intake-file-status';

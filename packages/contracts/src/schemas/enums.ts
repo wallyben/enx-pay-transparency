@@ -7,6 +7,8 @@ import { CaseworkStatus } from '../enums/casework-status';
 import { ContractType } from '../enums/contract-type';
 import { CountryCode } from '../enums/country-code';
 import { EmploymentType } from '../enums/employment-type';
+import { EuCoreMetricId } from '../enums/eu-core-metric-id';
+import { EuCoreMetricResultStatus } from '../enums/eu-core-metric-result-status';
 import { Gender } from '../enums/gender';
 import { IntakeColumnType } from '../enums/intake-column-type';
 import { IntakeFileStatus } from '../enums/intake-file-status';
@@ -28,6 +30,8 @@ export const CategoryOverrideStatusSchema = z.nativeEnum(CategoryOverrideStatus)
 export const WorkerStatusSchema = z.nativeEnum(WorkerStatus);
 export const EmploymentTypeSchema = z.nativeEnum(EmploymentType);
 export const ContractTypeSchema = z.nativeEnum(ContractType);
+export const EuCoreMetricIdSchema = z.nativeEnum(EuCoreMetricId);
+export const EuCoreMetricResultStatusSchema = z.nativeEnum(EuCoreMetricResultStatus);
 export const GenderSchema = z.nativeEnum(Gender);
 export const PayComponentSchema = z.nativeEnum(PayComponent);
 export const SnapshotStatusSchema = z.nativeEnum(SnapshotStatus);

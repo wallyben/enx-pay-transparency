@@ -18,6 +18,8 @@ export {
   ContractTypeSchema,
   CountryCodeSchema,
   EmploymentTypeSchema,
+  EuCoreMetricIdSchema,
+  EuCoreMetricResultStatusSchema,
   GenderSchema,
   IntakeColumnTypeSchema,
   IntakeFileStatusSchema,
@@ -55,4 +57,14 @@ export {
   StructuralIssueSchema,
   StructuralValidationResultSchema,
 } from './intake';
+export {
+  EuCoreMetricsInclusionExclusionSummarySchema,
+  EuCoreMetricsRunResultSchema,
+  EuCoreMetricsTraceabilitySchema,
+  EuCoreMetricIssueSchema,
+  EuCorePayQuartileBandCountsSchema,
+  EuCoreQuartileDistributionResultSchema,
+  EuCoreScalarMetricResultSchema,
+  EuCoreVariablePayRowInputSchema,
+} from './eu-core-metrics';
 export { PaginationQuerySchema } from './pagination';

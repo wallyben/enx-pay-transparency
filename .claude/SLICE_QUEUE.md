@@ -6,9 +6,9 @@
 
 ## CURRENT ACTIVE SLICE
 
-**Slice ID:** S11  
-**Name:** metrics_eu_core  
-**Status:** PENDING — **S10 ACCEPTED** (2026-04-07). Next implementation slice; **not started**.  
+**Slice ID:** S12  
+**Name:** reporting_pack_base  
+**Status:** PENDING — **S11 ACCEPTED** (2026-04-07). Next implementation slice; **not started**.  
 **Wave:** 3 — Metrics and reporting core  
 **Milestone:** M3
 
@@ -558,7 +558,7 @@ Package shells — each contains only `package.json`, `tsconfig.json`, `src/inde
 
 | ID | Slice Name | Status | Completion Date | Notes |
 |---|---|---|---|---|
-| S11 | metrics_eu_core | PENDING | — | Blocked on M2 Gate |
+| S11 | metrics_eu_core | ACCEPTED | 2026-04-07 | `@enx/metrics-engine`, EU core contracts/schemas, audit hook, ADR-010; validation green |
 | S12 | reporting_pack_base | PENDING | — | Blocked on S11 |
 | S13 | group_dashboard_core | PENDING | — | Blocked on S12 |
 
@@ -566,15 +566,38 @@ Package shells — each contains only `package.json`, `tsconfig.json`, `src/inde
 
 **Purpose:** Implement the EU Pay Transparency Directive core metric calculations: mean and median pay gap by gender, bonus gap, pay quartile distribution. Calculations must be deterministic and testable against known reference values.
 
+**Owned Files (S11 delivery):**
+- `packages/contracts/src/enums/eu-core-metric-id.ts`
+- `packages/contracts/src/enums/eu-core-metric-result-status.ts`
+- `packages/contracts/src/enums/index.ts` (exports)
+- `packages/contracts/src/types/eu-core-metrics.ts`
+- `packages/contracts/src/types/index.ts` (exports)
+- `packages/contracts/src/schemas/enums.ts` (EU core enum Zod)
+- `packages/contracts/src/schemas/eu-core-metrics.ts`
+- `packages/contracts/src/schemas/index.ts` (exports)
+- `packages/contracts/src/__tests__/eu-core-metrics-schemas.test.ts`
+- `packages/metrics-engine/` (package: `package.json`, `tsconfig.json`, `jest.config.js`, `src/index.ts`, `src/eu-core/decimal-parse.ts`, `src/eu-core/statistics.ts`, `src/eu-core/run-eu-core-metrics.ts`, `src/eu-core/metrics-audit.ts`, `src/__tests__/`)
+- `docs/adr/ADR-010-metrics-engine-package.md`
+- `.claude/SLICE_QUEUE.md` (this file — S11 status only)
+
 **Acceptance Criteria:**
-- [ ] Mean and median gender pay gap calculations are correct against reference test fixtures
-- [ ] Bonus gap and pay quartile distribution are implemented
-- [ ] All calculations reference the snapshot ID and methodology version
-- [ ] Calculations are blocked if category assignments are incomplete
-- [ ] Unit tests use fixed input fixtures with known expected outputs
+- [x] Mean and median gender pay gap calculations are correct against reference test fixtures
+- [x] Bonus gap and pay quartile distribution are implemented
+- [x] All calculations reference the snapshot ID and methodology version
+- [x] Calculations are blocked if category assignments are incomplete
+- [x] Unit tests use fixed input fixtures with known expected outputs
 
 **Blockers / Review Notes:**
-- Blocked on M2 Gate
+- Blocked on M2 Gate — **cleared** on branch: S08–S10 ACCEPTED (2026-04-07).
+
+**Completion record — 2026-04-07:**
+- Status set to **ACCEPTED**
+- ADR-010 filed: `docs/adr/ADR-010-metrics-engine-package.md`
+- `pnpm test` — PASS (59 suites, 367 tests, 0 failures)
+- `pnpm typecheck` — PASS (0 TS errors across workspace projects including `@enx/metrics-engine`)
+- `pnpm lint` — PASS
+- Primary API: `runEuCoreMetrics`, `writeEuCoreMetricsRunAudit` / `buildEuCoreMetricsRunAuditInput`; EU core result contracts `EuCoreMetricsRunResult` + inclusion/exclusion summary; variable pay via optional `variablePayRows`; snapshot gate blocks headline metrics when `unassignedCount` or `reviewRequiredCount` is non-zero
+- S12 next (PENDING, not started)
 
 ---
 
@@ -846,3 +869,4 @@ Country packs are independent of each other and may be executed in parallel if r
 | 2026-04-07 | S08 ACCEPTED: job normalization package `@enx/job-architecture`, contracts job norm types/issues + `JOB_*` logical fields, intake optional job column mapping, pipeline + audit service, tests + ADR-007; `pnpm test` / `typecheck` / `lint` green. S09 next (PENDING). | S08 completion |
 | 2026-04-07 | S09 ACCEPTED: category engine `@enx/category-engine`, contracts category assignment enums/types/schemas + tests, exact vs normalized-equivalent keys + deterministic category IDs, review-required/unassigned outcomes, audit hook on assignment run, ADR-008; `pnpm test` / `typecheck` / `lint` green. S10 next (PENDING). | S09 completion |
 | 2026-04-07 | S10 ACCEPTED: equal-value ruleset + `EQUAL_VALUE` basis, governed `CategoryOverrideRecord` (`PENDING`/`APPROVED`/`REJECTED`), row metrics gate fields + snapshot `metricsCalculationBlockedCount`, override decision audit helper, extended pipeline/service; contracts/schemas/tests; ADR-009; replaced S09 equal-value leakage test with metrics-engine/pay-gap guard; `pnpm test` / `typecheck` / `lint` green. S11 next (PENDING). | S10 completion |
+| 2026-04-07 | S11 ACCEPTED: `@enx/metrics-engine` EU core `runEuCoreMetrics` (mean/median gap %, optional mean variable gap, quartile distribution), first-class inclusion/exclusion + `metricsCalculationBlocked` exclusion, classification incomplete gate, contracts enums/types/schemas + schema tests, audit write helper, ADR-010; `pnpm test` / `typecheck` / `lint` green. S12 next (PENDING). | S11 completion |

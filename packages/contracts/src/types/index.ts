@@ -28,6 +28,18 @@ export {
   type EqualValueRuleset,
 } from './category-assignment';
 export {
+  type EuCoreMetricIssue,
+  type EuCoreMetricsInclusionExclusionSummary,
+  type EuCoreMetricsRunInput,
+  type EuCoreMetricsRunResult,
+  type EuCoreMetricsTraceability,
+  type EuCorePayQuartileBandCounts,
+  type EuCoreQuartileDistributionResult,
+  type EuCoreScalarMetricResult,
+  type EuCoreVariablePayRowInput,
+  type PayQuartileBand,
+} from './eu-core-metrics';
+export {
   type JobNormalizationIssue,
   type JobNormalizationRowResult,
   type JobNormalizationSnapshotResult,
