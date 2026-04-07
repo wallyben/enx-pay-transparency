@@ -1,0 +1,168 @@
+{
+  "contract_id": "JDMS_v1",
+  "version": "1.0.0",
+  "status": "DRAFT",
+  "scope": "Defines the minimum canonical job-descriptor field set expected on the sealed intake row for the current mock-enterprise CSV → @enx/job-architecture → @enx/category-engine executable path, and the minimum identifiers needed for auditable equal-value grouping under Methodology v1 framing. Applies to synthetic/mock demonstration data and serves as the reference contract for future intake validators and adapters—not to Wave P pilot evidence or legal sign-off.",
+  "purpose": "Provide a single machine-readable source of truth for: (1) which job descriptor fields upstream systems must supply for high-yield deterministic category assignment, (2) which fields are mandatory for equal-value grouping evidence units, (3) which absences surface as REVIEW_REQUIRED vs run-level blockers under the current engines, and (4) expected source-of-truth ownership by domain (HRIS, job architecture catalog, reward).",
+  "fields": [
+    {
+      "canonical_field_name": "job_title",
+      "description": "Worker-facing or position job title text used to normalize title tokens for category matching and intake sealing.",
+      "required_for_category_assignment": true,
+      "required_for_equal_value_grouping": true,
+      "required_for_metrics_eligibility": true,
+      "expected_source_domain": "HRIS assignment / position record (primary); job architecture catalog (supporting reference for conflicts)",
+      "allowed_aliases": [
+        "JOB_TITLE",
+        "title"
+      ],
+      "data_type": "string",
+      "allowed_nullability": "prohibited_for_intake_seal",
+      "blocker_if_missing": true,
+      "review_required_if_missing": true,
+      "notes": "Mock intake profile treats title as required to seal. Absent/invalid title typically produces job-normalization issues and prevents clean assignment paths."
+    },
+    {
+      "canonical_field_name": "job_family",
+      "description": "Job family code or normalized family key (after trim/lowercase rules) that becomes familyCodeNormalized for category assignment.",
+      "required_for_category_assignment": true,
+      "required_for_equal_value_grouping": true,
+      "required_for_metrics_eligibility": true,
+      "expected_source_domain": "Job architecture catalog; HRIS assignment (often copied from catalog)",
+      "allowed_aliases": [
+        "job_family_code",
+        "JOB_FAMILY_CODE",
+        "family_code"
+      ],
+      "data_type": "string_code",
+      "allowed_nullability": "prohibited_for_high_yield_assignment",
+      "blocker_if_missing": true,
+      "review_required_if_missing": true,
+      "notes": "In mock-enterprise CSV bridge the column is `job_family_code`. Must satisfy job-normalization code-shape rules (e.g. alphanumeric/underscore) where applicable."
+    },
+    {
+      "canonical_field_name": "job_subfamily_code",
+      "description": "Second hierarchy axis code that becomes subfamilyCodeNormalized. In the current category-engine implementation, both EXACT and NORMALIZED_EQUIVALENT assignment paths require a non-empty normalized subfamily together with family and grade/level.",
+      "required_for_category_assignment": true,
+      "required_for_equal_value_grouping": true,
+      "required_for_metrics_eligibility": true,
+      "expected_source_domain": "Job architecture catalog; HRIS assignment (must be carried into intake—catalog file alone is not consumed by the current TS normalization step)",
+      "allowed_aliases": [
+        "job_subfamily",
+        "JOB_SUBFAMILY_CODE",
+        "subfamily_code"
+      ],
+      "data_type": "string_code",
+      "allowed_nullability": "prohibited_for_high_yield_assignment",
+      "blocker_if_missing": true,
+      "review_required_if_missing": true,
+      "notes": "Synthetic unlock finding: when this intake column is blank for all rows while family and grade are present, the dominant outcome is REVIEW_REQUIRED with CAT_ASN_INSUFFICIENT_JOB_DESCRIPTOR and missing normalized subfamily—collapsing assignable yield independent of scenario mix. Supplying governed subfamily (or an explicitly approved alternate axis mapped to subfamilyCodeNormalized) is mandatory for enterprise-usable classification yield on the current executable path."
+    },
+    {
+      "canonical_field_name": "job_level",
+      "description": "Grade, band, or level token that normalizes to gradeOrLevelNormalized via the job-architecture grade parser.",
+      "required_for_category_assignment": true,
+      "required_for_equal_value_grouping": true,
+      "required_for_metrics_eligibility": true,
+      "expected_source_domain": "Reward / job architecture (level framework); HRIS assignment (often mirrored from reward)",
+      "allowed_aliases": [
+        "job_grade_or_level",
+        "JOB_GRADE_OR_LEVEL",
+        "grade_or_level",
+        "job_grade"
+      ],
+      "data_type": "string",
+      "allowed_nullability": "prohibited_for_high_yield_assignment",
+      "blocker_if_missing": true,
+      "review_required_if_missing": true,
+      "notes": "Unparseable or ambiguous grade tokens can trigger job-normalization issues (REVIEW_REQUIRED) even when the scalar is non-null."
+    },
+    {
+      "canonical_field_name": "position_id",
+      "description": "Stable identifier for the position or job profile row used to anchor audit traceability for role-level decisions (e.g. methodology scoring unit).",
+      "required_for_category_assignment": false,
+      "required_for_equal_value_grouping": true,
+      "required_for_metrics_eligibility": false,
+      "expected_source_domain": "HRIS position / job profile identifier; job architecture catalog key (when aligned)",
+      "allowed_aliases": [
+        "POSITION_ID",
+        "positionId",
+        "job_profile_id"
+      ],
+      "data_type": "string",
+      "allowed_nullability": "allowed_for_category_only_runs",
+      "blocker_if_missing": false,
+      "review_required_if_missing": false,
+      "notes": "Methodology v1 cites position_id + job_level as part of the scored role unit. The current category-engine assignment path in the mock run does not substitute this for the hierarchy fields above; absence is a governance/traceability gap for equal-value work, not the synthetic unlock blocker."
+    },
+    {
+      "canonical_field_name": "job_code",
+      "description": "Optional architecture or profile code used for catalog crosswalk, reporting slices, or future reconciliation—distinct from family/subfamily hierarchy codes.",
+      "required_for_category_assignment": false,
+      "required_for_equal_value_grouping": false,
+      "required_for_metrics_eligibility": false,
+      "expected_source_domain": "Job architecture catalog; reward (internal job code)",
+      "allowed_aliases": [
+        "architecture_job_code",
+        "JOB_CODE",
+        "profile_code"
+      ],
+      "data_type": "string_code",
+      "allowed_nullability": "optional",
+      "blocker_if_missing": false,
+      "review_required_if_missing": false,
+      "notes": "Not required for high-yield deterministic assignment in the current rule pack; include when enterprise source systems use it as the join key to governed catalogs."
+    },
+    {
+      "canonical_field_name": "equal_value_group_declaration",
+      "description": "Declared equal-value group identifier or structured declaration consumed when the equal-value assignment path is enabled in engine meta (e.g. equalValueRuleset non-null).",
+      "required_for_category_assignment": false,
+      "required_for_equal_value_grouping": false,
+      "required_for_metrics_eligibility": false,
+      "expected_source_domain": "Reward / methodology governance (equal-value register); optional HRIS reference fields when explicitly mapped",
+      "allowed_aliases": [
+        "equal_value_group_id",
+        "EQUAL_VALUE_GROUP_ID"
+      ],
+      "data_type": "string",
+      "allowed_nullability": "optional_unless_equal_value_path_active",
+      "blocker_if_missing": false,
+      "review_required_if_missing": false,
+      "notes": "When equalValueRuleset is active, absence of a declared group can yield CAT_ASN_EQUAL_VALUE_NO_DECLARED_GROUP (REVIEW_REQUIRED). Mock-enterprise baseline/unlock runs used equalValueRuleset null; flags here are false because requirement is conditional on engine configuration, not universal JDMS."
+    }
+  ],
+  "known_failure_modes": [
+    {
+      "code": "CAT_ASN_INSUFFICIENT_JOB_DESCRIPTOR",
+      "summary": "Normalized job descriptor incomplete for assignment (commonly missing subfamilyCodeNormalized while family and grade are present).",
+      "typical_row_outcome": "REVIEW_REQUIRED",
+      "run_impact": "Under @enx/metrics-engine, any REVIEW_REQUIRED category rows contribute to classificationIncomplete and can block EU core metrics and reporting completeness (e.g. METRICS_RUN_GATE_BLOCKED)."
+    },
+    {
+      "code": "CAT_ASN_JOB_NORMALIZATION_ISSUES_PRESENT",
+      "summary": "Title, hierarchy code shape, or grade token failed job-normalization rules.",
+      "typical_row_outcome": "REVIEW_REQUIRED",
+      "run_impact": "Same gate behavior as other REVIEW_REQUIRED rows: metrics/reporting may remain blocked until resolved or dispositioned."
+    },
+    {
+      "code": "CAT_ASN_DESCRIPTOR_EMPTY",
+      "summary": "All normalized descriptor parts empty after normalization.",
+      "typical_row_outcome": "UNASSIGNED",
+      "run_impact": "Contributes to classification incompleteness and run-level blocking consistent with metrics-engine rules."
+    },
+    {
+      "code": "CAT_ASN_EQUAL_VALUE_NO_DECLARED_GROUP",
+      "summary": "Equal-value path enabled but no declared group on the row.",
+      "typical_row_outcome": "REVIEW_REQUIRED",
+      "run_impact": "Same as other REVIEW_REQUIRED-driven gate failures when present in cohort."
+    }
+  ],
+  "contract_assumptions": [
+    "The current executable category assignment logic requires non-empty normalized subfamily together with family and grade/level for both EXACT and NORMALIZED_EQUIVALENT paths in assign-category-row semantics referenced by mock-enterprise documentation.",
+    "Job architecture catalog files are not automatically merged by the TS job-normalization step in this repo snapshot; adapters or future intake pipelines must project catalog fields onto the sealed intake row.",
+    "Metrics eligibility in the mock run is gated on classification completeness (no REVIEW_REQUIRED/UNASSIGNED for included rows), so fields that cause those states are effectively required for gate-clearing metrics outputs.",
+    "Equal-value methodology scoring and approvals are out of scope for this contract file; JDMS only names descriptor identifiers needed to align with Methodology v1 text.",
+    "Changing category rules to remove the subfamily requirement would be a product/governance change and would obsolete or revise this contract version—it is not implied by JDMS v1."
+  ],
+  "synthetic_mode_note": "JDMS v1 is authored for mock-enterprise / synthetic demonstration alignment and the observed classification-unlock experiment. It is not real pilot evidence, not a legal methodology sign-off, and not a substitute for Wave P real-evidence readiness artifacts."
+}
