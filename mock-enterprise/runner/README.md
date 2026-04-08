@@ -8,6 +8,7 @@
 - `run_classification_forensics.py` — builds `REVIEW_REQUIRED` breakdowns from `engine_category_detail_*.json` and adapter context; optional `--compare` for baseline vs unlock engine JSON.
 - `run_descriptor_completeness_validator.py` — **pre-engine** JDMS v1 completeness gate on synthetic CSVs; writes `out/reports/DESCRIPTOR_COMPLETENESS_*` and `out/intermediate/descriptor_completeness_results.json` (see `mock-enterprise/docs/DESCRIPTOR_COMPLETENESS_VALIDATOR.md`).
 - `run_unlock_regression_suite.py` — **Slice 10** dual-profile regression: baseline blocked path + pilot-shaped unlock path; writes `out/reports/UNLOCK_REGRESSION_*` and `out/intermediate/unlock_regression_results.json` (see `mock-enterprise/docs/UNLOCK_REGRESSION_SUITE.md`).
+- `generate_remediation_cases.py` — **Slice 3** remediation case model: reads descriptor + forensics + engine JSON; writes `out/intermediate/remediation_cases.json`, `out/reports/REMEDIATION_CASE_*` (see `mock-enterprise/docs/REMEDIATION_TICKET_MODEL.md`).
 - `run_engines.ts` — **demo-only** bridge that calls existing packages: `@enx/intake-engine` (register + seal snapshot), `@enx/job-architecture`, `@enx/category-engine`, `@enx/metrics-engine`, `@enx/reporting-engine`.
 - `mock-intake-profile.ts` — demo CSV layout + mapping profile (not the production default three-column intake).
 
@@ -34,6 +35,12 @@ python mock-enterprise/runner/run_descriptor_completeness_validator.py
 
 ```bash
 python mock-enterprise/runner/run_unlock_regression_suite.py
+```
+
+**Remediation cases (deterministic buckets; synthetic):**
+
+```bash
+python mock-enterprise/runner/generate_remediation_cases.py
 ```
 
 **Classification unlock profile (synthetic):**
