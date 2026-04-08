@@ -1,0 +1,416 @@
+{
+  "model_version": "1.0.0",
+  "source_run_reference": "mock_enterprise_remediation_bundle_v1;primary_intake_file_id:65a259a3-5308-420b-bb2d-0ef3be6c9f13",
+  "cases": [
+    {
+      "case_id": "REM-CASE-2b55825082f3",
+      "case_type": "DESCRIPTOR_COMPLETENESS_BLOCKER",
+      "issue_code": "JDMS_JOB_SUBFAMILY_CODE_MISSING",
+      "severity": "CRITICAL",
+      "blocker_flag": true,
+      "owner_role": "HRIS_PEOPLE_DATA_OWNER",
+      "status": "OPEN",
+      "source_run_reference": "mock_enterprise:intake_file_id:65a259a3-5308-420b-bb2d-0ef3be6c9f13",
+      "source_snapshot_reference": "snp_b46a3d115c561d3a8ae01e995dd43754c5c21deb35a3c7a0ca08d9986eb407f7",
+      "source_artifact_references": [
+        "mock-enterprise/out/intermediate/descriptor_completeness_results.json",
+        "mock-enterprise/out/intermediate/review_required_forensics.json",
+        "mock-enterprise/out/intermediate/unlock_regression_results.json",
+        "mock-enterprise/out/intermediate/engine_output_main.json",
+        "mock-enterprise/out/intermediate/engine_output_unlock.json"
+      ],
+      "affected_record_count": 5695,
+      "affected_entity_keys": [
+        "dataset_profile:baseline_adversarial",
+        "validator_pattern:job_subfamily_code:MISSING_IN_ASSIGNMENT_AND_NO_CATALOG_COLUMN"
+      ],
+      "root_cause_summary": "Mandatory JDMS field job_subfamily_code is absent on the executable intake path for the full main-engine cohort rows in baseline_adversarial (assignment/catalog gap).",
+      "recommended_action": "Populate subfamily on HRIS assignment or project catalog columns onto intake per JOB_ARCHITECTURE_INGEST_CONTRACT; re-run descriptor validator then sealed engine run.",
+      "rerun_required": true,
+      "related_case_ids": [
+        "REM-CASE-a65cffa638ff"
+      ],
+      "created_timestamp": "2026-04-07T23:32:28Z",
+      "notes": "Synthetic baseline pack; sealed-run discipline: fix source data and re-seal \u2014 do not mutate historical snapshot artifacts."
+    },
+    {
+      "case_id": "REM-CASE-3991efecccf9",
+      "case_type": "INTAKE_JOIN_INTEGRITY_BLOCKER",
+      "issue_code": "WORKER_JOIN_NOT_OK",
+      "severity": "HIGH",
+      "blocker_flag": true,
+      "owner_role": "HRIS_PAYROLL_INTEGRATION_OWNER",
+      "status": "OPEN",
+      "source_run_reference": "mock_enterprise:intake_file_id:65a259a3-5308-420b-bb2d-0ef3be6c9f13;forensics_label:join_not_ok",
+      "source_snapshot_reference": "snp_b46a3d115c561d3a8ae01e995dd43754c5c21deb35a3c7a0ca08d9986eb407f7",
+      "source_artifact_references": [
+        "mock-enterprise/out/intermediate/descriptor_completeness_results.json",
+        "mock-enterprise/out/intermediate/review_required_forensics.json",
+        "mock-enterprise/out/intermediate/unlock_regression_results.json",
+        "mock-enterprise/out/intermediate/engine_output_main.json",
+        "mock-enterprise/out/intermediate/engine_output_unlock.json"
+      ],
+      "affected_record_count": 473,
+      "affected_entity_keys": [
+        "forensics_enterprise_label:join_not_ok",
+        "forensics_intermediate_run:main"
+      ],
+      "root_cause_summary": "Worker-level join_not_ok from adapter context; crosswalk / key resolution failure pool.",
+      "recommended_action": "Remediate underlying HRIS/payroll/governance data or approved exception path; re-run mock-enterprise demo forensics to confirm label counts trend to expectation.",
+      "rerun_required": true,
+      "related_case_ids": [],
+      "created_timestamp": "2026-04-07T23:32:28Z",
+      "notes": "Worker-level adapter labels; counts are not identical to engine-row cohort \u2014 coarse synthetic bucket."
+    },
+    {
+      "case_id": "REM-CASE-3b7fa535c242",
+      "case_type": "PAYROLL_MAPPING_BLOCKER",
+      "issue_code": "WORKER_UNMAPPED_EARNING_CODE",
+      "severity": "HIGH",
+      "blocker_flag": true,
+      "owner_role": "PAYROLL_CONTROLS_OWNER",
+      "status": "OPEN",
+      "source_run_reference": "mock_enterprise:intake_file_id:65a259a3-5308-420b-bb2d-0ef3be6c9f13;forensics_label:unmapped_earning_code_worker",
+      "source_snapshot_reference": "snp_b46a3d115c561d3a8ae01e995dd43754c5c21deb35a3c7a0ca08d9986eb407f7",
+      "source_artifact_references": [
+        "mock-enterprise/out/intermediate/descriptor_completeness_results.json",
+        "mock-enterprise/out/intermediate/review_required_forensics.json",
+        "mock-enterprise/out/intermediate/unlock_regression_results.json",
+        "mock-enterprise/out/intermediate/engine_output_main.json",
+        "mock-enterprise/out/intermediate/engine_output_unlock.json"
+      ],
+      "affected_record_count": 240,
+      "affected_entity_keys": [
+        "forensics_enterprise_label:unmapped_earning_code_worker",
+        "forensics_intermediate_run:main"
+      ],
+      "root_cause_summary": "Unmapped in-scope earning code on worker; mapping table / payroll controls remediation.",
+      "recommended_action": "Remediate underlying HRIS/payroll/governance data or approved exception path; re-run mock-enterprise demo forensics to confirm label counts trend to expectation.",
+      "rerun_required": true,
+      "related_case_ids": [],
+      "created_timestamp": "2026-04-07T23:32:28Z",
+      "notes": "Worker-level adapter labels; counts are not identical to engine-row cohort \u2014 coarse synthetic bucket."
+    },
+    {
+      "case_id": "REM-CASE-52b674cac748",
+      "case_type": "JOB_EVIDENCE_AMBIGUITY_BLOCKER",
+      "issue_code": "WORKER_AMBIGUOUS_JOB_EVIDENCE",
+      "severity": "MEDIUM",
+      "blocker_flag": true,
+      "owner_role": "HRIS_PAYROLL_INTEGRATION_OWNER",
+      "status": "OPEN",
+      "source_run_reference": "mock_enterprise:intake_file_id:65a259a3-5308-420b-bb2d-0ef3be6c9f13;forensics_label:ambiguous_job_evidence_scenario_data_only",
+      "source_snapshot_reference": "snp_b46a3d115c561d3a8ae01e995dd43754c5c21deb35a3c7a0ca08d9986eb407f7",
+      "source_artifact_references": [
+        "mock-enterprise/out/intermediate/descriptor_completeness_results.json",
+        "mock-enterprise/out/intermediate/review_required_forensics.json",
+        "mock-enterprise/out/intermediate/unlock_regression_results.json",
+        "mock-enterprise/out/intermediate/engine_output_main.json",
+        "mock-enterprise/out/intermediate/engine_output_unlock.json"
+      ],
+      "affected_record_count": 320,
+      "affected_entity_keys": [
+        "forensics_enterprise_label:ambiguous_job_evidence_scenario_data_only",
+        "forensics_intermediate_run:main"
+      ],
+      "root_cause_summary": "Ambiguous job evidence (scenario-driven synthetic); clarify authoritative job signals and joins.",
+      "recommended_action": "Remediate underlying HRIS/payroll/governance data or approved exception path; re-run mock-enterprise demo forensics to confirm label counts trend to expectation.",
+      "rerun_required": true,
+      "related_case_ids": [],
+      "created_timestamp": "2026-04-07T23:32:28Z",
+      "notes": "Worker-level adapter labels; counts are not identical to engine-row cohort \u2014 coarse synthetic bucket."
+    },
+    {
+      "case_id": "REM-CASE-8b6aab4d5f37",
+      "case_type": "CLASSIFICATION_INSUFFICIENT_DESCRIPTOR",
+      "issue_code": "CAT_ASN_INSUFFICIENT_JOB_DESCRIPTOR",
+      "severity": "HIGH",
+      "blocker_flag": true,
+      "owner_role": "HRIS_PEOPLE_DATA_OWNER",
+      "status": "OPEN",
+      "source_run_reference": "mock_enterprise:intake_file_id:65a259a3-5308-420b-bb2d-0ef3be6c9f13;forensics_run:main",
+      "source_snapshot_reference": "snp_b46a3d115c561d3a8ae01e995dd43754c5c21deb35a3c7a0ca08d9986eb407f7",
+      "source_artifact_references": [
+        "mock-enterprise/out/intermediate/descriptor_completeness_results.json",
+        "mock-enterprise/out/intermediate/review_required_forensics.json",
+        "mock-enterprise/out/intermediate/unlock_regression_results.json",
+        "mock-enterprise/out/intermediate/engine_output_main.json",
+        "mock-enterprise/out/intermediate/engine_output_unlock.json"
+      ],
+      "affected_record_count": 5485,
+      "affected_entity_keys": [
+        "forensics_intermediate_run:main",
+        "engine_cohort:main"
+      ],
+      "root_cause_summary": "Category engine placed rows in REVIEW_REQUIRED for insufficient job descriptor material; forensics shows missing normalized subfamily key alignment at the same scale.",
+      "recommended_action": "Close JDMS mandatory descriptor gaps first; then re-run sealed intake + category assignment; confirm REVIEW_REQUIRED clears for this issue code.",
+      "rerun_required": true,
+      "related_case_ids": [
+        "REM-CASE-2b55825082f3"
+      ],
+      "created_timestamp": "2026-04-07T23:32:28Z",
+      "notes": "Downstream symptom tied to descriptor completeness in synthetic baseline; trace via related_case_ids."
+    },
+    {
+      "case_id": "REM-CASE-983aad6abfc1",
+      "case_type": "DEMO_WORKER_MANDATORY_FIELD_BLOCKER",
+      "issue_code": "WORKER_MISSING_FTE_PRIMARY_ASSIGNMENT",
+      "severity": "MEDIUM",
+      "blocker_flag": true,
+      "owner_role": "HRIS_PEOPLE_DATA_OWNER",
+      "status": "OPEN",
+      "source_run_reference": "mock_enterprise:intake_file_id:65a259a3-5308-420b-bb2d-0ef3be6c9f13;forensics_label:missing_fte_primary_assignment",
+      "source_snapshot_reference": "snp_b46a3d115c561d3a8ae01e995dd43754c5c21deb35a3c7a0ca08d9986eb407f7",
+      "source_artifact_references": [
+        "mock-enterprise/out/intermediate/descriptor_completeness_results.json",
+        "mock-enterprise/out/intermediate/review_required_forensics.json",
+        "mock-enterprise/out/intermediate/unlock_regression_results.json",
+        "mock-enterprise/out/intermediate/engine_output_main.json",
+        "mock-enterprise/out/intermediate/engine_output_unlock.json"
+      ],
+      "affected_record_count": 240,
+      "affected_entity_keys": [
+        "forensics_enterprise_label:missing_fte_primary_assignment",
+        "forensics_intermediate_run:main"
+      ],
+      "root_cause_summary": "Missing FTE on primary assignment for eligible cohort scenarios.",
+      "recommended_action": "Remediate underlying HRIS/payroll/governance data or approved exception path; re-run mock-enterprise demo forensics to confirm label counts trend to expectation.",
+      "rerun_required": true,
+      "related_case_ids": [],
+      "created_timestamp": "2026-04-07T23:32:28Z",
+      "notes": "Worker-level adapter labels; counts are not identical to engine-row cohort \u2014 coarse synthetic bucket."
+    },
+    {
+      "case_id": "REM-CASE-9c2910e645ca",
+      "case_type": "METHODOLOGY_ADAPTER_MISMATCH_BLOCKER",
+      "issue_code": "WORKER_METHODOLOGY_MISMATCH_SCENARIO_ADAPTER",
+      "severity": "HIGH",
+      "blocker_flag": true,
+      "owner_role": "REWARD_GOVERNANCE_OWNER",
+      "status": "OPEN",
+      "source_run_reference": "mock_enterprise:intake_file_id:65a259a3-5308-420b-bb2d-0ef3be6c9f13;forensics_label:methodology_mismatch_scenario_adapter",
+      "source_snapshot_reference": "snp_b46a3d115c561d3a8ae01e995dd43754c5c21deb35a3c7a0ca08d9986eb407f7",
+      "source_artifact_references": [
+        "mock-enterprise/out/intermediate/descriptor_completeness_results.json",
+        "mock-enterprise/out/intermediate/review_required_forensics.json",
+        "mock-enterprise/out/intermediate/unlock_regression_results.json",
+        "mock-enterprise/out/intermediate/engine_output_main.json",
+        "mock-enterprise/out/intermediate/engine_output_unlock.json"
+      ],
+      "affected_record_count": 160,
+      "affected_entity_keys": [
+        "forensics_enterprise_label:methodology_mismatch_scenario_adapter",
+        "forensics_intermediate_run:main"
+      ],
+      "root_cause_summary": "Methodology / adapter mismatch scenario at worker level (synthetic).",
+      "recommended_action": "Remediate underlying HRIS/payroll/governance data or approved exception path; re-run mock-enterprise demo forensics to confirm label counts trend to expectation.",
+      "rerun_required": true,
+      "related_case_ids": [],
+      "created_timestamp": "2026-04-07T23:32:28Z",
+      "notes": "Worker-level adapter labels; counts are not identical to engine-row cohort \u2014 coarse synthetic bucket."
+    },
+    {
+      "case_id": "REM-CASE-a65cffa638ff",
+      "case_type": "JOB_ARCHITECTURE_HIERARCHY_CONFLICT",
+      "issue_code": "JDMS_JOB_LEVEL_ASSIGNMENT_VS_CATALOG_CONFLICT",
+      "severity": "HIGH",
+      "blocker_flag": true,
+      "owner_role": "REWARD_JOB_ARCHITECTURE_OWNER",
+      "status": "OPEN",
+      "source_run_reference": "mock_enterprise:intake_file_id:65a259a3-5308-420b-bb2d-0ef3be6c9f13",
+      "source_snapshot_reference": "snp_b46a3d115c561d3a8ae01e995dd43754c5c21deb35a3c7a0ca08d9986eb407f7",
+      "source_artifact_references": [
+        "mock-enterprise/out/intermediate/descriptor_completeness_results.json",
+        "mock-enterprise/out/intermediate/review_required_forensics.json",
+        "mock-enterprise/out/intermediate/unlock_regression_results.json",
+        "mock-enterprise/out/intermediate/engine_output_main.json",
+        "mock-enterprise/out/intermediate/engine_output_unlock.json"
+      ],
+      "affected_record_count": 218,
+      "affected_entity_keys": [
+        "dataset_profile:baseline_adversarial",
+        "validator_pattern:job_level:CONFLICT_ASSIGNMENT_VS_CATALOG"
+      ],
+      "root_cause_summary": "Assignment job_level disagrees with job_architecture catalog for a material subset of cohort rows.",
+      "recommended_action": "Reconcile authoritative grade/level between HRIS assignment and job architecture catalog; align ingestion mapping; re-run descriptor validator.",
+      "rerun_required": true,
+      "related_case_ids": [
+        "REM-CASE-2b55825082f3"
+      ],
+      "created_timestamp": "2026-04-07T23:32:28Z",
+      "notes": "Coexists with cohort-wide subfamily gap in baseline_adversarial; remediate hierarchy of truth."
+    },
+    {
+      "case_id": "REM-CASE-d94eaececea3",
+      "case_type": "GOVERNANCE_PENDING_OVERRIDE_BLOCKER",
+      "issue_code": "WORKER_PENDING_OVERRIDE_SCENARIO",
+      "severity": "MEDIUM",
+      "blocker_flag": true,
+      "owner_role": "REWARD_GOVERNANCE_OWNER",
+      "status": "OPEN",
+      "source_run_reference": "mock_enterprise:intake_file_id:65a259a3-5308-420b-bb2d-0ef3be6c9f13;forensics_label:pending_override_scenario",
+      "source_snapshot_reference": "snp_b46a3d115c561d3a8ae01e995dd43754c5c21deb35a3c7a0ca08d9986eb407f7",
+      "source_artifact_references": [
+        "mock-enterprise/out/intermediate/descriptor_completeness_results.json",
+        "mock-enterprise/out/intermediate/review_required_forensics.json",
+        "mock-enterprise/out/intermediate/unlock_regression_results.json",
+        "mock-enterprise/out/intermediate/engine_output_main.json",
+        "mock-enterprise/out/intermediate/engine_output_unlock.json"
+      ],
+      "affected_record_count": 240,
+      "affected_entity_keys": [
+        "forensics_enterprise_label:pending_override_scenario",
+        "forensics_intermediate_run:main"
+      ],
+      "root_cause_summary": "Pending governance override scenario flag at worker level (synthetic).",
+      "recommended_action": "Remediate underlying HRIS/payroll/governance data or approved exception path; re-run mock-enterprise demo forensics to confirm label counts trend to expectation.",
+      "rerun_required": true,
+      "related_case_ids": [],
+      "created_timestamp": "2026-04-07T23:32:28Z",
+      "notes": "Worker-level adapter labels; counts are not identical to engine-row cohort \u2014 coarse synthetic bucket."
+    },
+    {
+      "case_id": "REM-CASE-e7a9633c9a2e",
+      "case_type": "DESCRIPTOR_QUALITY_WARNING",
+      "issue_code": "JDMS_JOB_LEVEL_ASSIGNMENT_VS_CATALOG_CONFLICT",
+      "severity": "MEDIUM",
+      "blocker_flag": false,
+      "owner_role": "REWARD_JOB_ARCHITECTURE_OWNER",
+      "status": "TRIAGED",
+      "source_run_reference": "mock_enterprise:intake_file_id:eba461a2-c91a-4bdc-923a-9a2ee81c52b7",
+      "source_snapshot_reference": "snp_626d185ee61c53e68739c2010f9be29f6863ddb89d42a6cbf64a0cf057fc0d32",
+      "source_artifact_references": [
+        "mock-enterprise/out/intermediate/descriptor_completeness_results.json",
+        "mock-enterprise/out/intermediate/review_required_forensics.json",
+        "mock-enterprise/out/intermediate/unlock_regression_results.json",
+        "mock-enterprise/out/intermediate/engine_output_main.json",
+        "mock-enterprise/out/intermediate/engine_output_unlock.json"
+      ],
+      "affected_record_count": 218,
+      "affected_entity_keys": [
+        "dataset_profile:pilot_shaped_clean",
+        "validator_pattern:job_level:CONFLICT_ASSIGNMENT_VS_CATALOG"
+      ],
+      "root_cause_summary": "JDMS overall_pass is true but cohort rows carry warning-level assignment vs catalog level mismatch.",
+      "recommended_action": "Resolve catalog vs assignment level drift to clear warnings and reduce governance noise; re-run descriptor validator on pilot_shaped_clean.",
+      "rerun_required": true,
+      "related_case_ids": [],
+      "created_timestamp": "2026-04-07T23:32:28Z",
+      "notes": "Accepted-exception eligible (synthetic): warning-only under JDMS for this profile; formal ACCEPTED_EXCEPTION status requires governance decision \u2014 not auto-applied here."
+    },
+    {
+      "case_id": "REM-CASE-ed0a5235cc53",
+      "case_type": "DEMO_WORKER_MANDATORY_FIELD_BLOCKER",
+      "issue_code": "WORKER_MISSING_GENDER",
+      "severity": "MEDIUM",
+      "blocker_flag": true,
+      "owner_role": "HRIS_PEOPLE_DATA_OWNER",
+      "status": "OPEN",
+      "source_run_reference": "mock_enterprise:intake_file_id:65a259a3-5308-420b-bb2d-0ef3be6c9f13;forensics_label:missing_gender",
+      "source_snapshot_reference": "snp_b46a3d115c561d3a8ae01e995dd43754c5c21deb35a3c7a0ca08d9986eb407f7",
+      "source_artifact_references": [
+        "mock-enterprise/out/intermediate/descriptor_completeness_results.json",
+        "mock-enterprise/out/intermediate/review_required_forensics.json",
+        "mock-enterprise/out/intermediate/unlock_regression_results.json",
+        "mock-enterprise/out/intermediate/engine_output_main.json",
+        "mock-enterprise/out/intermediate/engine_output_unlock.json"
+      ],
+      "affected_record_count": 240,
+      "affected_entity_keys": [
+        "forensics_enterprise_label:missing_gender",
+        "forensics_intermediate_run:main"
+      ],
+      "root_cause_summary": "Missing gender on worker record for synthetic scenarios requiring it for cohort eligibility.",
+      "recommended_action": "Remediate underlying HRIS/payroll/governance data or approved exception path; re-run mock-enterprise demo forensics to confirm label counts trend to expectation.",
+      "rerun_required": true,
+      "related_case_ids": [],
+      "created_timestamp": "2026-04-07T23:32:28Z",
+      "notes": "Worker-level adapter labels; counts are not identical to engine-row cohort \u2014 coarse synthetic bucket."
+    }
+  ],
+  "case_counts_by_issue": {
+    "CAT_ASN_INSUFFICIENT_JOB_DESCRIPTOR": {
+      "case_count": 1,
+      "affected_record_count": 5485
+    },
+    "JDMS_JOB_LEVEL_ASSIGNMENT_VS_CATALOG_CONFLICT": {
+      "case_count": 2,
+      "affected_record_count": 436
+    },
+    "JDMS_JOB_SUBFAMILY_CODE_MISSING": {
+      "case_count": 1,
+      "affected_record_count": 5695
+    },
+    "WORKER_AMBIGUOUS_JOB_EVIDENCE": {
+      "case_count": 1,
+      "affected_record_count": 320
+    },
+    "WORKER_JOIN_NOT_OK": {
+      "case_count": 1,
+      "affected_record_count": 473
+    },
+    "WORKER_METHODOLOGY_MISMATCH_SCENARIO_ADAPTER": {
+      "case_count": 1,
+      "affected_record_count": 160
+    },
+    "WORKER_MISSING_FTE_PRIMARY_ASSIGNMENT": {
+      "case_count": 1,
+      "affected_record_count": 240
+    },
+    "WORKER_MISSING_GENDER": {
+      "case_count": 1,
+      "affected_record_count": 240
+    },
+    "WORKER_PENDING_OVERRIDE_SCENARIO": {
+      "case_count": 1,
+      "affected_record_count": 240
+    },
+    "WORKER_UNMAPPED_EARNING_CODE": {
+      "case_count": 1,
+      "affected_record_count": 240
+    }
+  },
+  "case_counts_by_owner": {
+    "HRIS_PAYROLL_INTEGRATION_OWNER": {
+      "case_count": 2,
+      "affected_record_count": 793
+    },
+    "HRIS_PEOPLE_DATA_OWNER": {
+      "case_count": 4,
+      "affected_record_count": 11660
+    },
+    "PAYROLL_CONTROLS_OWNER": {
+      "case_count": 1,
+      "affected_record_count": 240
+    },
+    "REWARD_GOVERNANCE_OWNER": {
+      "case_count": 2,
+      "affected_record_count": 400
+    },
+    "REWARD_JOB_ARCHITECTURE_OWNER": {
+      "case_count": 2,
+      "affected_record_count": 436
+    }
+  },
+  "case_counts_by_severity": {
+    "CRITICAL": {
+      "case_count": 1,
+      "affected_record_count": 5695
+    },
+    "HIGH": {
+      "case_count": 5,
+      "affected_record_count": 6576
+    },
+    "MEDIUM": {
+      "case_count": 5,
+      "affected_record_count": 1258
+    }
+  },
+  "generated_timestamp": "2026-04-07T23:42:50Z",
+  "notes": [
+    "Synthetic mock-enterprise only; not pilot readiness evidence.",
+    "Unlock regression JSON is referenced for lineage; cases are derived from descriptor + forensics + engine IDs.",
+    "generated_timestamp records report emission time; case content is keyed to input artifact timestamps where listed on cases."
+  ],
+  "unlock_regression_overall": "PASS"
+}
